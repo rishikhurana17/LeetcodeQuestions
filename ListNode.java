@@ -8,4 +8,12 @@ public class ListNode {
 	ListNode(int x) {
 		val = x;
 	}
+
+	public ListNode() {
+
+	}
+
+	public ListNode newNode(int i) {
+	    return null;
+	}
 }

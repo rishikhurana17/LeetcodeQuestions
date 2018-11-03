@@ -72,6 +72,54 @@ public class LeetCode {
 		return max;
 	}
 
+//or below is the second solution
+//    When right parentheses are more than left parentheses in the forward pass, we can discard previous parentheses. In the backward pass, when left parentheses are more than right parentheses, we can discard previous parentheses.
+    int longestValidParentheses3(String s) {
+        int longest = 0;
+        int extra=0;
+        int length=0;
+        for(int i=0; i<s.length(); i++) {
+            if(s.charAt(i) == '(') {
+                extra++;
+                length++;
+            }
+            else {
+                if(extra>0) {
+                    extra--;
+                    length++;
+                    if(extra == 0)
+                        longest = Math.max(longest, length);
+                }
+                else {
+                    extra = 0;
+                    length=0;
+                }
+            }
+        }
+        length = 0;
+        extra=0;
+        for(int i=s.length()-1; i>=0; i--) {
+            if(s.charAt(i) == ')') {
+                extra++;
+                length++;
+            }
+            else {
+                if(extra>0){
+                    extra--;
+                    length++;
+                    if(extra == 0)
+                        longest = Math.max(longest, length);
+
+                }
+                else {
+                    extra = 0;
+                    length=0;
+                }
+            }
+        }
+        return longest;
+    }
+
 	// Q35 search insert position a very easy question
 	// Given a sorted array and a target value, return the index if the target
 	// is found.
@@ -445,45 +493,6 @@ public class LeetCode {
 	// edge cases.
 
 	// Q8 String to integer (atoi) #TopInterviewQuestion
-	// i guess the below solution is not working properly
-	public static int atoi(String str) {
-		if (str == null || str.length() < 1)
-			return 0;
-		str = str.trim();
-		char flag = '+';
-		// check negative or positive
-		int i = 0;
-		if (str.charAt(0) == '-') {
-			flag = '-';
-			i++;
-		} else if (str.charAt(0) == '+') {
-			i++;
-		}
-
-		// use double to store result
-		double result = 0;
-
-		// calculate value
-		while (str.length() > i && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
-			result = result * 10 + (str.charAt(i) - '0');
-			// Character.getNumericValue(str.charAt(i))
-			// System.out.println(str.charAt(i));
-			// System.out.println(str.charAt(i) - '0');
-			// System.out.println("result is " + result);
-			// System.out.println(Character.getNumericValue(str.charAt(i)));
-			i++;
-		}
-		if (flag == '-')
-			result = -result;
-		// handle max and min
-		if (result > Integer.MAX_VALUE)
-			return Integer.MAX_VALUE;
-		if (result < Integer.MIN_VALUE)
-			return Integer.MIN_VALUE;
-		return (int) result;
-	}
-
-	// this is the method that passes all the leetcode testcases
 	public int myAtoi(String str) {
 		int index = 0;
 		int total = 0;
@@ -1152,8 +1161,8 @@ public class LeetCode {
 		if (prices == null || prices.length == 0)
 			return 0;
 		int i = 0;
-		int peak = prices[0];
-		int valley = prices[0];
+		int peak ;
+		int valley ;
 		int maxProfit = 0;
 		int len = prices.length;
 		while (i < len - 1) {
@@ -1398,7 +1407,7 @@ public class LeetCode {
 	// Alternate Solution and a very good solution based on Floyds Cycle
 	// Detection Algorithm
 	public static boolean isHappy2(int n) {
-		int slow = n, fast = n;
+		int slow = n, fast = n; //remember it goes from the back
 		do {
 			slow = next(slow);
 			fast = next(next(fast));
@@ -1810,6 +1819,7 @@ public class LeetCode {
 		return slow + 1;
 	}
 
+
 // if asked for the above solution that you cannot modify then the solution will be like this
 	public int findDuplicate3(int[] nums) {
 		int n = nums.length;
@@ -1887,7 +1897,7 @@ public class LeetCode {
 	// Prime Factors //Prime factorization
 	public static List<Integer> primeFactors(int n) {
 
-		List<Integer> factors = new ArrayList<Integer>();
+		List<Integer> factors = new ArrayList<>();
 		for (int i = 2; i <= n; i++) {
 			while (n % i == 0) {
 				factors.add(i);
@@ -1908,8 +1918,7 @@ public class LeetCode {
 		boolean prime[] = new boolean[n + 1];
 		for (int i = 0; i < n; i++)
 			prime[i] = true;
-		for (int p = 2; p * p <= n; p++) { // If prime[p] is not changed, then
-											// it is a prime
+		for (int p = 2; p * p <= n; p++) { // If prime[p] is not changed, then it is a prime
 			if (prime[p] == true) {
 				// Update all multiples of p
 				for (int i = p * 2; i <= n; i += p)
@@ -2117,10 +2126,7 @@ public class LeetCode {
 		return n % 4 != 0;
 	}
 
-	// Q3 Given a string, find the length of the longest substring without
-	// repeating characters. #TopInterviewQuestion
-	// below method will take O(n) complexity
-	// This method is the best method
+	// Q3 Given a string, find the length of the longest substring without repeating characters. #TopInterviewQuestion
 	public int lengthOfLongestSubstring2(String s) {
 		if (s.length() == 0)
 			return 0;
@@ -2168,22 +2174,6 @@ public class LeetCode {
 			chars[s.charAt(i)] = i + 1;
 		}
 		return max;
-	}
-
-	public int lengthOfLongestSubstring4(String s) {
-		int len = s.length();
-		HashSet<Character> set = new HashSet<>();
-		int i = 0, j = 0, max = 0;
-		while (i < len && j < len) {
-			if (!set.contains(s.charAt(i))) {
-				set.add(s.charAt(i++));
-				max = Math.max(max, i - j);
-			} else {
-				set.remove(s.charAt(j++));
-			}
-		}
-		return max;
-
 	}
 
 	// Q6 zig zag conversion .. zigzag conversion
@@ -2964,8 +2954,7 @@ public class LeetCode {
 	// You must do this in-place without altering the nodes' values.
 	// For example,
 	// Given {1,2,3,4}, reorder it to {1,4,2,3}.
-	// This question is a combination of Reverse a linked list I & II. Second
-	// method is a better one
+	// This question is a combination of Reverse a linked list I & II. Second method is a better one
 	public void reorderList(ListNode head) {
 		if (head == null || head.next == null)
 			return;
@@ -3004,9 +2993,7 @@ public class LeetCode {
 	public void reorderListanotherway(ListNode head) {
 		if (head == null || head.next == null)
 			return;
-		// step 1. cut the list to two halves
-		// prev will be the tail of 1st half
-		// slow will be the head of 2nd half
+		// step 1. cut the list to two halves prev will be the tail of 1st half. slow will be the head of 2nd half
 		ListNode prev = null, slow = head, fast = head, l1 = head;
 		while (fast != null && fast.next != null) {
 			prev = slow;
@@ -3043,7 +3030,7 @@ public class LeetCode {
 		}
 	}
 
-	// Q147 sort a linked list using insertion sort //dint get it
+	// Q147 sort a linked list using insertion sort //dint get it  #NotAsked
 	public ListNode insertionSortList(ListNode head) {
 		if (head == null) {
 			return head;
@@ -3246,7 +3233,7 @@ public class LeetCode {
 		return grid[m - 1][n - 1];
 	}
 
-	// Q365 Water & Jug Problem
+	// Q365 Water & Jug Problem   #NOT ASKED
 	// This is a pure Math problem. We need the knowledge of number theory to
 	// cover the proof and solution.
 	// The basic idea is to use the property of Bézout's identity and check if z
@@ -3291,7 +3278,7 @@ public class LeetCode {
 		return a;
 	}
 
-	// Q333 largest BST in a binary tree #hardlyasked
+	// Q333 largest BST in a binary tree #Notasked
 	// concept is to use postorder traversal
 	// and make sure min of right side > root and max of left side should be <
 	// than root to get the bst
@@ -3414,7 +3401,7 @@ public class LeetCode {
 		return root.val;
 	}
 
-	// Q452 Minimum Number of Arrows to Burst Balloons #GoodQuestion
+	// Q452 Minimum Number of Arrows to Burst Balloons #GoodQuestion #HardlyAsked
 	public int findMinArrowShots(int[][] points) {
 		if (points.length == 0) {
 			return 0;
@@ -4224,6 +4211,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		while (!poheap.isEmpty()) {
 			max = poheap.poll();
 			c1 *= max;
+
 		}
 		while (!neheap.isEmpty()) {
 			max *= neheap.poll();
@@ -4647,14 +4635,12 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			System.out.println("The complete array is sorted");
 			return;
 		}
-		// step 1(b) of above algo
-		// move from end index till array[j-1] > array[j]
+		// step 1(b) of above algo move from end index till array[j-1] > array[j]
 		for (e = n - 1; e > 0; e--) {
 			if (arr[e] < arr[e - 1])
 				break;
 		}
-		// step 2(a) of above algo
-		// find the max and min
+		// step 2(a) of above algo find the max and min
 		max = arr[s];
 		min = arr[s];
 		for (i = s + 1; i <= e; i++) {
@@ -4665,8 +4651,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 
 		// step 2(b) of above algo
-		// search the sorted array from 0 to start index at which minimum
-		// element will be in sorted array
+		// search the sorted array from 0 to start index at which minimum element will be in sorted array
 		for (i = 0; i < s; i++) {
 			if (arr[i] > min) {
 				s = i;
@@ -4682,8 +4667,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 				break;
 			}
 		}
-		// step 3 of above algo
-		// print
+		// step 3 of above algo print
 		System.out.println(" The unsorted subarray which" + " makes the given array sorted lies"
 				+ "  between the indices " + s + " and " + e);
 		return;
@@ -5317,16 +5301,11 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q463 Island Perimeter #GoodQuestion
-	// You are given a map in form of a two-dimensional integer grid where 1
-	// represents land and 0 represents water.
-	// Grid cells are connected horizontally/vertically (not diagonally). The
-	// grid is completely surrounded by water,
-	// and there is exactly one island (i.e., one or more connected land cells).
-	// The island doesn't have "lakes"
-	// (water inside that isn't connected to the water around the island). One
-	// cell is a square with side length 1.
-	// The grid is rectangular, width and height don't exceed 100. Determine the
-	// perimeter of the island
+	// You are given a map in form of a two-dimensional integer grid where 1 represents land and 0 represents water.
+	// Grid cells are connected horizontally/vertically (not diagonally). The grid is completely surrounded by water,
+	// and there is exactly one island (i.e., one or more connected land cells). The island doesn't have "lakes"
+	// (water inside that isn't connected to the water around the island). One cell is a square with side length 1.
+	// The grid is rectangular, width and height don't exceed 100. Determine the perimeter of the island
 
 	// Solution add 4 for each land and remove 2 for each internal edge
 	public static int islandPerimeter(int[][] grid) {
@@ -5516,7 +5495,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	public int pathSum3(TreeNode root, int sum) {
 		if (root == null)
 			return 0;
-		return pathSumFrom(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
+		return pathSumFrom(root, sum) + pathSumFrom(root.left, sum) + pathSumFrom(root.right, sum);
 	}
 
 	private int pathSumFrom(TreeNode node, int sum) {
@@ -5524,35 +5503,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			return 0;
 		return (node.val == sum ? 1 : 0) + pathSumFrom(node.left, sum - node.val)
 				+ pathSumFrom(node.right, sum - node.val);
-	}
-
-	// below method is difficult to understand
-	public int pathSum(TreeNode root, int sum) {
-		HashMap<Integer, Integer> preSum = new HashMap();
-		preSum.put(0, 1);
-		helper(root, 0, sum, preSum);
-		return count;
-	}
-
-	int count = 0;
-
-	public void helper(TreeNode root, int currSum, int target, HashMap<Integer, Integer> preSum) {
-		if (root == null) {
-			return;
-		}
-		currSum += root.val;
-		if (preSum.containsKey(currSum - target)) {
-			count += preSum.get(currSum - target);
-		}
-		if (!preSum.containsKey(currSum)) {
-			preSum.put(currSum, 1);
-		} else {
-			preSum.put(currSum, preSum.get(currSum) + 1);
-		}
-
-		helper(root.left, currSum, target, preSum);
-		helper(root.right, currSum, target, preSum);
-		preSum.put(currSum, preSum.get(currSum) - 1);
 	}
 
 	// Q438 find all anagrams in a string
@@ -5844,8 +5794,11 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return A[lo] == target ? true : false;
 	}
 
-	// Q153 find minimum in rotated sorted array #GoodQuestion
-	// You may assume no duplicate exists in the array.
+// Q153 find minimum in rotated sorted array  . No Duplicates #GoodQuestion
+
+// Solution	If the first element is larger than the last one, then we compute the element in the middle,
+// and compare it with the first element. If value of the element in the middle is larger than the first
+// element, we know the rotation is at the second half of this array. Else, it is in the first half in the array.
 	int findMin2(int[] num) {
 		int start = 0, end = num.length - 1;
 
@@ -5865,20 +5818,17 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return num[start];
 	}
 
-	// Q154 minimum in rotated sorted array with duplicates allowed..send the
-	// lower index
+// Q154 minimum in rotated sorted array with duplicates allowed..send the lower index
 
 //    We assert the loop invariant is the index of the minimum, min, is within the range [lo, hi].
-//
 //    Before the loop, min is in [0, nums.length - 1]. To satisfy the invariant, lo = 0, hi = nums.length - 1
-//    If we guess mi,
-//if nums[mi] > nums[hi], min should be always in [mi + 1, hi] (explained in Essence). To satisfy the invariant, lo = mi + 1;
-//else if nums[mi] < nums[lo], min should be always in [lo + 1, mi] (explained in Essence), to satisfy the assertion, hi = mi, lo = lo + 1;
-//else (nums[lo] <= nums[mi] <= nums[hi]) min should be always nums[lo].
+//    If we guess mi, if nums[mi] > nums[hi], min should be always in [mi + 1, hi] (explained in Essence). To satisfy the invariant, lo = mi + 1;
+// else if nums[mi] < nums[lo], min should be always in [lo + 1, mi] (explained in Essence), to satisfy the assertion, hi = mi, lo = lo + 1;
+// else (nums[lo] <= nums[mi] <= nums[hi]) min should be always nums[lo].
 //    After the loop, lo = hi, min should be in [lo, lo], to satisfy the assertion, min = lo.
-//            Essence
-//    If we split the array with mi into [lo, mi] and [mi, hi]. If [lo, mi] is not sorted, since we detect [lo, mi] is not sorted by nums[lo] > nums[mi] so nums[lo] cannot be min, min must be within (lo, mi]. If [mi, hi] is not sorted, min must be within (mi, hi] - since we detect [mi, hi] is not sorted by nums[mi] > nums[hi], nums[mi] cannot be min. If they are both sorted, nums[lo] is the min.
-//            There are 4 kinds of relationship among num[lo], nums[mi], nums[hi]
+//  Essence:
+//  If we split the array with mi into [lo, mi] and [mi, hi]. If [lo, mi] is not sorted, since we detect [lo, mi] is not sorted by nums[lo] > nums[mi] so nums[lo] cannot be min, min must be within (lo, mi]. If [mi, hi] is not sorted, min must be within (mi, hi] - since we detect [mi, hi] is not sorted by nums[mi] > nums[hi], nums[mi] cannot be min. If they are both sorted, nums[lo] is the min.
+//      There are 4 kinds of relationship among num[lo], nums[mi], nums[hi]
 //
 // nums[lo] <= nums[mi] <= nums[hi], min is nums[lo]
 // nums[lo] > nums[mi] <= nums[hi], (lo, mi] is not sorted, min is inside
@@ -5894,7 +5844,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
             }
             else if (nums[mi] < nums[lo]) {
                 hi = mi;
-                lo++;
+
             }
             else { // nums[lo] <= nums[mi] <= nums[hi]
                 hi--;
@@ -6094,26 +6044,24 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Word break II #TopInterviewQuestion
-	// Given a non-empty string s and a dictionary wordDict containing a list of
-	// non-empty words,
-	// add spaces in s to construct a sentence where each word is a valid
-	// dictionary word.
+	// Given a non-empty string s and a dictionary wordDict containing a list of non-empty words,
+	// add spaces in s to construct a sentence where each word is a valid dictionary word.
 	// You may assume the dictionary does not contain duplicate words.]
 	// Return all such possible sentences.
 	// For example, given
 	// s = "catsanddog",
 	// dict = ["cat", "cats", "and", "sand", "dog"].
 	// A solution is ["cats and dog", "cat sand dog"].
-	// difficult to understand
-	HashMap<String, List<String>> map = new HashMap<String, List<String>>();
+
+	HashMap<String, List<String>> map1 = new HashMap<String, List<String>>();
 
 	public List<String> wordBreak1(String s, Set<String> wordDict) {
 		List<String> res = new ArrayList<String>();
 		if (s == null || s.length() == 0) {
 			return res;
 		}
-		if (map.containsKey(s)) {
-			return map.get(s);
+		if (map1.containsKey(s)) {
+			return map1.get(s);
 		}
 		if (wordDict.contains(s)) {
 			res.add(s);
@@ -6129,15 +6077,13 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 				}
 			}
 		}
-		map.put(s, res);
+		map1.put(s, res);
 		return res;
 	}
 
 
 	// Q120 Triangle #GoodQuestion
-	// Given a triangle, find the minimum path sum from top to bottom. Each step
-	/////////////////////////////////////// you may move to adjacent numbers on
-	/////////////////////////////////////// the row below.
+	// Given a triangle, find the minimum path sum from top to bottom. Each stepyou may move to adjacent numbers on the row below.
 	// For example, given the following triangle
 	// [
 	// [2],
@@ -6198,6 +6144,14 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		for (int i = 0; i < num.length; i++)
 			s_num[i] = String.valueOf(num[i]);
 
+		Arrays.sort(s_num, new Comparator<String>() {
+			@Override
+			public int compare(String o1, String o2) {
+				String s1 = o1 + o2;
+				 String s2=o2+o1;
+				return o2.compareTo(o1);
+			}
+		});
 		// Comparator to decide which string should come first in concatenation
 		Comparator<String> comp = new Comparator<String>() {
 			@Override
@@ -6224,7 +6178,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 	}
 
-	// Q134 Gas Station #TopInterviewQuestion
+// Q134 Gas Station #TopInterviewQuestion
 // There are N gas stations along a circular route, where the amount of gas at station i is gas[i].
 // You have a car with an unlimited gas tank and it costs cost[i] of gas to travel from station i to its next station (i+1).
 // You begin the journey with an empty tank at one of the gas stations. Return the starting gas station's index if you can
@@ -6367,7 +6321,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		// deal with the float part
 		// key is the remainder, value is the start positon of possible repeat
 		// numbers
-		HashMap<Long, Integer> map = new HashMap<Long, Integer>();
+		HashMap<Long, Integer> map = new HashMap<>();
 		Long r = n % d;
 		while (r > 0) {
 			if (map.containsKey(r)) {
@@ -6564,10 +6518,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 				if (stack.isEmpty()) {
 					area = input[top] * i;
 				}
-				// if stack is not empty then everythin from i-1 to input.peek()
-				// + 1
-				// has to be greater or equal to input[top]
-				// so area = input[top]*(i - stack.peek() - 1);
+				// if stack is not empty then everythin from i-1 to input.peek() + 1
+				// has to be greater or equal to input[top] so area = input[top]*(i - stack.peek() - 1);
 				else {
 					area = input[top] * (i - stack.peekFirst() - 1);
 				}
@@ -6578,15 +6530,11 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 		while (!stack.isEmpty()) {
 			int top = stack.pollFirst();
-			// if stack is empty means everything till i has to be
-			// greater or equal to input[top] so get area by
-			// input[top] * i;
+			// if stack is empty means everything till i has to be greater or equal to input[top] so get area by input[top] * i;
 			if (stack.isEmpty()) {
 				area = input[top] * i;
 			}
-			// if stack is not empty then everything from i-1 to input.peek() +
-			// 1
-			// has to be greater or equal to input[top]
+			// if stack is not empty then everything from i-1 to input.peek() + 1 has to be greater or equal to input[top]
 			// so area = input[top]*(i - stack.peek() - 1);
 			else {
 				area = input[top] * (i - stack.peekFirst() - 1);
@@ -6619,10 +6567,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// meeting point.
 	// 3) Find the distance of all members from best meeting point.
 
-	// this is the accepted solution
 	public int minTotalDistance2(int[][] grid) {
 		int m = grid.length;
 		int n = grid[0].length;
+//        List<Integer> listX = new ArrayList<Integer>();
 
 		ArrayList<Integer> cols = new ArrayList<Integer>();
 		ArrayList<Integer> rows = new ArrayList<Integer>();
@@ -6631,12 +6579,18 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 				if (grid[i][j] == 1) {
 					rows.add(i);
 					cols.add(j);
+//					listX.add(i);
 				}
 			}
 		}
 
 		int sum = 0;
 
+//We don't need to sort the first list (listX) as it already comes sorted
+//        int pivotX = listX.get(listX.size() / 2);
+//        for(Integer x : listX){
+//            ret = ret + Math.abs(x - pivotX);
+//        }
 		for (Integer i : rows) {
 			sum += Math.abs(i - rows.get(rows.size() / 2));
 		}
@@ -6764,11 +6718,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 	}
 
-	// have certain doubts
 	// Q149 Max Points on a line ( maximum points on a plane )
 	// #TopInterviewQuestion
-	// Given n points on a 2D plane, find the maximum number of points that lie
-	// on the same straight line.
+	// Given n points on a 2D plane, find the maximum number of points that lie on the same straight line.
 	public int maxPoints(Point[] points) {
 		if (points.length <= 0)
 			return 0;
@@ -6822,8 +6774,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 						vertical++;
 					}
 				} else {
-					double slope = points[j].y == points[i].y ? 0.0
-							: (1.0 * (points[j].y - points[i].y)) / (points[j].x - points[i].x);
+//					double slope = points[j].y == points[i].y ? 0.0
+//							: (1.0 * (points[j].y - points[i].y)) / (points[j].x - points[i].x);
+                    double slope = (double) (points[j].y - points[i].y) / (double) (points[j].x - points[i].x);
 					if (result.get(slope) != null) {
 						result.put(slope, result.get(slope) + 1);
 					} else {
@@ -6843,7 +6796,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q4 Median of Two Sorted Arrays #TopInterviewQuestion
-	// very well explained by tushar
 	// https://www.youtube.com/watch?v=LPFhl65R7ww&t=1206s
 	public double findMedianSortedArrays(int input1[], int input2[]) {
 
@@ -6860,20 +6812,14 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 			// binary search on a smaller size array
 			int partitionX = (low + high) / 2;
-			int partitionY = (x + y + 1) / 2 - partitionX; // formula needs to
-															// be remembered +1
-															// coz
-			// it plays well with both odd and even numbered sum
+			int partitionY = (x + y + 1) / 2 - partitionX; // formula needs to be remembered +1
+															// coz it plays well with both odd and even numbered sum
 
-			// partition the array into two halves such that number of element
-			// on each half is exactly same and
-			// every element on the left half is less than every element on the
-			// right
+// partition the array into two halves such that number of element on each half is exactly same and
+// every element on the left half is less than every element on the right
 
-			// if partitionX is 0 it means nothing is there on left side. Use
-			// -INF for maxLeftX
-			// if partitionX is length of input then there is nothing on right
-			// side. Use +INF for minRightX
+// if partitionX is 0 it means nothing is there on left side. Use -INF for maxLeftX
+// if partitionX is length of input then there is nothing on right side. Use +INF for minRightX
 			int maxLeftX = (partitionX == 0) ? Integer.MIN_VALUE : input1[partitionX - 1];
 			int minRightX = (partitionX == x) ? Integer.MAX_VALUE : input1[partitionX];
 
@@ -6881,26 +6827,20 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			int minRightY = (partitionY == y) ? Integer.MAX_VALUE : input2[partitionY];
 
 			if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
-				// We have partitioned array at correct place
-				// Now get max of left elements and min of right elements to get
-				// the median in case of even length combined array size
-				// or get max of left for odd length combined array size.
+// We have partitioned array at correct place Now get max of left elements and min of right elements to get
+// the median in case of even length combined array size or get max of left for odd length combined array size.
 				if ((x + y) % 2 == 0) {
 					return ((double) Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY)) / 2;
 				} else {
 					return (double) Math.max(maxLeftX, maxLeftY);
 				}
-			} else if (maxLeftX > minRightY) { // we are too far on right side
-												// for partitionX. Go on left
-												// side.
+			} else if (maxLeftX > minRightY) { // we are too far on right side for partitionX. Go on left side.
 				high = partitionX - 1;
-			} else { // we are too far on left side for partitionX. Go on right
-						// side.
+			} else { // we are too far on left side for partitionX. Go on right side.
 				low = partitionX + 1;
 			}
 		}
-		// Only we we can come here is if input arrays were not sorted. Throw in
-		// that scenario.
+		// Only we we can come here is if input arrays were not sorted. Throw in that scenario.
 		throw new IllegalArgumentException();
 	}
 
@@ -6941,16 +6881,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			}
 		});
 
-		PriorityQueue<Integer> queue = new PriorityQueue<Integer>(); // it has
-																		// to be
-																		// a
-																		// priority
-																		// queue
-																		// instead
-																		// of a
-																		// simple
-																		// queue..
-		// for example [[0,30],[5,10],[15,20]]
+		PriorityQueue<Integer> queue = new PriorityQueue<>();
+		// it has  to be a priority queue instead of a simple queue.. for example [[0,30],[5,10],[15,20]]
 
 		int count = 1;
 		queue.offer(intervals[0].end);
@@ -6969,23 +6901,19 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// NOT a leetcode question BUT similar to the above one. Only difference
-	// Meeting start time and end times are two different arrays
-	// Returns minimum number of platforms required
+	// Meeting start time and end times are two different arrays Returns minimum number of platforms required
 	public static int findPlatform(int arr[], int dep[], int n) {
-		// Sort arrival and departure arrays
+// Sort arrival and departure arrays
 		Arrays.sort(arr);
 		Arrays.sort(dep);
 
-		// plat_needed indicates number of platforms
-		// needed at a time
+// plat_needed indicates number of platforms needed at a time
 		int plat_needed = 1, result = 1;
 		int i = 1, j = 0;
 
-		// Similar to merge in merge sort to process
-		// all events in sorted order
+		// Similar to merge in merge sort to process all events in sorted order
 		while (i < n && j < n) {
-			// If next event in sorted order is arrival,
-			// increment count of platforms needed
+// If next event in sorted order is arrival, increment count of platforms needed
 			if (arr[i] <= dep[j]) {
 				plat_needed++;
 				i++;
@@ -6995,9 +6923,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 					result = plat_needed;
 			}
 
-			// understood why is it decrementing it..but i guess there will be a
-			// way where we dont need to decrement
-			// Else decrement count of platforms needed
+// understood why is it decrementing it..but i guess there will be a way where we dont need to decrement
+// Else decrement count of platforms needed
 			else {
 				plat_needed--;
 				j++;
@@ -7008,13 +6935,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q239 Sliding Window Maximum #TopInterviewQuestion
-	// Given an array nums, there is a sliding window of size k which is moving
-	// from the very left of the array
-	// to the very right. You can only see the k numbers in the window. Each
-	// time the sliding window moves right
+	// Given an array nums, there is a sliding window of size k which is moving from the very left of the array
+	// to the very right. You can only see the k numbers in the window. Each time the sliding window moves right
 	// by one position. Return the max sliding window.
-	// very well explained by iDeserve
-	// https://www.youtube.com/watch?v=39grPZtywyQ
+	//
 
 	public void printMaxfromEachSubarray(int[] array, int k) {
 		LinkedList<Integer> list = new LinkedList();
@@ -7028,24 +6952,20 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			list.addLast(i);
 		}
 		for (int i = k; i < array.length; i++) {
-			// first element present in the list is the greatest element for the
-			// last 'k' sized sub-array
+// first element present in the list is the greatest element for the last 'k' sized sub-array
 			System.out.println(array[list.getFirst()]);
 
-			// now remove all indices of elements from the list which do not
-			// belong to current window
+// now remove all indices of elements from the list which do not belong to current window
 			while (!list.isEmpty() && (list.getFirst() < (i - k + 1))) {
 				list.removeFirst();
 			}
 
-			// now again remove all useless elements present at the front of the
-			// list
-			// remove all useless elements present at the front of the list
+// now again remove all useless elements present at the front of the list remove all useless elements present at the front of the list
 			while (!list.isEmpty() && array[list.getLast()] < array[i]) {
 				list.removeLast();
 			}
 
-			// and finally insert this new element at the back of the list
+// and finally insert this new element at the back of the list
 			list.add(i);
 		}
 
@@ -7074,6 +6994,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 		return result;
 	}
+
+
 
 	// Q346 Moving Average from the data stream #GoodQuestion
 	// for saying we can say about the below methods which creates a queue of a
@@ -7111,9 +7033,11 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 	}
 
-	// below is a better method coz in the above method the queue keeps on
-	// increasing
-	private int[] window;
+// below is a better method coz in the above method the queue keeps on increasing
+// The idea is to keep the sum so far and update the sum just by replacing the oldest number with the new entry.
+
+
+    private int[] window;
 	private int n1, insert;
 	private long sum;
 
@@ -7130,10 +7054,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		sum -= window[insert];
 		sum += val;
 		window[insert] = val;
-		insert = (insert + 1) % window.length; // it stores the element directly
-												// on the index so the size will
-												// only be three
-
+		insert = (insert + 1) % window.length; // it stores the element directly on the index so the size will only be three
 		return (double) sum / n1;
 	}
 
@@ -7141,13 +7062,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// Given four lists A, B, C, D of integer values, compute how many tuples
 	// (i, j, k, l) there are such that A[i] + B[j] + C[k] + D[l] is zero.
 
-	// Take the arrays A and B, and compute all the possible sums of two
-	// elements. Put the sum in the Hash map, and
-	// increase the hash map value if more than 1 pair sums to the same value.
-	// Compute all the possible sums of the arrays C and D. If the hash map
-	// contains the opposite value of the
-	// current sum, increase the count of four elements sum to 0 by the counter
-	// in the map.
+	// Take the arrays A and B, and compute all the possible sums of two elements. Put the sum in the Hash map, and
+	// increase the hash map value if more than 1 pair sums to the same value. Compute all the possible sums of the arrays
+    // C and D. If the hash map contains the opposite value of the
+	// current sum, increase the count of four elements sum to 0 by the counter in the map.
 	public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
 		Map<Integer, Integer> sums = new HashMap<>();
 		int count = 0;
@@ -7204,10 +7122,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			return s.length();
 		Map<Character, Integer> map = new HashMap<>();
 		for (int i = 0; i < s.length(); i++) {
-			if (map.containsKey(s.charAt(i))) {
-				map.put(s.charAt(i), map.get(s.charAt(i)) + 1);
-			} else
-				map.put(s.charAt(i), 1);
+            char c = s.charAt(i);
+            map.put(c, map.getOrDefault(c, 0) + 1);
 		}
 		int idx = 0;
 		while (idx < s.length() && map.get(s.charAt(idx)) >= k)
@@ -7222,69 +7138,44 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// Q340 Longest substring with at most k distinct characters
 	// #TopInterviewQuestion
 	// https://www.youtube.com/watch?v=RHFrVNmlyA8&t=6s
-	int lengthOfLongestSubstringKDistinct(String str, int k) {
-		int s = 0, e = 0, maxlen = 0;
-		Map<Character, Integer> dic = new HashMap<>();
-		while (e < str.length()) {
-			char c = str.charAt(e);
-			if (dic.containsKey(c)) {
-				dic.put(c, dic.get(c) + 1);
+	int lengthOfLongestSubstringKDistinct(String s, int k) {
+        Map<Character, Integer> map = new HashMap<>();
+        int left = 0;
+        int best = 0;
+        for (int i = 0; i < s.length(); i++) {
+            // character at the right pointer
+            char c = s.charAt(i);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+            // make sure map size is valid, no need to check left pointer less than s.length()
+            while (map.size() > k) {
+                char leftChar = s.charAt(left);
+                map.put(leftChar, map.get(leftChar) - 1);
+                if (map.get(leftChar) == 0) {
+                    map.remove(leftChar);
+                }
+                left++;
+            }
+            best = Math.max(best, i - left + 1);
+        }
+        return best;
+    }
 
-			} else {
-				dic.put(c, 1);
-			}
+	// OR
+    public int lengthOfLongestSubstringKDistinct2(String s, int k) {
+        int[] count = new int[256];
+        int num = 0, i = 0, res = 0;
+        for (int j = 0; j < s.length(); j++) {
+            if (count[s.charAt(j)]++ == 0) num++;
+            if (num > k) {
+                while (--count[s.charAt(i++)] > 0);
+                num--;
+            }
+            res = Math.max(res, j - i + 1);
+        }
+        return res;
+    }
 
-			while (dic.size() > k) {
-				char ch = str.charAt(s);
-				if (dic.get(ch) == 0)
-					dic.remove(ch);
-				else
-					dic.put(ch, dic.get(ch) - 1);
-
-				++s;
-			}
-			maxlen = Math.max(maxlen, e - s + 1);
-			++e;
-		}
-		return maxlen;
-	}
-
-	// dont know something is wrong in the above solution. null pointer
-	// exception.
-	// below solution is working fine
-	public int lengthOfLongestSubstringKDistinct2(String s, int k) {
-		if (k == 0 || s == null || s.length() == 0)
-			return 0;
-		if (s.length() < k)
-			return s.length();
-		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
-		int maxLen = k;
-		int left = 0;
-		for (int i = 0; i < s.length(); i++) {
-			char c = s.charAt(i);
-			if (map.containsKey(c)) {
-				map.put(c, map.get(c) + 1);
-			} else {
-				map.put(c, 1);
-			}
-			if (map.size() > k) {
-				maxLen = Math.max(maxLen, i - left);
-				while (map.size() > k) {
-					char fc = s.charAt(left);
-					if (map.get(fc) == 1) {
-						map.remove(fc);
-					} else {
-						map.put(fc, map.get(fc) - 1);
-					}
-					left++;
-				}
-			}
-		}
-		maxLen = Math.max(maxLen, s.length() - left);
-		return maxLen;
-	}
-
-	// Longest substring with m unique characters #GoodQuestion
+	// Longest substring with M unique characters #GoodQuestion
 	// https://www.youtube.com/watch?v=8AQra0p_HmI
 	public static String solution(String s, Integer m) {
 		int start = 0, end = 0, windowSize = 1, windowStart = 0;
@@ -7303,8 +7194,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			}
 			end++;
 
-			// move start forward if number of unique characters is greater than
-			// m
+			// move start forward if number of unique characters is greater than m
 			while (!isLessThanM(hash, m)) {
 				int temp = hash.get((int) s.charAt(start));
 				hash.put((int) s.charAt(start), --temp);
@@ -7329,9 +7219,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q76 Given a string S and a string T, find the minimum window in S which
-	// will contain all the characters in T
-	// in complexity O(n).
-	// Minimum Window Substring
+	// will contain all the characters in T in complexity O(n).
+    // Minimum Window Substring #GoodQuestion
 	public static String minWindow(String s, String t) {
 		Map<Character, Integer> map = new HashMap<>();
 		for (char temp : s.toCharArray()) {
@@ -7368,86 +7257,94 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return minLength == Integer.MAX_VALUE ? "" : s.substring(minStart, minStart + minLength);
 	}
 
-	// Q380 Insert Delete GetRandom O(1) #TopInterviewQuestion
-	// Design a data structure that supports all following operations in average
-	// O(1) time.
+	//Shuffle of a given array
+    static void randomize( int arr[], int n)
+    {
+        // Creating a object for Random class
+        Random r = new Random();
+
+        // Start from the last element and swap one by one. We don't need to run for the first element that's why i > 0
+        for (int i = n-1; i > 0; i--) {
+
+            // Pick a random index from 0 to i
+            int j = r.nextInt(i);
+
+            // Swap arr[i] with the element at random index
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+        // Prints the random array
+        System.out.println(Arrays.toString(arr));
+    }
+
+    // Q380 Insert Delete GetRandom O(1) #TopInterviewQuestion
+	// Design a data structure that supports all following operations in average O(1) time.
 	// insert(val): Inserts an item val to the set if not already present.
 	// remove(val): Removes an item val from the set if present.
-	// getRandom: Returns a random element from current set of elements. Each
-	// element must have the same probability of being returned.
-	ArrayList<Integer> nums;
-	HashMap<Integer, Integer> locs;
+	// getRandom: Returns a random element from current set of elements.
+	// Each element must have the same probability of being returned.
+	ArrayList<Integer> list;
+	HashMap<Integer, Integer> map;
 	java.util.Random rand = new java.util.Random();
 
 	public void ContructorRandomizedSet() {
-		nums = new ArrayList<Integer>();
-
+		list = new ArrayList<Integer>();
 		// map for storing the number and its index
-		locs = new HashMap<Integer, Integer>();
+		map = new HashMap<Integer, Integer>();
 	}
 
-	/**
-	 * Inserts a value to the set. Returns true if the set did not already
-	 * contain the specified element.
-	 */
+	// Inserts a value to the set. Returns true if the set did not already contain the specified element
 	public boolean insert(int val) {
-		boolean contain = locs.containsKey(val);
+		boolean contain = map.containsKey(val);
 		if (contain)
 			return false;
-		locs.put(val, nums.size());
-		nums.add(val);
+		map.put(val, list.size());
+		list.add(val);
 		return true;
 	}
 
-	/**
-	 * Removes a value from the set. Returns true if the set contained the
-	 * specified element.
-	 */
+	// Removes a value from the set. Returns true if the set contained the specified element.
 	public boolean remove(int val) {
-		boolean contain = locs.containsKey(val);
+		boolean contain = map.containsKey(val);
 		if (!contain)
 			return false;
-		int loc = locs.get(val);
-		if (loc < nums.size() - 1) { // if it is not the last one than swap the
-										// last one with this val
-			int lastone = nums.get(nums.size() - 1); // this is the actual
-														// element
-			nums.set(loc, lastone);
-			locs.put(lastone, loc);
+		int location = map.get(val);
+		if (location < list.size() - 1) { // if it is not the last one than swap the last one with this val
+			int lastone = list.get(list.size() - 1); // this is the actual element
+			list.set(location, lastone);
+			map.put(lastone, location);
 		}
-		locs.remove(val);
-		nums.remove(nums.size() - 1);
+		map.remove(val);
+		list.remove(list.size() - 1);
 		return true;
 	}
 
 	/** Get a random element from the set. */
 	public int getRandom() {
-		return nums.get(rand.nextInt(nums.size()));
+		return list.get(rand.nextInt(list.size()));
 	}
 
-	// Q381 Insert Delete GetRandom O(1) -- Duplicates Allowed (follow up
-	// question for the above question)
+	// Q381 Insert Delete GetRandom O(1) -- Duplicates Allowed (follow up question for the above question)
 
 	class RandomizedCollection {
 		ArrayList<Integer> nums;
-		HashMap<Integer, Set<Integer>> locs;
+		HashMap<Integer, Set<Integer>> map;
 		java.util.Random rand = new java.util.Random();
 
 		/** Initialize your data structure here. */
 		public RandomizedCollection() {
 			nums = new ArrayList<Integer>();
-			locs = new HashMap<Integer, Set<Integer>>();
+			map = new HashMap<Integer, Set<Integer>>();
 		}
 
-		/**
-		 * Inserts a value to the collection. Returns true if the collection did
-		 * not already contain the specified element.
-		 */
+// Inserts a value to the collection. Returns true if the collection did not already contain the specified element.
+
 		public boolean insert(int val) {
-			boolean contain = locs.containsKey(val);
+			boolean contain = map.containsKey(val);
 			if (!contain)
-				locs.put(val, new LinkedHashSet<Integer>());
-			locs.get(val).add(nums.size());
+				map.put(val, new LinkedHashSet<Integer>());
+			map.get(val).add(nums.size());
 			nums.add(val);
 			return !contain;
 		}
@@ -7457,21 +7354,21 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		 * contained the specified element.
 		 */
 		public boolean remove(int val) {
-			boolean contain = locs.containsKey(val);
+			boolean contain = map.containsKey(val);
 			if (!contain)
 				return false;
-			int loc = locs.get(val).iterator().next();
-			locs.get(val).remove(loc);
+			int loc = map.get(val).iterator().next();
+			map.get(val).remove(loc);
 			if (loc < nums.size() - 1) {
 				int lastone = nums.get(nums.size() - 1);
 				nums.set(loc, lastone);
-				locs.get(lastone).remove(nums.size() - 1);
-				locs.get(lastone).add(loc);
+				map.get(lastone).remove(nums.size() - 1);
+				map.get(lastone).add(loc);
 			}
 			nums.remove(nums.size() - 1);
 
-			if (locs.get(val).isEmpty())
-				locs.remove(val);
+			if (map.get(val).isEmpty())
+				map.remove(val);
 			return true;
 		}
 
@@ -7495,25 +7392,25 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// of that element(so we can create a tuple class here), replace that root
 	// with the next element from the same column.
 	// explained it very well https://www.youtube.com/watch?v=zIaMTdBQT34&t=309s
-//	public int kthSmallest1(int[][] matrix, int k) {
-//		int n = matrix.length;
-//		PriorityQueue<Tuple> pq = new PriorityQueue<>();
-//		for (int j = 0; j <= n - 1; j++)
-//			pq.offer(new Tuple(0, j, matrix[0][j]));
-//		for (int i = 0; i < k - 1; i++) {
-//			Tuple t = pq.poll();
-//			if (t.x == n - 1)
-//				continue;
-//			pq.offer(new Tuple(t.x + 1, t.y, matrix[t.x + 1][t.y]));
-//		}
-//		return pq.poll().val;
-//	}
+	public int kthSmallest1(int[][] matrix, int k) {
+		int n = matrix.length;
+		PriorityQueue<Tuple> pq = new PriorityQueue<>();
+		for (int j = 0; j <= n - 1; j++)
+			pq.offer(new Tuple(0, j, matrix[0][j]));
+
+		for (int i = 0; i < k - 1; i++) {
+			Tuple t = pq.poll();
+			if (t.x == n - 1)
+				continue;
+			pq.offer(new Tuple(t.x + 1, t.y, matrix[t.x + 1][t.y]));
+		}
+		return pq.poll().val;
+	}
 
 	// or
 
 	public int kthSmallest2(int[][] matrix, int k) {
-		int lo = matrix[0][0], hi = matrix[matrix.length - 1][matrix[0].length - 1] + 1;// [lo,
-																						// hi)
+		int lo = matrix[0][0], hi = matrix[matrix.length - 1][matrix[0].length - 1] + 1;// [lo , hi)
 		while (lo < hi) {
 			int mid = lo + (hi - lo) / 2;
 			int count = 0, j = matrix[0].length - 1;
@@ -7530,11 +7427,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return lo;
 	}
 
-	// Given a list of strings write a function to write the kth most frequent
-	// recurrent strings
+	// Given a list of strings write a function to write the kth most frequent recurrent strings
 	// this method looks good
 	public String kthMostFrequentString(String[] string, int k) {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		HashMap<String, Integer> map = new HashMap<>();
 		for (String s : string) {
 			Integer x = map.get(s);
 			if (x == null)
@@ -7576,6 +7472,17 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 
 		Map<Integer, Integer> freqs = new HashMap<>();
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+//        List<Map.Entry<Integer, Set<Integer>>> mapEntries = new ArrayList<>(map.entrySet());
+//        // Collections.sort method is only applicable to list and thus we are
+//        // adding the complete hashmap in the list
+//        Collections.sort(mapEntries, new Comparator<Map.Entry<Integer, Set<Integer>>>   () {
+//            public int compare(Map.Entry<Integer, Set<Integer>> a, Map.Entry<Integer, Set<Integer>> b) {
+//               Set a1 = a.getValue();
+//                Set b1 = b.getValue();
+//                return a1.size() - b1.size();
+//            }
+//        });
 		for (int num : nums) {
 			freqs.put(num, freqs.getOrDefault(num, 0) + 1);
 		}
@@ -7776,6 +7683,20 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 
 	}
+
+// 285	Inorder Successor of a BST
+    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+        TreeNode succ = null;
+        while (root != null) {
+            if (p.val < root.val) {
+                succ = root;
+                root = root.left;
+            }
+            else
+                root = root.right;
+        }
+        return succ;
+    }
 
 	// Q46 Permutation of a string #TopInterviewQuestion
 	public static HashSet<String> getAllPermutations(String str) {
@@ -8081,13 +8002,11 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 	}
 
-	// Q297 Serialize and Deserialize Binary Tree #TopInterviewQuestion
-	// The idea is simple: print the tree in pre-order traversal and use "X" to
-	// denote null node and split node
-	// with ",". We can use a StringBuilder for building the string on the fly.
-	// For deserializing, we use a Queue
-	// to store the pre-order traversal and since we have "X" as null node, we
-	// know exactly how to where to end building subtress.
+// Q297 Serialize and Deserialize Binary Tree #TopInterviewQuestion
+// The idea is simple: print the tree in pre-order traversal and use "X" to denote null node and split node
+// with ",". We can use a StringBuilder for building the string on the fly.
+// For deserializing, we use a Queue to store the pre-order traversal and since we have "X" as null node, we
+// know exactly how to where to end building subtress.
 
 	private static final String splitter = ",";
 	private static final String NN = "X";
@@ -8111,12 +8030,14 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 	// Decodes your encoded data to tree.
 	public TreeNode deserialize2(String data) {
-		Deque<String> nodes = new LinkedList<>();
-		nodes.addAll(Arrays.asList(data.split(splitter)));
-		return buildTree(nodes);
+		//Deque<String> nodes = new LinkedList<>();
+		Queue<String> nodes1 = new LinkedList<>();
+		//nodes1.addAll()
+		nodes1.addAll(Arrays.asList(data.split(splitter)));
+		return buildTree(nodes1);
 	}
 
-	private TreeNode buildTree(Deque<String> nodes) {
+	private TreeNode buildTree(Queue<String> nodes) {
 		String val = nodes.remove();
 
 		if (val.equals(NN))
@@ -8131,11 +8052,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 	// Without recursion Serialize and Deserialize
 	// Here I use typical BFS method to handle a binary tree. I use string n to
-	// represent null values.
-	// The string of the binary tree in the example will be "1 2 3 n n 4 5 n n n
-	// n ".
-	// When deserialize the string, I assign left and right child for each
-	// not-null node, and add the not-null
+	// represent null values. The string of the binary tree in the example will be "1 2 3 n n 4 5 n n n
+	// n ". When deserialize the string, I assign left and right child for each not-null node, and add the not-null
 	// children to the queue, waiting to be handled later.
 	public String serialize(TreeNode root) {
 		if (root == null)
@@ -8180,8 +8098,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q680 Valid palindrome 2 #GoodQuestion
-	// Given a non-empty string s, you may delete at most one character.
-	// Judge whether you can make it a palindrome
+	// Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome
 	public boolean validPalindrome2(String s) {
 		int i = 0, j = s.length() - 1;
 		while (i < j && s.charAt(i) == s.charAt(j)) {
@@ -8249,21 +8166,14 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q658 K closest points to the given value #GoodQuestion
-	// Given a sorted array, two integers k and x, find the k closest elements
-	// to x in the array.
-	// The result should also be sorted in ascending order. If there is a tie,
-	// the smaller elements are always preferred.
-	// In the following solutions, it is assumed that all elements of array are
-	// distinct.
+	// Given a sorted array, two integers k and x, find the k closest elements to x in the array.
+	// The result should also be sorted in ascending order. If there is a tie, the smaller elements are always preferred.
+	// In the following solutions, it is assumed that all elements of array are distinct.
 	// A simple solution is to do linear search for k closest elements.
-	// 1) Start from the first element and search for the crossover point (The
-	// point before which elements are smaller
-	// than or equal to X and after which elements are greater). This step takes
-	// O(n) time.
-	// 2) Once we find the crossover point, we can compare elements on both
-	// sides of crossover point to print k closest elements.
+	// 1) Start from the first element and search for the crossover point (The  point before which elements are smaller
+	// than or equal to X and after which elements are greater). This step takes O(n) time.
+	// 2) Once we find the crossover point, we can compare elements on both sides of crossover point to print k closest elements.
 	// This step takes O(k) time.
-
 	class KClosest {
 		/*
 		 * Function to find the cross over point (the point before which
@@ -8372,7 +8282,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return res;
 	}
 
-	// Q300 Length of longest increasing subsequence #TopInterviewQuestion
+	// Q300 Length of longest increasing subsequence #TopInterviewQuestion  #Salesforce
 	// Given an unsorted array of integers, find the length of longest
 	// increasing subsequence.
 	// Very well explained by tushar https://www.youtube.com/watch?v=CE2b_-XfVDk
@@ -8828,12 +8738,12 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
             return;
         traverse(root.left);
 
-        // If first element has not been found, assign it to prevElement (refer to 6 in the example above)
+        // If first element has not been found, assign it to prevElement
         if (firstElement == null && prevElement.val >= root.val) {
             firstElement = prevElement;
         }
 
-        // If first element is found, assign the second element to the root (refer to 2 in the example above)
+        // If first element is found, assign the second element to the root
         if (firstElement != null && prevElement.val >= root.val) {
             secondElement = root;
         }
@@ -9096,8 +9006,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q100 Same Tree
-	// Given two binary trees, write a function to check if they are the same or
-	// not.
+	// Given two binary trees, write a function to check if they are the same or not.
 	// Two binary trees are considered the same if they are structurally
 	// identical and the nodes have the same value.
 	public boolean isSameTree(TreeNode p, TreeNode q) {
@@ -9132,7 +9041,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// Q96 Unique Binary Search Trees
 	// Given n, how many structurally unique BST's (binary search trees) that
 	// store values 1...n?
-	//
 	// For example,
 	// Given n = 3, there are a total of 5 unique BST's.
 	//
@@ -9155,41 +9063,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 
 		return G[n];
-	}
-
-	// Using recursion also we can do it
-	int countTreesRec(int numKeys) {
-		if (numKeys <= 1) {
-			return (1);
-		} else {
-			int sum = 0;
-			int left, right, root;
-			for (root = 1; root <= numKeys; root++) {
-				left = countTreesRec(root - 1);
-				right = countTreesRec(numKeys - root);
-				sum += left * right;
-			}
-			return (sum);
-		}
-	}
-
-	// or the below method
-	// its more of counting the possibilities for the left number of elements
-	// and right number of elements and then multiplying them
-	public int countPossibilities(int n, int[] solutions) {
-		if (n < 0)
-			return 0;
-		else if (n == 1 || n == 0)
-			return 1;
-		int possibilities = 0;
-		for (int i = 0; i < n; i++) {
-			if (solutions[i] == -1)
-				solutions[i] = countPossibilities(i, solutions); // compute all	BST's in the left subtree
-			if (solutions[n - 1 - i] == -1)
-				solutions[n - 1 - i] = countPossibilities(n - 1 - i, solutions); // compute all BST's in the left subtree
-			possibilities += solutions[i] + solutions[n - 1 - i];
-		}
-		return possibilities;
 	}
 
 	// Q95 Unique Binary Search Trees II
@@ -9586,8 +9459,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q328 Odd Even Linked List #TopInterviewQuestion
-	// Given a singly linked list, group all odd nodes together followed by the
-	// even nodes.
+	// Given a singly linked list, group all odd nodes together followed by the even nodes.
 	// Input: 1->2->3->4->5->NULL
 	// Output: 1->3->5->2->4->NULL
 	public ListNode oddEvenList(ListNode head) {
@@ -9654,8 +9526,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		for (int i = 0; i < m - 1; i++)
 			pre = pre.next;
 
-		ListNode start = pre.next; // a pointer to the beginning of a sub-list
-									// that will be reversed
+		ListNode start = pre.next; // a pointer to the beginning of a sub-list that will be reversed
 		ListNode then = start.next; // a pointer to a node that will be reversed
 		// 1 - 2 -3 - 4 - 5 ; m=2; n =4 ---> pre = 1, start = 2, then = 3
 		// dummy-> 1 -> 2 -> 3 -> 4 -> 5
@@ -9665,10 +9536,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			pre.next = then;
 			then = start.next;
 		}
-		// first reversing : dummy->1 - 3 - 2 - 4 - 5; pre = 1, start = 2, then
-		// = 4
-		// second reversing: dummy->1 - 4 - 3 - 2 - 5; pre = 1, start = 2, then
-		// = 5 (finish)
+		// first reversing : dummy->1 - 3 - 2 - 4 - 5; pre = 1, start = 2, then = 4
+		// second reversing: dummy->1 - 4 - 3 - 2 - 5; pre = 1, start = 2, then = 5 (finish)
 		return dummy.next;
 	}
 
@@ -9759,11 +9628,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// the two partitions. For example,
 	// Given 1->4->3->2->5->2 and x = 3,
 	// return 1->2->2->4->3->5.
-	// the basic idea is to maintain two queues, the first one stores all nodes
-	// with val less than x ,
-	// and the second queue stores all the rest nodes. Then concat these two
-	// queues. Remember to set the tail of second queue a null next, or u will
-	// get TLE.
+	// the basic idea is to maintain two queues, the first one stores all nodes with val less than x ,
+	// and the second queue stores all the rest nodes. Then concat these two queues. Remember to set the
+	// tail of second queue a null next, or u will get TLE.
 	public ListNode partition(ListNode head, int x) {
 		ListNode node1 = new ListNode(0);
 		ListNode node2 = new ListNode(0);
@@ -9834,8 +9701,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return head.next;
 	}
 
-	// Q21 merge two sorted lists #TopInterviewQuestion
-	// merge two sorted linked lists
+	// Q21 merge two sorted (linked) lists #TopInterviewQuestion
 	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 		if (l1 == null)
 			return l2;
@@ -9871,8 +9737,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q19 Remove Nth Node From End of List #TopInterviewQuestion
-	// Given a linked list, remove the nth node from the end of list and return
-	// its head.
+	// Given a linked list, remove the nth node from the end of list and return its head.
 
 	// A one pass solution can be done using pointers.Move one pointer fast --> n+1 places forward,
 	// to maintain a gap of n between the two pointers and then move both at the same speed. Finally,
@@ -9900,10 +9765,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// Dynamic Programming
 
 	// Q322 Coin Change Problem #TopInterviewQuestion
-	// You are given coins of different denominations and a total amount of
-	// money amount.
-	// Write a function to compute the fewest number of coins that you need to
-	// make up that amount.
+	// You are given coins of different denominations and a total amount of money amount.
+	// Write a function to compute the fewest number of coins that you need to  make up that amount.
 	// If that amount of money cannot be made up by any combination of the
 	// coins, return -1.
 	/**
@@ -9913,10 +9776,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	 * possible.
 	 */
 	public int minimumCoinBottomUp(int total, int coins[]) {
-		int T[] = new int[total + 1]; // to keep the track of minimum number of
-										// coins to form a total of that index
+		int T[] = new int[total + 1]; // to keep the track of minimum number of coins to form a total of that index
 		int R[] = new int[total + 1]; // this is useful to get the final answer
-		// foe example coins[0] = 7 , coins[1] = 2 , coins[2] = 3 , coins[3] = 6
+		// for example coins[0] = 7 , coins[1] = 2 , coins[2] = 3 , coins[3] = 6
 		// ;
 		T[0] = 0;
 		for (int i = 1; i <= total; i++) {
@@ -9953,11 +9815,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Given a total and coins of certain denominations find number of ways
-	// total
-	// * can be formed from coins assuming infinity supply of coins
+	// total * can be formed from coins assuming infinity supply of coins
 
-	// below solution tells you the number of ways we can achieve that total and
-	// not the combination
+	// below solution tells you the number of ways we can achieve that total and not the combination
 	public int numberOfSolutions(int total, int coins[]) {
 		int temp[][] = new int[coins.length + 1][total + 1];
 		for (int i = 0; i <= coins.length; i++) {
@@ -9991,8 +9851,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// It arrives at that point from left (moving right to that point).
 	// Thus, we have the following state equations: suppose the number of paths
 	// to arrive at a point (i, j) is denoted
-	// as P[i][j], it is easily concluded that P[i][j] = P[i - 1][j] + P[i][j -
-	// 1].
+	// as P[i][j], it is easily concluded that P[i][j] = P[i - 1][j] + P[i][j - 1].
 	// The boundary conditions of the above equation occur at the leftmost
 	// column (P[i][j - 1] does not exist)
 	// and the uppermost row (P[i - 1][j] does not exist). These conditions can
@@ -10017,12 +9876,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Unique Path 2
-	// Now consider if some obstacles are added to the grids. How many unique
-	// paths would there be?
-	// An obstacle and empty space is marked as 1 and 0 respectively in the
-	// grid.
-	// For example,
-	// There is one obstacle in the middle of a 3x3 grid as illustrated below.
+	// Now consider if some obstacles are added to the grids. How many unique paths would there be?
+	// An obstacle and empty space is marked as 1 and 0 respectively in the grid.
+	// For example, There is one obstacle in the middle of a 3x3 grid as illustrated below.
 	// [
 	// [0,0,0],
 	// [0,1,0],
@@ -10042,14 +9898,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 				else if (i == 0)
 					obstacleGrid[i][j] = obstacleGrid[i][j - 1] * 1;// For row 0, if there are no paths to left cell, then its 0,else 1
 				else if (j == 0)
-					obstacleGrid[i][j] = obstacleGrid[i - 1][j] * 1;// For col
-																	// 0, if
-																	// there are
-																	// no paths
-																	// to upper
-																	// cell,
-																	// then its
-																	// 0,else 1
+					obstacleGrid[i][j] = obstacleGrid[i - 1][j] * 1;// For col 0, if there are no paths to upper cell,then its 0,else 1
 				else
 					obstacleGrid[i][j] = obstacleGrid[i - 1][j] + obstacleGrid[i][j - 1];
 			}
@@ -10063,8 +9912,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	public boolean isMatch(String s, String p) {
 		char[] str = s.toCharArray();
 		char[] pattern = p.toCharArray();
-		// replace multiple * with one *
-		// e.g a**b***c --> a*b*c
+		// replace multiple * with one * e.g a**b***c --> a*b*c
 
 		int writeIndex = 0;
 		boolean isFirst = true;
@@ -10080,8 +9928,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			}
 		}
 		boolean T[][] = new boolean[str.length + 1][writeIndex + 1];
-		// write index is the pattern we got after removing multiple stars ***
-		// into 1 star *
+		// write index is the pattern we got after removing multiple stars *** into 1 star *
 		if (writeIndex > 0 && pattern[0] == '*') {
 			T[0][1] = true;
 		}
@@ -10090,8 +9937,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 		for (int i = 1; i < T.length; i++) {
 			for (int j = 1; j < T[0].length; j++) {
-				if (pattern[j - 1] == '?' || str[i - 1] == pattern[j - 1]) { // first
-																				// condition
+				if (pattern[j - 1] == '?' || str[i - 1] == pattern[j - 1]) { // first condition
 					T[i][j] = T[i - 1][j - 1];
 				} else if (pattern[j - 1] == '*') { // second condition
 					T[i][j] = T[i - 1][j] || T[i][j - 1];
@@ -10111,8 +9957,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	public boolean matchRegex(char[] text, char[] pattern) {
 		boolean T[][] = new boolean[text.length + 1][pattern.length + 1];
 		T[0][0] = true;
-		// Deals with patterns like a* or a*b* or a*b*c* //these things can be
-		// matched with empty text as well
+		// Deals with patterns like a* or a*b* or a*b*c* //these things can be matched with empty text as well
 		for (int i = 1; i < T[0].length; i++) {
 			if (pattern[i - 1] == '*') {
 				T[0][i] = T[0][i - 2];
@@ -10120,13 +9965,12 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 		for (int i = 1; i < T.length; i++) {
 			for (int j = 1; j < T[0].length; j++) {
-				if (pattern[j - 1] == '.' || pattern[j - 1] == text[i - 1]) { // first
-																				// condition
+				if (pattern[j - 1] == '.' || pattern[j - 1] == text[i - 1]) { // first condition
 					T[i][j] = T[i - 1][j - 1];
 				} else if (pattern[j - 1] == '*') {
 					T[i][j] = T[i][j - 2];
-					if (pattern[j - 2] == '.' || pattern[j - 2] == text[i - 1]) { // second
-																					// condition
+					if (pattern[j - 2] == '.' || pattern[j - 2] == text[i - 1]) { // second condition
+
 						T[i][j] = T[i][j] | T[i - 1][j];
 					}
 				} else {
@@ -10161,8 +10005,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		int n = s.length();
 		int palindromeBeginsAt = 0; // index where the longest palindrome begins
 		int max_len = 1;// length of the longest palindrome
-		boolean palindrome[][] = new boolean[n][n]; // boolean table to store
-													// palindrome truth
+		boolean palindrome[][] = new boolean[n][n]; // boolean table to store palindrome truth
 
 		// Trivial case: single letter palindromes
 		for (int i = 0; i < n; i++) {
@@ -10182,11 +10025,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		for (int curr_len = 3; curr_len <= n; curr_len++) {
 			for (int i = 0; i < n - curr_len + 1; i++) {
 				int j = i + curr_len - 1;
-				if (s.charAt(i) == s.charAt(j) // 1. The first and last
-												// characters should match
-						&& palindrome[i + 1][j - 1]) // 2. Rest of the substring
-														// should be a
-														// palindrome
+				if (s.charAt(i) == s.charAt(j) // 1. The first and last characters should match
+						&& palindrome[i + 1][j - 1]) // 2. Rest of the substring should be a palindrome
 				{
 					palindrome[i][j] = true;
 					palindromeBeginsAt = i;
@@ -10222,15 +10062,11 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 					if ((i > 0) && (j > 0)) // neither the first row nor first
 											// column
 					{
-						// Refer in ppt :- LCS(ACBE,ADC) = max(LCS(ACB,ADC),
-						// LCS(ACBE,AD))
-						// Thumb rule:- mismatch take max. if not in first row
-						// or column.
+						// Refer in ppt :- LCS(ACBE,ADC) = max(LCS(ACB,ADC), LCS(ACBE,AD))
+						// Thumb rule:- mismatch take max. if not in first row or column.
 						if (match[i - 1][j] >= match[i][j - 1]) {
 							match[i][j] = match[i - 1][j];
-							pointer[i][j] = pick_s2; // ditch s1's character
-														// trimming s1s
-														// character
+							pointer[i][j] = pick_s2; // ditch s1's character trimming s1s character
 						} else {
 							match[i][j] = match[i][j - 1];
 							pointer[i][j] = pick_s1;// ditch s2's character.
@@ -10274,7 +10110,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		System.out.println(result.reverse());
 	}
 
-	// longest palindromic subsequence
+	// longest palindromic subsequence  #dekhSakteHaiEkBaar
 	// 1. Initialize a palindrome DP table of size nxn where n is the length of
 	// the given String
 	// 2. Set single length palindrome values to 1
@@ -10286,8 +10122,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// 4. after the loop, return palindrome[0][n-1]
 	public static int LPSunsequence(String s) {
 		int n = s.length();
-		int palindrome[][] = new int[n][n]; // Table to store lengths of
-											// palindrome subsequences.
+		int palindrome[][] = new int[n][n]; // Table to store lengths of palindrome subsequences.
 
 		// Trivial case: single letter palindromes
 		for (int i = 0; i < n; i++) {
@@ -10325,23 +10160,12 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 						match[i][j] = 1;
 					else
 						match[i][j] = match[i - 1][j - 1] + 1;
-					if (match[i][j] > max) // If you find a longer common
-											// substring re-initialize the max
-											// count and update the result list.
+					if (match[i][j] > max) // If you find a longer common substring re-initialize the max count and update the result list.
 					{
 						max = match[i][j];
 						result = new ArrayList<String>();
-						result.add(S1.substring(i - max + 1, i + 1)); // substring
-																		// starts
-																		// at
-																		// i-max+1
-																		// and
-																		// ends
-																		// at i
-					} else if (match[i][j] == max) // else if you find a common
-													// substring with the max
-													// length, store it in the
-													// list.
+						result.add(S1.substring(i - max + 1, i + 1)); // substring starts at i-max+1 and ends at i
+					} else if (match[i][j] == max) // else if you find a common substring with the max length, store it in the list.
 					{
 						result.add(S1.substring(i - max + 1, i + 1));
 					}
@@ -10371,18 +10195,13 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// I keep two heaps (or priority queues):
 	// Max-heap / small has the smaller half of the numbers.
 	// Min-heap / large has the larger half of the numbers.
-	// This gives me direct access to the one or two middle values (they're the
-	// tops of the heaps), so getting
+	// This gives me direct access to the one or two middle values (they're the tops of the heaps), so getting
 	// the median takes O(1) time. And adding a number takes O(log n) time.
-	// Supporting both min- and max-heap is more or less cumbersome, depending
-	// on the language,
-	// so I simply negate the numbers in the heap in which I want the reverse of
-	// the default order.
-	// To prevent this from causing a bug with -231 (which negated is itself,
-	// when using 32-bit ints),
+	// Supporting both min- and max-heap is more or less cumbersome, depending on the language,
+	// so I simply negate the numbers in the heap in which I want the reverse of the default order.
+	// To prevent this from causing a bug with -231 (which negated is itself, when using 32-bit ints),
 	// I use integer types larger than 32 bits.
-	// Using larger integer types also prevents an overflow error when taking
-	// the mean of the two middle numbers.
+	// Using larger integer types also prevents an overflow error when taking the mean of the two middle numbers.
 	// I think almost all solutions posted previously have that bug.
 
 	private PriorityQueue<Integer> small = new PriorityQueue<>(Collections.reverseOrder());
@@ -10429,8 +10248,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 	}
 
-	// Merge k sorted array //not a leetcode question but similar to merge k
-	// sorted lists
+	// Merge k sorted array //not a leetcode question but similar to merge k sorted lists
 	public static int[] mergeKLists(int[][] array) {
 		if (array == null || array.length == 0)
 			return null;
@@ -10457,10 +10275,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q23 merge k sorted lists #TopInterviewQuestion
-	// Merge k sorted linked lists and return it as one sorted list. Analyze and
-	// describe its complexity.
-	// Simple solution : iterate over the list and add the elements in the
-	// priority queue and then pop it
+	// Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+	// Simple solution : iterate over the list and add the elements in the priority queue and then pop it
 	public static ListNode mergeKLists(List<ListNode> lists) {
 		if (lists == null || lists.size() == 0)
 			return null;
@@ -10574,10 +10390,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q200 Number of islands #TopInterviewQuestion
-	// Given a 2d grid map of '1's (land) and '0's (water), count the number of
-	// islands.
-	// An island is surrounded by water and is formed by connecting adjacent
-	// lands horizontally or vertically.
+	// Given a 2d grid map of '1's (land) and '0's (water), count the number of islands.
+	// An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
 	// You may assume all four edges of the grid are all surrounded by water.
 	private int n;
 	private int m;
@@ -10609,12 +10423,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q695 maximum area of an island
-	// Given a non-empty 2D array grid of 0's and 1's, an island is a group of
-	// 1's (representing land) connected
-	// 4-directionally (horizontal or vertical.) You may assume all four edges
-	// of the grid are surrounded by water.
-	// Find the maximum area of an island in the given 2D array. (If there is no
-	// island, the maximum area is 0.)
+	// Given a non-empty 2D array grid of 0's and 1's, an island is a group of 1's (representing land) connected
+	// 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.
+	// Find the maximum area of an island in the given 2D array. (If there is no island, the maximum area is 0.)
 	public int maxAreaOfIsland(int[][] grid) {
 		int max_area = 0;
 		for (int i = 0; i < grid.length; i++)
@@ -10828,8 +10639,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q78 Subsets #TopInterviewQuestion
-	// Given a set of distinct integers, nums, return all possible subsets (the
-	// power set).
+	// Given a set of distinct integers, nums, return all possible subsets (the power set).
 	// Input: nums = [1,2,3]
 	// Output:
 	// [
@@ -10859,7 +10669,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 	}
 
-	// Combination of a String
+	// Combination of a String and subset is the same
 	static void combine(String str) {
 		int length = str.length();
 		StringBuffer output = new StringBuffer(length);
@@ -10873,8 +10683,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			if (curr + 1 != length)
 				combination1(str, length, output, curr + 1);
 			output.deleteCharAt(output.length() - 1);
-			System.out.println("output coming out to be now " + output);
-			System.out.println("allowed start is " + allowedStart);
+//			System.out.println("output coming out to be now " + output);
+//			System.out.println("allowed start is " + allowedStart);
 		}
 	}
 	// Combination Sum
@@ -10911,6 +10721,31 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 				tempList.remove(tempList.size() - 1);
 			}
 		}
+	}
+
+//	Parition Equal Subset Sum
+public boolean canPartition(int[] nums) {
+	int sum = 0;
+	for (int i = 0; i<nums.length; i++){
+		sum += nums[i];
+	}
+
+	if (sum % 2 ==1) return false;
+	sum = sum/2;
+	Arrays.sort(nums);
+	boolean flag = false;
+	return backtrack(sum, nums.length-1, nums);
+}
+
+	public boolean backtrack(int sum, int start, int[] nums) {
+		if (start < 0) return false;
+		//System.out.println("here is: "+ "target sum "+ sum + " current value " + nums[start] );
+		if (sum == nums[start]) {
+			//System.out.println("i have succeeded");
+			return true;
+		}
+		if (sum < nums[start]) return false;
+		return backtrack(sum - nums[start], start - 1, nums) || backtrack(sum, start - 1, nums);
 	}
 
 	// Q131 pallindrome partitioning //TopInterviewQuestion #NOTAskedMuch..dont

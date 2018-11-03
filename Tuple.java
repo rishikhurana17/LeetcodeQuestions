@@ -15,7 +15,7 @@ public class Tuple implements Comparable<Tuple>{
         }
 
         @Override
-        public int compareTo (leetcode.Tuple that) {
+        public int compareTo (Tuple that) {
             return this.val - that.val;
         }
 }
