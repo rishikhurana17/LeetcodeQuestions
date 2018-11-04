@@ -49,7 +49,6 @@ public class LeetCode {
 
 	// 32. Given a string containing just the characters '(' and ')', find the
 	// length of the longest valid (well-formed) parentheses substring.
-    //see it again
 	public static int longestValidParentheses2(String s) {
 		Stack<Integer> stack = new Stack<Integer>();
 		int max = 0;
@@ -5820,14 +5819,15 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 // Q154 minimum in rotated sorted array with duplicates allowed..send the lower index
 
-//    We assert the loop invariant is the index of the minimum, min, is within the range [lo, hi].
-//    Before the loop, min is in [0, nums.length - 1]. To satisfy the invariant, lo = 0, hi = nums.length - 1
-//    If we guess mi, if nums[mi] > nums[hi], min should be always in [mi + 1, hi] (explained in Essence). To satisfy the invariant, lo = mi + 1;
+// We assert the loop invariant is the index of the minimum, min, is within the range [lo, hi].
+// Before the loop, min is in [0, nums.length - 1]. To satisfy the invariant, lo = 0, hi = nums.length - 1
+// If we guess mi, if nums[mi] > nums[hi], min should be always in [mi + 1, hi] (explained in Essence). To satisfy the invariant, lo = mi + 1;
 // else if nums[mi] < nums[lo], min should be always in [lo + 1, mi] (explained in Essence), to satisfy the assertion, hi = mi, lo = lo + 1;
 // else (nums[lo] <= nums[mi] <= nums[hi]) min should be always nums[lo].
-//    After the loop, lo = hi, min should be in [lo, lo], to satisfy the assertion, min = lo.
+// After the loop, lo = hi, min should be in [lo, lo], to satisfy the assertion, min = lo.
 //  Essence:
-//  If we split the array with mi into [lo, mi] and [mi, hi]. If [lo, mi] is not sorted, since we detect [lo, mi] is not sorted by nums[lo] > nums[mi] so nums[lo] cannot be min, min must be within (lo, mi]. If [mi, hi] is not sorted, min must be within (mi, hi] - since we detect [mi, hi] is not sorted by nums[mi] > nums[hi], nums[mi] cannot be min. If they are both sorted, nums[lo] is the min.
+//  If we split the array with mi into [lo, mi] and [mi, hi]. If [lo, mi] is not sorted, since we detect [lo, mi] is not sorted by nums[lo] > nums[mi]
+//  so nums[lo] cannot be min, min must be within (lo, mi]. If [mi, hi] is not sorted, min must be within (mi, hi] - since we detect [mi, hi] is not sorted by nums[mi] > nums[hi], nums[mi] cannot be min. If they are both sorted, nums[lo] is the min.
 //      There are 4 kinds of relationship among num[lo], nums[mi], nums[hi]
 //
 // nums[lo] <= nums[mi] <= nums[hi], min is nums[lo]
@@ -5946,8 +5946,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		while (left <= right) {
 			if (A[left] <= A[right]) {
 				if (A[left] >= maxLeft) {
-					maxLeft = A[left]; // when we are updating max left we are
-										// not making any calculation as doing a
+					maxLeft = A[left]; // when we are updating max left we are not making any calculation as doing a
 					// calculation means we are spilling the water.
 				} else {
 					sum += maxLeft - A[left];
@@ -6207,23 +6206,19 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Basic Calculator 1
-	// Implement a basic calculator to evaluate a simple expression string.
-	// The expression string may contain open ( and closing parentheses ), the
-	// plus + or minus sign -, non-negative integers and empty spaces .
+	// Implement a basic calculator to evaluate a simple expression string. The expression string may contain open ( and
+    // closing parentheses ), the plus + or minus sign -, non-negative integers and empty spaces .
 	// One important thing is that the input is valid, which means the
 	// parentheses are always paired and in order.
 	// Only 5 possible input we need to pay attention:
-	//
 	// digit: it should be one digit from the current number
-	// '+': number is over, we can add the previous number and start a new
-	// number
+	// '+': number is over, we can add the previous number and start a new number
 	// '-': same as above
 	// '(': push the previous result and the sign into the stack, set result to
 	// 0, just calculate the new result within the parenthesis.
 	// ')': pop out the top two numbers from stack, first one is the sign before
 	// this pair of parenthesis, second is the temporary result before this pair
-	// of parenthesis. We add them together.
-	// Finally if there is only one number, from the above solution, we haven't
+	// of parenthesis. We add them together. Finally if there is only one number, from the above solution, we haven't
 	// add the number to the result, so we do a check see if the number is zero.
 	public static int calculate1(String s) {
 		int len = s.length(), sign = 1, result = 0;
@@ -6812,8 +6807,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 			// binary search on a smaller size array
 			int partitionX = (low + high) / 2;
-			int partitionY = (x + y + 1) / 2 - partitionX; // formula needs to be remembered +1
-															// coz it plays well with both odd and even numbered sum
+		int partitionY = (x + y + 1) / 2 - partitionX; // formula needs to be remembered coz it plays well with both odd and even numbered sum
 
 // partition the array into two halves such that number of element on each half is exactly same and
 // every element on the left half is less than every element on the right
@@ -7104,16 +7098,11 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return -1;
 	}
 
-	// Q395 Longest Substring with At Least K Repeating Characters
-	// #TopInterviewQuestion
-
+	// Q395 Longest Substring with At Least K Repeating Characters // #NOTaTopInterviewQuestion
 	// in the first pass I record counts of every character in a hashmap
-	// in the second pass I locate the first character that appear less than k
-	// times in the string.
-	// this character is definitely not included in the result, and that
-	// separates the string into two parts.
-	// keep doing this recursively and the maximum of the left/right part is the
-	// answer.
+	// in the second pass I locate the first character that appear less than k times in the string.
+	// this character is definitely not included in the result, and that separates the string into two parts.
+	// keep doing this recursively and the maximum of the left/right part is thes answer.
 
 	int longestSubstring(String s, int k) {
 		if (s.length() == 0 || k > s.length())
@@ -7218,9 +7207,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return (count <= m);
 	}
 
-	// Q76 Given a string S and a string T, find the minimum window in S which
-	// will contain all the characters in T in complexity O(n).
-    // Minimum Window Substring #GoodQuestion
+// Q76 Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
+// Minimum Window Substring #GoodQuestion
 	public static String minWindow(String s, String t) {
 		Map<Character, Integer> map = new HashMap<>();
 		for (char temp : s.toCharArray()) {
@@ -7383,13 +7371,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// Given a n x n matrix where each of the rows and columns are sorted in
 	// ascending order, find the kth smallest element in the matrix.
 
-	// Note that it is the kth smallest element in the sorted order, not the kth
-	// distinct element.
-	// Solution : Build a minHeap of elements from the first row.
-	// Do the following operations k-1 times :
+	// Note that it is the kth smallest element in the sorted order, not the kth distinct element.
+	// Solution : Build a minHeap of elements from the first row. Do the following operations k-1 times :
 	// Every time when you poll out the root(Top Element in Heap), you need to
-	// know the row number and column number
-	// of that element(so we can create a tuple class here), replace that root
+	// know the row number and column number of that element(so we can create a tuple class here), replace that root
 	// with the next element from the same column.
 	// explained it very well https://www.youtube.com/watch?v=zIaMTdBQT34&t=309s
 	public int kthSmallest1(int[][] matrix, int k) {
@@ -7472,17 +7457,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 
 		Map<Integer, Integer> freqs = new HashMap<>();
-        Map<Integer, Set<Integer>> map = new HashMap<>();
-//        List<Map.Entry<Integer, Set<Integer>>> mapEntries = new ArrayList<>(map.entrySet());
-//        // Collections.sort method is only applicable to list and thus we are
-//        // adding the complete hashmap in the list
-//        Collections.sort(mapEntries, new Comparator<Map.Entry<Integer, Set<Integer>>>   () {
-//            public int compare(Map.Entry<Integer, Set<Integer>> a, Map.Entry<Integer, Set<Integer>> b) {
-//               Set a1 = a.getValue();
-//                Set b1 = b.getValue();
-//                return a1.size() - b1.size();
-//            }
-//        });
 		for (int num : nums) {
 			freqs.put(num, freqs.getOrDefault(num, 0) + 1);
 		}
@@ -7721,13 +7695,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 	// Q105 Construct Binary Tree from Preorder and Inorder Traversal
 	// #TopInterviewQuestion
-	// Say we have 2 arrays, PRE and IN.
-	// Preorder traversing implies that PRE[0] is the root node.
-	// Then we can find this PRE[0] in IN, say it's IN[5].
-	// Now we know that IN[5] is root, so we know that IN[0] - IN[4] is on the
-	// left side,
-	// IN[6] to the end is on the right side.
-	// Recursively doing this on subarrays, we can build a tree out of it :)
+	// Preorder traversing implies that PRE[0] is the root node. Then we can find this PRE[0] in IN, say it's IN[5].
+	// Now we know that IN[5] is root, so we know that IN[0] - IN[4] is on the left side,
+	// IN[6] to the end is on the right side.  Recursively doing this on subarrays, we can build a tree out of it :)
 	public TreeNode buildTree(int[] preorder, int[] inorder) {
 		return helper(0, 0, inorder.length - 1, preorder, inorder);
 	}
@@ -7916,16 +7886,17 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			hits = new int[300];
 		}
 
-		// Record a hit. @param timestamp - The current timestamp (in seconds
-		// granularity).
+		// Record a hit. @param timestamp - The current timestamp (in seconds granularity).
 		public void hit(int timestamp) {
 			int index = timestamp % 300;
-			if (times[index] != timestamp) {
-				times[index] = timestamp;
-				hits[index] = 1;
-			} else {
-				hits[index]++;
-			}
+
+                if (times[index] != timestamp) {
+                    times[index] = timestamp;
+                    hits[index] = 1;
+                } else {
+                    hits[index]++;
+                }
+
 		}
 
 		// Return the number of hits in the past 5 minutes.
@@ -8124,20 +8095,12 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Minimum insertions to form a palindrome #GoodQuestion
-	// Base Case For Recursive Solution :
-	// if l > h (we crossed pointers) return INT_MAX
-	// if l == h return 0;
-	// (only one character, which is already palindrome, 0 insertion is required
-	// to make it palindrome)
-	// if l == h-1 and if str[l] == str[h] return 0;
-	// (if two length string example “aa or ab” and both characters are same ie
-	// : “aa” , its already palindrome,
-	// so return 0)
-	// if l == h-1 and if str[l] != str[h] return 1;
-	// (if two length string is there example “ab” and both characters are
-	// different ,
-	// we need 1 insertion to make this string a palindrome one ie “bab” or
-	// “aba“
+	// Base Case For Recursive Solution : if l > h (we crossed pointers) return INT_MAX
+	// if l == h return 0; (only one character, which is already palindrome, 0 insertion is required to make it palindrome)
+	// if l == h-1 and if str[l] == str[h] return 0; (if two length string example “aa or ab” and both characters are same ie
+	// : “aa” , its already palindrome,  so return 0)
+	// if l == h-1 and if str[l] != str[h] return 1; (if two length string is there example “ab” and both characters are
+	// different , we need 1 insertion to make this string a palindrome one ie “bab” or “aba“
 	// very well explained. https://www.youtube.com/watch?v=DOnK40BvazI
 	int findMinInsertionsRec(char str[], int l, int h) {
 		if (l > h)
@@ -8157,8 +8120,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		int l, h, len;
 		// memset(table, 0, sizeof(table));
 		Arrays.fill(table, 0);
-		for (len = 1; len < n; len++) // ++gap for length of the string as
-										// 1,2,3,4..n
+		for (len = 1; len < n; len++) // ++gap for length of the string as 1,2,3,4..n
 			for (l = 0, h = len; h < n; l++, h++) // it was ++l,++h
 				table[l][h] = (str[l] == str[h]) ? table[l + 1][h - 1]
 						: (Math.min(table[l][h - 1], table[l + 1][h]) + 1);
@@ -8175,11 +8137,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// 2) Once we find the crossover point, we can compare elements on both sides of crossover point to print k closest elements.
 	// This step takes O(k) time.
 	class KClosest {
-		/*
-		 * Function to find the cross over point (the point before which
-		 * elements are smaller than or equal to x and after which greater than
-		 * x)
-		 */
+
+//		  Function to find the cross over point (the point before which
+//		  elements are smaller than or equal to x and after which greater than x)
+
 		int findCrossOver(int arr[], int low, int high, int x) {
 			// Base cases
 			if (arr[high] <= x) // x is greater than all
@@ -8194,10 +8155,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			if (arr[mid] <= x && arr[mid + 1] > x)
 				return mid;
 
-			/*
-			 * If x is greater than arr[mid], then either arr[mid + 1] is
-			 * ceiling of x or ceiling lies in arr[mid+1...high]
-			 */
+
+// If x is greater than arr[mid], then either arr[mid + 1] is
+// ceiling of x or ceiling lies in arr[mid+1...high]
+
 			if (arr[mid] < x)
 				return findCrossOver(arr, mid + 1, high, x);
 			return findCrossOver(arr, low, mid - 1, x);
@@ -8243,7 +8204,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 	}
 
-	// Q334 Increasing triplet subsequence #TopInterviewQuestion
+	// Q334 Increasing triplet subsequence #NOTaTopInterviewQuestion
 	// Given an unsorted array return whether an increasing subsequence of
 	// length 3 exists or not in the array.
 	public boolean increasingTriplet(int[] nums) {
@@ -8255,22 +8216,17 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 				small = n;
 			} // update small if n is smaller than both ..// c1 is min seen so
 				// far (it's a candidate for 1st element)
-			else if (n <= big) { // here when x > c1, i.e. x might be either c2
-									// or c3
+			else if (n <= big) { // here when x > c1, i.e. x might be either c2 or c3
 				big = n;
-			} // update big only if greater than small but smaller than big ..//
-				// x is better than the current c2, store it
+			} // update big only if greater than small but smaller than big .. x is better than the current c2, store it
 			else
-				return true; // return if you find a number bigger than both //
-								// the increasing subsequence of 3 elements
-								// exists
+				return true; // return if you find a number bigger than both the increasing subsequence of 3 elements exists
 		}
 		return false;
 	}
 
 	// Q674 longest continuous increase subsequence #GoodQuestion
-	// Given an unsorted array of integers, find the length of longest
-	// continuous increasing subsequence (subarray).
+	// Given an unsorted array of integers, find the length of longest continuous increasing subsequence (subarray).
 	public int findLengthOfLCIS(int[] nums) {
 		int res = 0, cnt = 0;
 		for (int i = 0; i < nums.length; i++) {
@@ -8282,76 +8238,24 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return res;
 	}
 
-	// Q300 Length of longest increasing subsequence #TopInterviewQuestion  #Salesforce
-	// Given an unsorted array of integers, find the length of longest
-	// increasing subsequence.
-	// Very well explained by tushar https://www.youtube.com/watch?v=CE2b_-XfVDk
-	// basic condition if arr[j] < arr[i] then T[i] = Max (T[i] , T[j]+1)
-
-	public int longestSubsequenceWithActualSolution(int arr[]) {
-		int T[] = new int[arr.length];
-		int actualSolution[] = new int[arr.length];
-		for (int i = 0; i < arr.length; i++) {
-			T[i] = 1;
-			actualSolution[i] = i;
-		}
-
-		for (int i = 1; i < arr.length; i++) {
-			for (int j = 0; j < i; j++) {
-				if (arr[i] > arr[j]) {
-					if (T[j] + 1 > T[i]) {
-						T[i] = T[j] + 1;
-						// set the actualSolution to point to guy before me
-						actualSolution[i] = j;
-					}
-				}
-			}
-		}
-
-		// find the index of max number in T
-		int maxIndex = 0;
-		for (int i = 0; i < T.length; i++) {
-			if (T[i] > T[maxIndex]) {
-				maxIndex = i;
-			}
-		}
-
-		// lets print the actual solution
-		int t = maxIndex;
-		int newT = maxIndex;
-		do {
-			t = newT;
-			System.out.print(arr[t] + " ");
-			newT = actualSolution[t];
-		} while (t != newT);
-		System.out.println();
-
-		return T[maxIndex];
-	}
-
 	// Q45 Jump Game II
-	// Given an array of non-negative integers, you are initially positioned at
-	// the first index of the array.
-	// Each element in the array represents your maximum jump length at that
-	// position.
-	// In this method, we build a jumps[] array from left to right such that
-	// jumps[i] indicates the minimum
-	// number of jumps needed to reach arr[i] from arr[0]. Finally, we return
-	// jumps[n-1].
+	// Given an array of non-negative integers, you are initially positioned at the first index of the array.
+	// Each element in the array represents your maximum jump length at that position.
+	// In this method, we build a jumps[] array from left to right such that jumps[i] indicates the minimum
+	// number of jumps needed to reach arr[i] from arr[0]. Finally, we return jumps[n-1].
 	// tusharroy example. https://www.youtube.com/watch?v=cETfFsSTGJI
 	private static int minJumps2(int[] arr, int n) {
-		int jumps[] = new int[n]; // jumps[n-1] will hold the result
+		int jumps[] = new int[n]; // jumps[n-1] will hold the result ..
+		// this is basically the minimum number of jumps needed to reach to that point
 		int i, j;
 		if (n == 0 || arr[0] == 0)
-			return Integer.MAX_VALUE; // if first element is 0, END CANNOT BE
-										// REACHED
+			return Integer.MAX_VALUE; // if first element is 0, END CANNOT BE REACHED
 		jumps[0] = 0;
-		// Find the minimum number of jumps to reach arr[i] from arr[0], and
-		// assign this value to jumps[i]
+		// Find the minimum number of jumps to reach arr[i] from arr[0], and assign this value to jumps[i]
 		for (i = 1; i < n; i++) {
 			jumps[i] = Integer.MAX_VALUE;
 			for (j = 0; j < i; j++) {
-				if (i <= j + arr[j] && jumps[j] != Integer.MAX_VALUE) {
+				if (i <= j + arr[j] && jumps[j] != Integer.MAX_VALUE) {   // can i reach i from j
 					jumps[i] = Math.min(jumps[i], jumps[j] + 1);
 					break;
 				}
@@ -8407,126 +8311,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 		result.add(newInterval);
 		return result;
-	}
-
-	// Palindrome Partitioning - II #HardlyAsked #LeavingQuestion
-	// Given a string s, partition s such that every substring of the partition
-	// is a palindrome.
-	// Return the minimum cuts needed for a palindrome partitioning of s.
-	// i is the starting index and j is the ending index. i must be passed as 0
-	// and j as n-1
-	// minPalPartion(str, i, j) = 0 if i == j. // When string is of length 1.
-	// minPalPartion(str, i, j) = 0 if str[i..j] is palindrome.
-	//// If none of the above conditions is true, then minPalPartion(str, i, j)
-	// can be
-	//// calculated recursively using the following formula.
-	// minPalPartion(str, i, j) = Min { minPalPartion(str, i, k) + 1 +
-	// minPalPartion(str, k+1, j) } where k varies from i to j-1
-	static int minPalPartion(String str) {
-		// Get the length of the string
-		int n = str.length();
-		/*
-		 * Create two arrays to build the solution in bottom up manner C[i][j] =
-		 * Minimum number of cuts needed // for palindrome partitioning of
-		 * substring str[i..j] P[i][j] = true if substring str[i..j] is
-		 * palindrome, else false Note that C[i][j] is 0 if P[i][j] is true
-		 */
-		int[][] C = new int[n][n];
-		boolean[][] P = new boolean[n][n];
-		int i, j, k, L; // different looping variables
-		// Every substring of length 1 is a palindrome
-		for (i = 0; i < n; i++) {
-			P[i][i] = true;
-			C[i][i] = 0;
-		}
-
-		/*
-		 * L is substring length. Build the solution in bottom up manner by
-		 * considering all substrings of length starting from 2 to n. The loop
-		 * structure is same as Matrx Chain Multiplication problem ( See
-		 * https://www.geeksforgeeks.org/archives/15553 )
-		 */
-		for (L = 2; L <= n; L++) {
-			// For substring of length L, set different possible starting
-			// indexes
-			for (i = 0; i < n - L + 1; i++) {
-				j = i + L - 1; // Set ending index
-				// If L is 2, then we just need to compare two characters.
-				// Else need to check two corner characters and value of
-				// P[i+1][j-1]
-				if (L == 2)
-					P[i][j] = (str.charAt(i) == str.charAt(j));
-				else
-					P[i][j] = (str.charAt(i) == str.charAt(j)) && P[i + 1][j - 1];
-
-				// IF str[i..j] is palindrome, then C[i][j] is 0
-				if (P[i][j] == true)
-					C[i][j] = 0;
-				else {
-					// Make a cut at every possible localtion starting from i to
-					// j, and get the minimum cost cut.
-					C[i][j] = Integer.MAX_VALUE;
-					for (k = i; k <= j - 1; k++)
-						C[i][j] = Integer.min(C[i][j], C[i][k] + C[k + 1][j] + 1);
-				}
-			}
-		}
-		// Return the min cut value for complete string. i.e., str[0..n-1]
-		return C[0][n - 1];
-	}
-
-	// the above solution is O(n3)
-	// Returns the minimum number of cuts needed to partition a string such that
-	// every part is a palindrome
-	// below solution is O(n2)
-	static int minPalPartion2(String str) {
-		// Get the length of the string
-		int n = str.length();
-		/*
-		 * Create two arrays to build the solution in bottom up manner C[i] =
-		 * Minimum number of cuts needed for palindrome partitioning of
-		 * substring str[0..i] P[i][j] = true if substring str[i..j] is
-		 * palindrome, else false Note that C[i] is 0 if P[0][i] is true
-		 */
-		int[] C = new int[n];
-		boolean[][] P = new boolean[n][n];
-		int i, j, k, L; // different looping variables
-		// Every substring of length 1 is a palindrome
-		for (i = 0; i < n; i++) {
-			P[i][i] = true;
-		}
-
-		/*
-		 * L is substring length. Build the solution in bottom up manner by
-		 * considering all substrings of length starting from 2 to n.
-		 */
-		for (L = 2; L <= n; L++) {
-			// For substring of length L, set different possible starting
-			// indexes
-			for (i = 0; i < n - L + 1; i++) {
-				j = i + L - 1; // Set ending index
-				// If L is 2, then we just need to compare two characters. Else
-				// need to check two corner characters and value of P[i+1][j-1]
-				if (L == 2)
-					P[i][j] = (str.charAt(i) == str.charAt(j));
-				else
-					P[i][j] = (str.charAt(i) == str.charAt(j)) && P[i + 1][j - 1];
-			}
-		}
-
-		for (i = 0; i < n; i++) {
-			if (P[0][i] == true)
-				C[i] = 0;
-			else {
-				C[i] = Integer.MAX_VALUE;
-				for (j = 0; j < i; j++) {
-					if (P[j + 1][i] == true && 1 + C[j] < C[i])
-						C[i] = 1 + C[j];
-				}
-			}
-		}
-		// Return the min cut value for complete string. i.e., str[0..n-1]
-		return C[n - 1];
 	}
 
 	// K closest point #GoodQuestion
@@ -8637,6 +8421,44 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return courseRemaining == 0;
 	}
 
+	//BuildOrder (//Removal of Dependencies)
+
+void findBuildOrder(String[] projects, String[][] dependencies) {
+		int count =0;
+		Map<String , Set<String>> graph  =  new HashMap<String,Set<String>>();
+		for(String project : projects){
+			graph.put(project , new HashSet<>());
+			count++;
+		}
+
+		for(int i = 0 ; i < dependencies.length ; i++){
+			graph.get(dependencies[i][1]).add(dependencies[i][0]); // make sure this change in the question
+		}
+
+		Queue<String> queue = new LinkedList<>();
+		int courseRemaining = count;
+
+		for(Map.Entry<String, Set<String>> entry  : graph.entrySet()){
+			if(entry.getValue().size() == 0){
+				queue.offer(entry.getKey());  // queue has all those elements which has zero dependencies
+				courseRemaining--;
+			}
+		}
+		while(!queue.isEmpty()){
+			String key = queue.poll();
+			System.out.println("Element polled is " + key);
+			for(Map.Entry<String, Set<String>> entry  : graph.entrySet()){
+				if(entry.getValue().contains(key)){
+					entry.getValue().remove(key);
+					if(entry.getValue().size()==0){
+						queue.offer(entry.getKey());
+						courseRemaining--;
+					}
+				}
+			}
+		}
+	}
+
 	// Tree Related Questions
 	// Q230 kth smallest element in the BST #TopInterviewQuestion
 	// Given a binary search tree, write a function kthSmallest to find the kth
@@ -8693,32 +8515,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// element of the second pair
 	// https://www.youtube.com/watch?v=LR3K5XAWV5k very well explained in this
 
-	Node firstStartPoint, lastEndPoint, prevNode;
-
-	public void recoverTree(Node root) {
-		findSegments(root);
-		int temp = firstStartPoint.data;
-		firstStartPoint.data = lastEndPoint.data;
-		lastEndPoint.data = temp;
-	}
-
-	public void findSegments(Node root) {
-		if (root == null)
-			return;
-		findSegments(root.left);
-		if (prevNode != null) {
-			if (prevNode.data > root.data) {
-				if (firstStartPoint == null)
-					firstStartPoint = prevNode;
-				lastEndPoint = root;
-			}
-		}
-		prevNode = root;
-		findSegments(root.right);
-
-	}
-
-	//better solution of the above question recover binary search tree
     TreeNode firstElement = null;
     TreeNode secondElement = null;
     // The reason for this initialization is to avoid null pointer exception in the first comparison when prevElement has not been initialized
@@ -9038,7 +8834,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 		return true;
 	}
-	// Q96 Unique Binary Search Trees
+	// Q96 Unique Binary Search Trees   (leaving for now )
 	// Given n, how many structurally unique BST's (binary search trees) that
 	// store values 1...n?
 	// For example,
@@ -9403,14 +9199,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return dummy.next;
 	}
 
-	// Q160 Intersection of two LinkedLists #TopInterviewQuestion
-	// Write a program to find the node at which the intersection of two singly
-	// linked lists begins.
-
-	// Apart from the general method which is been user for getting the
-	// intersection of two linkedlist,
-	// below is one interesting method to get the intersection
-	// assigning the pointer to the other list once it reached the end
+// Q160 Intersection of two LinkedLists #TopInterviewQuestion
+// Write a program to find the node at which the intersection of two singly linked lists begins.
+// Apart from the general method which is been user for getting the intersection of two linkedlist,
+// below is one interesting method to get the intersection assigning the pointer to the other list once it reached the end
 
 	public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
 		if (headA == null || headB == null)
@@ -9511,18 +9303,14 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Reverse Linked List II #GoodQuestion
-	// Reverse a linked list from position m to n. Do it in-place and in
-	// one-pass. For example:
-	// Given 1->2->3->4->5->NULL, m = 2 and n = 4,
-	// return 1->4->3->2->5->NULL.
+	// Reverse a linked list from position m to n. Do it in-place and in one-pass. For example:
+	// Given 1->2->3->4->5->NULL, m = 2 and n = 4, return 1->4->3->2->5->NULL.
 	public ListNode reverseBetween(ListNode head, int m, int n) {
 		if (head == null)
 			return null;
-		ListNode dummy = new ListNode(0); // create a dummy node to mark the
-											// head of this list
+		ListNode dummy = new ListNode(0); // create a dummy node to mark the head of this list
 		dummy.next = head;
-		ListNode pre = dummy; // make a pointer pre as a marker for the node
-								// before reversing
+		ListNode pre = dummy; // make a pointer pre as a marker for the node before reversing
 		for (int i = 0; i < m - 1; i++)
 			pre = pre.next;
 
@@ -9648,15 +9436,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// 2 Add Two Numbers #TopInterviewQuestion
-	// actually its two linked listed in reverse order
-	// You are given two non-empty linked lists representing two non-negative
-	// integers. The digits are
-	// stored in reverse order and each of their nodes contain a single digit.
-	// Add the two numbers and return it as a linked list.
-	// You may assume the two numbers do not contain any leading zero, except
-	// the number 0 itself.
-	// Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
-	// Output: 7 -> 0 -> 8
+	// actually its two linked listed in reverse order You are given two non-empty linked lists representing two non-negative
+	// integers. The digits are stored in reverse order and each of their nodes contain a single digit.
+	// Add the two numbers and return it as a linked list. You may assume the two numbers do not contain any leading zero, except
+	// the number 0 itself.  Input: (2 -> 4 -> 3) + (5 -> 6 -> 4) Output: 7 -> 0 -> 8
 
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		ListNode c1 = l1;
@@ -9764,6 +9547,175 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 	// Dynamic Programming
 
+
+	// Q300 Length of longest increasing subsequence #TopInterviewQuestion  #Salesforce
+	// Given an unsorted array of integers, find the length of longest
+	// increasing subsequence.
+	// Very well explained by tushar https://www.youtube.com/watch?v=CE2b_-XfVDk
+	// basic condition if arr[j] < arr[i] then T[i] = Max (T[i] , T[j]+1)
+
+	public int longestSubsequenceWithActualSolution(int arr[]) {
+		int T[] = new int[arr.length];
+		int actualSolution[] = new int[arr.length];
+		for (int i = 0; i < arr.length; i++) {
+			T[i] = 1;
+			actualSolution[i] = i;
+		}
+
+		for (int i = 1; i < arr.length; i++) {
+			for (int j = 0; j < i; j++) {
+				if (arr[i] > arr[j]) {
+					if (T[j] + 1 > T[i]) {
+						T[i] = T[j] + 1;
+						// set the actualSolution to point to guy before me
+						actualSolution[i] = j;
+					}
+				}
+			}
+		}
+
+		// find the index of max number in T
+		int maxIndex = 0;
+		for (int i = 0; i < T.length; i++) {
+			if (T[i] > T[maxIndex]) {
+				maxIndex = i;
+			}
+		}
+
+		// lets print the actual solution
+		int t = maxIndex;
+		int newT = maxIndex;
+		do {
+			t = newT;
+			System.out.print(arr[t] + " ");
+			newT = actualSolution[t];
+		} while (t != newT);
+		System.out.println();
+
+		return T[maxIndex];
+	}
+
+	// Palindrome Partitioning - II #HardlyAsked #LeavingQuestion
+	// Given a string s, partition s such that every substring of the partition
+	// is a palindrome.
+	// Return the minimum cuts needed for a palindrome partitioning of s.
+	// i is the starting index and j is the ending index. i must be passed as 0
+	// and j as n-1
+	// minPalPartion(str, i, j) = 0 if i == j. // When string is of length 1.
+	// minPalPartion(str, i, j) = 0 if str[i..j] is palindrome.
+	//// If none of the above conditions is true, then minPalPartion(str, i, j)
+	// can be
+	//// calculated recursively using the following formula.
+	// minPalPartion(str, i, j) = Min { minPalPartion(str, i, k) + 1 +
+	// minPalPartion(str, k+1, j) } where k varies from i to j-1
+	static int minPalPartion(String str) {
+		// Get the length of the string
+		int n = str.length();
+		/*
+		 * Create two arrays to build the solution in bottom up manner C[i][j] =
+		 * Minimum number of cuts needed // for palindrome partitioning of
+		 * substring str[i..j] P[i][j] = true if substring str[i..j] is
+		 * palindrome, else false Note that C[i][j] is 0 if P[i][j] is true
+		 */
+		int[][] C = new int[n][n];
+		boolean[][] P = new boolean[n][n];
+		int i, j, k, L; // different looping variables
+		// Every substring of length 1 is a palindrome
+		for (i = 0; i < n; i++) {
+			P[i][i] = true;
+			C[i][i] = 0;
+		}
+
+		/*
+		 * L is substring length. Build the solution in bottom up manner by
+		 * considering all substrings of length starting from 2 to n. The loop
+		 * structure is same as Matrx Chain Multiplication problem ( See
+		 * https://www.geeksforgeeks.org/archives/15553 )
+		 */
+		for (L = 2; L <= n; L++) {
+			// For substring of length L, set different possible starting
+			// indexes
+			for (i = 0; i < n - L + 1; i++) {
+				j = i + L - 1; // Set ending index
+				// If L is 2, then we just need to compare two characters.
+				// Else need to check two corner characters and value of
+				// P[i+1][j-1]
+				if (L == 2)
+					P[i][j] = (str.charAt(i) == str.charAt(j));
+				else
+					P[i][j] = (str.charAt(i) == str.charAt(j)) && P[i + 1][j - 1];
+
+				// IF str[i..j] is palindrome, then C[i][j] is 0
+				if (P[i][j] == true)
+					C[i][j] = 0;
+				else {
+					// Make a cut at every possible localtion starting from i to
+					// j, and get the minimum cost cut.
+					C[i][j] = Integer.MAX_VALUE;
+					for (k = i; k <= j - 1; k++)
+						C[i][j] = Integer.min(C[i][j], C[i][k] + C[k + 1][j] + 1);
+				}
+			}
+		}
+		// Return the min cut value for complete string. i.e., str[0..n-1]
+		return C[0][n - 1];
+	}
+
+	// the above solution is O(n3)
+	// Returns the minimum number of cuts needed to partition a string such that
+	// every part is a palindrome
+	// below solution is O(n2)
+	static int minPalPartion2(String str) {
+		// Get the length of the string
+		int n = str.length();
+		/*
+		 * Create two arrays to build the solution in bottom up manner C[i] =
+		 * Minimum number of cuts needed for palindrome partitioning of
+		 * substring str[0..i] P[i][j] = true if substring str[i..j] is
+		 * palindrome, else false Note that C[i] is 0 if P[0][i] is true
+		 */
+		int[] C = new int[n];
+		boolean[][] P = new boolean[n][n];
+		int i, j, k, L; // different looping variables
+		// Every substring of length 1 is a palindrome
+		for (i = 0; i < n; i++) {
+			P[i][i] = true;
+		}
+
+		/*
+		 * L is substring length. Build the solution in bottom up manner by
+		 * considering all substrings of length starting from 2 to n.
+		 */
+		for (L = 2; L <= n; L++) {
+			// For substring of length L, set different possible starting
+			// indexes
+			for (i = 0; i < n - L + 1; i++) {
+				j = i + L - 1; // Set ending index
+				// If L is 2, then we just need to compare two characters. Else
+				// need to check two corner characters and value of P[i+1][j-1]
+				if (L == 2)
+					P[i][j] = (str.charAt(i) == str.charAt(j));
+				else
+					P[i][j] = (str.charAt(i) == str.charAt(j)) && P[i + 1][j - 1];
+			}
+		}
+
+		for (i = 0; i < n; i++) {
+			if (P[0][i] == true)
+				C[i] = 0;
+			else {
+				C[i] = Integer.MAX_VALUE;
+				for (j = 0; j < i; j++) {
+					if (P[j + 1][i] == true && 1 + C[j] < C[i])
+						C[i] = 1 + C[j];
+				}
+			}
+		}
+		// Return the min cut value for complete string. i.e., str[0..n-1]
+		return C[n - 1];
+	}
+
+
 	// Q322 Coin Change Problem #TopInterviewQuestion
 	// You are given coins of different denominations and a total amount of money amount.
 	// Write a function to compute the fewest number of coins that you need to  make up that amount.
@@ -9836,27 +9788,17 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q62 Unique Paths #TopInterviewQuestion
-	// A robot is located at the top-left corner of a m x n grid (marked 'Start'
-	// in the diagram below).
-	// The robot can only move either down or right at any point in time. The
-	// robot is trying to reach the bottom-right corner
-	// of the grid (marked 'Finish' in the diagram below).
-	// How many possible unique paths are there?
+	// A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+	// The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner
+	// of the grid (marked 'Finish' in the diagram below). How many possible unique paths are there?
 
-	// This is a fundamental DP problem. First of all, let's make some
-	// observations.
-	// Since the robot can only move right and down, when it arrives at a point,
-	// there are only two possibilities:
-	// It arrives at that point from above (moving down to that point);
-	// It arrives at that point from left (moving right to that point).
-	// Thus, we have the following state equations: suppose the number of paths
-	// to arrive at a point (i, j) is denoted
-	// as P[i][j], it is easily concluded that P[i][j] = P[i - 1][j] + P[i][j - 1].
-	// The boundary conditions of the above equation occur at the leftmost
-	// column (P[i][j - 1] does not exist)
-	// and the uppermost row (P[i - 1][j] does not exist). These conditions can
-	// be handled by initialization (pre-processing)
-	// initialize P[0][j] = 1, P[i][0] = 1 for all valid i, j. Note the initial
+	// This is a fundamental DP problem. First of all, let's make some observations.
+	// Since the robot can only move right and down, when it arrives at a point, there are only two possibilities:
+	// It arrives at that point from above (moving down to that point); It arrives at that point from left (moving right to that point).
+	// Thus, we have the following state equations: suppose the number of paths to arrive at a point (i, j) is denoted
+	// as P[i][j], it is easily concluded that P[i][j] = P[i - 1][j] + P[i][j - 1]. The boundary conditions of the above equation occur at the leftmost
+	// column (P[i][j - 1] does not exist) and the uppermost row (P[i - 1][j] does not exist). These conditions can
+	// be handled by initialization (pre-processing) initialize P[0][j] = 1, P[i][0] = 1 for all valid i, j. Note the initial
 	// value is 1 instead of 0!
 
 	public int uniquePaths(int m, int n) {

@@ -57,7 +57,7 @@ public class SurroundedRegions {
         char [][]board = {
                 {'X' ,'X', 'X', '0'},
                 {'X', 'O', 'O', 'X'},
-                {'X' ,'X' ,'O' ,'X'},
+                {'X' ,'0' ,'O' ,'X'},
                 {'X','O','X','X'}
 
         };

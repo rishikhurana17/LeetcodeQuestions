@@ -43,9 +43,9 @@ public class ListIterator {
 		firstList.add(2);
 		firstList.add(3);
 		firstList.add(4);
-		secondList.add(1);
-		secondList.add(2);
-		secondList.add(10);
+		secondList.add(5);
+		secondList.add(6);
+		secondList.add(7);
 		secondList.add(4);
 		secondList.add(17);
 		secondList.add(27);

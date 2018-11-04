@@ -103,38 +103,16 @@ public class ListIterator2 {
         System.out.println("Old list looks like " + ListIterator2.getInput());
         ListIterator2 listIterator = new ListIterator2((ListIterator2.getInput()));
 		System.out.println(listIterator.next());
-		listIterator.remove();
-		System.out.println(listIterator.next());
-		listIterator.remove();
-		System.out.println(listIterator.next());
-		listIterator.remove();
-
-
-
-		System.out.println(listIterator.next());
-		listIterator.remove();
-		System.out.println(listIterator.next());
-		listIterator.remove();
-		System.out.println(listIterator.next());
-		listIterator.remove();
-		System.out.println(listIterator.next());
-		listIterator.remove();
-		System.out.println(listIterator.next());
-		listIterator.remove();
-		System.out.println(listIterator.next());
-		listIterator.remove();
-		System.out.println(listIterator.next());
-		listIterator.remove();
 		System.out.println(listIterator.next());
 		System.out.println(listIterator.next());
 		System.out.println(listIterator.next());
-
-//	System.out.println(listIterator.remove());
-	//	listIterator.remove();
-
-	//	listIterator.remove();
-
-
+		System.out.println(listIterator.next());
+		System.out.println(listIterator.next());
+		System.out.println(listIterator.next());
+		System.out.println(listIterator.next());
+		System.out.println(listIterator.next());
+		System.out.println(listIterator.next());
+		System.out.println(listIterator.next());
 	}
 
 	public static ArrayList<ArrayList<Integer>> getInput() {

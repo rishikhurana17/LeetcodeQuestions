@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 public class kthsmallestElementHeap {
 	public static int find(int[] A, int k) {
-		PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+		PriorityQueue<Integer> pq = new PriorityQueue<>();
 		for (int i = 0; i < A.length; i++) {
 			pq.offer(A[i]);
 			// inserts the element in the queue
