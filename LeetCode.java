@@ -5191,21 +5191,16 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q496 Next greater Element I
-	// You are given two arrays (without duplicates) nums1 and nums2 where
-	// nums1’s elements are subset of nums2.
-	// Find all the next greater numbers for nums1's elements in the
-	// corresponding places of nums2.
-	// The Next Greater Number of a number x in nums1 is the first greater
-	// number to its right in nums2.
+	// You are given two arrays (without duplicates) nums1 and nums2 where nums1’s elements are subset of nums2.
+	// Find all the next greater numbers for nums1's elements in the corresponding places of nums2.
+	// The Next Greater Number of a number x in nums1 is the first greater number to its right in nums2.
 	// If it does not exist, output -1 for this number.
-	// Solution: Suppose we have a decreasing sequence followed by a greater
-	// number
+	// Solution: Suppose we have a decreasing sequence followed by a greater number
 	// For example [5, 4, 3, 2, 1, 6] then the greater number 6 is the next
 	// greater element for all previous numbers
 	// in the sequence. We use a stack to keep a decreasing sub-sequence,
 	// whenever we see a number x greater than stack.peek()
-	// we pop all elements less than x and for all the popped ones, their next
-	// greater element is x
+	// we pop all elements less than x and for all the popped ones, their next greater element is x
 	// For example [9, 8, 7, 3, 2, 1, 6]
 	// The stack will first contain [9, 8, 7, 3, 2, 1] and then we see 6 which
 	// is greater than 1 so we pop 1 2 3 whose next greater element should be 6
@@ -5376,10 +5371,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return ans;
 	}
 
-	// Iterative method. Here for each node in the tree we check whether its
-	// left child is a leaf.
-	// If it is true, we add its value to answer, otherwise add left child to
-	// the stack to process it later.
+	// Iterative method. Here for each node in the tree we check whether its left child is a leaf.
+	// If it is true, we add its value to answer, otherwise add left child to the stack to process it later.
 	// For right child we add it to stack only if it is not a leaf.
 	public int sumOfLeftLeaves2(TreeNode root) {
 		if (root == null)
@@ -6314,8 +6307,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			result.append(".");
 
 		// deal with the float part
-		// key is the remainder, value is the start positon of possible repeat
-		// numbers
+		// key is the remainder, value is the start positon of possible repeat numbers
 		HashMap<Long, Integer> map = new HashMap<>();
 		Long r = n % d;
 		while (r > 0) {
@@ -6341,8 +6333,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// this method is better
 
 	// good explanation https://www.youtube.com/watch?v=NKoHjWl2m8Y
-	// i think the above and the below method is the same .. a little here and
-	// there
 	// keeping two pointers start and end both innitialized at 0 when sum
 	// exceeds the target, increment start
 	// else keep on incrementing the end
@@ -6806,8 +6796,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		while (low <= high) {
 
 			// binary search on a smaller size array
-			int partitionX = (low + high) / 2;
-		int partitionY = (x + y + 1) / 2 - partitionX; // formula needs to be remembered coz it plays well with both odd and even numbered sum
+            int partitionX = (low + high) / 2;
+		    int partitionY = (x + y + 1) / 2 - partitionX; // formula needs to be remembered coz it plays well with both odd and even numbered sum
 
 // partition the array into two halves such that number of element on each half is exactly same and
 // every element on the left half is less than every element on the right
@@ -6839,14 +6829,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q252 Meeting Rooms I
-	// Given an array of meeting time intervals consisting of start and end
-	// times [[s1,e1],[s2,e2],...] (si < ei),
-	// determine if a person could attend all meetings. For example, Given [[0,
-	// 30],[5, 10],[15, 20]], return false.
-	// If a person can attend all meetings, there must not be any overlaps
-	// between any meetings.
-	// After sorting the intervals, we can compare the current end and next
-	// start.
+	// Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei),
+	// determine if a person could attend all meetings. For example, Given [[0, 30],[5, 10],[15, 20]], return false.
+	// If a person can attend all meetings, there must not be any overlaps between any meetings.
+	// After sorting the intervals, we can compare the current end and next start.
 	public boolean canAttendMeetings(Interval[] intervals) {
 		Arrays.sort(intervals, new Comparator<Interval>() {
 			public int compare(Interval a, Interval b) {
@@ -6863,8 +6849,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q253 Meeting Rooms II #TopInterviewQuestion
-	// Given an array of meeting time intervals consisting of start and end
-	// times [[s1,e1],[s2,e2],...]
+	// Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...]
 	// find the minimum number of conference rooms required.
 	public int minMeetingRooms(Interval[] intervals) {
 		if (intervals == null || intervals.length == 0)
@@ -6932,7 +6917,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// Given an array nums, there is a sliding window of size k which is moving from the very left of the array
 	// to the very right. You can only see the k numbers in the window. Each time the sliding window moves right
 	// by one position. Return the max sliding window.
-	//
 
 	public void printMaxfromEachSubarray(int[] array, int k) {
 		LinkedList<Integer> list = new LinkedList();
@@ -6944,6 +6928,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			}
 			// add index of current element at the back
 			list.addLast(i);
+
 		}
 		for (int i = k; i < array.length; i++) {
 // first element present in the list is the greatest element for the last 'k' sized sub-array
@@ -6988,7 +6973,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 		return result;
 	}
-
 
 
 	// Q346 Moving Average from the data stream #GoodQuestion
@@ -7164,8 +7148,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
         return res;
     }
 
-	// Longest substring with M unique characters #GoodQuestion
-	// https://www.youtube.com/watch?v=8AQra0p_HmI
+	// Longest substring with M unique characters #GoodQuestion https://www.youtube.com/watch?v=8AQra0p_HmI
 	public static String solution(String s, Integer m) {
 		int start = 0, end = 0, windowSize = 1, windowStart = 0;
 		int size = s.length();
@@ -7232,8 +7215,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 					minLength = end - start + 1;
 					minStart = start;
 				}
-				// this is like now we are moving the pointer start to the left
-				// and increasing the pointer back to the position
+				// this is like now we are moving the pointer start to the left and increasing the pointer back to the position
 				char head = s.charAt(start);
 				if (map.get(head) >= 0)
 					numOfTargets++;
@@ -7412,8 +7394,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return lo;
 	}
 
-	// Given a list of strings write a function to write the kth most frequent recurrent strings
-	// this method looks good
+// Given a list of strings write a function to write the kth most frequent recurrent strings
 	public String kthMostFrequentString(String[] string, int k) {
 		HashMap<String, Integer> map = new HashMap<>();
 		for (String s : string) {
@@ -7444,12 +7425,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return null;
 	}
 
-	// same logic as above but above they have string below we have set of
-	// integers.
+	// same logic as above but above they have string below we have set of integers.
 	// Q347 Top k frequent elements #TopInterviewQuestion
 	// Given a non-empty array of integers, return the k most frequent elements.
-	// For example,
-	// Given [1,1,1,2,2,3] and k = 2, return [1,2].
+	// For example, Given [1,1,1,2,2,3] and k = 2, return [1,2].
 	// this method is a much better option
 	public List<Integer> topKFrequent(int[] nums, int k) {
 		if (nums == null) {

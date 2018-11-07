@@ -1,11 +1,11 @@
 package leetcode;
 
 public class TreeNode {
-	int val;
 	public TreeNode root;
 	public TreeNode left;
 	public TreeNode right;
 	public TreeNode next;
+	public int val;
 
 	TreeNode(int x) {
 		val = x;
