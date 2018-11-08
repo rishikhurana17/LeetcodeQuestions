@@ -71,54 +71,6 @@ public class LeetCode {
 		return max;
 	}
 
-//or below is the second solution
-//    When right parentheses are more than left parentheses in the forward pass, we can discard previous parentheses. In the backward pass, when left parentheses are more than right parentheses, we can discard previous parentheses.
-    int longestValidParentheses3(String s) {
-        int longest = 0;
-        int extra=0;
-        int length=0;
-        for(int i=0; i<s.length(); i++) {
-            if(s.charAt(i) == '(') {
-                extra++;
-                length++;
-            }
-            else {
-                if(extra>0) {
-                    extra--;
-                    length++;
-                    if(extra == 0)
-                        longest = Math.max(longest, length);
-                }
-                else {
-                    extra = 0;
-                    length=0;
-                }
-            }
-        }
-        length = 0;
-        extra=0;
-        for(int i=s.length()-1; i>=0; i--) {
-            if(s.charAt(i) == ')') {
-                extra++;
-                length++;
-            }
-            else {
-                if(extra>0){
-                    extra--;
-                    length++;
-                    if(extra == 0)
-                        longest = Math.max(longest, length);
-
-                }
-                else {
-                    extra = 0;
-                    length=0;
-                }
-            }
-        }
-        return longest;
-    }
-
 	// Q35 search insert position a very easy question
 	// Given a sorted array and a target value, return the index if the target
 	// is found.
@@ -177,29 +129,7 @@ public class LeetCode {
 	// Determine if a Sudoku is valid, according to: Sudoku Puzzles - The Rules.
 	// The Sudoku board could be partially filled, where empty cells are filled
 	// with the character '.'.
-	public boolean isValidSudoku(char[][] board) {
-		for (int i = 0; i < 9; i++) {
-			Set<Character> rows = new HashSet<>(); // hashset if element is
-													// already there, it will
-													// return as false
-			Set<Character> cols = new HashSet<>();
-			Set<Character> cubes = new HashSet<>();
-			for (int j = 0; j < 9; j++) {
-				if (board[i][j] != '.' && !rows.add(board[i][j]))
-					return false;
-				if (board[j][i] != '.' && !cols.add(board[j][i]))
-					return false;
-				int colOffset = j % 3, rowOffset = j / 3;
-				int colStart = 3 * (i % 3), rowStart = 3 * (i / 3);
-				int row = rowStart + rowOffset, col = colStart + colOffset;
-				if (board[row][col] != '.' && !cubes.add(board[row][col]))
-					return false;
-			}
-		}
-		return true;
-	}
 
-	// Much better answer for the above question
 	public boolean isValidSudoku2(char[][] board) {
 		Set<String> set = new HashSet<>();
 		for (int row = 0; row < board.length; row++) {
@@ -260,36 +190,30 @@ public class LeetCode {
 	}
 
 	// better solution
-	// compare half of the digits in x, so don't need to deal with overflow.
+// compare half of the digits in x, so don't need to deal with overflow.
 	public boolean isPalindrome2(int x) {
 		if (x < 0 || (x != 0 && x % 10 == 0))
-			// As discussed above, when x < 0, x is not a palindrome.
-			// Also if the last digit of the number is 0, in order to be a
-			// palindrome,
-			// the first digit of the number also needs to be 0.
-			// Only 0 satisfy this property.
+// As discussed above, when x < 0, x is not a palindrome.
+// Also if the last digit of the number is 0, in order to be a palindrome,
+// the first digit of the number also needs to be 0. Only 0 satisfy this property.
 			return false;
 		int rev = 0;
 		while (x > rev) {
 			rev = rev * 10 + x % 10;
 			x = x / 10;
 		}
-// When the length is an odd number, we can get rid of the middle digit
-// by revertedNumber/10
-// For example when the input is 12321, at the end of the while loop we
-// get x = 12, revertedNumber = 123,
-// since the middle digit doesn't matter in palidrome(it will always
-// equal to itself), we can simply get rid of it.
+// When the length is an odd number, we can get rid of the middle digit by revertedNumber/10
+// For example when the input is 12321, at the end of the while loop we get x = 12, revertedNumber = 123,
+// since the middle digit doesn't matter in palidrome(it will always equal to itself), we can simply get rid of it.
 		return (x == rev || x == rev / 10);
 	}
 
 	// Q31 next permutation ... #GoodQuestion
 	// [6，3，4，9，8，7，1]
 	//      i-1 i     k
-	//// (1) leftward find the first decreasing number @ index i - 1, (4)
+	// (1) leftward find the first decreasing number @ index i - 1, (4)
 	// (2) then nums[i:] must be rightward decreasing (9,8,7,1)
-	// (3) leftward find the first number that is larger than i - 1, which is at
-	// k, (7)
+	// (3) leftward find the first number that is larger than i - 1, which is at k, (7)
 	// (4) swap i - 1 with k, (6,3,7,9,8,4,1). we can see that nums[i:] will
 	// still be rightward decreasing (9,8,4,1)
 	// (5) But we need them to be rightward increasing so that it's the smallest
@@ -400,8 +324,7 @@ public class LeetCode {
 	}
 
 	// Q119 Pascal's Triangle II
-	// Given a non-negative index k where k ≤ 33, return the kth index row of
-	// the Pascal's triangle.
+	// Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal's triangle.
 	public List<Integer> getRow(int numRows) {
 		List<Integer> list = new ArrayList<Integer>();
 		if (numRows < 0)
@@ -424,8 +347,7 @@ public class LeetCode {
 	// assume that your function returns 0 when the reversed integer overflows.
 
 	// this is the best method
-	// same as the way we found if the number is pallindrome or not.. only
-	// difference is in the while loop
+	// same as the way we found if the number is pallindrome or not.. only difference is in the while loop
 	public int reverseNumber(int x) {
 		long rev = 0;
 		while (x != 0) {
@@ -456,40 +378,25 @@ public class LeetCode {
 		return result;
 	}
 
-	// explanation of the overflow thing... why that condition is for the
-	// overflow
-	// For your reference, to test if there is overflow for any integer x of the
-	// form x = a * 10 + b
-	// where |b| < 10, the right way should be comparing x / 10 (integer
-	// division) with a. If x / 10 != a,
-	// there is overflow, otherwise no overflow can happen.
-	// The proof is as follows: first note that x itself is a signed integer,
-	// therefore we have INT_MIN <= x <= INT_MAX, which implies INT_MIN/10 <=
-	// x/10 <= INT_MAX/10.
-	// So if we assume x / 10 == a, we have INT_MIN/10 <= a <= INT_MAX/10.
-	// Since |b| < 10, then a * 10 + b can overflow only if a = INT_MAX/10 or a
-	// = INT_MIN/10.
-	// For signed 32-bit integers, we have INT_MAX = 2147483647 and INT_MIN =
-	// -2147483648.
+	// explanation of the overflow thing... why that condition is for the overflow
+	// For your reference, to test if there is overflow for any integer x of the form x = a * 10 + b
+	// where |b| < 10, the right way should be comparing x / 10 (integer division) with a. If x / 10 != a,
+	// there is overflow, otherwise no overflow can happen. The proof is as follows: first note that x itself
+	// is a signed integer, therefore we have INT_MIN <= x <= INT_MAX, which implies INT_MIN/10 <= x/10 <= INT_MAX/10.
+	// So if we assume x / 10 == a, we have INT_MIN/10 <= a <= INT_MAX/10. Since |b| < 10, then a * 10 + b can overflow
+	// only if a = INT_MAX/10 or a= INT_MIN/10.
+	// For signed 32-bit integers, we have INT_MAX = 2147483647 and INT_MIN = -2147483648.
 	// For a = INT_MAX/10 = 214748364, overflow will happen only if b = 8 or 9.
-	// However if this is the case, then x = a * 10 + b will be negative and x /
-	// 10 cannot be the same as a,
-	// contradicting our assumption above. Similarly if a = INT_MIN/10 =
-	// -214748364,
-	// overflow will happen only if b = -9 but then x = a * 10 + b will be
-	// positive and
+	// However if this is the case, then x = a * 10 + b will be negative and x /10 cannot be the same as a,
+	// contradicting our assumption above. Similarly if a = INT_MIN/10 = -214748364,
+	// overflow will happen only if b = -9 but then x = a * 10 + b will be positive and
 	// again x / 10 won't be equal to a. In summary, x / 10 != a <==> overflow.
-	//
-	// As for the test condition in the original post, which is equivalent to
-	// testing (x - b) / 10 != a,
-	// it will only cover the cases when |a| > INT_MAX/10 but not the cases
-	// when |a| = INT_MAX/10, b = 8 or 9 for positive a and -9 for negative a.
-	// The test condition works here because the edge cases mentioned above
-	// won't happen due to the fact
-	// that the input itself is a signed integer. If the input is something
-	// else, say a string
-	// (see String to Integer (atoi)), the test condition above will fail the
-	// edge cases.
+
+	// As for the test condition in the original post, which is equivalent to testing (x - b) / 10 != a,
+	// it will only cover the cases when |a| > INT_MAX/10 but not the cases when |a| = INT_MAX/10, b = 8
+	// or 9 for positive a and -9 for negative a. The test condition works here because the edge cases mentioned
+	// above won't happen due to the fact that the input itself is a signed integer. If the input is something
+	// else, say a string (see String to Integer (atoi)), the test condition above will fail the edge cases.
 
 	// Q8 String to integer (atoi) #TopInterviewQuestion
 	public int myAtoi(String str) {
@@ -580,7 +487,6 @@ public class LeetCode {
 	}
 
 	// Another solution
-	//this is also a good way of solving
 	public static int romanToInt(String s) {
 		Map<Character, Integer> map = new HashMap<>();
 		map.put('I', 1);
@@ -690,17 +596,12 @@ public class LeetCode {
 
 	// Q80 remove duplicates from the sorted array II
 	// What if duplicates are allowed at most twice?
-	// I think both Remove Duplicates from Sorted Array I and II could be solved
-	// in a consistent
-	// and more general way by allowing the duplicates to appear k times
-	// (k = 1 for problem I and k = 2 for problem II).
-	// Here is my way: we need a count variable to keep how many times the
-	// duplicated element appears,
-	// if we encounter a different element, just set counter to 1, if we
-	// encounter a duplicated one,
+	// I think both Remove Duplicates from Sorted Array I and II could be solved in a consistent
+	// and more general way by allowing the duplicates to appear k times (k = 1 for problem I and k = 2 for problem II).
+	// Here is my way: we need a count variable to keep how many times the duplicated element appears,
+	// if we encounter a different element, just set counter to 1, if we encounter a duplicated one,
 	// we need to check this count, if it is already k, then we need to skip it,
-	// otherwise, we can keep this element. The following is the implementation
-	// and can pass both OJ:
+	// otherwise, we can keep this element. The following is the implementation and can pass both OJ:
 	public static int removeDuplicates(int A[], int n, int k) {
 		if (n <= k)
 			return n;
@@ -721,8 +622,7 @@ public class LeetCode {
 		return i;
 	}
 
-	// very elegant solution for remove duplicates from the sorted array II but
-	// need to be seen again
+	// very elegant solution for remove duplicates from the sorted array II but need to be seen again
 	public int removeDuplicates(int[] nums) {
 		int i = 0;
 		for (int n : nums)
@@ -773,8 +673,7 @@ public class LeetCode {
 
 
 	// Q28 Implement strStr() #TopInterviewQuestion
-	// function to find the first occurrence of the substring needle in the
-	// string haystack
+	// function to find the first occurrence of the substring needle in the string haystack
 	public int strStr(String haystack, String needle) { // haystack.lastIndexOf(needle);
 
 		int l1 = haystack.length(), l2 = needle.length();
@@ -890,8 +789,7 @@ public class LeetCode {
 
 	// Q70 Climbing stairs problem #TopInterviewQuestion
 	// You are climbing a stair case. It takes n steps to reach to the top.
-	// Each time you can either climb 1 or 2 steps. In how many distinct ways
-	// can you climb to the top?
+	// Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 	public int fibonacciSeriesRecursive(int n) {
 		if (n == 1 || n == 0) {
 			return n;
@@ -943,13 +841,10 @@ public class LeetCode {
 		return head;
 	}
 
-	// Q88 Merge Sorted Array #TopInterviewQuestion
-	// Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1
-	// as one sorted array.
-	// Note: The number of elements initialized in nums1 and nums2 are m and n
-	// respectively.
-	// You may assume that nums1 has enough space (size that is greater or equal
-	// to m + n) to hold additional elements from nums2.
+// Q88 Merge Sorted Array #TopInterviewQuestion
+// Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
+// Note: The number of elements initialized in nums1 and nums2 are m and n respectively.
+// You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2.
 	public void merge(int A[], int m, int B[], int n) {
 		int i = m - 1;
 		int j = n - 1;
@@ -1059,15 +954,6 @@ public class LeetCode {
 		if (root.right == null)
 			return 1 + minDepth(root.left);
 		return 1 + Math.min(minDepth(root.left), minDepth(root.right));
-	}
-
-	public int minDepth2(TreeNode root) {
-		if (root == null)
-			return 0;
-		int left = minDepth(root.left);
-		int right = minDepth(root.right);
-		return (left == 0 || right == 0) ? left + right + 1 : Math.min(left, right) + 1;
-
 	}
 
 	public int minDepthNonRecursive(TreeNode root) {
@@ -1207,9 +1093,7 @@ public class LeetCode {
 		return true;
 	}
 
-	// Q136 Given an array of integers, every element appears twice except for
-	// one. #TopInterviewQuestion
-	// Find that single one.
+// Q136 Given an array of integers, every element appears twice except for one.Find that single one. #TopInterviewQuestion
 	public int singleNumber(int A[], int n) {
 		int result = A[0];
 		for (int i = 1; i < n; i++) {
@@ -1291,8 +1175,7 @@ public class LeetCode {
 	}
 
 	// Majority Element II
-	// Given an integer array of size n, find all elements that appear more than
-	// ⌊ n/3 ⌋ times.
+	// Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
 	// The algorithm should run in linear time and in O(1) space.
 	public List<Integer> majorityElement2(int[] nums) {
 		Integer major1 = null, major2 = null, cnt1 = 0, cnt2 = 0;
@@ -1330,10 +1213,8 @@ public class LeetCode {
 	// Q172 factorial trailing zeros #TopInterviewQuestion
 	// Given an integer n, return the number of trailing zeroes in n!.
 	// 10 is the product of 2 and 5. In n!, we need to know how many 2 and 5,
-	// and the number of zeros is the minimum of the number of 2 and the number
-	// of 5.
-	// Since multiple of 2 is more than multiple of 5, the number of zeros is
-	// dominant by the number of 5.
+	// and the number of zeros is the minimum of the number of 2 and the number of 5.
+	// Since multiple of 2 is more than multiple of 5, the number of zeros is dominant by the number of 5.
 	public int trailingZeroes(int n) {
 		int r = 0;
 		while (n > 0) {
@@ -1403,8 +1284,7 @@ public class LeetCode {
 		return false;
 	}
 
-	// Alternate Solution and a very good solution based on Floyds Cycle
-	// Detection Algorithm
+	// Alternate Solution and a very good solution based on Floyds Cycle Detection Algorithm
 	public static boolean isHappy2(int n) {
 		int slow = n, fast = n; //remember it goes from the back
 		do {
@@ -1480,9 +1360,7 @@ public class LeetCode {
 	}
 
 	// Q283 move zeroes #TopInterviewQuestion
-	// Shifting zeros on the right
-	// Shift non-zero values as far forward as possible
-	// Fill remaining space with zeros
+	// Shifting zeros on the right. Shift non-zero values as far forward as possible Fill remaining space with zeros
 	public void moveZeroes(int[] nums) {
 		if (nums == null || nums.length == 0)
 			return;
@@ -1569,30 +1447,21 @@ public class LeetCode {
 	}
 
 	// Q400 nth digit of a number #GoodQuestion #HardlyAsked
-	// Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7,
-	// 8, 9, 10, 11, ...
-	// To make the problem much much more easier, I divide the problem into 3
-	// parts:
-	// calculate how many digits the number has.
-	// calculate what the muber is.
+	// Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ...
+	// To make the problem much much more easier, I divide the problem into 3 parts:
+	// calculate how many digits the number has. calculate what the muber is.
 	// find out which digit in the number is we want.
 	// You can find the relative code part in the code section.
 	// Here is an example to help you to understand my code:
-	// Example:
-	// Input: 250
+	// Example: // Input: 250
 	// After step 1, you will find that the 250th digit must belong to a 3-digit
 	// number,since 1~9 can only provide 9 digits and 10~99 can only provide 180
 	// digits.Here, n = 250 - 9 - 90 * 2 = 61, and digits = 3.
-	// In step 2, we will find the target number, which named as number in my
-	// code.
-	// From step 1, the n becomes to 61, which means "the 61st digit in 3-digit
-	// number is the digit
-	// we are looking for ."Easily, we know the 61st digit in 3-digit number
-	// belongs to number = 100
-	// + 61 / 3 = 100 + 20 = 120.index is the index of the target digit in
-	// number.
-	// If index equals to 0, it means the target digit is the last digit of
-	// number.
+	// In step 2, we will find the target number, which named as number in my  code.
+	// From step 1, the n becomes to 61, which means "the 61st digit in 3-digit  number is the digit
+	// we are looking for ."Easily, we know the 61st digit in 3-digit number belongs to number = 100
+	// + 61 / 3 = 100 + 20 = 120.index is the index of the target digit in number.
+	// If index equals to 0, it means the target digit is the last digit of number.
 	// // Step 3, from step 2, we know index = n % digits = 61 % 3 = 1,
 	// which means the target digit is the 1st digit in number. Then, return 1.
 	// check the below method. for better understanding
@@ -1648,58 +1517,7 @@ public class LeetCode {
 		return Character.getNumericValue(index);
 	}
 
-	// Q67 Add Binary //the second solution is better
-	// Given two binary strings, return their sum (also a binary string).
-	// The input strings are both non-empty and contains only characters 1 or 0.
-	public static void AddTwoBinaryString(String s1, String s2) {
-		int i = -1;
-		int j = -1;
-		char ch1[] = s1.toCharArray();
-		char ch2[] = s2.toCharArray();
-		// just to make sure i will greater be j in terms of length so that in
-		// the future computer can be done easily
-		if (ch1.length > ch2.length) {
-			i = ch1.length - 1;
-			j = ch2.length - 1;
-		} else {
-			j = ch1.length - 1;
-			i = ch2.length - 1;
-		}
-		int carry = 0;
-		int sum[] = new int[ch1.length];
-		int k = ch1.length - 1;
-		while (j >= 0) {
-			sum[k] = ((int) ch2[j] - 48) + carry;
-			// sum[k] = Integer.valueOf(ch2[j] - '0') + carry; dont know if its
-			// the correct one or not.
-			if (i >= 0 && j >= 0) {
-				sum[k] = ((int) ch1[i] - 48) + ((int) ch2[j] - 48) + carry;
-			}
-			if (sum[k] == 3) {
-				sum[k] = 1;
-				carry = 1;
-			}
-			if (sum[k] == 2) {
-				sum[k] = 0;
-				carry = 1;
-			}
-			if (sum[k] == 1) {
-				sum[k] = 1;
-				carry = 0;
-			}
-			if (sum[k] == 0) {
-				sum[k] = 0;
-				carry = 0;
-			}
-			System.out.print(sum[k]);
-			i--;
-			j--;
-			k--;
-		}
-	}
-
-	// or can be done by below way
-	// Q67 Add binary #GoodQuestion
+	// Q67 Add Binary
 	// Given two binary strings, return their sum (also a binary string).
 	public String addBinary(String a, String b) {
 		StringBuilder sb = new StringBuilder();
@@ -1723,11 +1541,7 @@ public class LeetCode {
 	// Q415 Add Strings #GoodQuestion
 	// Given two non-negative integers num1 and num2 represented as string,
 	// return the sum of num1 and num2.
-	// Note:
-	// The length of both num1 and num2 is < 5100.
-	// Both num1 and num2 contains only digits 0-9.
-	// Both num1 and num2 does not contain any leading zero.
-	// second solution is better
+	//second solution is better
 	public String addStrings(String num1, String num2) {
 		StringBuilder sb = new StringBuilder();
 		int carry = 0;
@@ -1740,10 +1554,8 @@ public class LeetCode {
 		return sb.reverse().toString();
 	}
 
-	// same as we have added two binary elements ..only difference is instead of
-	// % and / by 2 we are doing that by 10
+// same as we have added two binary elements ..only difference is instead of % and / by 2 we are doing that by 10
 	public String addStrings2(String a, String b) {
-
 		StringBuilder sb = new StringBuilder();
 		int i = a.length() - 1, j = b.length() - 1, carry = 0;
 		while (i >= 0 || j >= 0) {
@@ -1907,12 +1719,10 @@ public class LeetCode {
 	}
 
 	// Although the above method can also be used for printing the primes
-	// sieveOfEratosthenes is for Given a number n, print all primes smaller
-	// than or equal to n.
+	// sieveOfEratosthenes is for Given a number n, print all primes smaller than or equal to n.
 	// It is also given that n is a small number.
 	public void sieveOfEratosthenes(int n) {
-		// Create a boolean array "prime[0..n]" and initialize
-		// all entries it as true. A value in prime[i] will
+		// Create a boolean array "prime[0..n]" and initialize all entries it as true. A value in prime[i] will
 		// finally be false if i is Not a prime, else true.
 		boolean prime[] = new boolean[n + 1];
 		for (int i = 0; i < n; i++)
@@ -1934,15 +1744,15 @@ public class LeetCode {
 	// Q226 Invert binary tree
 	// Note this tree doesn't traverse it from bottom to top
 	// it just inverts it
-	// 4
-	// / \
-	// 2 7
+	//    4
+	//  /   \
+	// 2    7
 	// / \ / \
 	// 1 3 6 9
 	// to
-	// 4
-	// / \
-	// 7 2
+	//    4
+	//  /   \
+	//  7    2
 	// / \ / \
 	// 9 6 3 1
 	public TreeNode invertTree(TreeNode root) {
@@ -1954,8 +1764,7 @@ public class LeetCode {
 		return root;
 	}
 
-	// one more method is given on leetcode to do the same //no need to do the
-	// recursion method.
+	// one more method is given on leetcode to do the same no need to do the recursion method.
 	// question is hardly been asked
 	public TreeNode invertTree2(TreeNode root) {
 		if (root == null) {
@@ -2003,7 +1812,7 @@ public class LeetCode {
 	// Q257 Binary Tree Paths
 	// Given a binary tree, return all root-to-leaf paths.
 	// For example, given the following binary tree:
-	// 1
+	//  1
 	// / \
 	// 2 3
 	// \
@@ -2125,7 +1934,7 @@ public class LeetCode {
 		return n % 4 != 0;
 	}
 
-	// Q3 Given a string, find the length of the longest substring without repeating characters. #TopInterviewQuestion
+// Q3 Given a string, find the length of the longest substring without repeating characters. #TopInterviewQuestion
 	public int lengthOfLongestSubstring2(String s) {
 		if (s.length() == 0)
 			return 0;
@@ -2175,8 +1984,7 @@ public class LeetCode {
 		return max;
 	}
 
-	// Q6 zig zag conversion .. zigzag conversion
-	// interesting question #GoodQuestion
+	// Q6 zig zag conversion .. zigzag conversion #GoodQuestion
 	public static String zigzagconvert(String s, int numRows) {
 		if (numRows <= 1)
 			return s;
@@ -2204,8 +2012,7 @@ public class LeetCode {
 	}
 
 	// Q15 3Sum three sum #TopInterviewQuestion
-	// Given an array S of n integers, are there elements a, b, c in S such that
-	// a + b + c = 0?
+	// Given an array S of n integers, are there elements a, b, c in S such that  a + b + c = 0?
 	// Find all unique triplets in the array which gives the sum of zero.
 	public List<List<Integer>> threeSum(int[] nums) {
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
@@ -2355,8 +2162,7 @@ public class LeetCode {
 	// Q17 letter combination of a phone number #TopInterviewQuestion
 	// this is how it works for the string 23
 	// i=0 -> result=combine("abc", [""]) ---> [a,b,c];
-	// i=1 -> result=combine("def", [a,b,c]) ---> [ad,bd,cd, ae,be,ce,
-	// af,bf,cf];
+	// i=1 -> result=combine("def", [a,b,c]) ---> [ad,bd,cd, ae,be,ce, af,bf,cf];
 	public static ArrayList<String> letterCombinations(String digits) {
 		ArrayList<String> res = new ArrayList<>();
 		String[] charmap = { "0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
@@ -2396,12 +2202,9 @@ public class LeetCode {
 	}
 
 	// Q339 Nested List Weight Sum
-	// Given a nested list of integers, return the sum of all integers in the
-	// list weighted by their depth.
-	// Each element is either an integer, or a list -- whose elements may also
-	// be integers or other lists.
-	// Example 1:Given the list [[1,1],2,[1,1]], return 10. (four 1's at depth
-	// 2, one 2 at depth 1)
+	// Given a nested list of integers, return the sum of all integers in the list weighted by their depth.
+	// Each element is either an integer, or a list -- whose elements may also be integers or other lists.
+	// Example 1:Given the list [[1,1],2,[1,1]], return 10. (four 1's at depth 2, one 2 at depth 1)
 	public int depthSum(List<NestedInteger> nestedList) {
 		return helper(nestedList, 1);
 	}
@@ -2570,9 +2373,7 @@ public class LeetCode {
 	// Given an array of non-negative integers, you are initially positioned at the first index of the array.
 	// Each element in the array represents your maximum jump length at that position.
 	// Determine if you are able to reach the last index.
-	// For example:
-	// A = [2,3,1,1,4], return true.
-	// A = [3,2,1,0,4], return false.
+	// For example:  A = [2,3,1,1,4], return true.  A = [3,2,1,0,4], return false.
 	public boolean canJump(int[] nums) {
 		int n = nums.length, reachablesofar = 0;
 		for (int i = 0; i < n; i++) {
@@ -2732,7 +2533,7 @@ public class LeetCode {
 		}
 	}
 
-	// the above method done non-recursively
+	// the above method is done non-recursively
 	public void connectRecursive(TreeLinkNode root) {
 		if (root == null)
 			return;
@@ -2750,75 +2551,6 @@ public class LeetCode {
 	// Q117 populating next right pointers in each node 2
 // doesnt need to be a perfect binary tree
 //very well explained by iDeserve https://www.youtube.com/watch?v=G46cenlnXvI&t=478s
-
-	// below method gives null pointer exception
-	void connect4RecursiveApproach(TreeLinkNode root) {
-		if (root == null)
-			return;
-
-		if (root.left != null) {
-			// root.left.next = root.right != null ? root.right :
-			// findNext(root.next);
-			if (root.right != null)
-				root.left.next = root.right;
-			else
-				root.left.next = findNext(root.next);
-		}
-		if (root.right != null)
-			root.right.next = findNext(root.next);
-
-		connect4RecursiveApproach(root.right);
-		connect4RecursiveApproach(root.left);
-	}
-
-	TreeLinkNode findNext(TreeLinkNode curr) {
-		if (curr != null)
-			return null;
-
-		if (curr.left != null)
-			return curr.left;
-		if (curr.right != null)
-			return curr.right;
-
-		return findNext(curr.next);
-
-	}
-
-	// based on level order traversal
-	public void connect5(TreeLinkNode root) {
-		TreeLinkNode head = null; // head of the next level
-		TreeLinkNode prev = null; // the leading node on the next level
-		TreeLinkNode cur = root; // current node of current level
-		while (cur != null) {
-			while (cur != null) { // iterate on the current level
-				// left child
-				if (cur.left != null) {
-					if (prev != null) {
-						prev.next = cur.left;
-					} else {
-						head = cur.left;
-					}
-					prev = cur.left;
-				}
-				// right child
-				if (cur.right != null) {
-					if (prev != null) {
-						prev.next = cur.right;
-					} else {
-						head = cur.right;
-					}
-					prev = cur.right;
-				}
-				// move to next node
-				cur = cur.next;
-			}
-			// move to next level
-			cur = head;
-			head = null;
-			prev = null;
-		}
-	}
-
 	public void connect(TreeLinkNode root) {
 
 		while (root != null) {
@@ -3313,20 +3045,16 @@ public class LeetCode {
 				return m;
 			}
 
-			// if we reach this point means subtree with this node as root is
-			// BST.
-			// Set isBST as true. Then set size as size of left + size of right
-			// + 1.
+			// if we reach this point means subtree with this node as root is BST.
+			// Set isBST as true. Then set size as size of left + size of right + 1.
 			// Set min and max to be returned to parent.
 			m.isBST = true;
 			m.size = leftMinMax.size + rightMinMax.size + 1;
 
-			// if root.left is null then set root.data as min else
-			// take min of left side as min
+			// if root.left is null then set root.data as min else take min of left side as min
 			m.min = root.left != null ? leftMinMax.min : root.data;
 
-			// if root.right is null then set root.data as max else
-			// take max of right side as max.
+			// if root.right is null then set root.data as max else take max of right side as max.
 			m.max = root.right != null ? rightMinMax.max : root.data;
 
 			return m;
@@ -3489,8 +3217,7 @@ public class LeetCode {
 	// Push element x onto stack.
 	public void push1(int x) {
 		q.add(x);
-		for (int i = 1; i < q.size(); i++) { // rotate the queue to make the
-												// tail be the head
+		for (int i = 1; i < q.size(); i++) { // rotate the queue to make the tail be the head
 			q.add(q.poll());
 		}
 	}
@@ -3674,8 +3401,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q686 Repeated String Match
-	// Given two strings A and B, find the minimum number of times A has to be
-	// repeated such that B is a
+	// Given two strings A and B, find the minimum number of times A has to be repeated such that B is a
 	// substring of it. If no such solution, return -1.
 	public int repeatedStringMatch(String A, String B) {
 		int count = 0;
@@ -3942,12 +3668,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q657 judge route circle
-	// Initially, there is a Robot at position (0, 0). Given a sequence of its
-	// moves, judge if this robot makes a circle,
-	// which means it moves back to the original place. The move sequence is
-	// represented by a string. And each move is
-	// represent by a character. The valid robot moves are R (Right), L (Left),
-	// U (Up) and D (down). The output should be
+	// Initially, there is a Robot at position (0, 0). Given a sequence of its moves, judge if this robot makes a circle,
+	// which means it moves back to the original place. The move sequence is represented by a string. And each move is
+	// represent by a character. The valid robot moves are R (Right), L (Left), U (Up) and D (down). The output should be
 	// true or false representing whether the robot makes a circle.
 	public boolean judgeCircle(String moves) {
 		int x = 0;
@@ -3967,8 +3690,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 	// Q653. Two Sum IV - Input is a BST
 	// Given a Binary Search Tree and a target number, return true
-	// if there exist two elements in the BST such that their sum is equal to
-	// the given target.
+	// if there exist two elements in the BST such that their sum is equal to the given target.
 
 	public boolean findTarget(TreeNode root, int k) {
 		HashSet<Integer> set = new HashSet<>();
@@ -4030,10 +3752,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return new int[] { duplicate, (int) sum + duplicate };
 	}
 
-	// Q268 missing number #TopInterviewQuestion
-	// Given an array containing n distinct numbers taken from 0, 1, 2, ..., n,
-	// find the one that is missing
-	// from the array. For example, Given nums = [0, 1, 3] return 2.
+// Q268 missing number #TopInterviewQuestion
+// Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing
+// from the array. For example, Given nums = [0, 1, 3] return 2.
 	public int missingNumber(int[] nums) {
 		int sum = 0;
 		for (int num : nums)
@@ -4205,6 +3926,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 				neheap.poll();
 			}
 		}
+
 		int c1 = 1;
 		int max = 0;
 		while (!poheap.isEmpty()) {
@@ -4219,11 +3941,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q617 Merge two binary trees
-	// Given two binary trees and imagine that when you put one of them to cover
-	// the other,
+	// Given two binary trees and imagine that when you put one of them to cover the other,
 	// some nodes of the two trees are overlapped while the others are not.
-	// You need to merge them into a new binary tree. The merge rule is that if
-	// two nodes overlap,
+	// You need to merge them into a new binary tree. The merge rule is that if two nodes overlap,
 	// then sum node values up as the new value of the merged node.
 	// Otherwise, the NOT null node will be used as the node of new tree.
 	public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
@@ -4508,18 +4228,12 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q506 find relative ranks
-	// Given scores of N athletes, find their relative ranks and the people with
-	// the top three highest scores,
-	// who will be awarded medals: "Gold Medal", "Silver Medal" and "Bronze
-	// Medal". Basically this question is to
-	// find out the score -> ranking mapping. The easiest way is to sort those
-	// scores in nums. But we will lose
-	// their original order. We can create (score , original index) pairs and
-	// sort them by score decreasingly.
-	// Then we will have score -> ranking (new index) mapping and we can use
-	// original index to create the result.
-	// Time complexity: O(NlgN). Space complexity: O(N). N is the number of
-	// scores.
+	// Given scores of N athletes, find their relative ranks and the people with the top three highest scores,
+	// who will be awarded medals: "Gold Medal", "Silver Medal" and "Bronze Medal". Basically this question is to
+	// find out the score -> ranking mapping. The easiest way is to sort those scores in nums. But we will lose
+	// their original order. We can create (score , original index) pairs and sort them by score decreasingly.
+	// Then we will have score -> ranking (new index) mapping and we can use original index to create the result.
+	// Time complexity: O(NlgN). Space complexity: O(N). N is the number of scores.
 	public static String[] findRelativeRanks(int[] nums) {
 		Integer[] index = new Integer[nums.length];
 		for (int i = 0; i < nums.length; i++) {
@@ -4568,14 +4282,11 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q520 Detect Capital
-	// Given a word, you need to judge whether the usage of capitals in it is
-	// right or not.
-	// We define the usage of capitals in a word to be right when one of the
-	// following cases holds:
+	// Given a word, you need to judge whether the usage of capitals in it is right or not.
+	// We define the usage of capitals in a word to be right when one of the following cases holds:
 	// All letters in this word are capitals, like "USA".
 	// All letters in this word are not capitals, like "leetcode".
-	// Only the first letter in this word is capital if it has more than one
-	// letter, like "Google".
+	// Only the first letter in this word is capital if it has more than one letter, like "Google".
 	// Otherwise, we define that this word doesn't use capitals in a right way.
 	public boolean detectCapitalUse(String word) {
 		int numUpper = 0;
@@ -4676,8 +4387,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// Given an integer array with even length, where different numbers in this
 	// array represent different kinds of candies.
 	// Each number means one candy of the corresponding kind.
-	// You need to distribute these candies equally in number to brother and
-	// sister.
+	// You need to distribute these candies equally in number to brother and sister.
 	// Return the maximum number of kinds of candies the sister could gain.
 	public int distributeCandies(int[] candies) {
 		int total = candies.length;
@@ -4954,11 +4664,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// Q557 Reverse words in the string III
-	// Given a string, you need to reverse the order of characters in each word
-	// within a sentence while still preserving
-	// whitespace and initial word order.
-	// Input: "Let's take LeetCode contest"
-	// Output: "s'teL ekat edoCteeL tsetnoc"
+	// Given a string, you need to reverse the order of characters in each word within a sentence while still preserving
+	// whitespace and initial word order. Input: "Let's take LeetCode contest" Output: "s'teL ekat edoCteeL tsetnoc"
 	public String reverseWords(String s) {
 		String[] str = s.split(" ");
 		for (int i = 0; i < str.length; i++)
@@ -5123,12 +4830,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return count;
 	}
 
-	// Q530. Minimum Absolute Difference in BST
-	// Given a binary search tree with non-negative values, find the minimum
-	// absolute difference between values of any two nodes.
-	// first method is to get the inorder traversal and then you can get your
-	// solution
-	// but the follow up question says what if the tree is not BST
+// Q530. Minimum Absolute Difference in BST
+// Given a binary search tree with non-negative values, find the minimum absolute difference between
+// values of any two nodes. first method is to get the inorder traversal and then you can get your solution
+// but the follow up question says what if the tree is not BST
 	int min = Integer.MAX_VALUE;
 	Integer prev = null;
 
@@ -5351,7 +5056,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return i;
 	}
 
-	// Q404 sum of left leaves #GoodQuestion
+	// Q404 sum of left leaves #GoodQuestion #NotAskedinLast1Year
 	// Recursive method. For given node we check whether its left child is a
 	// leaf. If it is the case,
 	// we add its value to answer, otherwise recursively call method on left
@@ -5960,14 +5665,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 	// Q205 isomorphic Strings
 	// Given two strings s and t, determine if they are isomorphic.
-	// Two strings are isomorphic if the characters in s can be replaced to get
-	// t.
-	// All occurrences of a character must be replaced with another character
-	// while preserving the order of characters.
-	// No two characters may map to the same character but a character may map
-	// to itself.
-	// For example,
-	// Given "egg", "add", return true.
+	// Two strings are isomorphic if the characters in s can be replaced to get t.
+	// All occurrences of a character must be replaced with another character while preserving the order of characters.
+	// No two characters may map to the same character but a character may map to itself.
+	// For example, Given "egg", "add", return true.
 	public boolean isIsomorphic(String s, String t) {
 		if (s == null || s.length() <= 1)
 			return true;
@@ -6108,10 +5809,8 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	// or below is the easy method
-	// Go from bottom to top.
-	// We start form the row above the bottom row [size()-2].
-	// Each number add the smaller number of two numbers that below it.
-	// And finally we get to the top we the smallest sum
+	// Go from bottom to top. We start form the row above the bottom row [size()-2].
+	// Each number add the smaller number of two numbers that below it. And finally we get to the top we the smallest sum
 	public static int minimumTotal3(List<List<Integer>> triangle) {
 		for (int i = triangle.size() - 2; i >= 0; i--)
 			for (int j = 0; j <= i; j++)
@@ -8316,11 +8015,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 	// Q127 Word ladder #TopInterviewQuestion
 	// Given two words (beginWord and endWord), and a dictionary's word list,
-	// find the length of shortest transformation sequence from beginWord to
-	// endWord, such that:
+	// find the length of shortest transformation sequence from beginWord to endWord, such that:
 	// Only one letter can be changed at a time.
-	// Each transformed word must exist in the word list. Note that beginWord is
-	// not a transformed word.
+	// Each transformed word must exist in the word list. Note that beginWord is not a transformed word.
 	public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
 		Set<String> beginSet = new HashSet<>();
 		Set<String> endSet = new HashSet<>();
@@ -8403,11 +8100,11 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	//BuildOrder (//Removal of Dependencies)
 
 void findBuildOrder(String[] projects, String[][] dependencies) {
-		int count =0;
+		int courseRemaining =0;
 		Map<String , Set<String>> graph  =  new HashMap<String,Set<String>>();
 		for(String project : projects){
 			graph.put(project , new HashSet<>());
-			count++;
+
 		}
 
 		for(int i = 0 ; i < dependencies.length ; i++){
@@ -8415,8 +8112,6 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		}
 
 		Queue<String> queue = new LinkedList<>();
-		int courseRemaining = count;
-
 		for(Map.Entry<String, Set<String>> entry  : graph.entrySet()){
 			if(entry.getValue().size() == 0){
 				queue.offer(entry.getKey());  // queue has all those elements which has zero dependencies
@@ -8485,18 +8180,16 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	}
 
 	// Q99 Recover Binary Search Tree #GoodQuestion
-	// Two elements of a binary search tree (BST) are swapped by mistake.
-	// Recover the tree without changing its structure.
-	// approach is to do the inorder traversal, and find the two pairs where
-	// elements are not sorted,
-	// when we find those, we will take the first element of the first pair and
-	// replace it with the second
+	// Two elements of a binary search tree (BST) are swapped by mistake. Recover the tree without changing its structure.
+	// approach is to do the inorder traversal, and find the two pairs where elements are not sorted,
+	// when we find those, we will take the first element of the first pair and replace it with the second
 	// element of the second pair
 	// https://www.youtube.com/watch?v=LR3K5XAWV5k very well explained in this
 
     TreeNode firstElement = null;
     TreeNode secondElement = null;
-    // The reason for this initialization is to avoid null pointer exception in the first comparison when prevElement has not been initialized
+    // The reason for this initialization is to avoid null pointer exception in the first comparison when prevElement
+	// has not been initialized
     TreeNode prevElement = new TreeNode(Integer.MIN_VALUE);
     public void recoverTree(TreeNode root) {
 
@@ -8529,7 +8222,6 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
     }
 
 	// Bottom view of a binary tree #Confused should be done or leave it ??
-	// Method that prints the bottom view.
 	public void bottomView(Node root) {
 
 		if (root == null)
@@ -9388,16 +9080,13 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		return l.next;
 	}
 
-	// Q86 partition list
-	// Given a linked list and a value x, partition it such that all nodes less
-	// than x come before nodes greater than or equal to x.
-	// You should preserve the original relative order of the nodes in each of
-	// the two partitions. For example,
-	// Given 1->4->3->2->5->2 and x = 3,
-	// return 1->2->2->4->3->5.
-	// the basic idea is to maintain two queues, the first one stores all nodes with val less than x ,
-	// and the second queue stores all the rest nodes. Then concat these two queues. Remember to set the
-	// tail of second queue a null next, or u will get TLE.
+// Q86 partition list
+// Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
+// You should preserve the original relative order of the nodes in each of the two partitions. For example,
+// Given 1->4->3->2->5->2 and x = 3, return 1->2->2->4->3->5.
+// the basic idea is to maintain two queues, the first one stores all nodes with val less than x ,
+// and the second queue stores all the rest nodes. Then concat these two queues. Remember to set the
+// tail of second queue a null next, or u will get TLE.
 	public ListNode partition(ListNode head, int x) {
 		ListNode node1 = new ListNode(0);
 		ListNode node2 = new ListNode(0);
@@ -9527,7 +9216,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	// Dynamic Programming
 
 
-	// Q300 Length of longest increasing subsequence #TopInterviewQuestion  #Salesforce
+	// Q300 Length of longest increasing subsequence #TopInterviewQuestion
 	// Given an unsorted array of integers, find the length of longest
 	// increasing subsequence.
 	// Very well explained by tushar https://www.youtube.com/watch?v=CE2b_-XfVDk
@@ -9574,19 +9263,13 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		return T[maxIndex];
 	}
 
-	// Palindrome Partitioning - II #HardlyAsked #LeavingQuestion
-	// Given a string s, partition s such that every substring of the partition
-	// is a palindrome.
-	// Return the minimum cuts needed for a palindrome partitioning of s.
-	// i is the starting index and j is the ending index. i must be passed as 0
-	// and j as n-1
-	// minPalPartion(str, i, j) = 0 if i == j. // When string is of length 1.
-	// minPalPartion(str, i, j) = 0 if str[i..j] is palindrome.
-	//// If none of the above conditions is true, then minPalPartion(str, i, j)
-	// can be
-	//// calculated recursively using the following formula.
-	// minPalPartion(str, i, j) = Min { minPalPartion(str, i, k) + 1 +
-	// minPalPartion(str, k+1, j) } where k varies from i to j-1
+// Palindrome Partitioning - II #HardlyAsked #LeavingQuestion
+// Given a string s, partition s such that every substring of the partition is a palindrome.
+// Return the minimum cuts needed for a palindrome partitioning of s.
+// i is the starting index and j is the ending index. i must be passed as 0 and j as n-1
+// minPalPartion(str, i, j) = 0 if i == j. // When string is of length 1. minPalPartion(str, i, j) = 0 if str[i..j] is palindrome.
+// If none of the above conditions is true, then minPalPartion(str, i, j) can be calculated recursively using the following formula.
+// minPalPartion(str, i, j) = Min { minPalPartion(str, i, k) + 1 + minPalPartion(str, k+1, j) } where k varies from i to j-1
 	static int minPalPartion(String str) {
 		// Get the length of the string
 		int n = str.length();
@@ -9766,6 +9449,25 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		return temp[coins.length][total];
 	}
 
+	// go to i - 1 (one step above) and input steps back from the current j value
+	public boolean subsetSum(int input[], int total) {
+		boolean T[][] = new boolean[input.length + 1][total + 1];
+		for (int i = 0; i <= input.length; i++) {
+			T[i][0] = true;
+		}
+
+		for (int i = 1; i <= input.length; i++) {
+			for (int j = 1; j <= total; j++) {
+				if (j - input[i - 1] >= 0) {
+					T[i][j] = T[i - 1][j] || T[i - 1][j - input[i - 1]];
+				} else {
+					T[i][j] = T[i - 1][j];
+				}
+			}
+		}
+		return T[input.length][total];
+	}
+
 	// Q62 Unique Paths #TopInterviewQuestion
 	// A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
 	// The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner
@@ -9900,24 +9602,6 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 			}
 		}
 		return T[text.length][pattern.length];
-	}
-
-	public boolean subsetSum(int input[], int total) {
-		boolean T[][] = new boolean[input.length + 1][total + 1];
-		for (int i = 0; i <= input.length; i++) {
-			T[i][0] = true;
-		}
-
-		for (int i = 1; i <= input.length; i++) {
-			for (int j = 1; j <= total; j++) {
-				if (j - input[i - 1] >= 0) {
-					T[i][j] = T[i - 1][j] || T[i - 1][j - input[i - 1]];
-				} else {
-					T[i][j] = T[i - 1][j];
-				}
-			}
-		}
-		return T[input.length][total];
 	}
 
 	// Q5 longest palindromic Substring #TopInterviewQuestion
@@ -10310,6 +9994,48 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 			boundaryDFS(board, i, j + 1);
 	}
 
+//or
+	public void SurroundedRegion(char[][] board) {
+		if (board.length == 0 || board[0].length == 0) return;
+		int m = board.length;
+		int n = board[0].length;
+
+		// go through the first column and the last column
+		for (int i = 0; i < m; i++) {
+			dfs(board, i, 0);
+			dfs(board, i, n - 1);
+		}
+
+		// go through the first row and the last row
+		for (int j = 1; j < n - 1; j++) {
+			dfs(board, 0, j);
+			dfs(board, m - 1, j);
+		}
+
+		// make all the remaining 'O' to 'X'
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				if (board[i][j] == 'O') board[i][j] = 'X';
+				if (board[i][j] == '*') board[i][j] = 'O';
+			}
+		}
+	}
+
+
+	// make every 'O' that we meet to '*'
+	// It is safe because we always start from the border
+	private void dfs(char[][] board, int i, int j) {
+		if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) return;
+		if (board[i][j] == 'X' || board[i][j] == '*') return;
+		board[i][j] = '*';
+		dfs(board, i - 1, j);
+		dfs(board, i + 1, j);
+		dfs(board, i, j - 1);
+		dfs(board, i, j + 1);
+	}
+
+
+
 	// Q200 Number of islands #TopInterviewQuestion
 	// Given a 2d grid map of '1's (land) and '0's (water), count the number of islands.
 	// An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
@@ -10422,11 +10148,9 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		}
 		if (left > 0) {
 			generateOneByOne(sublist + "(", list, left - 1, right);
-			System.out.println(sublist);
 		}
 		if (right > 0) {
 			generateOneByOne(sublist + ")", list, left, right - 1);
-			System.out.println(sublist);
 		}
 		if (left == 0 && right == 0) {
 			list.add(sublist);
@@ -10600,21 +10324,16 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	static void combination1(String str, int length, StringBuffer output, int allowedStart) {
 		for (int curr = allowedStart; curr < length; curr++) {
 			output.append(str.charAt(curr));
-			System.out.println(output);
 			if (curr + 1 != length)
 				combination1(str, length, output, curr + 1);
 			output.deleteCharAt(output.length() - 1);
-//			System.out.println("output coming out to be now " + output);
-//			System.out.println("allowed start is " + allowedStart);
 		}
 	}
 	// Combination Sum
-	// Given a collection of candidate numbers (C) and a target number (T), find
-	// all unique combinations in C where the candidate numbers sums to T.
-	// Each number in C may only be used once in the combination.
-	// Note: All numbers (including target) will be positive integers.
-	// The solution set must not contain duplicate combinations.
-	// For example, given candidate set [10, 1, 2, 7, 6, 1, 5] and target 8,
+	// Given a collection of candidate numbers (C) and a target number (T), find all unique combinations in C where
+	// the candidate numbers sums to T. Each number in C may only be used once in the combination.
+	// Note: All numbers (including target) will be positive integers. The solution set must not contain duplicate
+	// combinations. For example, given candidate set [10, 1, 2, 7, 6, 1, 5] and target 8,
 	// A solution set is:
 	// [
 	// [1, 7],
@@ -10669,16 +10388,11 @@ public boolean canPartition(int[] nums) {
 		return backtrack(sum - nums[start], start - 1, nums) || backtrack(sum, start - 1, nums);
 	}
 
-	// Q131 pallindrome partitioning //TopInterviewQuestion #NOTAskedMuch..dont
-	// know why it is topinterviewquestion
-	// there is one more solution. check the leetcode.
-	// Given a string s, partition s such that every substring of the partition
-	// is a palindrome.
+	// Q131 pallindrome partitioning //TopInterviewQuestion #NOTAskedMuch..dont know why it is topinterviewquestion
+	// Given a string s, partition s such that every substring of the partition is a palindrome.
 	// Return all possible palindrome partitioning of s.
-	//
 	// For example, given s = "aab",
 	// Return
-	//
 	// [
 	// ["aa","b"],
 	// ["a","a","b"]
@@ -10774,13 +10488,10 @@ public boolean canPartition(int[] nums) {
 	}
 
 	// increasing subsequence
-	// Given an integer array, your task is to find all the different possible
-	// increasing subsequences of the given array,
+	// Given an integer array, your task is to find all the different possible increasing subsequences of the given array,
 	// and the length of an increasing subsequence should be at least 2 .
-	// Example:
-	// Input: [4, 6, 7, 7]
-	// Output: [[4, 6], [4, 7], [4, 6, 7], [4, 6, 7, 7], [6, 7], [6, 7, 7],
-	// [7,7], [4,7,7]]
+	// Example: Input: [4, 6, 7, 7]
+	// Output: [[4, 6], [4, 7], [4, 6, 7], [4, 6, 7, 7], [6, 7], [6, 7, 7], [7,7], [4,7,7]]
 	public List<List<Integer>> findSubsequences(int[] nums) {
 		Set<List<Integer>> res = new HashSet<List<Integer>>();
 		List<Integer> holder = new ArrayList<Integer>();

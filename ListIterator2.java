@@ -94,6 +94,7 @@ public class ListIterator2 {
 			//String elementToBeRemoved = list.get(listIndex).get(elementIndex);
 			list.get(listIndex).remove(elementIndex);
 			canRemove = false;
+			currentIndex = currentIndex > 0 ? currentIndex -1 : currentIndex;
 		} else {
 			throw new Exception("Cannot remove");
 		}
@@ -103,14 +104,20 @@ public class ListIterator2 {
         System.out.println("Old list looks like " + ListIterator2.getInput());
         ListIterator2 listIterator = new ListIterator2((ListIterator2.getInput()));
 		System.out.println(listIterator.next());
+		listIterator.remove();
+		System.out.println(listIterator.next());
+		listIterator.remove();
+		System.out.println(listIterator.next());
+		listIterator.remove();
 		System.out.println(listIterator.next());
 		System.out.println(listIterator.next());
 		System.out.println(listIterator.next());
+		listIterator.remove();
 		System.out.println(listIterator.next());
 		System.out.println(listIterator.next());
+		listIterator.remove();
 		System.out.println(listIterator.next());
-		System.out.println(listIterator.next());
-		System.out.println(listIterator.next());
+		listIterator.remove();
 		System.out.println(listIterator.next());
 		System.out.println(listIterator.next());
 	}
