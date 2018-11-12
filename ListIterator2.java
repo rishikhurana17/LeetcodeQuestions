@@ -91,7 +91,6 @@ public class ListIterator2 {
 				listIndex = currentList;
 				elementIndex = currentIndex - 1;
 			}
-			//String elementToBeRemoved = list.get(listIndex).get(elementIndex);
 			list.get(listIndex).remove(elementIndex);
 			canRemove = false;
 			currentIndex = currentIndex > 0 ? currentIndex -1 : currentIndex;
