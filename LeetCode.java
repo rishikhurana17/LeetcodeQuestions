@@ -90,16 +90,13 @@ public class LeetCode {
 	}
 
 	// Q219 Contain duplicates II
-	// Given an array of integers and an integer k, find out whether there are
-	// two distinct indices
+	// Given an array of integers and an integer k, find out whether there are two distinct indices
 	// i and j in the array such that nums[i] = nums[j]
 	// and the absolute difference between i and j is at most k.
 
 	// we can use hashset as well as we are not looking to return indices
-	// this solution : Iterate through array and use HashTable to save number[i]
-	// as a key and i as a value.
-	// If the map already contains number[i] - subtract map.get(number[i]) from
-	// i and return true if result is
+	// this solution : Iterate through array and use HashTable to save number[i] as a key and i as a value.
+	// If the map already contains number[i] - subtract map.get(number[i]) from i and return true if result is
 	// less or equal to k.
 	public boolean containsNearbyDuplicate(int[] nums, int k) {
 		Map<Integer, Integer> map = new HashMap<>();
@@ -632,13 +629,9 @@ public class LeetCode {
 	}
 
 	// Q27 Remove Element
-	// Given an array nums and a value val, remove all instances of that value
-	// in-place and return the new length.
-	// Do not allocate extra space for another array, you must do this by
-	// modifying the input array in-place
-	// with O(1) extra memory.
-	// The order of elements can be changed. It doesn't matter what you leave
-	// beyond the new length.
+	// Given an array nums and a value val, remove all instances of that value in-place and return the new length.
+	// Do not allocate extra space for another array, you must do this by modifying the input array in-place
+	// with O(1) extra memory. The order of elements can be changed. It doesn't matter what you leave beyond the new length.
 	public int removeElement1(int[] A, int elem) {
 		int m = 0;
 		for (int i = 0; i < A.length; i++) {
@@ -692,8 +685,7 @@ public class LeetCode {
 	}
 
 	// Given a sorted array and a target value, return the index if the target
-	// is found. If not, return the index where it would be if it were inserted
-	// in order.
+	// is found. If not, return the index where it would be if it were inserted in order.
 	public static int SearchInsertPosition(int A[], int target) {
 		// binary search and return low
 		int low = 0, high = A.length - 1;
@@ -860,8 +852,7 @@ public class LeetCode {
 	}
 
 	// Q243 Shortest word distance
-	// Given a list of words and two words word1 and word2,
-	// return the shortest distance between these two words in the list.
+// Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
 	public int shortestDistance(String[] words, String word1, String word2) {
         int p1 = -1, p2 = -1, min = Integer.MAX_VALUE;
 
@@ -983,11 +974,9 @@ public class LeetCode {
 	}
 
 	// Q121 Best time to Buy and Sell stocks #TopInterviewQuestion
-	// Say you have an array for which the ith element is the price of a given
-	// stock on day i.
+	// Say you have an array for which the ith element is the price of a given stock on day i.
 	// If you were only permitted to complete at most one transaction
-	// (ie, buy one and sell one share of the stock), design an algorithm to
-	// find the maximum profit.
+	// (ie, buy one and sell one share of the stock), design an algorithm to find the maximum profit.
 	public static int maxProfit(int[] prices) {
 		if (prices.length == 0) {
 			return 0;
@@ -1012,7 +1001,6 @@ public class LeetCode {
 	}
 
 	// Below is a good solution
-	// another solution //check once again
 	int maxProfit3(int[] prices) {
 		int maxProfit = 0;
 		int minPrice = Integer.MAX_VALUE;
@@ -1024,13 +1012,10 @@ public class LeetCode {
 	}
 
 	// Q122 Best time to Buy and Sell stocks II #TopInterviewQuestion
-	// Say you have an array for which the ith element is the price of a given
-	// stock on day i.
-	// Design an algorithm to find the maximum profit. You may complete as many
-	// transactions as you like
-	// (ie, buy one and sell one share of the stock multiple times).
-	// However, you may not engage in multiple transactions at the same time
-	// (ie, you must sell the stock before you buy again).
+	// Say you have an array for which the ith element is the price of a given stock on day i.
+	// Design an algorithm to find the maximum profit. You may complete as many transactions as you like
+	// (ie, buy one and sell one share of the stock multiple times). However, you may not engage in multiple
+	// transactions at the same time (ie, you must sell the stock before you buy again).
 
 	public int maxProfit2(int[] prices) {
 		int total = 0;
@@ -1098,10 +1083,8 @@ public class LeetCode {
 		int result = A[0];
 		for (int i = 1; i < n; i++) {
 			result = result ^ A[i]; /* Get the xor of all elements */
-			// Logic: XOR will return 1 only on two different bits.
-			// So if two numbers are the same, XOR will return 0.
-			// Finally only one number left.
-			// A ^ A = 0 and A ^ B ^ A = B.
+			// Logic: XOR will return 1 only on two different bits. So if two numbers are the same, XOR will return 0.
+			// Finally only one number left. A ^ A = 0 and A ^ B ^ A = B.
 		}
 		return result;
 	}
@@ -1156,10 +1139,8 @@ public class LeetCode {
 	}
 
 	// Q169 majority element #TopInterviewQuestion
-	// Given an array of size n, find the majority element.
-	// The majority element is the element that appears more than ⌊ n/2 ⌋ times
-	// also sorting the array and first & middle or middle and the last will be
-	// same
+	// Given an array of size n, find the majority element. The majority element is the element that appears more
+	// than ⌊ n/2 ⌋ times also sorting the array and first & middle or middle and the last will be same
 	public static int majorityElement(int[] num) {
 		int major = num[0], count = 1;
 		for (int i = 1; i < num.length; i++) {
@@ -1408,6 +1389,7 @@ public class LeetCode {
 		@Override
 		public boolean hasNext() {
 			return !noSuchElement;
+
 		}
 
 		private void advanceIter() {
@@ -1609,8 +1591,21 @@ public class LeetCode {
 		return result;
 	}
 
-// we must choose the last element as the head of the linked list. If we choose 0, we can not detect the cycle.
-// Now the problem is the same as find the cycle in linkedlist!
+//    best solution
+
+public int findDuplicate4(int[] nums) {
+    int slow = 0, fast = 0;
+    do {
+        slow = nums[slow];
+        fast = nums[nums[fast]];
+    } while (slow != fast);
+    slow = 0;
+    while (slow != fast) {
+        slow = nums[slow];
+        fast = nums[fast];
+    }
+    return slow;
+}
 
 	public int findDuplicate2(int[] nums) {
 		int n = nums.length;
@@ -1648,20 +1643,6 @@ public class LeetCode {
 		return slow;
 	}
 
-	// this i am assuming is the best solution as everything starts from 0
-	public int findDuplicate4(int[] nums) {
-		int slow = 0, fast = 0;
-		do {
-			slow = nums[slow];
-			fast = nums[nums[fast]];
-		} while (slow != fast);
-		slow = 0;
-		while (slow != fast) {
-			slow = nums[slow];
-			fast = nums[fast];
-		}
-		return slow;
-	}
 
 	// next prime number
 	public static int nextPrime(int n) {
@@ -2240,8 +2221,7 @@ public class LeetCode {
 		return total;
 	}
 
-	// Q222 Count complete tree nodes
-	// Given a complete binary tree, count the number of nodes.
+	// Q222 Count complete tree nodes Given a complete binary tree, count the number of nodes.
 	int countNodes(TreeNode root) {
 		if (root == null)
 			return 0;
@@ -2483,8 +2463,7 @@ public class LeetCode {
 	}
 
 	// Q61 Rotate List
-	// Given a linked list, rotate the list to the right by k places, where k is
-	// non-negative.
+	// Given a linked list, rotate the list to the right by k places, where k is non-negative.
 	// My solution has O(n) time complexity and O(1) memory. The basic idea is to connect the list into a circle.
 	// First, count the length of list while going through the list to find the end of it.
 	// Connect the tail to head. The problem asked to rotate k nodes, however, now the tail is at the end of the list
@@ -2573,8 +2552,7 @@ public class LeetCode {
 
 	// Q138 Copy List with random pointer #TopInterviewQuestion
 	// linked list is given such that each node contains an additional random
-	// pointer which could point to any node
-	// in the list or null. Return a deep copy of the list.
+	// pointer which could point to any node in the list or null. Return a deep copy of the list.
 
 	// We can solve this problem by doing the following steps:
 	// copy every node, i.e., duplicate every node, and insert it to the list
@@ -2964,51 +2942,6 @@ public class LeetCode {
 		return grid[m - 1][n - 1];
 	}
 
-	// Q365 Water & Jug Problem   #NOT ASKED
-	// This is a pure Math problem. We need the knowledge of number theory to
-	// cover the proof and solution.
-	// The basic idea is to use the property of Bézout's identity and check if z
-	// is a multiple of GCD(x, y)
-	// let a and b be nonzero integers and let d be their greatest common
-	// divisor. Then there exist integers x and y such that ax+by=d
-	// In addition, the greatest common divisor d is the smallest positive
-	// integer that can be written as ax + by
-	// every integer of the form ax + by is a multiple of the greatest common
-	// divisor d.If a or b is negative this means we are emptying a jug of x or
-	// y gallons
-	// respectively.Similarly if a or b is positive this means we are filling a
-	// jug of x or y gallons respectively.
-	// x = 4, y = 6, z = 8.
-	// GCD(4, 6) = 2
-	// 8 is multiple of 2
-	// so this input is valid and we have:
-	// -1 * 4 + 6 * 2 = 8
-	// In this case, there is a solution obtained by filling the 6 gallon jug
-	// twice and emptying the 4 gallon jug once. (Solution. Fill the 6 gallon
-	// jug and empty 4 gallons to the 4 gallon jug. Empty the 4 gallon jug. Now
-	// empty the remaining two gallons from the 6 gallon jug to the 4 gallon
-	// jug. Next refill the 6 gallon jug. This gives 8 gallons in the end)
-	public boolean canMeasureWater(int x, int y, int z) {
-		// limit brought by the statement that water is finallly in one or both
-		// buckets
-		if (x + y < z)
-			return false;
-		// case x or y is zero
-		if (x == z || y == z || x + y == z)
-			return true;
-		// get GCD, then we can use the property of Bézout's identity
-		return z % GCD(x, y) == 0;
-	}
-
-	public int GCD(int a, int b) {
-		while (b != 0) {
-			int temp = b;
-			b = a % b;
-			a = temp;
-		}
-		return a;
-	}
-
 	// Q333 largest BST in a binary tree #Notasked
 	// concept is to use postorder traversal
 	// and make sure min of right side > root and max of left side should be <
@@ -3238,8 +3171,8 @@ public class LeetCode {
 	}
 
 // Implement Stack Using 2 Queues
-private Queue<Integer> q1 = new LinkedList<Integer>();
-    private Queue<Integer> q2 = new LinkedList<Integer>();
+private Queue<Integer> q1 = new LinkedList<>();
+    private Queue<Integer> q2 = new LinkedList<>();
     public void push4(int x) {
         if(q1.isEmpty()) {
             q1.add(x);
@@ -3288,193 +3221,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 	public boolean empty2() {
 		return input.empty() && output.empty();
-	}
-
-	// Q696 count binary substring #UselessQuestion
-	/*
-	 * Give a string s, count the number of non-empty (contiguous) substrings
-	 * that have the same number of 0's and 1's, and all the 0's and all the 1's
-	 * in these substrings are grouped consecutively. Substrings that occur
-	 * multiple times are counted the number of times they occur.
-	 */
-	public int countBinarySubstrings(String s) {
-		int prevRunLength = 0, curRunLength = 1, res = 0;
-		for (int i = 1; i < s.length(); i++) {
-			if (s.charAt(i) == s.charAt(i - 1))
-				curRunLength++;
-			else {
-				prevRunLength = curRunLength;
-				curRunLength = 1;
-			}
-			if (prevRunLength >= curRunLength)
-				res++;
-		}
-		return res;
-	}
-
-	// Q693 Binary Number with Alternate Bits #UselessQuestion
-	// Given a positive integer, check whether it has alternating bits: namely,
-	// if two adjacent bits will always have different values.
-	public boolean hasAlternatingBits(int n) {
-		String bits = Integer.toBinaryString(n);
-		for (int i = 0; i < bits.length() - 1; i++) {
-			if (bits.charAt(i) == bits.charAt(i + 1)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	// Q690 employee importance (Not asked these days)
-	/*
-	 * You are given a data structure of employee information, which includes
-	 * the employee's unique id, his importance value and his direct
-	 * subordinates' id. For example, employee 1 is the leader of employee 2,
-	 * and employee 2 is the leader of employee 3. They have importance value
-	 * 15, 10 and 5, respectively. Then employee 1 has a data structure like [1,
-	 * 15, [2]], and employee 2 has [2, 10, [3]], and employee 3 has [3, 5, []].
-	 * Note that although employee 3 is also a subordinate of employee 1, the
-	 * relationship is not direct.
-	 */
-
-	public int getImportance1(List<Employee> employees, int id) {
-		int total = 0;
-		Map<Integer, Employee> map = new HashMap<>();
-		for (Employee employee : employees) {
-			map.put(employee.id, employee);
-		}
-		Queue<Employee> queue = new LinkedList<>();
-		queue.offer(map.get(id));
-		while (!queue.isEmpty()) {
-			Employee current = queue.poll();
-			total += current.importance;
-			for (int subordinate : current.subordinates) {
-				queue.offer(map.get(subordinate));
-			}
-		}
-		return total;
-	}
-
-	public int getImportance2(List<Employee> employees, int id) {
-		Map<Integer, Employee> map = new HashMap<>();
-		for (Employee employee : employees) {
-			map.put(employee.id, employee);
-		}
-		return getImportanceHelper(map, id);
-	}
-
-	private int getImportanceHelper(Map<Integer, Employee> map, int rootId) {
-		Employee root = map.get(rootId);
-		int total = root.importance;
-		for (int subordinate : root.subordinates) {
-			total += getImportanceHelper(map, subordinate);
-		}
-		return total;
-	}
-
-	// Q687 Longest Univalue path
-	/*
-	 * Given a binary tree, find the length of the longest path where each node
-	 * in the path has the same value. This path may or may not pass through the
-	 * root. Note: The length of path between two nodes is represented by the
-	 * number of edges between them.
-	 */
-	int len = 0; // global variable
-
-	public int longestUnivaluePath(TreeNode root) {
-		if (root == null)
-			return 0;
-		len = 0;
-		getLen(root, root.val);
-		return len;
-	}
-
-	private int getLen(TreeNode node, int val) {
-		if (node == null)
-			return 0;
-		int left = getLen(node.left, node.val);
-		int right = getLen(node.right, node.val);
-		len = Math.max(len, left + right);
-		if (val == node.val)
-			return Math.max(left, right) + 1;
-		return 0;
-	}
-
-	// Q686 Repeated String Match
-	// Given two strings A and B, find the minimum number of times A has to be repeated such that B is a
-	// substring of it. If no such solution, return -1.
-	public int repeatedStringMatch(String A, String B) {
-		int count = 0;
-		StringBuilder sb = new StringBuilder();
-		while (sb.length() < B.length()) {
-			sb.append(A);
-			count++;
-		}
-		if (sb.toString().contains(B))
-			return count;
-		if (sb.append(A).toString().contains(B))
-			return ++count;
-		return -1;
-	}
-
-	// Q682 Baseball Game
-	// Given a list of strings, each string can be one of the 4 following types:
-	// Integer (one round's score): Directly represents the number of points you
-	// get in this round.
-	// "+" (one round's score): Represents that the points you get in this round
-	// are the sum of the last two valid round's points.
-	// "D" (one round's score): Represents that the points you get in this round
-	// are the doubled data of the last valid round's points.
-	// "C" (an operation, which isn't a round's score): Represents the last
-	// valid round's points you get were invalid and should be removed.
-	public int calPoints(String[] ops) {
-		int sum = 0;
-		LinkedList<Integer> list = new LinkedList<>();
-		for (String op : ops) {
-			if (op.equals("C")) {
-				sum -= list.removeLast();
-			} else if (op.equals("D")) {
-				list.add(list.peekLast() * 2);
-				sum += list.peekLast();
-			} else if (op.equals("+")) {
-				list.add(list.peekLast() + list.get(list.size() - 2));
-				sum += list.peekLast();
-			} else {
-				list.add(Integer.parseInt(op));
-				sum += list.peekLast();
-			}
-		}
-		return sum;
-	}
-
-	public int calPointsAnotherMethod(String[] ops) {
-		int sum = 0;
-		Stack<Integer> stack = new Stack<Integer>();
-		for (int i = 0; i < ops.length; i++) {
-			if (ops[i].equals("+")) {
-				int temp1 = stack.pop();
-				int temp2 = stack.pop();
-				int temp_sum = temp1 + temp2;
-				sum += temp_sum;
-				stack.push(temp2);
-				stack.push(temp1);
-				stack.push(temp_sum);
-			} else if (ops[i].equals("D")) {
-				int temp = stack.pop();
-				int temp_d = 2 * temp;
-				sum += temp_d;
-				stack.push(temp);
-				stack.push(temp_d);
-			} else if (ops[i].equals("C")) {
-				int cancel = stack.pop();
-				sum -= cancel;
-			} else {
-				int temp = Integer.parseInt(ops[i]);
-				sum += temp;
-				stack.push(temp);
-			}
-		}
-		return sum;
 	}
 
 // Q671 Second minimum Node in a binary tree
@@ -3586,107 +3332,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 	}
 
-	// Q669 Trim BST
-	// Given a binary search tree and the lowest and highest boundaries as L and
-	// R, trim the tree
-	// so that all its elements lies in [L, R] (R >= L). You might need to
-	// change the root of the tree,
-	// so the result should return the new root of the trimmed binary search
-	// tree.
-	public TreeNode trimBST(TreeNode root, int L, int R) {
-		if (root == null)
-			return null;
-
-		if (root.val < L)
-			return trimBST(root.right, L, R);
-		if (root.val > R)
-			return trimBST(root.left, L, R);
-
-		root.left = trimBST(root.left, L, R);
-		root.right = trimBST(root.right, L, R);
-
-		return root;
-	}
-
-	public TreeNode trimBSTNonRecusrsive(TreeNode root, int L, int R) {
-		if (root == null) {
-			return root;
-		}
-		// Find a valid root which is used to return.
-		while (root.val < L || root.val > R) {
-			if (root.val < L) {
-				root = root.right;
-			}
-			if (root.val > R) {
-				root = root.left;
-			}
-		}
-		TreeNode dummy = root;
-		// Remove the invalid nodes from left subtree.
-		while (dummy != null) {
-			while (dummy.left != null && dummy.left.val < L) {
-				dummy.left = dummy.left.right;
-				// If the left child is smaller than L, then we just keep the
-				// right subtree of it.
-			}
-			dummy = dummy.left;
-		}
-		dummy = root;
-		// Remove the invalid nodes from right subtree
-		while (dummy != null) {
-			while (dummy.right != null && dummy.right.val > R) {
-				dummy.right = dummy.right.left;
-				// If the right child is bigger than R, then we just keep the
-				// left subtree of it.
-			}
-			dummy = dummy.right;
-		}
-		return root;
-	}
-
-// Q665 non decreasing (increasing) array
-// Given an array with n integers, your task is to check if it could become non-decreasing by modifying
-// at most 1 element. We define an array is non-decreasing if array[i] <= array[i + 1] holds for every i (1 <= i < n).
-
-// This problem is like a greedy problem. When you find nums[i-1] > nums[i] for some i, you will prefer to change
-// nums[i-1]'s value, since a larger nums[i] will give you more risks that you get inversion errors after position i.
-// But, if you also find nums[i-2] > nums[i], then you have to change nums[i]'s value instead, or else you need to change
-// both of nums[i-2]'s and nums[i-1]'s values.
-
-	public boolean checkPossibility(int[] nums) {
-		int cnt = 0; // the number of changes
-		for (int i = 1; i < nums.length && cnt <= 1; i++) {
-			if (nums[i - 1] > nums[i]) {
-				cnt++;
-				if (i - 2 < 0 || nums[i - 2] <= nums[i])
-					nums[i - 1] = nums[i]; // modify nums[i-1] of a priority
-				else
-					nums[i] = nums[i - 1]; // have to modify nums[i]
-			}
-		}
-		return cnt <= 1;
-	}
-
-	// Q657 judge route circle
-	// Initially, there is a Robot at position (0, 0). Given a sequence of its moves, judge if this robot makes a circle,
-	// which means it moves back to the original place. The move sequence is represented by a string. And each move is
-	// represent by a character. The valid robot moves are R (Right), L (Left), U (Up) and D (down). The output should be
-	// true or false representing whether the robot makes a circle.
-	public boolean judgeCircle(String moves) {
-		int x = 0;
-		int y = 0;
-		for (char ch : moves.toCharArray()) {
-			if (ch == 'U')
-				y++;
-			else if (ch == 'D')
-				y--;
-			else if (ch == 'R')
-				x++;
-			else if (ch == 'L')
-				x--;
-		}
-		return x == 0 && y == 0;
-	}
 
 	// Q653. Two Sum IV - Input is a BST
 	// Given a Binary Search Tree and a target number, return true
@@ -3731,13 +3376,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 	// Q645 Set mismatch
 	// The set S originally contains numbers from 1 to n.
-	// But unfortunately, due to the data error, one of the numbers in the set
-	// got duplicated to another number in the set,
+	// But unfortunately, due to the data error, one of the numbers in the set got duplicated to another number in the set,
 	// which results in repetition of one number and loss of another number.
-	// Given an array nums representing the data status of this set after the
-	// error.
-	// Your task is to firstly find the number occurs twice and then find the
-	// number that is missing.
+	// Given an array nums representing the data status of this set after the error.
+	// Your task is to firstly find the number occurs twice and then find the number that is missing.
 	// Return them in the form of an array.
 	public int[] findErrorNums(int[] nums) {
 		Set<Integer> set = new HashSet<>();
@@ -3940,672 +3582,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return Math.max(c1, max);
 	}
 
-	// Q617 Merge two binary trees
-	// Given two binary trees and imagine that when you put one of them to cover the other,
-	// some nodes of the two trees are overlapped while the others are not.
-	// You need to merge them into a new binary tree. The merge rule is that if two nodes overlap,
-	// then sum node values up as the new value of the merged node.
-	// Otherwise, the NOT null node will be used as the node of new tree.
-	public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
-		if (t1 == null && t2 == null)
-			return null;
-		int val = (t1 == null ? 0 : t1.val) + (t2 == null ? 0 : t2.val);
-		TreeNode newNode = new TreeNode(val);
-		newNode.left = mergeTrees(t1 == null ? null : t1.left, t2 == null ? null : t2.left);
-		newNode.right = mergeTrees(t1 == null ? null : t1.right, t2 == null ? null : t2.right);
-		return newNode;
-	}
 
-	// Iterative Solution of merging 2 binary trees
-	public TreeNode mergeTreesNonRecursive(TreeNode t1, TreeNode t2) {
-		if (t1 == null && t2 == null)
-			return null;
-		if (t1 == null)
-			return t2;
-		if (t2 == null)
-			return t1;
-		Stack<TreeNode> stack1 = new Stack<>();
-		Stack<TreeNode> stack2 = new Stack<>();
-		stack1.push(t1);
-		stack2.push(t2);
-		TreeNode res = t1;
-		while (!stack1.isEmpty()) {
-			TreeNode cur1 = stack1.pop();
-			TreeNode cur2 = stack2.pop();
-			cur1.val += cur2.val;
-			if (cur1.right == null && cur2.right != null) {
-				cur1.right = cur2.right;
-			} else if (cur1.right != null && cur2.right != null) {
-				stack1.push(cur1.right);
-				stack2.push(cur2.right);
-			}
-			if (cur1.left == null && cur2.left != null) {
-				cur1.left = cur2.left;
-			} else if (cur1.left != null && cur2.left != null) {
-				stack1.push(cur1.left);
-				stack2.push(cur2.left);
-			}
-		}
-		return res;
-	}
-
-	// Q606 Construct string from a binary tree
-	// You need to construct a string consists of parenthesis and integers from
-	// a binary tree with the preorder traversing way.
-	// The null node needs to be represented by empty parenthesis pair "()".
-	// And you need to omit all the empty parenthesis pairs that don't affect
-	// the one-to-one mapping relationship
-	// between the string and the original binary tree.
-	// Input: Binary tree: [1,2,3,4]
-	// 1
-	// / \
-	// 2 3
-	// /
-	// 4
-	// Output: "1(2(4))(3)"
-	// Explanation: Originallay it needs to be "1(2(4)())(3()())",
-	// but you need to omit all the unnecessary empty parenthesis pairs.
-	// And it will be "1(2(4))(3)".
-	public String tree2str1(TreeNode t) {
-		if (t == null)
-			return "";
-
-		String result = t.val + "";
-
-		String left = tree2str1(t.left);
-		String right = tree2str1(t.right);
-
-		if (left == "" && right == "")
-			return result;
-		if (left == "")
-			return result + "()" + "(" + right + ")";
-		if (right == "")
-			return result + "(" + left + ")";
-		return result + "(" + left + ")" + "(" + right + ")";
-	}
-
-	// Another way
-	public String tree2str2(TreeNode t) {
-		if (t == null) {
-			return "";
-		}
-		StringBuilder sb = new StringBuilder();
-		preorder(t, sb);
-		return sb.toString();
-	}
-
-	private void preorder(TreeNode root, StringBuilder sb) {
-		if (root == null) {
-			return;
-		}
-		sb.append(root.val);
-		if (root.left != null) {
-			sb.append("(");
-			preorder(root.left, sb);
-			sb.append(")");
-		}
-		if (root.right != null) {
-			if (root.left == null) {
-				sb.append("()");
-			}
-			sb.append("(");
-			preorder(root.right, sb);
-			sb.append(")");
-		}
-	}
-
-	// Q605 Can Place Flowers
-	// Suppose you have a long flowerbed in which some of the plots are planted
-	// and some are not. However,
-	// flowers cannot be planted in adjacent plots - they would compete for
-	// water and both would die.
-	// Given a flowerbed (represented as an array containing 0 and 1, where 0
-	// means empty and 1 means not empty),
-	// and a number n, return if n new flowers can be planted in it without
-	// violating the no-adjacent-flowers rule.
-	public boolean canPlaceFlowers(int[] flowerbed, int n) {
-		int count = 0;
-		for (int i = 0; i < flowerbed.length && count < n; i++) {
-			if (flowerbed[i] == 0) {
-				// get next and prev flower bed slot values. If i lies at the
-				// ends the next and prev are considered as 0.
-				int next = (i == flowerbed.length - 1) ? 0 : flowerbed[i + 1];
-				int prev = (i == 0) ? 0 : flowerbed[i - 1];
-				if (next == 0 && prev == 0) {
-					flowerbed[i] = 1;
-					count++;
-				}
-			}
-		}
-		return count == n;
-	}
-
-	// difficult to thing about this solution but a good solution for the above
-	// question
-	public boolean canPlaceFlowers2(int[] flowerbed, int n) {
-		int count = 1;
-		int result = 0;
-		for (int i = 0; i < flowerbed.length; i++) {
-			if (flowerbed[i] == 0) {
-				count++;
-			} else {
-				result += (count - 1) / 2;
-				count = 0;
-			}
-		}
-		if (count != 0)
-			result += count / 2;
-		return result >= n;
-	}
-
-	// Q500 Keyboard Row
-	// Given a List of words, return the words that can be typed using letters
-	// of alphabet on only one row's of American keyboard
-	public String[] findWords(String[] words) {
-		String[] strs = { "QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM" };
-		Map<Character, Integer> map = new HashMap<>();
-		for (int i = 0; i < strs.length; i++) {
-			for (char c : strs[i].toCharArray()) {
-				map.put(c, i);// put <char, rowIndex> pair into the map
-			}
-		}
-		List<String> res = new LinkedList<>();
-		for (String w : words) {
-			if (w.equals(""))
-				continue;
-			int index = map.get(w.toUpperCase().charAt(0));
-			for (char c : w.toUpperCase().toCharArray()) {
-				if (map.get(c) != index) {
-					index = -1; // don't need a boolean flag.
-					break;
-				}
-			}
-			if (index != -1)
-				res.add(w);// if index != -1, this is a valid string
-		}
-		return res.toArray(new String[0]);
-	}
-
-	// better solution and understandable than the above solution
-	public String[] findWords2(String[] words) {
-		Set<Character> row1 = stringToCharSet("qwertyuiop");
-		Set<Character> row2 = stringToCharSet("asdfghjkl");
-		Set<Character> row3 = stringToCharSet("zxcvbnm");
-
-		List<String> res = new ArrayList();
-		for (String word : words) {
-			if (isValid(row1, word) || isValid(row2, word) || isValid(row3, word)) {
-				res.add(word);
-			}
-		}
-
-		return res.toArray(new String[0]);
-	}
-
-	boolean isValid(Set<Character> row, String word) {
-		for (char c : word.toCharArray()) {
-			if (!row.contains(Character.toLowerCase(c)))
-				return false;
-		}
-		return true;
-	}
-
-	Set<Character> stringToCharSet(String str) {
-		Set<Character> set = new HashSet();
-		for (char c : str.toCharArray()) {
-			set.add(c);
-		}
-		return set;
-	}
-
-	// dint understand properly.. have to check again
-	// Q501 find mode in binary search tree
-	// Given a binary search tree (BST) with duplicates, find all the mode(s)
-	// (the most frequently occurred element) in the given BST.
-	List<Integer> modes = new ArrayList<>();
-	Integer pre = null, maxCount = null;
-	int count1 = 0;
-	Integer mode = null;
-
-	void checkCount() {
-		if (maxCount == null || count1 > maxCount) {
-			maxCount = count1;
-			modes.clear();
-			modes.add(pre);
-		} else if (count1 == maxCount) {
-			modes.add(pre);
-		}
-	}
-
-	void helper(TreeNode root) {
-		if (root == null)
-			return;
-		helper(root.left);
-		if (pre == null) {
-			pre = root.val;
-			count1 = 1;
-		} else {
-			if (pre == root.val) {
-				count1++;
-			} else {
-				checkCount();
-				count1 = 1;
-				pre = root.val;
-			}
-		}
-		helper(root.right);
-	}
-
-	public int[] findMode(TreeNode root) {
-		if (root == null)
-			return new int[0];
-		helper(root);
-		checkCount();
-		int[] ret = new int[modes.size()];
-		for (int i = 0; i < ret.length; i++)
-			ret[i] = modes.get(i);
-		return ret;
-	}
-
-	// Q504 Base 7
-	// Given an integer, return its base 7 string representation.
-	public String convertTo7(int num) {
-		if (num == 0)
-			return "0";
-		StringBuilder sb = new StringBuilder();
-		boolean negative = false;
-		if (num < 0) {
-			negative = true;
-		}
-		while (num != 0) {
-			sb.append(Math.abs(num % 7));
-			num = num / 7;
-		}
-		if (negative) {
-			sb.append("-");
-		}
-		return sb.reverse().toString();
-	}
-
-	// Q506 find relative ranks
-	// Given scores of N athletes, find their relative ranks and the people with the top three highest scores,
-	// who will be awarded medals: "Gold Medal", "Silver Medal" and "Bronze Medal". Basically this question is to
-	// find out the score -> ranking mapping. The easiest way is to sort those scores in nums. But we will lose
-	// their original order. We can create (score , original index) pairs and sort them by score decreasingly.
-	// Then we will have score -> ranking (new index) mapping and we can use original index to create the result.
-	// Time complexity: O(NlgN). Space complexity: O(N). N is the number of scores.
-	public static String[] findRelativeRanks(int[] nums) {
-		Integer[] index = new Integer[nums.length];
-		for (int i = 0; i < nums.length; i++) {
-			index[i] = i;
-		}
-		Arrays.sort(index, (a, b) -> (nums[b] - nums[a]));
-		String[] result = new String[nums.length];
-		for (int i = 0; i < nums.length; i++) {
-			if (i == 0) {
-				result[index[i]] = "Gold Medal";
-			} else if (i == 1) {
-				result[index[i]] = "Silver Medal";
-			} else if (i == 2) {
-				result[index[i]] = "Bronze Medal";
-			} else {
-				result[index[i]] = (i + 1) + "";
-			}
-		}
-		return result;
-	}
-
-	// Another way using hashmap
-	public String[] findRelativeRanks2(int[] nums) {
-		int[] tmp = new int[nums.length];
-		for (int i = 0; i < nums.length; i++) {
-			tmp[i] = nums[i];
-		}
-		Arrays.sort(tmp);
-		Map<Integer, String> rankMap = new HashMap();
-		int len = nums.length;
-		for (int i = len - 1; i >= 0; i--) {
-			if (i == len - 1)
-				rankMap.put(tmp[i], "Gold Medal");
-			else if (i == len - 2)
-				rankMap.put(tmp[i], "Silver Medal");
-			else if (i == len - 3)
-				rankMap.put(tmp[i], "Bronze Medal");
-			else
-				rankMap.put(tmp[i], String.valueOf(len - i));
-		}
-		String[] result = new String[len];
-		for (int i = 0; i < len; i++) {
-			result[i] = rankMap.get(nums[i]);
-		}
-		return result;
-	}
-
-	// Q520 Detect Capital
-	// Given a word, you need to judge whether the usage of capitals in it is right or not.
-	// We define the usage of capitals in a word to be right when one of the following cases holds:
-	// All letters in this word are capitals, like "USA".
-	// All letters in this word are not capitals, like "leetcode".
-	// Only the first letter in this word is capital if it has more than one letter, like "Google".
-	// Otherwise, we define that this word doesn't use capitals in a right way.
-	public boolean detectCapitalUse(String word) {
-		int numUpper = 0;
-		for (int i = 0; i < word.length(); i++)
-			if (Character.isUpperCase(word.charAt(i)))
-				numUpper++;
-		if (numUpper == 1)
-			return Character.isUpperCase(word.charAt(0));
-		return numUpper == 0 || numUpper == word.length();
-	}
-
-	// Q599 Minimum Index Sum of Two Lists
-	// Suppose Andy and Doris want to choose a restaurant for dinner, and they
-	// both have a list of favorite restaurants
-	// represented by strings. You need to help them find out their common
-	// interest with the least list index sum.
-	// If there is a choice tie between answers, output all of them with no
-	// order requirement. You could assume there
-	// always exists an answer.
-	public String[] findRestaurant(String[] list1, String[] list2) {
-		Map<String, Integer> map = new HashMap<>();
-		List<String> res = new LinkedList<>();
-		int minSum = Integer.MAX_VALUE;
-		for (int i = 0; i < list1.length; i++)
-			map.put(list1[i], i);
-		for (int i = 0; i < list2.length; i++) {
-			Integer j = map.get(list2[i]);
-			if (j != null && i + j <= minSum) {
-				if (i + j < minSum) {
-					res.clear();
-					minSum = i + j;
-				}
-				res.add(list2[i]);
-			}
-		}
-		return res.toArray(new
-
-		String[res.size()]);
-	}
-
-	// Q581 Shortest Unsorted Continuous Subarray
-	// Given an integer array, you need to find one continuous subarray that if
-	// you only sort this subarray in ascending order,
-	// then the whole array will be sorted in ascending order, too.
-	// https://www.youtube.com/watch?v=Hg03KTli9co link for better understanding
-	// (ideserve)
-	static void printUnsorted(int arr[], int n) {
-		int s = 0, e = n - 1, i, max, min;
-		// step 1(a) of above algo
-		// move from start index till array[i] > array[i+1]
-		for (s = 0; s < n - 1; s++) {
-			if (arr[s] > arr[s + 1])
-				break;
-		}
-		if (s == n - 1) {
-			System.out.println("The complete array is sorted");
-			return;
-		}
-		// step 1(b) of above algo move from end index till array[j-1] > array[j]
-		for (e = n - 1; e > 0; e--) {
-			if (arr[e] < arr[e - 1])
-				break;
-		}
-		// step 2(a) of above algo find the max and min
-		max = arr[s];
-		min = arr[s];
-		for (i = s + 1; i <= e; i++) {
-			if (arr[i] > max)
-				max = arr[i];
-			if (arr[i] < min)
-				min = arr[i];
-		}
-
-		// step 2(b) of above algo
-		// search the sorted array from 0 to start index at which minimum element will be in sorted array
-		for (i = 0; i < s; i++) {
-			if (arr[i] > min) {
-				s = i;
-				break;
-			}
-		}
-		// step 2(c) of above algo
-		// search the sorted array from end index to end of array to find the
-		// index at which maximum element will be in a sorted array, maxindex
-		for (i = n - 1; i >= e + 1; i--) {
-			if (arr[i] < max) {
-				e = i;
-				break;
-			}
-		}
-		// step 3 of above algo print
-		System.out.println(" The unsorted subarray which" + " makes the given array sorted lies"
-				+ "  between the indices " + s + " and " + e);
-		return;
-	}
-
-	// Q575 distribute candies
-	// Given an integer array with even length, where different numbers in this
-	// array represent different kinds of candies.
-	// Each number means one candy of the corresponding kind.
-	// You need to distribute these candies equally in number to brother and sister.
-	// Return the maximum number of kinds of candies the sister could gain.
-	public int distributeCandies(int[] candies) {
-		int total = candies.length;
-		Set<Integer> kinds = new HashSet<Integer>();
-		for (int i = 0; i < total; i++) {
-			kinds.add(candies[i]);
-		}
-		if (kinds.size() > total / 2) {
-			return total / 2;
-		} else {
-			return kinds.size();
-		}
-	}
-
-	// Q566 Reshape the matrix
-	// In MATLAB, there is a very useful function called 'reshape', which can
-	// reshape a matrix into a new one with
-	// different size but keep its original data.You're given a matrix
-	// represented by a two-dimensional array, and two
-	// positive integers r and c representing the row number and column number
-	// of the wanted reshaped matrix, respectively.
-	// The reshaped matrix need to be filled with all the elements of the
-	// original matrix in the same row-traversing order
-	// as they were. If the 'reshape' operation with given parameters is
-	// possible and legal, output the new reshaped matrix;
-	// Otherwise, output the original matrix.Both are good solutions
-	public int[][] matrixReshape(int[][] nums, int r, int c) {
-		int m = nums.length, n = nums[0].length;
-		if (m * n != r * c)
-			return nums;
-		int[][] result = new int[r][c];
-		int row = 0, col = 0;
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < n; j++) {
-				result[row][col] = nums[i][j];
-				col++;
-				if (col == c) {
-					col = 0;
-					row++;
-				}
-			}
-		}
-		return result;
-	}
-
-	// ALternate solution
-	public int[][] matrixReshape2(int[][] nums, int r, int c) {
-		int row = nums.length;
-		int col = nums[0].length;
-		if (r * c != row * col)
-			return nums;
-
-		int[][] newMatrix = new int[r][c];
-		for (int i = 0; i < r * c; ++i) {
-			newMatrix[i / c][i % c] = nums[i / col][i % col];
-		}
-		return newMatrix;
-	}
-
-	// Q563 binary tree tilt
-	// Given a binary tree, return the tilt of the whole tree.
-	// The tilt of a tree node is defined as the absolute difference between the
-	// sum of all left subtree node values and the sum of all right subtree node
-	// values.
-	// Null node has tilt 0.
-	// The tilt of the whole tree is defined as the sum of all nodes' tilt.
-	int result = 0;
-
-	public int findTilt(TreeNode root) {
-		postOrder(root);
-		return result;
-	}
-
-	private int postOrder(TreeNode root) {
-		if (root == null)
-			return 0;
-		int left = postOrder(root.left);
-		int right = postOrder(root.right);
-		result += Math.abs(left - right);
-		return left + right + root.val;
-	}
-
-	public int findTiltNonRecursive(TreeNode root) {
-		if (root == null) {
-			return 0;
-		}
-		int tilt = 0;
-		Stack<TreeNode> stack = new Stack<>();
-		Map<TreeNode, Integer> map = new HashMap<>();
-		stack.push(root);
-		while (!stack.isEmpty()) {
-			TreeNode node = stack.peek();
-			if ((node.left == null || map.containsKey(node.left))
-					&& (node.right == null || map.containsKey(node.right))) {
-				stack.pop();
-				int left = map.containsKey(node.left) ? map.get(node.left) : 0;
-				int right = map.containsKey(node.right) ? map.get(node.right) : 0;
-				tilt += Math.abs(left - right);
-				map.put(node, left + right + node.val);
-			} else {
-				if (node.left != null && !map.containsKey(node.left)) {
-					stack.push(node.left);
-				}
-
-				if (node.right != null && !map.containsKey(node.right)) {
-					stack.push(node.right);
-				}
-			}
-		}
-		return tilt;
-	}
-
-	// Q561 array partition I .. did not understand.
-	// Given an array of 2n integers, your task is to group these integers into
-	// n pairs of integer, say (a1, b1),
-	// (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1
-	// to n as large as possible.
-	// there are two ways of solving it if the range is given like in this
-	// example( range is n is a positive integer,
-	// which is in the range of [1, 10000].All the integers in the array will be
-	// in the range of [-10000, 10000].)
-	// we use the below method. if range is not given then the below method is
-	// not of much use.
-	// that time we will sort the elements and take the odd elements to make a
-	// pair and even elements to make a pair.
-	// for (int i = 0; i < nums.length; i += 2) {result += nums[i]};}
-	public int arrayPairSum(int[] nums) {
-		int[] exist = new int[20001];
-		for (int i = 0; i < nums.length; i++) {
-			exist[nums[i] + 10000]++;
-		}
-		int sum = 0;
-		boolean odd = true;
-		for (int i = 0; i < exist.length; i++) {
-			while (exist[i] > 0) {
-				if (odd) {
-					sum += i - 10000;
-				}
-				odd = !odd;
-				exist[i]--;
-			}
-		}
-		return sum;
-	}
-
-	// Student attendance Record I
-	// You are given a string representing an attendance record for a student.
-	// The record only contains the following three characters:
-	// 'A' : Absent.
-	// 'L' : Late.
-	// 'P' : Present.
-	// A student could be rewarded if his attendance record doesn't contain more
-	// than one 'A' (absent) or more than two continuous 'L'
-	public boolean checkRecord(String s) {
-		int a = 0, l = 0;
-		char[] s1 = s.toCharArray();
-		for (int i = 0; i < s1.length; i++) {
-			if (s1[i] == 'A')
-				a++;
-			if (s1[i] == 'L')
-				l++;
-			else
-				l = 0;
-			if (a >= 2 || l > 2)
-				return false;
-		}
-		return true;
-	}
-
-    // Q538 Given a Binary Search Tree (BST), convert it to a Greater Tree such
-    // that every key of the original BST
-    // is changed to the original key plus sum of all keys greater than the
-    // original key in BST.
-    // Example:
-    // Input: The root of a Binary Search Tree like this:
-    // 5
-    // / \
-    // 2 13
-    //
-    // Output: The root of a Greater Tree like this:
-    // 18
-    // / \
-    // 20 13
-
-    public TreeNode convertBST(TreeNode root) {
-        convert(root);
-        return root;
-    }
-
-    public void convert(TreeNode cur) {
-        if (cur == null)
-            return;
-        convert(cur.right);
-        cur.val += sum;
-        sum = cur.val;
-        convert(cur.left);
-    }
-
-    // Non recursive approach of the above question
-    public TreeNode convertBSTNonRecursive(TreeNode root) {
-        if (root == null)
-            return null;
-        int sum = 0;
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode cur = root;
-        while (!stack.isEmpty() || cur != null) {
-            while (cur != null) {
-                stack.push(cur);
-                cur = cur.right;
-            }
-            cur = stack.pop();
-            int tmp = cur.val;
-            cur.val += sum;
-            sum += tmp;
-            cur = cur.left;
-        }
-        return root;
-    }
 
 	// Q344 Reverse String #TopInterviewQuestion
 	public static String reverseString(String s) {
@@ -4800,152 +3777,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 
 
-	// Q532 k-diff pairs in an array
-	// Given an array of integers and an integer k, you need to find the number
-	// of unique k-diff pairs in the array.
-	// Here a k-diff pair is defined as an integer pair (i, j), where i and j
-	// are both numbers in the array and their
-	// absolute difference is k.
-	// Input: [3, 1, 4, 1, 5], k = 2
-	// Output: 2
-	public int findPairs(int[] nums, int k) {
-		if (nums.length == 0 || k < 0)
-			return 0;
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-		int count = 0;
-		map.put(nums[0], 1);
-		for (int i = 1; i < nums.length; i++) {
-			if (map.containsKey(nums[i])) {
-				if (k == 0 && map.get(nums[i]) == 1)
-					count++;
-				map.put(nums[i], 2);
-				continue;
-			}
-			if (map.containsKey(nums[i] - k))
-				count++;
-			if (map.containsKey(nums[i] + k))
-				count++;
-			map.put(nums[i], 1);
-		}
-		return count;
-	}
-
-// Q530. Minimum Absolute Difference in BST
-// Given a binary search tree with non-negative values, find the minimum absolute difference between
-// values of any two nodes. first method is to get the inorder traversal and then you can get your solution
-// but the follow up question says what if the tree is not BST
-	int min = Integer.MAX_VALUE;
-	Integer prev = null;
-
-	public int getMinimumDifference(TreeNode root) {
-		if (root == null)
-			return min;
-
-		getMinimumDifference(root.left);
-
-		if (prev != null) {
-			min = Math.min(min, root.val - prev);
-		}
-		prev = root.val;
-
-		getMinimumDifference(root.right);
-
-		return min;
-	}
-
-	// Q521 Longest UnCommon Subsequence I
-	// Given a group of two strings, you need to find the longest uncommon
-	// subsequence of this group of two strings.
-	// The longest uncommon subsequence is defined as the longest subsequence of
-	// one of these strings and this subsequence
-	// should not be any subsequence of the other strings.
-	// A subsequence is a sequence that can be derived from one sequence by
-	// deleting some characters without changing the order of the remaining
-	// elements. Trivially, any string is a subsequence of itself and an empty
-	// string is a subsequence of any string.
-	// The input will be two strings, and the output needs to be the length of
-	// the longest uncommon subsequence. If the longest uncommon subsequence
-	// doesn't exist, return -1.
-	// Example 1: Input: "aba", "cdc" Output: 3
-	// Explanation: The longest uncommon subsequence is "aba" (or "cdc"),
-	// because "aba" is a subsequence of "aba",
-	// but not a subsequence of any other strings in the group of two strings.
-
-	public int findLUSlength(String a, String b) {
-		return a.equals(b) ? -1 : Math.max(a.length(), b.length());
-	}
-
-	// Q507 Perfect Number
-	// We define the Perfect Number is a positive integer that is equal to the
-	// sum of all its positive divisors except itself.
-	// Now, given an integer n, write a function that returns true when it is a
-	// perfect number and false when it is not.
-	// Example: Input: 28 Output: True
-	// Explanation: 28 = 1 + 2 + 4 + 7 + 14
-	public boolean checkPerfectNumber(int num) {
-		if (num == 1)
-			return false;
-		int sum = 1;
-		int sqrtNum = (int) Math.sqrt(num);
-		for (int i = 2; i <= sqrtNum; ++i) {
-			if (num % i == 0) {
-				sum += i + num / i;
-			}
-		}
-		return sum == num;
-	}
-
-	// Q496 Next greater Element I
-	// You are given two arrays (without duplicates) nums1 and nums2 where nums1’s elements are subset of nums2.
-	// Find all the next greater numbers for nums1's elements in the corresponding places of nums2.
-	// The Next Greater Number of a number x in nums1 is the first greater number to its right in nums2.
-	// If it does not exist, output -1 for this number.
-	// Solution: Suppose we have a decreasing sequence followed by a greater number
-	// For example [5, 4, 3, 2, 1, 6] then the greater number 6 is the next
-	// greater element for all previous numbers
-	// in the sequence. We use a stack to keep a decreasing sub-sequence,
-	// whenever we see a number x greater than stack.peek()
-	// we pop all elements less than x and for all the popped ones, their next greater element is x
-	// For example [9, 8, 7, 3, 2, 1, 6]
-	// The stack will first contain [9, 8, 7, 3, 2, 1] and then we see 6 which
-	// is greater than 1 so we pop 1 2 3 whose next greater element should be 6
-	public int[] nextGreaterElement(int[] findNums, int[] nums) {
-		Map<Integer, Integer> map = new HashMap<>(); // map from x to next
-														// greater element of x
-		Stack<Integer> stack1 = new Stack<>();
-		for (int num : nums) {
-			while (!stack1.isEmpty() && stack1.peek() < num)
-				map.put(stack1.pop(), num);
-			stack1.push(num);
-		}
-		for (int i = 0; i < findNums.length; i++)
-			findNums[i] = map.getOrDefault(findNums[i], -1);
-		return findNums;
-	}
-
-	// Q492 construct the rectangle
-	// For a web developer, it is very important to know how to design a web
-	// page's size. So, given a specific rectangular
-	// web page’s area, your job by now is to design a rectangular web page,
-	// whose length L and width W satisfy the following requirements:
-	// 1. The area of the rectangular web page you designed must equal to the
-	// given target area.
-	// 2. The width W should not be larger than the length L, which means L >=
-	// W.
-	// 3. The difference between length L and width W should be as small as
-	// possible.
-
-	/*
-	 * The W is always less than or equal to the square root of area so we start
-	 * searching at sqrt(area) till we find the result
-	 */
-	public int[] constructRectangle(int area) {
-		int w = (int) Math.sqrt(area);
-		while (area % w != 0)
-			w--;
-		return new int[] { area / w, w };
-	}
-
 	// Q476 Number Compliment #GoodQuestion
 	// Given a positive integer, output its complement number. The complement
 	// strategy is to flip the bits of its binary representation.
@@ -4964,39 +3795,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		String s = Integer.toBinaryString(num);
 		int t = (int) (Math.pow(2, s.length()) - 1);
 		return t - num;
-	}
-
-	// Heaters // dint understand the logic
-	// Winter is coming! Your first job during the contest is to design a
-	// standard heater with fixed warm radius to warm all the houses.
-	// Now, you are given positions of houses and heaters on a horizontal line,
-	// find out minimum radius of heaters so that all houses could be covered by
-	// those heaters.
-	// So, your input will be the positions of houses and heaters seperately,
-	// and your expected output will be the minimum radius standard of heaters.
-	// The idea is to leverage decent Arrays.binarySearch() function provided by
-	// Java.
-	// For each house, find its position between those heaters (thus we need the
-	// heaters array to be sorted).
-	// Calculate the distances between this house and left heater and right
-	// heater, get a MIN value of those two values. Corner cases are there is no
-	// left or right heater.
-	// Get MAX value among distances in step 2. It's the answer.
-	// Time complexity: max(O(nlogn), O(mlogn)) - m is the length of houses, n
-	// is the length of heaters.
-	public int findRadius(int[] houses, int[] heaters) {
-		Arrays.sort(heaters);
-		int result = Integer.MIN_VALUE;
-		for (int house : houses) {
-			int index = Arrays.binarySearch(heaters, house);
-			if (index < 0) {
-				index = -(index + 1);
-			}
-			int dist1 = index - 1 >= 0 ? house - heaters[index - 1] : Integer.MAX_VALUE;
-			int dist2 = index < heaters.length ? heaters[index] - house : Integer.MAX_VALUE;
-			result = Math.max(result, Math.min(dist1, dist2));
-		}
-		return result;
 	}
 
 	// Q463 Island Perimeter #GoodQuestion
@@ -5025,82 +3823,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return result;
 	}
 
-	// Q374 guess number higher or lower
-	// We are playing the Guess Game. The game is as follows:
-	// I pick a number from 1 to n. You have to guess which number I picked.
-	// Every time you guess wrong, I'll tell you whether the number is higher or
-	// lower.
-	// You call a pre-defined API guess(int num) which returns 3 possible
-	// results (-1, 1, or 0):
-	// -1 : My number is lower
-	// 1 : My number is higher
-	// 0 : Congrats! You got it!
-
-	private int guess(int num) {
-		// pre-defined api as per the question
-		return 0;
-	}
-
-	public int guessNumber(int n) {
-		int i = 1, j = n;
-		while (i < j) {
-			int mid = i + (j - i) / 2;
-			if (guess(mid) == 0) {
-				return mid;
-			} else if (guess(mid) == 1) {
-				i = mid + 1;
-			} else {
-				j = mid;
-			}
-		}
-		return i;
-	}
-
-	// Q404 sum of left leaves #GoodQuestion #NotAskedinLast1Year
-	// Recursive method. For given node we check whether its left child is a
-	// leaf. If it is the case,
-	// we add its value to answer, otherwise recursively call method on left
-	// child. For right child we
-	// call method only if it has at least one non-null child.
-	public int sumOfLeftLeaves1(TreeNode root) {
-		if (root == null)
-			return 0;
-		int ans = 0;
-		if (root.left != null) {
-			if (root.left.left == null && root.left.right == null)
-				ans += root.left.val;
-			else
-				ans += sumOfLeftLeaves1(root.left);
-		}
-		ans += sumOfLeftLeaves1(root.right);
-		return ans;
-	}
-
-	// Iterative method. Here for each node in the tree we check whether its left child is a leaf.
-	// If it is true, we add its value to answer, otherwise add left child to the stack to process it later.
-	// For right child we add it to stack only if it is not a leaf.
-	public int sumOfLeftLeaves2(TreeNode root) {
-		if (root == null)
-			return 0;
-		int ans = 0;
-		Stack<TreeNode> stack = new Stack<TreeNode>();
-		stack.push(root);
-
-		while (!stack.empty()) {
-			TreeNode node = stack.pop();
-			if (node.left != null) {
-				if (node.left.left == null && node.left.right == null)
-					ans += node.left.val;
-				else
-					stack.push(node.left);
-			}
-			if (node.right != null) {
-				if (node.right.left != null || node.right.right != null)
-					stack.push(node.right);
-			}
-		}
-		return ans;
-	}
 
 	// Q113 PATH SUM II
 	// Given a binary tree and a sum, find all root-to-leaf paths where each
@@ -5201,10 +3923,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return (node.val == sum ? 1 : 0) + pathSumFrom(node.left, sum - node.val)
 				+ pathSumFrom(node.right, sum - node.val);
 	}
-
-	// Q438 find all anagrams in a string
-	// in the top the link is given, it can be done using sliding window
-	// mechanism
 
 	// Assign Cookies
 	// Assume you are an awesome parent and want to give your children some
@@ -5553,8 +4271,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
     }
 
 	// Q41 First Missing Positive #TopInterviewQuestion
-	// Given an unsorted integer array, find the smallest missing positive
-	// integer.
+	// Given an unsorted integer array, find the smallest missing positive integer.
 	// second solution is better
 	public static int firstMissingPositiveAnd0(int A[]) {
 		int n = A.length;
@@ -6027,22 +4744,20 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// Given an array of n positive integers and a positive integer s, find the
 	// minimal length of a contiguous subarray
 	// of which the sum ≥ s. If there isn't one, return 0 instead.
-	// For example, given the array [2,3,1,2,4,3] and s = 7,
-	// the subarray [4,3] has the minimal length under the problem constraint.
-	// this method is better
 
 	// good explanation https://www.youtube.com/watch?v=NKoHjWl2m8Y
 	// keeping two pointers start and end both innitialized at 0 when sum
-	// exceeds the target, increment start
-	// else keep on incrementing the end
+	// exceeds the target, increment start else keep on incrementing the end
 	// Returns length of smallest subarray with sum greater than s.
-	// If there is no subarray with given sum, then returns n+1
+    // If there is no subarray with given sum, then returns n+1
+
+    //second solution is better
 	static int smallestSubWithSum(int nums[], int s) {
 		int start = 0, end = 0, sum = 0, minLen = Integer.MAX_VALUE;
 		while (end < nums.length) {
 			while (end < nums.length && sum < s)
 				sum += nums[end++];
-			if (sum < s)
+			if (sum < s) //for the conditions like [1,1] and s is 3
 				break;
 			while (start < end && sum >= s)
 				sum -= nums[start++];
@@ -6051,6 +4766,25 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 		return minLen == Integer.MAX_VALUE ? 0 : minLen;
 	}
+//or //add all the elements at once and then start from the beginning
+    public int minSubArrayLen(int s, int[] a) {
+        if (a == null || a.length == 0)
+            return 0;
+
+        int i = 0, j = 0, sum = 0, min = Integer.MAX_VALUE;
+
+        while (j < a.length) {
+            sum += a[j++];
+
+            while (sum >= s) {
+                min = Math.min(min, j - i);
+                sum -= a[i++];
+            }
+        }
+
+        return min == Integer.MAX_VALUE ? 0 : min;
+
+    }
 
 	// Q238 Product of Array Except Self #TopInterviewQuestion
 	// Given an array of n integers where n > 1, nums, return an array output
@@ -6060,10 +4794,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// For example, given [1,2,3,4], return [24,12,8,6].
 	// its more of calculating the left and right of the required number
 	// output = [
-	// 24, // left: init=1 nums[i]=1 right: 2 * 3 * 4
-	// 12, // left: 1 nums[i]=2 right: 3 * 4
-	// 8, // left: 1 * 2 nums[i]=3 right: 4
-	// 6, // left: 1 * 2 * 3 nums[i]=4 right: init=1
+	// 24,  left: init=1 nums[i]=1 right: 2 * 3 * 4
+	// 12,  left: 1 nums[i]=2 right: 3 * 4
+	// 8,   left: 1 * 2 nums[i]=3 right: 4
+	// 6,   left: 1 * 2 * 3 nums[i]=4 right: init=1
 	// ]
 
 	// both the below methods are good
@@ -6196,14 +4930,11 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 				stack.offerFirst(i++);
 			} else {
 				int top = stack.pollFirst();
-				// if stack is empty means everything till i has to be
-				// greater or equal to input[top] so get area by
-				// input[top] * i;
+// if stack is empty means everything till i has to be greater or equal to input[top] so get area by  input[top] * i;
 				if (stack.isEmpty()) {
 					area = input[top] * i;
 				}
-				// if stack is not empty then everythin from i-1 to input.peek() + 1
-				// has to be greater or equal to input[top] so area = input[top]*(i - stack.peek() - 1);
+// if stack is not empty then everythin from i-1 to input.peek() + 1 has to be greater or equal to input[top] so area = input[top]*(i - stack.peek() - 1);
 				else {
 					area = input[top] * (i - stack.peekFirst() - 1);
 				}
@@ -6214,12 +4945,12 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 		while (!stack.isEmpty()) {
 			int top = stack.pollFirst();
-			// if stack is empty means everything till i has to be greater or equal to input[top] so get area by input[top] * i;
+// if stack is empty means everything till i has to be greater or equal to input[top] so get area by input[top] * i;
 			if (stack.isEmpty()) {
 				area = input[top] * i;
 			}
-			// if stack is not empty then everything from i-1 to input.peek() + 1 has to be greater or equal to input[top]
-			// so area = input[top]*(i - stack.peek() - 1);
+// if stack is not empty then everything from i-1 to input.peek() + 1 has to be greater or equal to input[top]
+// so area = input[top]*(i - stack.peek() - 1);
 			else {
 				area = input[top] * (i - stack.peekFirst() - 1);
 			}
@@ -6313,8 +5044,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	}
 
 	private void pushAll(TreeNode node) {
-		for (; node != null; stack.push(node), node = node.left)
-			;
+		for (; node != null; stack.push(node), node = node.left);
 	}
 
 	// Q155 Min Stack #TopInterviewQuestion
@@ -6402,8 +5132,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		}
 	}
 
-	// Q149 Max Points on a line ( maximum points on a plane )
-	// #TopInterviewQuestion
+	// Q149 Max Points on a line ( maximum points on a plane ) // #TopInterviewQuestion
 	// Given n points on a 2D plane, find the maximum number of points that lie on the same straight line.
 	public int maxPoints(Point[] points) {
 		if (points.length <= 0)
@@ -6573,7 +5302,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 				queue.poll();
 			}
 
-			queue.offer(intervals[i].end);
+			queue.offer(intervals[i].end); //this is the main point to remember
 		}
 		return count;
 	}
@@ -6675,8 +5404,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 
 	// Q346 Moving Average from the data stream #GoodQuestion
-	// for saying we can say about the below methods which creates a queue of a
-	// defined size
+	// for saying we can say about the below methods which creates a queue of a defined size
 	// Queue<Integer> fifo = new CircularFifoQueue<Integer>(2);
 	// Queue<Integer> fifo = EvictingQueue.create(2);
 	public class MovingAverage {
@@ -6712,8 +5440,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 
 // below is a better method coz in the above method the queue keeps on increasing
 // The idea is to keep the sum so far and update the sum just by replacing the oldest number with the new entry.
-
-
     private int[] window;
 	private int n1, insert;
 	private long sum;
@@ -6735,7 +5461,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return (double) sum / n1;
 	}
 
-	// Q 454 4sumII #TopInterviewQuestion
+	// Q 454 4sumII #TopInterviewQuestion #AmazonAsked
 	// Given four lists A, B, C, D of integer values, compute how many tuples
 	// (i, j, k, l) there are such that A[i] + B[j] + C[k] + D[l] is zero.
 
@@ -6807,9 +5533,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 		return Math.max(left, right);
 	}
 
-	// Q340 Longest substring with at most k distinct characters
-	// #TopInterviewQuestion
+	// Q340 Longest substring with at most k distinct characters // #TopInterviewQuestion
 	// https://www.youtube.com/watch?v=RHFrVNmlyA8&t=6s
+    //below solution is better
 	int lengthOfLongestSubstringKDistinct(String s, int k) {
         Map<Character, Integer> map = new HashMap<>();
         int left = 0;
@@ -6958,9 +5684,9 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	java.util.Random rand = new java.util.Random();
 
 	public void ContructorRandomizedSet() {
-		list = new ArrayList<Integer>();
+		list = new ArrayList<>();
 		// map for storing the number and its index
-		map = new HashMap<Integer, Integer>();
+		map = new HashMap<>();
 	}
 
 	// Inserts a value to the set. Returns true if the set did not already contain the specified element
@@ -6970,6 +5696,7 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			return false;
 		map.put(val, list.size());
 		list.add(val);
+		list.remove( val);
 		return true;
 	}
 
@@ -7058,20 +5785,19 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 	// know the row number and column number of that element(so we can create a tuple class here), replace that root
 	// with the next element from the same column.
 	// explained it very well https://www.youtube.com/watch?v=zIaMTdBQT34&t=309s
-	public int kthSmallest1(int[][] matrix, int k) {
-		int n = matrix.length;
-		PriorityQueue<Tuple> pq = new PriorityQueue<>();
-		for (int j = 0; j <= n - 1; j++)
-			pq.offer(new Tuple(0, j, matrix[0][j]));
-
-		for (int i = 0; i < k - 1; i++) {
-			Tuple t = pq.poll();
-			if (t.x == n - 1)
-				continue;
-			pq.offer(new Tuple(t.x + 1, t.y, matrix[t.x + 1][t.y]));
-		}
-		return pq.poll().val;
-	}
+    public int kthSmallest(int[][] matrix, int k) {
+        int n = matrix.length;
+        PriorityQueue<Tuple> pq = new PriorityQueue<>();
+        for (int j = 0; j <= n - 1; j++)
+            pq.offer(new Tuple(0, j, matrix[0][j]));
+        for (int i = 0; i < k - 1; i++) {
+            Tuple t = pq.poll();
+            if (t.x == n - 1)
+                continue;
+            pq.offer(new Tuple(t.x + 1, t.y, matrix[t.x + 1][t.y]));
+        }
+        return pq.poll().val;
+    }
 
 	// or
 
@@ -7221,55 +5947,6 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			}
 			return false;
 		}
-	}
-
-	// 515 Find Largest Value in Each Tree Row
-	// Just a simple pre-order traverse idea. Use depth to expand result list
-	// size and put the max value in the appropriate position.
-	public List<Integer> largestValues(TreeNode root) {
-		List<Integer> res = new ArrayList<Integer>();
-		helper(root, res, 0);
-		return res;
-	}
-
-	private void helper(TreeNode root, List<Integer> res, int d) {
-		if (root == null) {
-			return;
-		}
-		// expand list size
-		if (d == res.size()) {
-			res.add(root.val);
-		} else {
-			// or set value
-			res.set(d, Math.max(res.get(d), root.val));
-		}
-		helper(root.left, res, d + 1);
-		helper(root.right, res, d + 1);
-	}
-
-	// or Non recursive method .. the below method is a good method
-	public int[] findValueMostElement(TreeNode root) {
-		Queue<TreeNode> queue = new LinkedList<TreeNode>();
-		List<Integer> res = new ArrayList<Integer>();
-		queue.add(root);
-		int queueSize = root == null ? 0 : 1;
-		while (queueSize > 0) {
-			int largestElement = Integer.MIN_VALUE;
-			for (int i = 0; i < queueSize; i++) {
-				TreeNode cur = queue.poll();
-				largestElement = Math.max(cur.val, largestElement);
-				if (cur.left != null)
-					queue.add(cur.left);
-				if (cur.right != null)
-					queue.add(cur.right);
-			}
-			res.add(largestElement);
-			queueSize = queue.size();
-		}
-		int[] resArray = new int[res.size()];
-		for (int i = 0; i < res.size(); i++)
-			resArray[i] = res.get(i);
-		return resArray;
 	}
 
 	// Q94 Binary Tree Inorder Traversal #TopInterviewQuestion
@@ -7553,6 +6230,10 @@ private Queue<Integer> q1 = new LinkedList<Integer>();
 			}
 		}
 	}
+// Q362 Design a hit counter which counts the number of hits received in the past 5 minutes.
+// Each function accepts a timestamp parameter (in seconds granularity) and you may assume that calls are being made
+// to the system in chronological order (ie, the timestamp is monotonically increasing). You may assume that the earliest timestamp starts at 1.
+// It is possible that several hits arrive roughly at the same time.
 
 	public class HItCounter {
 		private int[] times;
@@ -9214,8 +7895,6 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	}
 
 	// Dynamic Programming
-
-
 	// Q300 Length of longest increasing subsequence #TopInterviewQuestion
 	// Given an unsorted array of integers, find the length of longest
 	// increasing subsequence.
@@ -9833,8 +8512,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	}
 
 	// Another way of doing the same question
-	PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());// smaller
-																						// half
+	PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());// smaller half
 	PriorityQueue<Integer> minHeap = new PriorityQueue<>();; // higher half
 
 	public void addNum2(int num) {
@@ -10536,7 +9214,1300 @@ public boolean canPartition(int[] nums) {
 		// System.out.println(findRelativeRanks(nums));
 	}
 
-	// h index
+    // 515 Find Largest Value in Each Tree Row
+    // Just a simple pre-order traverse idea. Use depth to expand result list
+    // size and put the max value in the appropriate position.
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        helper(root, res, 0);
+        return res;
+    }
+
+    private void helper(TreeNode root, List<Integer> res, int d) {
+        if (root == null) {
+            return;
+        }
+        // expand list size
+        if (d == res.size()) {
+            res.add(root.val);
+        } else {
+            // or set value
+            res.set(d, Math.max(res.get(d), root.val));
+        }
+        helper(root.left, res, d + 1);
+        helper(root.right, res, d + 1);
+    }
+
+    // or Non recursive method .. the below method is a good method
+    public int[] findValueMostElement(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        List<Integer> res = new ArrayList<Integer>();
+        queue.add(root);
+        int queueSize = root == null ? 0 : 1;
+        while (queueSize > 0) {
+            int largestElement = Integer.MIN_VALUE;
+            for (int i = 0; i < queueSize; i++) {
+                TreeNode cur = queue.poll();
+                largestElement = Math.max(cur.val, largestElement);
+                if (cur.left != null)
+                    queue.add(cur.left);
+                if (cur.right != null)
+                    queue.add(cur.right);
+            }
+            res.add(largestElement);
+            queueSize = queue.size();
+        }
+        int[] resArray = new int[res.size()];
+        for (int i = 0; i < res.size(); i++)
+            resArray[i] = res.get(i);
+        return resArray;
+    }
+
+    // Q374 guess number higher or lower
+    // We are playing the Guess Game. The game is as follows:
+    // I pick a number from 1 to n. You have to guess which number I picked.
+    // Every time you guess wrong, I'll tell you whether the number is higher or
+    // lower.
+    // You call a pre-defined API guess(int num) which returns 3 possible
+    // results (-1, 1, or 0):
+    // -1 : My number is lower
+    // 1 : My number is higher
+    // 0 : Congrats! You got it!
+
+    private int guess(int num) {
+        // pre-defined api as per the question
+        return 0;
+    }
+
+    public int guessNumber(int n) {
+        int i = 1, j = n;
+        while (i < j) {
+            int mid = i + (j - i) / 2;
+            if (guess(mid) == 0) {
+                return mid;
+            } else if (guess(mid) == 1) {
+                i = mid + 1;
+            } else {
+                j = mid;
+            }
+        }
+        return i;
+    }
+
+    // Q404 sum of left leaves #GoodQuestion #NotAskedinLast1Year
+    // Recursive method. For given node we check whether its left child is a
+    // leaf. If it is the case,
+    // we add its value to answer, otherwise recursively call method on left
+    // child. For right child we
+    // call method only if it has at least one non-null child.
+    public int sumOfLeftLeaves1(TreeNode root) {
+        if (root == null)
+            return 0;
+        int ans = 0;
+        if (root.left != null) {
+            if (root.left.left == null && root.left.right == null)
+                ans += root.left.val;
+            else
+                ans += sumOfLeftLeaves1(root.left);
+        }
+        ans += sumOfLeftLeaves1(root.right);
+        return ans;
+    }
+
+    // Iterative method. Here for each node in the tree we check whether its left child is a leaf.
+    // If it is true, we add its value to answer, otherwise add left child to the stack to process it later.
+    // For right child we add it to stack only if it is not a leaf.
+    public int sumOfLeftLeaves2(TreeNode root) {
+        if (root == null)
+            return 0;
+        int ans = 0;
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.push(root);
+
+        while (!stack.empty()) {
+            TreeNode node = stack.pop();
+            if (node.left != null) {
+                if (node.left.left == null && node.left.right == null)
+                    ans += node.left.val;
+                else
+                    stack.push(node.left);
+            }
+            if (node.right != null) {
+                if (node.right.left != null || node.right.right != null)
+                    stack.push(node.right);
+            }
+        }
+        return ans;
+    }
+    // Heaters // dint understand the logic
+    // Winter is coming! Your first job during the contest is to design a
+    // standard heater with fixed warm radius to warm all the houses.
+    // Now, you are given positions of houses and heaters on a horizontal line,
+    // find out minimum radius of heaters so that all houses could be covered by
+    // those heaters.
+    // So, your input will be the positions of houses and heaters seperately,
+    // and your expected output will be the minimum radius standard of heaters.
+    // The idea is to leverage decent Arrays.binarySearch() function provided by
+    // Java.
+    // For each house, find its position between those heaters (thus we need the
+    // heaters array to be sorted).
+    // Calculate the distances between this house and left heater and right
+    // heater, get a MIN value of those two values. Corner cases are there is no
+    // left or right heater.
+    // Get MAX value among distances in step 2. It's the answer.
+    // Time complexity: max(O(nlogn), O(mlogn)) - m is the length of houses, n
+    // is the length of heaters.
+    public int findRadius(int[] houses, int[] heaters) {
+        Arrays.sort(heaters);
+        int result = Integer.MIN_VALUE;
+        for (int house : houses) {
+            int index = Arrays.binarySearch(heaters, house);
+            if (index < 0) {
+                index = -(index + 1);
+            }
+            int dist1 = index - 1 >= 0 ? house - heaters[index - 1] : Integer.MAX_VALUE;
+            int dist2 = index < heaters.length ? heaters[index] - house : Integer.MAX_VALUE;
+            result = Math.max(result, Math.min(dist1, dist2));
+        }
+        return result;
+    }
+
+    // Q532 k-diff pairs in an array
+    // Given an array of integers and an integer k, you need to find the number of unique k-diff pairs in the array.
+    // Here a k-diff pair is defined as an integer pair (i, j), where i and j are both numbers in the array and their
+    // absolute difference is k. Input: [3, 1, 4, 1, 5], k = 2. Output: 2
+    public int findPairs(int[] nums, int k) {
+        if (nums.length == 0 || k < 0)
+            return 0;
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        int count = 0;
+        map.put(nums[0], 1);
+        for (int i = 1; i < nums.length; i++) {
+            if (map.containsKey(nums[i])) {
+                if (k == 0 && map.get(nums[i]) == 1)
+                    count++;
+                map.put(nums[i], 2);
+                continue;
+            }
+            if (map.containsKey(nums[i] - k))
+                count++;
+            if (map.containsKey(nums[i] + k))
+                count++;
+            map.put(nums[i], 1);
+        }
+        return count;
+    }
+
+    // Q530. Minimum Absolute Difference in BST
+// Given a binary search tree with non-negative values, find the minimum absolute difference between
+// values of any two nodes. first method is to get the inorder traversal and then you can get your solution
+// but the follow up question says what if the tree is not BST
+    int min = Integer.MAX_VALUE;
+    Integer prev = null;
+
+    public int getMinimumDifference(TreeNode root) {
+        if (root == null)
+            return min;
+
+        getMinimumDifference(root.left);
+
+        if (prev != null) {
+            min = Math.min(min, root.val - prev);
+        }
+        prev = root.val;
+
+        getMinimumDifference(root.right);
+
+        return min;
+    }
+
+    // Q521 Longest UnCommon Subsequence I
+    // Given a group of two strings, you need to find the longest uncommon
+    // subsequence of this group of two strings.
+    // The longest uncommon subsequence is defined as the longest subsequence of
+    // one of these strings and this subsequence
+    // should not be any subsequence of the other strings.
+    // A subsequence is a sequence that can be derived from one sequence by
+    // deleting some characters without changing the order of the remaining
+    // elements. Trivially, any string is a subsequence of itself and an empty
+    // string is a subsequence of any string.
+    // The input will be two strings, and the output needs to be the length of
+    // the longest uncommon subsequence. If the longest uncommon subsequence
+    // doesn't exist, return -1.
+    // Example 1: Input: "aba", "cdc" Output: 3
+    // Explanation: The longest uncommon subsequence is "aba" (or "cdc"),
+    // because "aba" is a subsequence of "aba",
+    // but not a subsequence of any other strings in the group of two strings.
+
+    public int findLUSlength(String a, String b) {
+        return a.equals(b) ? -1 : Math.max(a.length(), b.length());
+    }
+
+    // Q507 Perfect Number
+    // We define the Perfect Number is a positive integer that is equal to the
+    // sum of all its positive divisors except itself.
+    // Now, given an integer n, write a function that returns true when it is a
+    // perfect number and false when it is not.
+    // Example: Input: 28 Output: True
+    // Explanation: 28 = 1 + 2 + 4 + 7 + 14
+    public boolean checkPerfectNumber(int num) {
+        if (num == 1)
+            return false;
+        int sum = 1;
+        int sqrtNum = (int) Math.sqrt(num);
+        for (int i = 2; i <= sqrtNum; ++i) {
+            if (num % i == 0) {
+                sum += i + num / i;
+            }
+        }
+        return sum == num;
+    }
+
+    // Q496 Next greater Element I
+    // You are given two arrays (without duplicates) nums1 and nums2 where nums1’s elements are subset of nums2.
+    // Find all the next greater numbers for nums1's elements in the corresponding places of nums2.
+    // The Next Greater Number of a number x in nums1 is the first greater number to its right in nums2.
+    // If it does not exist, output -1 for this number.
+    // Solution: Suppose we have a decreasing sequence followed by a greater number
+    // For example [5, 4, 3, 2, 1, 6] then the greater number 6 is the next
+    // greater element for all previous numbers
+    // in the sequence. We use a stack to keep a decreasing sub-sequence,
+    // whenever we see a number x greater than stack.peek()
+    // we pop all elements less than x and for all the popped ones, their next greater element is x
+    // For example [9, 8, 7, 3, 2, 1, 6]
+    // The stack will first contain [9, 8, 7, 3, 2, 1] and then we see 6 which
+    // is greater than 1 so we pop 1 2 3 whose next greater element should be 6
+    public int[] nextGreaterElement(int[] findNums, int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>(); // map from x to next
+        // greater element of x
+        Stack<Integer> stack1 = new Stack<>();
+        for (int num : nums) {
+            while (!stack1.isEmpty() && stack1.peek() < num)
+                map.put(stack1.pop(), num);
+            stack1.push(num);
+        }
+        for (int i = 0; i < findNums.length; i++)
+            findNums[i] = map.getOrDefault(findNums[i], -1);
+        return findNums;
+    }
+
+    // Q492 construct the rectangle
+    // For a web developer, it is very important to know how to design a web
+    // page's size. So, given a specific rectangular
+    // web page’s area, your job by now is to design a rectangular web page,
+    // whose length L and width W satisfy the following requirements:
+    // 1. The area of the rectangular web page you designed must equal to the
+    // given target area.
+    // 2. The width W should not be larger than the length L, which means L >=
+    // W.
+    // 3. The difference between length L and width W should be as small as
+    // possible.
+
+    /*
+     * The W is always less than or equal to the square root of area so we start
+     * searching at sqrt(area) till we find the result
+     */
+    public int[] constructRectangle(int area) {
+        int w = (int) Math.sqrt(area);
+        while (area % w != 0)
+            w--;
+        return new int[] { area / w, w };
+    }
+
+
+    // Q617 Merge two binary trees
+    // Given two binary trees and imagine that when you put one of them to cover the other,
+    // some nodes of the two trees are overlapped while the others are not.
+    // You need to merge them into a new binary tree. The merge rule is that if two nodes overlap,
+    // then sum node values up as the new value of the merged node.
+    // Otherwise, the NOT null node will be used as the node of new tree.
+    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null)
+            return null;
+        int val = (t1 == null ? 0 : t1.val) + (t2 == null ? 0 : t2.val);
+        TreeNode newNode = new TreeNode(val);
+        newNode.left = mergeTrees(t1 == null ? null : t1.left, t2 == null ? null : t2.left);
+        newNode.right = mergeTrees(t1 == null ? null : t1.right, t2 == null ? null : t2.right);
+        return newNode;
+    }
+
+    // Iterative Solution of merging 2 binary trees
+    public TreeNode mergeTreesNonRecursive(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null)
+            return null;
+        if (t1 == null)
+            return t2;
+        if (t2 == null)
+            return t1;
+        Stack<TreeNode> stack1 = new Stack<>();
+        Stack<TreeNode> stack2 = new Stack<>();
+        stack1.push(t1);
+        stack2.push(t2);
+        TreeNode res = t1;
+        while (!stack1.isEmpty()) {
+            TreeNode cur1 = stack1.pop();
+            TreeNode cur2 = stack2.pop();
+            cur1.val += cur2.val;
+            if (cur1.right == null && cur2.right != null) {
+                cur1.right = cur2.right;
+            } else if (cur1.right != null && cur2.right != null) {
+                stack1.push(cur1.right);
+                stack2.push(cur2.right);
+            }
+            if (cur1.left == null && cur2.left != null) {
+                cur1.left = cur2.left;
+            } else if (cur1.left != null && cur2.left != null) {
+                stack1.push(cur1.left);
+                stack2.push(cur2.left);
+            }
+        }
+        return res;
+    }
+
+    // Q606 Construct string from a binary tree
+    // You need to construct a string consists of parenthesis and integers from
+    // a binary tree with the preorder traversing way.
+    // The null node needs to be represented by empty parenthesis pair "()".
+    // And you need to omit all the empty parenthesis pairs that don't affect
+    // the one-to-one mapping relationship
+    // between the string and the original binary tree.
+    // Input: Binary tree: [1,2,3,4]
+    // 1
+    // / \
+    // 2 3
+    // /
+    // 4
+    // Output: "1(2(4))(3)"
+    // Explanation: Originallay it needs to be "1(2(4)())(3()())",
+    // but you need to omit all the unnecessary empty parenthesis pairs.
+    // And it will be "1(2(4))(3)".
+    public String tree2str1(TreeNode t) {
+        if (t == null)
+            return "";
+
+        String result = t.val + "";
+
+        String left = tree2str1(t.left);
+        String right = tree2str1(t.right);
+
+        if (left == "" && right == "")
+            return result;
+        if (left == "")
+            return result + "()" + "(" + right + ")";
+        if (right == "")
+            return result + "(" + left + ")";
+        return result + "(" + left + ")" + "(" + right + ")";
+    }
+
+    // Another way
+    public String tree2str2(TreeNode t) {
+        if (t == null) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        preorder(t, sb);
+        return sb.toString();
+    }
+
+    private void preorder(TreeNode root, StringBuilder sb) {
+        if (root == null) {
+            return;
+        }
+        sb.append(root.val);
+        if (root.left != null) {
+            sb.append("(");
+            preorder(root.left, sb);
+            sb.append(")");
+        }
+        if (root.right != null) {
+            if (root.left == null) {
+                sb.append("()");
+            }
+            sb.append("(");
+            preorder(root.right, sb);
+            sb.append(")");
+        }
+    }
+
+    // Q605 Can Place Flowers
+    // Suppose you have a long flowerbed in which some of the plots are planted
+    // and some are not. However,
+    // flowers cannot be planted in adjacent plots - they would compete for
+    // water and both would die.
+    // Given a flowerbed (represented as an array containing 0 and 1, where 0
+    // means empty and 1 means not empty),
+    // and a number n, return if n new flowers can be planted in it without
+    // violating the no-adjacent-flowers rule.
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+        int count = 0;
+        for (int i = 0; i < flowerbed.length && count < n; i++) {
+            if (flowerbed[i] == 0) {
+                // get next and prev flower bed slot values. If i lies at the
+                // ends the next and prev are considered as 0.
+                int next = (i == flowerbed.length - 1) ? 0 : flowerbed[i + 1];
+                int prev = (i == 0) ? 0 : flowerbed[i - 1];
+                if (next == 0 && prev == 0) {
+                    flowerbed[i] = 1;
+                    count++;
+                }
+            }
+        }
+        return count == n;
+    }
+
+    // difficult to thing about this solution but a good solution for the above
+    // question
+    public boolean canPlaceFlowers2(int[] flowerbed, int n) {
+        int count = 1;
+        int result = 0;
+        for (int i = 0; i < flowerbed.length; i++) {
+            if (flowerbed[i] == 0) {
+                count++;
+            } else {
+                result += (count - 1) / 2;
+                count = 0;
+            }
+        }
+        if (count != 0)
+            result += count / 2;
+        return result >= n;
+    }
+
+    // Q500 Keyboard Row
+    // Given a List of words, return the words that can be typed using letters
+    // of alphabet on only one row's of American keyboard
+    public String[] findWords(String[] words) {
+        String[] strs = { "QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM" };
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < strs.length; i++) {
+            for (char c : strs[i].toCharArray()) {
+                map.put(c, i);// put <char, rowIndex> pair into the map
+            }
+        }
+        List<String> res = new LinkedList<>();
+        for (String w : words) {
+            if (w.equals(""))
+                continue;
+            int index = map.get(w.toUpperCase().charAt(0));
+            for (char c : w.toUpperCase().toCharArray()) {
+                if (map.get(c) != index) {
+                    index = -1; // don't need a boolean flag.
+                    break;
+                }
+            }
+            if (index != -1)
+                res.add(w);// if index != -1, this is a valid string
+        }
+        return res.toArray(new String[0]);
+    }
+
+    // better solution and understandable than the above solution
+    public String[] findWords2(String[] words) {
+        Set<Character> row1 = stringToCharSet("qwertyuiop");
+        Set<Character> row2 = stringToCharSet("asdfghjkl");
+        Set<Character> row3 = stringToCharSet("zxcvbnm");
+
+        List<String> res = new ArrayList();
+        for (String word : words) {
+            if (isValid(row1, word) || isValid(row2, word) || isValid(row3, word)) {
+                res.add(word);
+            }
+        }
+
+        return res.toArray(new String[0]);
+    }
+
+    boolean isValid(Set<Character> row, String word) {
+        for (char c : word.toCharArray()) {
+            if (!row.contains(Character.toLowerCase(c)))
+                return false;
+        }
+        return true;
+    }
+
+    Set<Character> stringToCharSet(String str) {
+        Set<Character> set = new HashSet();
+        for (char c : str.toCharArray()) {
+            set.add(c);
+        }
+        return set;
+    }
+
+    // dint understand properly.. have to check again
+    // Q501 find mode in binary search tree
+    // Given a binary search tree (BST) with duplicates, find all the mode(s)
+    // (the most frequently occurred element) in the given BST.
+    List<Integer> modes = new ArrayList<>();
+    Integer pre = null, maxCount = null;
+    int count1 = 0;
+    Integer mode = null;
+
+    void checkCount() {
+        if (maxCount == null || count1 > maxCount) {
+            maxCount = count1;
+            modes.clear();
+            modes.add(pre);
+        } else if (count1 == maxCount) {
+            modes.add(pre);
+        }
+    }
+
+    void helper(TreeNode root) {
+        if (root == null)
+            return;
+        helper(root.left);
+        if (pre == null) {
+            pre = root.val;
+            count1 = 1;
+        } else {
+            if (pre == root.val) {
+                count1++;
+            } else {
+                checkCount();
+                count1 = 1;
+                pre = root.val;
+            }
+        }
+        helper(root.right);
+    }
+
+    public int[] findMode(TreeNode root) {
+        if (root == null)
+            return new int[0];
+        helper(root);
+        checkCount();
+        int[] ret = new int[modes.size()];
+        for (int i = 0; i < ret.length; i++)
+            ret[i] = modes.get(i);
+        return ret;
+    }
+
+    // Q504 Base 7
+    // Given an integer, return its base 7 string representation.
+    public String convertTo7(int num) {
+        if (num == 0)
+            return "0";
+        StringBuilder sb = new StringBuilder();
+        boolean negative = false;
+        if (num < 0) {
+            negative = true;
+        }
+        while (num != 0) {
+            sb.append(Math.abs(num % 7));
+            num = num / 7;
+        }
+        if (negative) {
+            sb.append("-");
+        }
+        return sb.reverse().toString();
+    }
+
+    // Q506 find relative ranks
+    // Given scores of N athletes, find their relative ranks and the people with the top three highest scores,
+    // who will be awarded medals: "Gold Medal", "Silver Medal" and "Bronze Medal". Basically this question is to
+    // find out the score -> ranking mapping. The easiest way is to sort those scores in nums. But we will lose
+    // their original order. We can create (score , original index) pairs and sort them by score decreasingly.
+    // Then we will have score -> ranking (new index) mapping and we can use original index to create the result.
+    // Time complexity: O(NlgN). Space complexity: O(N). N is the number of scores.
+    public static String[] findRelativeRanks(int[] nums) {
+        Integer[] index = new Integer[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            index[i] = i;
+        }
+        Arrays.sort(index, (a, b) -> (nums[b] - nums[a]));
+        String[] result = new String[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            if (i == 0) {
+                result[index[i]] = "Gold Medal";
+            } else if (i == 1) {
+                result[index[i]] = "Silver Medal";
+            } else if (i == 2) {
+                result[index[i]] = "Bronze Medal";
+            } else {
+                result[index[i]] = (i + 1) + "";
+            }
+        }
+        return result;
+    }
+
+    // Another way using hashmap
+    public String[] findRelativeRanks2(int[] nums) {
+        int[] tmp = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            tmp[i] = nums[i];
+        }
+        Arrays.sort(tmp);
+        Map<Integer, String> rankMap = new HashMap();
+        int len = nums.length;
+        for (int i = len - 1; i >= 0; i--) {
+            if (i == len - 1)
+                rankMap.put(tmp[i], "Gold Medal");
+            else if (i == len - 2)
+                rankMap.put(tmp[i], "Silver Medal");
+            else if (i == len - 3)
+                rankMap.put(tmp[i], "Bronze Medal");
+            else
+                rankMap.put(tmp[i], String.valueOf(len - i));
+        }
+        String[] result = new String[len];
+        for (int i = 0; i < len; i++) {
+            result[i] = rankMap.get(nums[i]);
+        }
+        return result;
+    }
+
+    // Q520 Detect Capital
+    // Given a word, you need to judge whether the usage of capitals in it is right or not.
+    // We define the usage of capitals in a word to be right when one of the following cases holds:
+    // All letters in this word are capitals, like "USA".
+    // All letters in this word are not capitals, like "leetcode".
+    // Only the first letter in this word is capital if it has more than one letter, like "Google".
+    // Otherwise, we define that this word doesn't use capitals in a right way.
+    public boolean detectCapitalUse(String word) {
+        int numUpper = 0;
+        for (int i = 0; i < word.length(); i++)
+            if (Character.isUpperCase(word.charAt(i)))
+                numUpper++;
+        if (numUpper == 1)
+            return Character.isUpperCase(word.charAt(0));
+        return numUpper == 0 || numUpper == word.length();
+    }
+
+    // Q599 Minimum Index Sum of Two Lists
+    // Suppose Andy and Doris want to choose a restaurant for dinner, and they
+    // both have a list of favorite restaurants
+    // represented by strings. You need to help them find out their common
+    // interest with the least list index sum.
+    // If there is a choice tie between answers, output all of them with no
+    // order requirement. You could assume there
+    // always exists an answer.
+    public String[] findRestaurant(String[] list1, String[] list2) {
+        Map<String, Integer> map = new HashMap<>();
+        List<String> res = new LinkedList<>();
+        int minSum = Integer.MAX_VALUE;
+        for (int i = 0; i < list1.length; i++)
+            map.put(list1[i], i);
+        for (int i = 0; i < list2.length; i++) {
+            Integer j = map.get(list2[i]);
+            if (j != null && i + j <= minSum) {
+                if (i + j < minSum) {
+                    res.clear();
+                    minSum = i + j;
+                }
+                res.add(list2[i]);
+            }
+        }
+        return res.toArray(new
+
+                String[res.size()]);
+    }
+
+    // Q581 Shortest Unsorted Continuous Subarray
+    // Given an integer array, you need to find one continuous subarray that if
+    // you only sort this subarray in ascending order,
+    // then the whole array will be sorted in ascending order, too.
+    // https://www.youtube.com/watch?v=Hg03KTli9co link for better understanding
+    // (ideserve)
+    static void printUnsorted(int arr[], int n) {
+        int s = 0, e = n - 1, i, max, min;
+        // step 1(a) of above algo
+        // move from start index till array[i] > array[i+1]
+        for (s = 0; s < n - 1; s++) {
+            if (arr[s] > arr[s + 1])
+                break;
+        }
+        if (s == n - 1) {
+            System.out.println("The complete array is sorted");
+            return;
+        }
+        // step 1(b) of above algo move from end index till array[j-1] > array[j]
+        for (e = n - 1; e > 0; e--) {
+            if (arr[e] < arr[e - 1])
+                break;
+        }
+        // step 2(a) of above algo find the max and min
+        max = arr[s];
+        min = arr[s];
+        for (i = s + 1; i <= e; i++) {
+            if (arr[i] > max)
+                max = arr[i];
+            if (arr[i] < min)
+                min = arr[i];
+        }
+
+        // step 2(b) of above algo
+        // search the sorted array from 0 to start index at which minimum element will be in sorted array
+        for (i = 0; i < s; i++) {
+            if (arr[i] > min) {
+                s = i;
+                break;
+            }
+        }
+        // step 2(c) of above algo
+        // search the sorted array from end index to end of array to find the
+        // index at which maximum element will be in a sorted array, maxindex
+        for (i = n - 1; i >= e + 1; i--) {
+            if (arr[i] < max) {
+                e = i;
+                break;
+            }
+        }
+        // step 3 of above algo print
+        System.out.println(" The unsorted subarray which" + " makes the given array sorted lies"
+                + "  between the indices " + s + " and " + e);
+        return;
+    }
+
+    // Q575 distribute candies
+    // Given an integer array with even length, where different numbers in this
+    // array represent different kinds of candies.
+    // Each number means one candy of the corresponding kind.
+    // You need to distribute these candies equally in number to brother and sister.
+    // Return the maximum number of kinds of candies the sister could gain.
+    public int distributeCandies(int[] candies) {
+        int total = candies.length;
+        Set<Integer> kinds = new HashSet<Integer>();
+        for (int i = 0; i < total; i++) {
+            kinds.add(candies[i]);
+        }
+        if (kinds.size() > total / 2) {
+            return total / 2;
+        } else {
+            return kinds.size();
+        }
+    }
+
+    // Q566 Reshape the matrix
+    // In MATLAB, there is a very useful function called 'reshape', which can
+    // reshape a matrix into a new one with
+    // different size but keep its original data.You're given a matrix
+    // represented by a two-dimensional array, and two
+    // positive integers r and c representing the row number and column number
+    // of the wanted reshaped matrix, respectively.
+    // The reshaped matrix need to be filled with all the elements of the
+    // original matrix in the same row-traversing order
+    // as they were. If the 'reshape' operation with given parameters is
+    // possible and legal, output the new reshaped matrix;
+    // Otherwise, output the original matrix.Both are good solutions
+    public int[][] matrixReshape(int[][] nums, int r, int c) {
+        int m = nums.length, n = nums[0].length;
+        if (m * n != r * c)
+            return nums;
+        int[][] result = new int[r][c];
+        int row = 0, col = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                result[row][col] = nums[i][j];
+                col++;
+                if (col == c) {
+                    col = 0;
+                    row++;
+                }
+            }
+        }
+        return result;
+    }
+
+    // ALternate solution
+    public int[][] matrixReshape2(int[][] nums, int r, int c) {
+        int row = nums.length;
+        int col = nums[0].length;
+        if (r * c != row * col)
+            return nums;
+
+        int[][] newMatrix = new int[r][c];
+        for (int i = 0; i < r * c; ++i) {
+            newMatrix[i / c][i % c] = nums[i / col][i % col];
+        }
+        return newMatrix;
+    }
+
+    // Q563 binary tree tilt
+    // Given a binary tree, return the tilt of the whole tree.
+    // The tilt of a tree node is defined as the absolute difference between the
+    // sum of all left subtree node values and the sum of all right subtree node
+    // values.
+    // Null node has tilt 0.
+    // The tilt of the whole tree is defined as the sum of all nodes' tilt.
+    int result = 0;
+
+    public int findTilt(TreeNode root) {
+        postOrder(root);
+        return result;
+    }
+
+    private int postOrder(TreeNode root) {
+        if (root == null)
+            return 0;
+        int left = postOrder(root.left);
+        int right = postOrder(root.right);
+        result += Math.abs(left - right);
+        return left + right + root.val;
+    }
+
+    public int findTiltNonRecursive(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int tilt = 0;
+        Stack<TreeNode> stack = new Stack<>();
+        Map<TreeNode, Integer> map = new HashMap<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.peek();
+            if ((node.left == null || map.containsKey(node.left))
+                    && (node.right == null || map.containsKey(node.right))) {
+                stack.pop();
+                int left = map.containsKey(node.left) ? map.get(node.left) : 0;
+                int right = map.containsKey(node.right) ? map.get(node.right) : 0;
+                tilt += Math.abs(left - right);
+                map.put(node, left + right + node.val);
+            } else {
+                if (node.left != null && !map.containsKey(node.left)) {
+                    stack.push(node.left);
+                }
+
+                if (node.right != null && !map.containsKey(node.right)) {
+                    stack.push(node.right);
+                }
+            }
+        }
+        return tilt;
+    }
+
+    // Q561 array partition I .. did not understand.
+    // Given an array of 2n integers, your task is to group these integers into
+    // n pairs of integer, say (a1, b1),
+    // (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1
+    // to n as large as possible.
+    // there are two ways of solving it if the range is given like in this
+    // example( range is n is a positive integer,
+    // which is in the range of [1, 10000].All the integers in the array will be
+    // in the range of [-10000, 10000].)
+    // we use the below method. if range is not given then the below method is
+    // not of much use.
+    // that time we will sort the elements and take the odd elements to make a
+    // pair and even elements to make a pair.
+    // for (int i = 0; i < nums.length; i += 2) {result += nums[i]};}
+    public int arrayPairSum(int[] nums) {
+        int[] exist = new int[20001];
+        for (int i = 0; i < nums.length; i++) {
+            exist[nums[i] + 10000]++;
+        }
+        int sum = 0;
+        boolean odd = true;
+        for (int i = 0; i < exist.length; i++) {
+            while (exist[i] > 0) {
+                if (odd) {
+                    sum += i - 10000;
+                }
+                odd = !odd;
+                exist[i]--;
+            }
+        }
+        return sum;
+    }
+
+    // Student attendance Record I
+    // You are given a string representing an attendance record for a student.
+    // The record only contains the following three characters:
+    // 'A' : Absent.
+    // 'L' : Late.
+    // 'P' : Present.
+    // A student could be rewarded if his attendance record doesn't contain more
+    // than one 'A' (absent) or more than two continuous 'L'
+    public boolean checkRecord(String s) {
+        int a = 0, l = 0;
+        char[] s1 = s.toCharArray();
+        for (int i = 0; i < s1.length; i++) {
+            if (s1[i] == 'A')
+                a++;
+            if (s1[i] == 'L')
+                l++;
+            else
+                l = 0;
+            if (a >= 2 || l > 2)
+                return false;
+        }
+        return true;
+    }
+
+    // Q538 Given a Binary Search Tree (BST), convert it to a Greater Tree such
+    // that every key of the original BST
+    // is changed to the original key plus sum of all keys greater than the
+    // original key in BST.
+    // Example:
+    // Input: The root of a Binary Search Tree like this:
+    // 5
+    // / \
+    // 2 13
+    //
+    // Output: The root of a Greater Tree like this:
+    // 18
+    // / \
+    // 20 13
+
+    public TreeNode convertBST(TreeNode root) {
+        convert(root);
+        return root;
+    }
+
+    public void convert(TreeNode cur) {
+        if (cur == null)
+            return;
+        convert(cur.right);
+        cur.val += sum;
+        sum = cur.val;
+        convert(cur.left);
+    }
+
+    // Non recursive approach of the above question
+    public TreeNode convertBSTNonRecursive(TreeNode root) {
+        if (root == null)
+            return null;
+        int sum = 0;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        while (!stack.isEmpty() || cur != null) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.right;
+            }
+            cur = stack.pop();
+            int tmp = cur.val;
+            cur.val += sum;
+            sum += tmp;
+            cur = cur.left;
+        }
+        return root;
+    }
+    // Q365 Water & Jug Problem   #NOT ASKED
+    // This is a pure Math problem. We need the knowledge of number theory to cover the proof and solution.
+    // The basic idea is to use the property of Bézout's identity and check if z is a multiple of GCD(x, y)
+    // let a and b be nonzero integers and let d be their greatest common
+    // divisor. Then there exist integers x and y such that ax+by=d
+    // In addition, the greatest common divisor d is the smallest positive integer that can be written as ax + by
+    // every integer of the form ax + by is a multiple of the greatest common
+    // divisor d.If a or b is negative this means we are emptying a jug of x or y gallons
+    // respectively.Similarly if a or b is positive this means we are filling a
+    // jug of x or y gallons respectively.
+    // x = 4, y = 6, z = 8. GCD(4, 6) = 2. 8 is multiple of 2
+    // so this input is valid and we have: -1 * 4 + 6 * 2 = 8
+    // In this case, there is a solution obtained by filling the 6 gallon jug
+    // twice and emptying the 4 gallon jug once. (Solution. Fill the 6 gallon
+    // jug and empty 4 gallons to the 4 gallon jug. Empty the 4 gallon jug. Now
+    // empty the remaining two gallons from the 6 gallon jug to the 4 gallon
+    // jug. Next refill the 6 gallon jug. This gives 8 gallons in the end)
+    public boolean canMeasureWater(int x, int y, int z) {
+        // limit brought by the statement that water is finallly in one or both
+        // buckets
+        if (x + y < z)
+            return false;
+        // case x or y is zero
+        if (x == z || y == z || x + y == z)
+            return true;
+        // get GCD, then we can use the property of Bézout's identity
+        return z % GCD(x, y) == 0;
+    }
+
+    public int GCD(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+
+
+    // Q696 count binary substring #UselessQuestion
+	/*
+	 * Give a string s, count the number of non-empty (contiguous) substrings
+	 * that have the same number of 0's and 1's, and all the 0's and all the 1's
+	 * in these substrings are grouped consecutively. Substrings that occur
+	 * multiple times are counted the number of times they occur.
+	 */
+    public int countBinarySubstrings(String s) {
+        int prevRunLength = 0, curRunLength = 1, res = 0;
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) == s.charAt(i - 1))
+                curRunLength++;
+            else {
+                prevRunLength = curRunLength;
+                curRunLength = 1;
+            }
+            if (prevRunLength >= curRunLength)
+                res++;
+        }
+        return res;
+    }
+
+    // Q693 Binary Number with Alternate Bits #UselessQuestion
+    // Given a positive integer, check whether it has alternating bits: namely,
+    // if two adjacent bits will always have different values.
+    public boolean hasAlternatingBits(int n) {
+        String bits = Integer.toBinaryString(n);
+        for (int i = 0; i < bits.length() - 1; i++) {
+            if (bits.charAt(i) == bits.charAt(i + 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Q690 employee importance (Not asked these days)
+	/*
+	 * You are given a data structure of employee information, which includes
+	 * the employee's unique id, his importance value and his direct
+	 * subordinates' id. For example, employee 1 is the leader of employee 2,
+	 * and employee 2 is the leader of employee 3. They have importance value
+	 * 15, 10 and 5, respectively. Then employee 1 has a data structure like [1,
+	 * 15, [2]], and employee 2 has [2, 10, [3]], and employee 3 has [3, 5, []].
+	 * Note that although employee 3 is also a subordinate of employee 1, the
+	 * relationship is not direct.
+	 */
+
+    public int getImportance1(List<Employee> employees, int id) {
+        int total = 0;
+        Map<Integer, Employee> map = new HashMap<>();
+        for (Employee employee : employees) {
+            map.put(employee.id, employee);
+        }
+        Queue<Employee> queue = new LinkedList<>();
+        queue.offer(map.get(id));
+        while (!queue.isEmpty()) {
+            Employee current = queue.poll();
+            total += current.importance;
+            for (int subordinate : current.subordinates) {
+                queue.offer(map.get(subordinate));
+            }
+        }
+        return total;
+    }
+
+    public int getImportance2(List<Employee> employees, int id) {
+        Map<Integer, Employee> map = new HashMap<>();
+        for (Employee employee : employees) {
+            map.put(employee.id, employee);
+        }
+        return getImportanceHelper(map, id);
+    }
+
+    private int getImportanceHelper(Map<Integer, Employee> map, int rootId) {
+        Employee root = map.get(rootId);
+        int total = root.importance;
+        for (int subordinate : root.subordinates) {
+            total += getImportanceHelper(map, subordinate);
+        }
+        return total;
+    }
+    // Q687 Longest Univalue path
+	/*
+	 * Given a binary tree, find the length of the longest path where each node
+	 * in the path has the same value. This path may or may not pass through the
+	 * root. Note: The length of path between two nodes is represented by the
+	 * number of edges between them.
+	 */
+    int len = 0; // global variable
+
+    public int longestUnivaluePath(TreeNode root) {
+        if (root == null)
+            return 0;
+        len = 0;
+        getLen(root, root.val);
+        return len;
+    }
+
+    private int getLen(TreeNode node, int val) {
+        if (node == null)
+            return 0;
+        int left = getLen(node.left, node.val);
+        int right = getLen(node.right, node.val);
+        len = Math.max(len, left + right);
+        if (val == node.val)
+            return Math.max(left, right) + 1;
+        return 0;
+    }
+
+    // Q686 Repeated String Match
+    // Given two strings A and B, find the minimum number of times A has to be repeated such that B is a
+    // substring of it. If no such solution, return -1.
+    public int repeatedStringMatch(String A, String B) {
+        int count = 0;
+        StringBuilder sb = new StringBuilder();
+        while (sb.length() < B.length()) {
+            sb.append(A);
+            count++;
+        }
+        if (sb.toString().contains(B))
+            return count;
+        if (sb.append(A).toString().contains(B))
+            return ++count;
+        return -1;
+    }
+
+    // Q682 Baseball Game
+    // Given a list of strings, each string can be one of the 4 following types:
+    // Integer (one round's score): Directly represents the number of points you
+    // get in this round.
+    // "+" (one round's score): Represents that the points you get in this round
+    // are the sum of the last two valid round's points.
+    // "D" (one round's score): Represents that the points you get in this round
+    // are the doubled data of the last valid round's points.
+    // "C" (an operation, which isn't a round's score): Represents the last
+    // valid round's points you get were invalid and should be removed.
+    public int calPoints(String[] ops) {
+        int sum = 0;
+        LinkedList<Integer> list = new LinkedList<>();
+        for (String op : ops) {
+            if (op.equals("C")) {
+                sum -= list.removeLast();
+            } else if (op.equals("D")) {
+                list.add(list.peekLast() * 2);
+                sum += list.peekLast();
+            } else if (op.equals("+")) {
+                list.add(list.peekLast() + list.get(list.size() - 2));
+                sum += list.peekLast();
+            } else {
+                list.add(Integer.parseInt(op));
+                sum += list.peekLast();
+            }
+        }
+        return sum;
+    }
+
+    public int calPointsAnotherMethod(String[] ops) {
+        int sum = 0;
+        Stack<Integer> stack = new Stack<Integer>();
+        for (int i = 0; i < ops.length; i++) {
+            if (ops[i].equals("+")) {
+                int temp1 = stack.pop();
+                int temp2 = stack.pop();
+                int temp_sum = temp1 + temp2;
+                sum += temp_sum;
+                stack.push(temp2);
+                stack.push(temp1);
+                stack.push(temp_sum);
+            } else if (ops[i].equals("D")) {
+                int temp = stack.pop();
+                int temp_d = 2 * temp;
+                sum += temp_d;
+                stack.push(temp);
+                stack.push(temp_d);
+            } else if (ops[i].equals("C")) {
+                int cancel = stack.pop();
+                sum -= cancel;
+            } else {
+                int temp = Integer.parseInt(ops[i]);
+                sum += temp;
+                stack.push(temp);
+            }
+        }
+        return sum;
+    }
+    // Q669 Trim BST
+    // Given a binary search tree and the lowest and highest boundaries as L and
+    // R, trim the tree
+    // so that all its elements lies in [L, R] (R >= L). You might need to
+    // change the root of the tree,
+    // so the result should return the new root of the trimmed binary search
+    // tree.
+    public TreeNode trimBST(TreeNode root, int L, int R) {
+        if (root == null)
+            return null;
+
+        if (root.val < L)
+            return trimBST(root.right, L, R);
+        if (root.val > R)
+            return trimBST(root.left, L, R);
+
+        root.left = trimBST(root.left, L, R);
+        root.right = trimBST(root.right, L, R);
+
+        return root;
+    }
+
+    public TreeNode trimBSTNonRecusrsive(TreeNode root, int L, int R) {
+        if (root == null) {
+            return root;
+        }
+        // Find a valid root which is used to return.
+        while (root.val < L || root.val > R) {
+            if (root.val < L) {
+                root = root.right;
+            }
+            if (root.val > R) {
+                root = root.left;
+            }
+        }
+        TreeNode dummy = root;
+        // Remove the invalid nodes from left subtree.
+        while (dummy != null) {
+            while (dummy.left != null && dummy.left.val < L) {
+                dummy.left = dummy.left.right;
+                // If the left child is smaller than L, then we just keep the
+                // right subtree of it.
+            }
+            dummy = dummy.left;
+        }
+        dummy = root;
+        // Remove the invalid nodes from right subtree
+        while (dummy != null) {
+            while (dummy.right != null && dummy.right.val > R) {
+                dummy.right = dummy.right.left;
+                // If the right child is bigger than R, then we just keep the
+                // left subtree of it.
+            }
+            dummy = dummy.right;
+        }
+        return root;
+    }
+
+// Q665 non decreasing (increasing) array
+// Given an array with n integers, your task is to check if it could become non-decreasing by modifying
+// at most 1 element. We define an array is non-decreasing if array[i] <= array[i + 1] holds for every i (1 <= i < n).
+
+// This problem is like a greedy problem. When you find nums[i-1] > nums[i] for some i, you will prefer to change
+// nums[i-1]'s value, since a larger nums[i] will give you more risks that you get inversion errors after position i.
+// But, if you also find nums[i-2] > nums[i], then you have to change nums[i]'s value instead, or else you need to change
+// both of nums[i-2]'s and nums[i-1]'s values.
+
+    public boolean checkPossibility(int[] nums) {
+        int cnt = 0; // the number of changes
+        for (int i = 1; i < nums.length && cnt <= 1; i++) {
+            if (nums[i - 1] > nums[i]) {
+                cnt++;
+                if (i - 2 < 0 || nums[i - 2] <= nums[i])
+                    nums[i - 1] = nums[i]; // modify nums[i-1] of a priority
+                else
+                    nums[i] = nums[i - 1]; // have to modify nums[i]
+            }
+        }
+        return cnt <= 1;
+    }
+
+    // Q657 judge route circle
+    // Initially, there is a Robot at position (0, 0). Given a sequence of its moves, judge if this robot makes a circle,
+    // which means it moves back to the original place. The move sequence is represented by a string. And each move is
+    // represent by a character. The valid robot moves are R (Right), L (Left), U (Up) and D (down). The output should be
+    // true or false representing whether the robot makes a circle.
+    public boolean judgeCircle(String moves) {
+        int x = 0;
+        int y = 0;
+        for (char ch : moves.toCharArray()) {
+            if (ch == 'U')
+                y++;
+            else if (ch == 'D')
+                y--;
+            else if (ch == 'R')
+                x++;
+            else if (ch == 'L')
+                x--;
+        }
+        return x == 0 && y == 0;
+    }
+
+    // h index
 	// Given an array of citations (each citation is a non-negative integer) of
 	// a researcher, write a function
 	// to compute the researcher's h-index. According to the definition of
