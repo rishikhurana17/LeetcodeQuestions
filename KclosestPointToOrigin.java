@@ -13,6 +13,7 @@ public class KclosestPointToOrigin {
     public static Point[] findKClosestPoints(Point[] points, int k, Point target) {
         if (points == null || points.length == 0 || k < 1 || k > points.length)   return points;
         Queue<Point> pq = new PriorityQueue<>(k, new Comparator<Point>(){
+            @Override
             public int compare(Point p1, Point p2) {
                 int d1 = (p1.x - target.x) * (p1.x - target.x) + (p1.y - target.y) * (p1.y - target.y);
                 int d2 = (p2.x - target.x) * (p2.x - target.x) + (p2.y - target.y) * (p2.y - target.y);

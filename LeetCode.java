@@ -5696,7 +5696,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 			return false;
 		map.put(val, list.size());
 		list.add(val);
-		list.remove( val);
 		return true;
 	}
 
@@ -6829,10 +6828,10 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 			k--;
 			if (k == 0)
 				return n.val;
-			TreeNode right = n.right;
-			while (right != null) {
-				st.push(right);
-				right = right.left;
+			TreeNode node = n.right;
+			while (node != null) {
+				st.push(node);
+				node = node.left;
 			}
 		}
 		return -1; // never hit if k is valid
@@ -6872,6 +6871,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
     // The reason for this initialization is to avoid null pointer exception in the first comparison when prevElement
 	// has not been initialized
     TreeNode prevElement = new TreeNode(Integer.MIN_VALUE);
+
     public void recoverTree(TreeNode root) {
 
         // In order traversal to find the two elements
@@ -6882,6 +6882,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
         firstElement.val = secondElement.val;
         secondElement.val = temp;
     }
+
     private void traverse(TreeNode root) {
         if (root == null)
             return;
@@ -8128,6 +8129,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		return temp[coins.length][total];
 	}
 
+	//Subset Sum
 	// go to i - 1 (one step above) and input steps back from the current j value
 	public boolean subsetSum(int input[], int total) {
 		boolean T[][] = new boolean[input.length + 1][total + 1];

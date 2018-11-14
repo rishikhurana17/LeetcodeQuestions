@@ -34,17 +34,14 @@ import java.util.PriorityQueue;
 // explained it very well https://www.youtube.com/watch?v=zIaMTdBQT34&t=309s
     public static int kthSmallest(int[][] matrix, int k) {
         int n = matrix.length;
-        PriorityQueue<Tuple> pq = new PriorityQueue<Tuple>(new Comparator<Tuple>() {
-            @Override
-            public int compare(Tuple a, Tuple b) {
-                return a.val - b.val;
-            }
-        });
+        PriorityQueue<Tuple> pq = new PriorityQueue<>();
+
         for(int j = 0; j <= n-1; j++)
             pq.offer(new Tuple(0, j, matrix[0][j]));
         for(int i = 0; i < k-1; i++) {
             Tuple t = pq.poll();
-            if(t.x == n-1)
+            if(t.x == n-1) // when it reaches to the last row, pq.offer will not be
+                // called as there are no elements in the next row
                continue;
             pq.offer(new Tuple(t.x+1, t.y, matrix[t.x+1][t.y]));
         }
