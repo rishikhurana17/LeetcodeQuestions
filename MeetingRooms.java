@@ -1,7 +1,4 @@
-package leetcode;
-
-import leetcode.*;
-import leetcode.Interval;
+package LeetcodePrograms;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -12,7 +9,7 @@ import java.util.Queue;
  * Created by rkhurana on 10/16/18.
  */
 public class MeetingRooms {
-    public static int minMeetingRooms(leetcode.Interval[] intervals) {
+    public static int minMeetingRooms(LeetcodePrograms.Interval[] intervals) {
         if(intervals==null||intervals.length==0)
             return 0;
         Arrays.sort(intervals, new Comparator<Interval>(){

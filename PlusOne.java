@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 /**
  * Created by rkhurana on 7/25/18.
@@ -19,7 +19,7 @@ public class PlusOne {
     }
 
     public static void main(String [] args){
-        int []num = {9,9};
+        int []num = {8,9};
         System.out.println(plusOne(num));
     }
 }

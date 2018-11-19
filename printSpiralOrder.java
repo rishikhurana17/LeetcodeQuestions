@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 public class printSpiralOrder {
 	private static void spiralOrder(int[][] arr, int row, int column) {

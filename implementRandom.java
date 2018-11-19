@@ -1,4 +1,4 @@
-package leetcode;/*
+package LeetcodePrograms;/*
 LCG implementation for learning purposes based on http://en.wikipedia.org/wiki/Linear_congruential_generator
 Iris Yuan
 3/6/2014

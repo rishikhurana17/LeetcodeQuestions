@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 public class Sudoko {
 	private static void printBoard(Integer[][] board) {

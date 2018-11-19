@@ -1,6 +1,5 @@
-package leetcode;//to avoid duplicates, use Set.
+package LeetcodePrograms;//to avoid duplicates, use Set.
 //if you want to arrange in ascending order, use TreeSet else Hashset is fine too
-import java.util.HashSet;
 import java.util.TreeSet;
 
 public class Permutation {

@@ -1,6 +1,5 @@
-package leetcode;
+package LeetcodePrograms;
 
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class kthlargestElementHeap {

@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 /**
  * Created by rkhurana on 11/12/18.

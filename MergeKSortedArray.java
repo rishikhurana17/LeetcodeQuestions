@@ -1,10 +1,8 @@
-package leetcode;
+package LeetcodePrograms;
 
 /**
  * Created by rkhurana on 6/16/18.
  */
-
-import leetcode.MergedContainer;
 
 import java.util.*;
 

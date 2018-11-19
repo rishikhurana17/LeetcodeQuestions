@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 //get the compliment of a number
 //50 stands for 110010 and complement of that is 001101 which is 13

@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 public class UrlShortener {
 	private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

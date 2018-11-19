@@ -1,4 +1,4 @@
-package leetcode;//panagram means it contains all the letters of the alphabet
+package LeetcodePrograms;//panagram means it contains all the letters of the alphabet
 
 public class panagram {
 

@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 // Q658 K closest points to the given value
 // Given a sorted array, two integers k and x, find the k closest elements to x in the array.

@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 /**
  * Created by rkhurana on 6/21/18.
@@ -29,12 +29,12 @@ public class LargestBSTInBinaryTree {
     // largest BST in a binary tree concept is to use postorder traversal and make sure min of right side > root
     // and max of left side should be < than root to get the bst
 
-        public int largestBST(leetcode.Node root){
+        public int largestBST(LeetcodePrograms.Node root){
             MinMax m = largest(root);
             return m.size;
         }
 
-        private MinMax largest(leetcode.Node root){
+        private MinMax largest(LeetcodePrograms.Node root){
             //if root is null return min as Integer.MAX and max as Integer.MIN
             if(root == null){
                 return new MinMax();

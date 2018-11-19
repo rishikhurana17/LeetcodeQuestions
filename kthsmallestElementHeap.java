@@ -1,7 +1,6 @@
-package leetcode;
+package LeetcodePrograms;
 
 import java.util.PriorityQueue;
-import java.util.Comparator;
 
 public class kthsmallestElementHeap {
 	public static int find(int[] A, int k) {

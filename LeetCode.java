@@ -35,7 +35,7 @@
 // design tic tac toe
 // Remove invalid parenthesis #facebook
 
-package leetcode;
+package LeetcodePrograms;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -72,8 +72,7 @@ public class LeetCode {
 	}
 
 	// Q35 search insert position a very easy question
-	// Given a sorted array and a target value, return the index if the target
-	// is found.
+	// Given a sorted array and a target value, return the index if the target is found.
 	// If not, return the index where it would be if it were inserted in order.
 	public int searchInsert(int[] A, int target) {
 		int low = 0, high = A.length - 1;
@@ -149,9 +148,9 @@ public class LeetCode {
 		return true;
 	}
 
-	// Q1 two sum 2 sum working solution .. accepted in leetcode ..twosum
+	// Q1 two sum 2 sum working solution .. accepted in LeetcodePrograms ..twosum
 	// #TopInterviewQuestion
-	// Q167 two sum II - input array is sorted .. accepted in leetcode
+	// Q167 two sum II - input array is sorted .. accepted in LeetcodePrograms
 	// Given an array of integers, return indices of the two numbers such that
 	// they add up to a specific target.
 	// You may assume that each input would have exactly one solution, and you
@@ -1165,7 +1164,7 @@ public class LeetCode {
 				cnt1++;
 			} else if (num.equals(major2)) {
 				cnt2++;
-			} else if (cnt1 == 0) {
+			} else if (cnt1 == 0) {  //remember this
 				major1 = num;
 				cnt1 = 1;
 			} else if (cnt2 == 0) {
@@ -1267,7 +1266,7 @@ public class LeetCode {
 
 	// Alternate Solution and a very good solution based on Floyds Cycle Detection Algorithm
 	public static boolean isHappy2(int n) {
-		int slow = n, fast = n; //remember it goes from the back
+		int slow = n, fast = n;
 		do {
 			slow = next(slow);
 			fast = next(next(fast));
@@ -1745,7 +1744,7 @@ public int findDuplicate4(int[] nums) {
 		return root;
 	}
 
-	// one more method is given on leetcode to do the same no need to do the recursion method.
+	// one more method is given on LeetcodePrograms to do the same no need to do the recursion method.
 	// question is hardly been asked
 	public TreeNode invertTree2(TreeNode root) {
 		if (root == null) {
@@ -1768,7 +1767,7 @@ public int findDuplicate4(int[] nums) {
 		return root;
 	}
 
-	// one more method given on leetcode to invert the tree
+	// one more method given on LeetcodePrograms to invert the tree
 	public TreeNode invertTree3(TreeNode root) {
 		if (root == null) {
 			return null;
@@ -4426,9 +4425,9 @@ private Queue<Integer> q1 = new LinkedList<>();
 	// into a space-separated sequence of one or more dictionary words. You may
 	// assume the dictionary does not contain duplicate words.
 	// For example, given
-	// s = "leetcode",
+	// s = "LeetcodePrograms",
 	// dict = ["leet", "code"].
-	// Return true because "leetcode" can be segmented as "leet code".
+	// Return true because "LeetcodePrograms" can be segmented as "leet code".
 	public boolean wordBreak(String s, Set<String> dict) {
 		boolean[] f = new boolean[s.length() + 1];
 		f[0] = true;
@@ -4491,7 +4490,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return res;
 	}
 
-
+//----starting from here
 	// Q120 Triangle #GoodQuestion
 	// Given a triangle, find the minimum path sum from top to bottom. Each stepyou may move to adjacent numbers on the row below.
 	// For example, given the following triangle
@@ -4594,10 +4593,8 @@ private Queue<Integer> q1 = new LinkedList<>();
 
 	// The reason why I think this works:
 	// 1, if sum of gas is more than sum of cost, then there must be a solution.
-	// And the question guaranteed that the solution is unique(The first one I
-	// found is the right one).
-	// 2, The tank should never be negative, so restart whenever there is a
-	// negative number.
+	// And the question guaranteed that the solution is unique(The first one I found is the right one).
+	// 2, The tank should never be negative, so restart whenever there is a negative number.
 	public int canCompleteCircuit(int[] gas, int[] cost) {
 		int start = 0, total = 0, tank = 0;
 
@@ -4766,7 +4763,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		}
 		return minLen == Integer.MAX_VALUE ? 0 : minLen;
 	}
-//or //add all the elements at once and then start from the beginning
+//or add all the elements at once and then start from the beginning
     public int minSubArrayLen(int s, int[] a) {
         if (a == null || a.length == 0)
             return 0;
@@ -4820,7 +4817,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		int[] leftArr = new int[n];
 		int left = 1;
 		// Traverse from the left
-		for (int i = 0; i < n; ++i) {
+		for (int i = 0; i < n; i++) {
 			leftArr[i] = left;
 			left = left * input[i];
 		}
@@ -4828,7 +4825,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		// Traverse from the right
 		int right = 1;
 		int[] prodArray = leftArr;
-		for (int i = n - 1; i >= 0; --i) {
+		for (int i = n - 1; i >= 0; i++) {
 			prodArray[i] = right * prodArray[i];
 			right = right * input[i];
 		}
@@ -4962,24 +4959,18 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 	// Q296 Best Meeting point
-	// A group of two or more people wants to meet and minimize the total travel
-	// distance.
-	// You are given a 2D grid of values 0 or 1, where each 1 marks the home of
-	// someone in the group.
-	// The distance is calculated using Manhattan Distance, where distance(p1,
-	// p2) = |p2.x - p1.x| + |p2.y - p1.y|.
+	// A group of two or more people wants to meet and minimize the total travel distance.
+	// You are given a 2D grid of values 0 or 1, where each 1 marks the home of someone in the group.
+	// The distance is calculated using Manhattan Distance, where distance(p1,p2) = |p2.x - p1.x| + |p2.y - p1.y|.
 	// For example, given three people living at (0,0), (0,4), and (2,2):
-	//
 	// 1 - 0 - 0 - 0 - 1
 	// | | | | |
 	// 0 - 0 - 0 - 0 - 0
 	// | | | | |
 	// 0 - 0 - 1 - 0 - 0
-	// The point (0,2) is an ideal meeting point, as the total travel distance
-	// of 2+2+2=6 is minimal. So return 6.
+	// The point (0,2) is an ideal meeting point, as the total travel distance of 2+2+2=6 is minimal. So return 6.
 	// 1) Store all horizontal and vertical positions of all group member.
-	// 2) Now sort it to find minimum middle position, which will be the best
-	// meeting point.
+	// 2) Now sort it to find minimum middle position, which will be the best meeting point.
 	// 3) Find the distance of all members from best meeting point.
 
 	public int minTotalDistance2(int[][] grid) {
@@ -5113,25 +5104,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return help_stack.peek();
 	}
 
-	// Range sum query - Immutable
-	// Given an integer array nums, find the sum of the elements between indices
-	// i and j (i ≤ j), inclusive.
-	public class NumArray {
-		private int[] nums;
-
-		public NumArray(int[] nums) {
-			for (int i = 1; i < nums.length; i++)
-				nums[i] += nums[i - 1];
-			this.nums = nums;
-		}
-
-		public int sumRange(int i, int j) {
-			if (i == 0)
-				return nums[j];
-			return nums[j] - nums[i - 1];
-		}
-	}
-
 	// Q149 Max Points on a line ( maximum points on a plane ) // #TopInterviewQuestion
 	// Given n points on a 2D plane, find the maximum number of points that lie on the same straight line.
 	public int maxPoints(Point[] points) {
@@ -5197,6 +5169,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 					}
 				}
 			}
+			// did not get the below part
 			for (Integer count : result.values()) {
 				if (count + duplicate > max) {
 					max = count + duplicate;
@@ -5307,7 +5280,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return count;
 	}
 
-	// NOT a leetcode question BUT similar to the above one. Only difference
+	// NOT a LeetcodePrograms question BUT similar to the above one. Only difference
 	// Meeting start time and end times are two different arrays Returns minimum number of platforms required
 	public static int findPlatform(int arr[], int dep[], int n) {
 // Sort arrival and departure arrays
@@ -5774,16 +5747,15 @@ private Queue<Integer> q1 = new LinkedList<>();
 		}
 	}
 
-	// Q378 kth smallest element in the sorted matrix #TopInterviewQuestion
-	// Given a n x n matrix where each of the rows and columns are sorted in
-	// ascending order, find the kth smallest element in the matrix.
-
-	// Note that it is the kth smallest element in the sorted order, not the kth distinct element.
-	// Solution : Build a minHeap of elements from the first row. Do the following operations k-1 times :
-	// Every time when you poll out the root(Top Element in Heap), you need to
-	// know the row number and column number of that element(so we can create a tuple class here), replace that root
-	// with the next element from the same column.
-	// explained it very well https://www.youtube.com/watch?v=zIaMTdBQT34&t=309s
+// Q378 kth smallest element in the sorted matrix #TopInterviewQuestion
+// Given a n x n matrix where each of the rows and columns are sorted in ascending order, find the kth smallest element
+// in the matrix.
+// Note that it is the kth smallest element in the sorted order, not the kth distinct element.
+// Solution : Build a minHeap of elements from the first row. Do the following operations k-1 times :
+// Every time when you poll out the root(Top Element in Heap), you need to
+// know the row number and column number of that element(so we can create a tuple class here), replace that root
+// with the next element from the same column.
+// explained it very well https://www.youtube.com/watch?v=zIaMTdBQT34&t=309s
     public int kthSmallest(int[][] matrix, int k) {
         int n = matrix.length;
         PriorityQueue<Tuple> pq = new PriorityQueue<>();
@@ -6234,17 +6206,17 @@ private Queue<Integer> q1 = new LinkedList<>();
 // to the system in chronological order (ie, the timestamp is monotonically increasing). You may assume that the earliest timestamp starts at 1.
 // It is possible that several hits arrive roughly at the same time.
 
-	public class HItCounter {
+	public class HitCounter {
 		private int[] times;
 		private int[] hits;
 
-		/** Initialize your data structure here. */
-		public HItCounter() {
+/** Initialize your data structure here. */
+		public HitCounter() {
 			times = new int[300];
 			hits = new int[300];
 		}
 
-		// Record a hit. @param timestamp - The current timestamp (in seconds granularity).
+// Record a hit. @param timestamp - The current timestamp (in seconds granularity).
 		public void hit(int timestamp) {
 			int index = timestamp % 300;
 
@@ -6254,11 +6226,9 @@ private Queue<Integer> q1 = new LinkedList<>();
                 } else {
                     hits[index]++;
                 }
-
 		}
 
-		// Return the number of hits in the past 5 minutes.
-		// @param timestamp - The current timestamp (in seconds granularity).
+// Return the number of hits in the past 5 minutes. @param timestamp - The current timestamp (in seconds granularity).
 		public int getHits(int timestamp) {
 			int total = 0;
 			for (int i = 0; i < 300; i++) {
@@ -6277,8 +6247,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 	public static String encode(int num) {
 		StringBuilder sb = new StringBuilder();
 		while (num > 0) {
-			// System.out.println("appended string " + ALPHABET.charAt( num %
-			// BASE ));
+			// System.out.println("appended string " + ALPHABET.charAt( num % BASE ));
 			sb.append(ALPHABET.charAt(num % BASE));
 			num /= BASE;
 		}
@@ -6289,6 +6258,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		int num = 0;
 		for (int i = 0; i < str.length(); i++) {
 			num = num * BASE + ALPHABET.indexOf(str.charAt(i));
+
 		}
 		return num;
 	}
@@ -6361,8 +6331,10 @@ private Queue<Integer> q1 = new LinkedList<>();
 	public TreeNode deserialize2(String data) {
 		//Deque<String> nodes = new LinkedList<>();
 		Queue<String> nodes1 = new LinkedList<>();
-		//nodes1.addAll()
+        //both the below statements will work
 		nodes1.addAll(Arrays.asList(data.split(splitter)));
+//		Collections.addAll(nodes1, data.split(splitter)); this works too
+
 		return buildTree(nodes1);
 	}
 
@@ -6599,6 +6571,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 	// Q45 Jump Game II
 	// Given an array of non-negative integers, you are initially positioned at the first index of the array.
 	// Each element in the array represents your maximum jump length at that position.
+	// Your goal is to reach the last index in the minimum number of jumps.
 	// In this method, we build a jumps[] array from left to right such that jumps[i] indicates the minimum
 	// number of jumps needed to reach arr[i] from arr[0]. Finally, we return jumps[n-1].
 	// tusharroy example. https://www.youtube.com/watch?v=cETfFsSTGJI
@@ -6918,8 +6891,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		// Queue to store tree nodes in level order traversal
 		Queue<Node> queue = new LinkedList<Node>();
 
-		// Assign initialized horizontal distance value to root
-		// node and add it to the queue.
+		// Assign initialized horizontal distance value to root node and add it to the queue.
 		root.hd = hd;
 		queue.add(root);
 
@@ -6927,32 +6899,26 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		while (!queue.isEmpty()) {
 			Node temp = queue.remove();
 
-			// Extract the horizontal distance value from the
-			// dequeued tree node.
+			// Extract the horizontal distance value from the dequeued tree node.
 			hd = temp.hd;
 
-			// Put the dequeued tree node to TreeMap having key
-			// as horizontal distance. Every time we find a node
-			// having same horizontal distance we need to replace
-			// the data in the map.
+			// Put the dequeued tree node to TreeMap having key as horizontal distance. Every time we find a node
+			// having same horizontal distance we need to replace the data in the map.
 			map.put(hd, temp.data);
 
-			// If the dequeued node has a left child add it to the
-			// queue with a horizontal distance hd-1.
+			// If the dequeued node has a left child add it to the queue with a horizontal distance hd-1.
 			if (temp.left != null) {
 				temp.left.hd = hd - 1;
 				queue.add(temp.left);
 			}
-			// If the dequeued node has a left child add it to the
-			// queue with a horizontal distance hd+1.
+			// If the dequeued node has a left child add it to the queue with a horizontal distance hd+1.
 			if (temp.right != null) {
 				temp.right.hd = hd + 1;
 				queue.add(temp.right);
 			}
 		}
 
-		// Extract the entries of map into a set to traverse
-		// an iterator over that.
+		// Extract the entries of map into a set to traverse an iterator over that.
 		Set<Map.Entry<Integer, Integer>> set = map.entrySet();
 
 		// Make an iterator
@@ -6967,15 +6933,13 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 
 	// Q107 Level order traversal II #GoodQuestion
 	// Given a binary tree, return the bottom-up level order traversal of its
-	// nodes' values. (ie, from left to right, level by level from leaf to
-	// root).
-	// For example:
-	// Given binary tree [3,9,20,null,null,15,7],
-	// 3
-	/// \
-	// 9 20
-	/// \
-	// 15 7
+	// nodes' values. (ie, from left to right, level by level from leaf to root).
+	// For example: Given binary tree [3,9,20,null,null,15,7],
+	//    3
+	//   / \
+	//  9 20
+	// / \
+	//15 7
 	// return its bottom-up level order traversal as:
 	// [
 	// [15,7],
@@ -6999,6 +6963,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 				if (node.right != null)
 					q.add(node.right);
 			}
+
 			result.add(0, list);
 		}
 		return result;
@@ -8533,7 +8498,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		}
 	}
 
-	// Merge k sorted array //not a leetcode question but similar to merge k sorted lists
+	// Merge k sorted array //not a LeetcodePrograms question but similar to merge k sorted lists
 	public static int[] mergeKLists(int[][] array) {
 		if (array == null || array.length == 0)
 			return null;
@@ -8702,8 +8667,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	}
 
 
-	// make every 'O' that we meet to '*'
-	// It is safe because we always start from the border
+	// make every 'O' that we meet to '*' It is safe because we always start from the border
 	private void dfs(char[][] board, int i, int j) {
 		if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) return;
 		if (board[i][j] == 'X' || board[i][j] == '*') return;
@@ -8879,7 +8843,8 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[i].length; j++) {
-				if ((word.charAt(0) == board[i][j]) && search(board, word, i, j, 0)) {
+				if ((word.charAt(0) == board[i][j])
+						&& search(board, word, i, j, 0)) {
 					return true;
 				}
 			}
@@ -9215,6 +9180,25 @@ public boolean canPartition(int[] nums) {
 		int nums[] = { 10, 3, 8, 9, 4 };
 		// System.out.println(findRelativeRanks(nums));
 	}
+    // Range sum query - Immutable
+    // Given an integer array nums, find the sum of the elements between indices
+    // i and j (i ≤ j), inclusive.
+    public class NumArray {
+        private int[] nums;
+
+        public NumArray(int[] nums) {
+            for (int i = 1; i < nums.length; i++)
+                nums[i] += nums[i - 1];
+            this.nums = nums;
+        }
+
+        public int sumRange(int i, int j) {
+            if (i == 0)
+                return nums[j];
+            return nums[j] - nums[i - 1];
+        }
+    }
+
 
     // 515 Find Largest Value in Each Tree Row
     // Just a simple pre-order traverse idea. Use depth to expand result list
@@ -9862,7 +9846,7 @@ public boolean canPartition(int[] nums) {
     // Given a word, you need to judge whether the usage of capitals in it is right or not.
     // We define the usage of capitals in a word to be right when one of the following cases holds:
     // All letters in this word are capitals, like "USA".
-    // All letters in this word are not capitals, like "leetcode".
+    // All letters in this word are not capitals, like "LeetcodePrograms".
     // Only the first letter in this word is capital if it has more than one letter, like "Google".
     // Otherwise, we define that this word doesn't use capitals in a right way.
     public boolean detectCapitalUse(String word) {
@@ -10588,7 +10572,7 @@ public boolean canPartition(int[] nums) {
 	// After third round, the three bulbs are [on, off, off].
 	//
 	// So you should return 1, because there is only one bulb is on.
-	// explanation : see the leetcode
+	// explanation : see the LeetcodePrograms
 	double bulbSwitch(int n) {
 		return Math.sqrt(n);
 	}

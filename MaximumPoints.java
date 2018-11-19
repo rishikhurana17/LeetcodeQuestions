@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 
 
@@ -42,7 +42,7 @@ public class MaximumPoints {
         return result;
     }
     //or
-    public int maxPoints2(leetcode.Point[] points) {
+    public int maxPoints2(LeetcodePrograms.Point[] points) {
         if(points == null || points.length == 0) return 0;
 
         HashMap<Double, Integer> result = new HashMap<Double, Integer>();

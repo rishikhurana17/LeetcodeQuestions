@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 public class WordNode2 {
     String word;

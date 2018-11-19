@@ -1,4 +1,4 @@
-package leetcode; /**
+package LeetcodePrograms; /**
 Created by Assaf Elovic
 www.assafelovic.com
 Find duplicate files in give file system root

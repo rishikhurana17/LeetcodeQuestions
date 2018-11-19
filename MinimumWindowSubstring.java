@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 import java.util.*;
 /**
  * Created by rkhurana on 10/23/18.

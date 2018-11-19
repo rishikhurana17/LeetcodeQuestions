@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 import java.util.LinkedList;
 // Q239 Sliding Window Maximum #TopInterviewQuestion

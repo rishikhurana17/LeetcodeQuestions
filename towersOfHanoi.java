@@ -1,6 +1,4 @@
-package leetcode;
-
-import java.util.Stack;
+package LeetcodePrograms;
 
 public class towersOfHanoi {
 	public static void tower(int n, char sourceRod, char destinationRod,char auxiliaryRod) {

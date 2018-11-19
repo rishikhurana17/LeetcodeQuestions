@@ -1,6 +1,4 @@
-package leetcode;
-
-import leetcode.Point;
+package LeetcodePrograms;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;

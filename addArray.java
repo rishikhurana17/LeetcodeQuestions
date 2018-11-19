@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 public class addArray {
 	public static void AddOne() {

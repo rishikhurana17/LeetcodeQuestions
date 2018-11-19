@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 public class Node {
     public Node left;

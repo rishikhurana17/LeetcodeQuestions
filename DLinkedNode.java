@@ -1,4 +1,4 @@
-package leetcode;
+package LeetcodePrograms;
 
 class DLinkedNode {
 	int key;

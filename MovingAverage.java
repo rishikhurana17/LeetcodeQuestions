@@ -1,7 +1,4 @@
-package leetcode;//moving average from the data stream
-
-import java.util.LinkedList;
-import java.util.Queue;
+package LeetcodePrograms;//moving average from the data stream
 
 public class MovingAverage {
 
