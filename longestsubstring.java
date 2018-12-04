@@ -3,87 +3,6 @@ import java.util.*;
 
 public class LongestSubstring {
 
-//    public Point[] findKClosestPoints(Point[] points, int k, Point target) {
-//        if (points.length == 0 || k < 1 || k > points.length)   return points;
-//        int left = 0, right = points.length - 1;
-//        while (true) {
-//            int pos = partition(points, left, right, target);
-//            if (pos == k - 1)   break;
-//            else if (pos > k - 1)   right = pos - 1;
-//            else    left = pos + 1;
-//        }
-//        Point[] res = new Point[k];
-//        for (int i = 0; i < k; i++)
-//            res[i] = points[i];
-//        return res;
-//    }
-//
-//    private int partition(Point[] points, int left, int right, Point target) {
-//        shuffle(points);
-//        int idx = left; // important
-//        Point pivot = points[idx];
-//        int pDist = getDistance(pivot, target);
-//        swap(points, idx, right);
-//        for (int i = left; i < right; i++) {
-//            int iDist = getDistance(points[i], target);
-//            if (iDist < pDist)  swap(points, i, idx++);
-//        }
-//        swap(points, idx, right);
-//        return idx;
-//    }
-//
-//    private int getDistance(Point p, Point target) {
-//        return (p.x - target.x) * (p.x - target.x) + (p.y - target.y) * (p.y - target.y);
-//    }
-//
-//    private static void swap(Point[] points, int left, int right) {
-//        Point temp = points[left];
-//        points[left] = points[right];
-//        points[right] = temp;
-//    }
-
-    // partition function used by quickselect
-//    int quickselectPartition(vector<pair<int, int>>& nums, int start, int end) {
-//        int pivot = nums[end].first;
-//        int i = start, j = start;
-//        for (; j < end; j++) {
-//            if (nums[j].first <= pivot) {
-//                swap(nums[i], nums[j]);
-//                i++;
-//            }
-//        }
-//        swap(nums[end], nums[i]);
-//        return i;
-//    }
-//
-//    // a combination of quickselect and quicksort
-//    void quickselect(vector<pair<int, int>>& nums, int start, int end, int k) {
-//        if (start >= end) {
-//            return;
-//        }
-//        int pivotIndex = quickselectPartition(nums, start, end);
-//        if (pivotIndex < k - 1) {
-//            quickselect(nums, start, pivotIndex - 1, k);
-//            quickselect(nums, pivotIndex + 1, end, k);
-//        } else {
-//            quickselect(nums, start, pivotIndex - 1, k);
-//        }
-//    }
-//
-//    // uses a combination of quickselect and quicksort to find k closest elements in O(n + k log k).
-//    multiset<int> kClosestQuickselect(vector<int> nums, int target, int k) {
-//        vector<pair<int, int>> distances(nums.size());
-//        for (int i = 0; i < nums.size(); i++) {
-//            distances[i] = make_pair(abs(nums[i] - target), nums[i]);
-//        }
-//
-//        quickselect(distances, 0, distances.size() - 1, k);
-//        multiset<int> result;
-//        for (int i = 0; i < k; i++) {
-//            result.insert(distances[i].second);
-//        }
-//        return result;
- //   }
 
     int lengthOfLongestSubstringKDistinct(String str, int k) {
         int s = 0, e = 0, maxlen = 0;
@@ -155,9 +74,81 @@ public class LongestSubstring {
         return maxLen;
     }
 
+    public int LongestSubstringWithoutRepeatingCharacter(String s) {
+        if (s.length() == 0)
+            return 0;
+        int max = Integer.MIN_VALUE;
+        HashMap<Character, Integer> map = new HashMap<>();
+        int j = 0;
+        String substring = "";
+        for(int i = 0 ; i < s.length() ; i++){
+            if(map.containsKey(s.charAt(i))){
+
+                j = Math.max(j,map.get(s.charAt(i))+1); //find the old index
+            }
+            map.put(s.charAt(i) , i);
+            max = Math.max(max , i - j + 1);
+
+        }
+        return max;
+    }
+
+    public static String LongestContinousSubstring2(String str){
+        int low = 0 ;
+        //List<String> list = new ArrayList<String>();
+        String result="";
+        if(str.length() == 0)
+            return "";
+
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(int i=0 ; i < str.length() ; i++){
+            if(map.get(str.charAt(i))!= null){
+                if( (i) - low> result.length()){
+                    result = str.substring(low,i);
+                }
+
+                low = Math.max(map.get(str.charAt(i)) +1,low);
+            }
+            map.put(str.charAt(i),i);
+        }
+        return result;
+
+    }
+
+
+//if you want all the strings (list) of the same size to be printed
+public static List<String> LongestContinousSubstring(String str){
+    int low = 0 ;
+    List<String> list = new ArrayList<String>();
+
+    if(str.length() == 0)
+        return list;
+    String result ="";
+    HashMap<Character,Integer> map = new HashMap<>();
+    for(int i=0 ; i < str.length() ; i++){
+    if(map.get(str.charAt(i))!= null){
+        if( (i) - low> result.length()){
+            list.clear();
+            //result = str.substring(low,i);
+            list.add(str.substring(low,i));
+        }
+        else if((i) - low == result.length()){
+            list.add(str.substring(low,i));
+
+        }
+
+        low = Math.max(map.get(str.charAt(i)) +1,low);
+    }
+    map.put(str.charAt(i),i);
+ }
+ return list;
+
+ }
+
+
     public static void main(String [] args) {
            LongestSubstring o = new LongestSubstring();
-            System.out.println(o.lengthOfLongestSubstringKDistinct("eceba",2));
+            System.out.println(o.LongestContinousSubstring2("This_is_a_video_conference_room"));
     }
 }
 

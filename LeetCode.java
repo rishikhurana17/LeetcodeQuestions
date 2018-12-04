@@ -423,9 +423,9 @@ public class LeetCode {
 			if (digit < 0 || digit > 9)
 				break;
 
-				// overflow can be checked by below line have to see about this line above
-				if ((Integer.MAX_VALUE - digit) / 10 < total)
-					return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+    		// overflow can be checked by below line have to see about this line above
+            if ((Integer.MAX_VALUE - digit) / 10 < total)
+        		return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
 
 			total = total * 10 + digit;
 			index++; // don't forget to increment the counter
@@ -1923,7 +1923,7 @@ public int findDuplicate4(int[] nums) {
 		int j = 0;
 		for (int i = 0; i < s.length(); i++) {
 			if (map.containsKey(s.charAt(i))) {
-				j = Math.max(j, map.get(s.charAt(i)) + 1);
+				j = Math.max(j, map.get(s.charAt(i)) + 1); //find the old index
 			}
 			map.put(s.charAt(i), i);
 			max = Math.max(max, i - j + 1);
@@ -3331,68 +3331,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 		}
 	}
 
-
-	// Q653. Two Sum IV - Input is a BST
-	// Given a Binary Search Tree and a target number, return true
-	// if there exist two elements in the BST such that their sum is equal to the given target.
-
-	public boolean findTarget(TreeNode root, int k) {
-		HashSet<Integer> set = new HashSet<>();
-		return dfs(root, set, k);
-	}
-
-	public boolean dfs(TreeNode root, HashSet<Integer> set, int k) {
-		if (root == null)
-			return false;
-		if (set.contains(k - root.val))
-			return true;
-		set.add(root.val);
-		return dfs(root.left, set, k) || dfs(root.right, set, k);
-	}
-
-	// Same above method using inorder traversal
-	public boolean findTargetInorderTraversal(TreeNode root, int k) {
-		List<Integer> nums = new ArrayList<>();
-		inorder(root, nums);
-		for (int i = 0, j = nums.size() - 1; i < j;) {
-			if (nums.get(i) + nums.get(j) == k)
-				return true;
-			if (nums.get(i) + nums.get(j) < k)
-				i++;
-			else
-				j--;
-		}
-		return false;
-	}
-
-	public void inorder(TreeNode root, List<Integer> nums) {
-		if (root == null)
-			return;
-		inorder(root.left, nums);
-		nums.add(root.val);
-		inorder(root.right, nums);
-	}
-
-	// Q645 Set mismatch
-	// The set S originally contains numbers from 1 to n.
-	// But unfortunately, due to the data error, one of the numbers in the set got duplicated to another number in the set,
-	// which results in repetition of one number and loss of another number.
-	// Given an array nums representing the data status of this set after the error.
-	// Your task is to firstly find the number occurs twice and then find the number that is missing.
-	// Return them in the form of an array.
-	public int[] findErrorNums(int[] nums) {
-		Set<Integer> set = new HashSet<>();
-		int duplicate = 0, n = nums.length;
-		long sum = (n * (n + 1)) / 2;
-		for (int i : nums) {
-			if (set.contains(i))
-				duplicate = i;
-			sum -= i;
-			set.add(i);
-		}
-		return new int[] { duplicate, (int) sum + duplicate };
-	}
-
 // Q268 missing number #TopInterviewQuestion
 // Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing
 // from the array. For example, Given nums = [0, 1, 3] return 2.
@@ -3923,81 +3861,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 				+ pathSumFrom(node.right, sum - node.val);
 	}
 
-	// Assign Cookies
-	// Assume you are an awesome parent and want to give your children some
-	// cookies. But, you should give each child at most one cookie. Each child i
-	// has a greed factor gi, which is the minimum size of a cookie that the
-	// child will be content with; and each cookie j has a size sj. If sj >= gi,
-	// we can assign the cookie j to the child i, and the child i will be
-	// content. Your goal is to maximize the number of your content children and
-	// output the maximum number.
-	//
-	// Note:
-	// You may assume the greed factor is always positive.
-	// You cannot assign more than one cookie to one child
-
-	public static int findContentChildren(int[] g, int[] s) {
-		int count = 0;
-		TreeMap<Integer, Integer> tree = new TreeMap<>();
-		for (int temp : s) {
-			Integer num = tree.get(temp);
-			num = num == null ? 0 : num;
-			tree.put(temp, num + 1);
-		}
-		for (int temp : g) {
-			Integer targ = tree.ceilingKey(temp);
-			if (targ != null) {
-				Integer num = tree.get(targ);
-				if (num > 0) {
-					count++;
-					if (num == 1) {
-						tree.remove(targ);
-					} else {
-						tree.put(targ, num - 1);
-					}
-				}
-			}
-		}
-		return count;
-	}
-
-	// Q459 repeated substring pattern
-	// Given a non-empty string check if it can be constructed by taking a
-	// substring of it and
-	// appending multiple copies of the substring together. You may assume the
-	// given string consists
-	// of lowercase English letters only and its length will not exceed 10000.
-	public boolean repeatedSubstringPattern(String str) {
-		// This is the kmp issue
-		int[] prefix = kmp(str);
-		int len = prefix[str.length() - 1];
-		int n = str.length();
-		return (len > 0 && n % (n - len) == 0);
-	}
-
-	private int[] kmp(String s) {
-		int len = s.length();
-		int[] res = new int[len];
-		char[] ch = s.toCharArray();
-		int i = 0, j = 1;
-		res[0] = 0;
-		while (i < ch.length && j < ch.length) {
-			if (ch[j] == ch[i]) {
-				res[j] = i + 1;
-				i++;
-				j++;
-			} else {
-				if (i == 0) {
-					res[j] = 0;
-					j++;
-				} else {
-					i = res[i - 1];
-				}
-			}
-		}
-		return res;
-	}
-
 	// Q34 Find First and Last Position of Element in Sorted Array
 	// #TopInterviewQuestion
 	// Search for a Range
@@ -4233,7 +4096,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 // Q154 minimum in rotated sorted array with duplicates allowed..send the lower index
-
 // We assert the loop invariant is the index of the minimum, min, is within the range [lo, hi].
 // Before the loop, min is in [0, nums.length - 1]. To satisfy the invariant, lo = 0, hi = nums.length - 1
 // If we guess mi, if nums[mi] > nums[hi], min should be always in [mi + 1, hi] (explained in Essence). To satisfy the invariant, lo = mi + 1;
@@ -4862,6 +4724,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 	// Q221 Maximal square #GoodQuestion
+	//will look it for some other way
 	// Given a 2D binary matrix filled with 0's and 1's, find the largest square
 	// containing only 1's and return its area.
 	// For example, given the following matrix:
@@ -6044,163 +5907,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return root;
 	}
 
-	public static void AddTwoArrays() {
-		int val = 0;
-		int carry = 0;
-		int arrA[] = { 5, 6, 6, 9 };
-		int i = arrA.length - 1;
-		int arrB[] = { 4, 6, 4 };
-		int j = arrB.length - 1;
-		int k;
-		if (i > j) {
-			k = i;
-		} else
-			k = j;
-		int result[] = new int[k + 1];
-		// int result1[] = new int[result.length + 1];
-		while (i >= 0 && j >= 0) {
-			val = arrA[i] + arrB[j] + carry; // what if val >10 and what if it
-												// doesnt
-			result[k] = val % 10;
-			carry = val / 10;
-			i--;
-			j--;
-			k--;
-		}
-		while (i >= 0) {
-			val = arrA[i] + carry; // what if val >10 and what if it doesnt
-			result[k] = val % 10;
-			carry = val / 10;
-			i--;
-			k--;
-		}
-		while (j >= 0) {
-			val = arrB[j] + carry; // what if val >10 and what if it doesnt
-			result[k] = val % 10;
-			carry = val / 10;
-			j--;
-			k--;
-		}
-		if (carry == 1) {
-			result = new int[k + 1];
-			result[0] = 1;
-		}
-		System.out.println("result comes out to be ");
-		for (i = 0; i < result.length; i++)
-			System.out.println(result[i]);
-	}
-
-	// Recursive Java program to print all files
-	// in a folder(and sub-folders)
-	static void RecursivePrint(File[] arr, int index, int level) {
-		// terminate condition
-		if (index == arr.length)
-			return;
-
-		// tabs for internal levels
-		for (int i = 0; i < level; i++)
-			System.out.print("\t");
-
-		// for files
-		if (arr[index].isFile())
-			System.out.println(arr[index].getName());
-
-		// for sub-directories
-		else if (arr[index].isDirectory()) {
-			System.out.println("[" + arr[index].getName() + "]");
-
-			// recursion for sub-directories
-			RecursivePrint(arr[index].listFiles(), 0, level + 1);
-		}
-
-		// recursion for main directory
-		RecursivePrint(arr, ++index, level);
-	}
-
-	// Find file duplicates in a directory
-	private static MessageDigest messageDigest;
-	static {
-		try {
-			messageDigest = MessageDigest.getInstance("SHA-512");
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException("cannot initialize SHA-512 hash function", e);
-		}
-	}
-
-	public static void findDuplicateFiles(Map<String, List<String>> filesList, File directory) {
-		for (File dirChild : directory.listFiles()) {
-			// Iterate all file sub directories recursively
-			if (dirChild.isDirectory()) {
-				findDuplicateFiles(filesList, dirChild);
-			} else {
-				try {
-					// Read file as bytes
-					FileInputStream fileInput = new FileInputStream(dirChild);
-					byte fileData[] = new byte[(int) dirChild.length()];
-					fileInput.read(fileData);
-					fileInput.close();
-					// Create unique hash for current file
-					String uniqueFileHash = new BigInteger(1, messageDigest.digest(fileData)).toString(16);
-					List<String> identicalList = filesList.get(uniqueFileHash);
-					if (identicalList == null) {
-						identicalList = new LinkedList<String>();
-					}
-					// Add path to list
-					identicalList.add(dirChild.getAbsolutePath());
-					// push updated list to Hash table
-					filesList.put(uniqueFileHash, identicalList);
-				} catch (IOException e) {
-					throw new RuntimeException("cannot read file " + dirChild.getAbsolutePath(), e);
-				}
-			}
-		}
-	}
-
-	public class HeapInsertion {
-		private void shiftUp(ArrayList<Integer> items) {
-			int k = items.size() - 1;
-			while (k > 0) {
-				int p = (k - 1) / 2;
-				int item = items.get(k);
-				int parent = items.get(p);
-
-				// swap
-				if (item > parent) {
-					items.set(k, parent);
-					items.set(p, item);
-
-					// move up 1 level
-					k = p;
-				} else {
-					break;
-				}
-			}
-		}
-
-		private void ShiftDown(ArrayList<Integer> items) {
-			int k = 0;
-			int l = 2 * k + 1;
-			while (l < items.size()) {
-				int max = l;
-				int r = l + 1;
-				if (r < items.size()) // there is a right child
-				{
-					if (items.get(k) > items.get(l)) {
-						max++;
-					}
-				}
-				if (items.get(k) < items.get(l)) { // switch
-					int temp = items.get(k);
-					items.set(k, items.get(max));
-					items.set(max, temp);
-					k = max;
-					l = 2 * k + 1;
-				} else {
-					break;
-				}
-			}
-		}
-	}
 // Q362 Design a hit counter which counts the number of hits received in the past 5 minutes.
 // Each function accepts a timestamp parameter (in seconds granularity) and you may assume that calls are being made
 // to the system in chronological order (ie, the timestamp is monotonically increasing). You may assume that the earliest timestamp starts at 1.
@@ -6652,7 +6358,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 			public int compare(Point p1, Point p2) {
 				int d1 = (p1.x - target.x) * (p1.x - target.x) + (p1.y - target.y) * (p1.y - target.y);
 				int d2 = (p2.x - target.x) * (p2.x - target.x) + (p2.y - target.y) * (p2.y - target.y);
-				return d2 - d1;
+				return d1 - d2;
 			}
 		});
 		for (Point p : points) {
@@ -6663,6 +6369,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		Point[] res = new Point[k];
 		for (int i = k - 1; i >= 0; i--)
 			res[i] = pq.poll();
+
 		return res;
 	}
 
@@ -7468,6 +7175,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	}
 
 	// Q142 Linked List cycle II
+    // find the start of the cycle
 	public ListNode detectCycle(ListNode head) {
 		ListNode slow = head;
 		ListNode fast = head;
@@ -8077,6 +7785,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	// total * can be formed from coins assuming infinity supply of coins
 
 	// below solution tells you the number of ways we can achieve that total and not the combination
+	// go input of i step back on the same line and sum with the number above that
 	public int numberOfSolutions(int total, int coins[]) {
 		int temp[][] = new int[coins.length + 1][total + 1];
 		for (int i = 0; i <= coins.length; i++) {
@@ -8564,6 +8273,34 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		}
 		return dummy.next;
 	}
+// or
+    public static ListNode mergeKLists(ListNode[] lists){
+        return partion(lists,0,lists.length-1);
+    }
+
+    public static ListNode partion(ListNode[] lists,int s,int e){
+        if(s==e)  return lists[s];
+        if(s<e){
+            int q=(s+e)/2;
+            ListNode l1=partion(lists,s,q);
+            ListNode l2=partion(lists,q+1,e);
+            return merge2(l1,l2);
+        }else
+            return null;
+    }
+
+    //This function is from Merge Two Sorted Lists.
+    public static ListNode merge2(ListNode l1,ListNode l2){
+        if(l1==null) return l2;
+        if(l2==null) return l1;
+        if(l1.val<l2.val){
+            l1.next=merge2(l1.next,l2);
+            return l1;
+        }else{
+            l2.next=merge2(l1,l2.next);
+            return l2;
+        }
+    }
 	// Backtracking Questions
 
 	// Q130 Surrounded Regions #TopInterviewQuestion
@@ -8666,7 +8403,6 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		}
 	}
 
-
 	// make every 'O' that we meet to '*' It is safe because we always start from the border
 	private void dfs(char[][] board, int i, int j) {
 		if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) return;
@@ -8677,8 +8413,6 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		dfs(board, i, j - 1);
 		dfs(board, i, j + 1);
 	}
-
-
 
 	// Q200 Number of islands #TopInterviewQuestion
 	// Given a 2d grid map of '1's (land) and '0's (water), count the number of islands.
@@ -8729,8 +8463,8 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	public int AreaOfIsland(int[][] grid, int i, int j) {
 		if (i >= 0 && i < grid.length && j >= 0 && j < grid[0].length && grid[i][j] == 1) {
 			grid[i][j] = 0;
-			return 1 + AreaOfIsland(grid, i + 1, j) + AreaOfIsland(grid, i - 1, j) + AreaOfIsland(grid, i, j - 1)
-					+ AreaOfIsland(grid, i, j + 1);
+			return 1 + AreaOfIsland(grid, i + 1, j) + AreaOfIsland(grid, i - 1, j) +
+                    AreaOfIsland(grid, i, j - 1) + AreaOfIsland(grid, i, j + 1);
 		}
 		return 0;
 	}
@@ -9180,6 +8914,298 @@ public boolean canPartition(int[] nums) {
 		int nums[] = { 10, 3, 8, 9, 4 };
 		// System.out.println(findRelativeRanks(nums));
 	}
+
+    // Assign Cookies
+    // Assume you are an awesome parent and want to give your children some
+    // cookies. But, you should give each child at most one cookie. Each child i
+    // has a greed factor gi, which is the minimum size of a cookie that the
+    // child will be content with; and each cookie j has a size sj. If sj >= gi,
+    // we can assign the cookie j to the child i, and the child i will be
+    // content. Your goal is to maximize the number of your content children and
+    // output the maximum number.
+    // Note:
+    // You may assume the greed factor is always positive.
+    // You cannot assign more than one cookie to one child
+
+    public static int findContentChildren(int[] g, int[] s) {
+        int count = 0;
+        TreeMap<Integer, Integer> tree = new TreeMap<>();
+        for (int temp : s) {
+            Integer num = tree.get(temp);
+            num = num == null ? 0 : num;
+            tree.put(temp, num + 1);
+        }
+        for (int temp : g) {
+            Integer targ = tree.ceilingKey(temp);
+            if (targ != null) {
+                Integer num = tree.get(targ);
+                if (num > 0) {
+                    count++;
+                    if (num == 1) {
+                        tree.remove(targ);
+                    } else {
+                        tree.put(targ, num - 1);
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    // Q459 repeated substring pattern
+    // Given a non-empty string check if it can be constructed by taking a substring of it and
+    // appending multiple copies of the substring together. You may assume the given string consists
+    // of lowercase English letters only and its length will not exceed 10000.
+    public boolean repeatedSubstringPattern(String str) {
+        // This is the kmp issue
+        int[] prefix = kmp(str);
+        int len = prefix[str.length() - 1];
+        int n = str.length();
+        return (len > 0 && n % (n - len) == 0);
+    }
+
+    private int[] kmp(String s) {
+        int len = s.length();
+        int[] res = new int[len];
+        char[] ch = s.toCharArray();
+        int i = 0, j = 1;
+        res[0] = 0;
+        while (i < ch.length && j < ch.length) {
+            if (ch[j] == ch[i]) {
+                res[j] = i + 1;
+                i++;
+                j++;
+            } else {
+                if (i == 0) {
+                    res[j] = 0;
+                    j++;
+                } else {
+                    i = res[i - 1];
+                }
+            }
+        }
+        return res;
+    }
+
+
+    // Q653. Two Sum IV - Input is a BST
+    // Given a Binary Search Tree and a target number, return true
+    // if there exist two elements in the BST such that their sum is equal to the given target.
+
+    public boolean findTarget(TreeNode root, int k) {
+        HashSet<Integer> set = new HashSet<>();
+        return dfs(root, set, k);
+    }
+
+    public boolean dfs(TreeNode root, HashSet<Integer> set, int k) {
+        if (root == null)
+            return false;
+        if (set.contains(k - root.val))
+            return true;
+        set.add(root.val);
+        return dfs(root.left, set, k) || dfs(root.right, set, k);
+    }
+
+    // Same above method using inorder traversal
+    public boolean findTargetInorderTraversal(TreeNode root, int k) {
+        List<Integer> nums = new ArrayList<>();
+        inorder(root, nums);
+        for (int i = 0, j = nums.size() - 1; i < j;) {
+            if (nums.get(i) + nums.get(j) == k)
+                return true;
+            if (nums.get(i) + nums.get(j) < k)
+                i++;
+            else
+                j--;
+        }
+        return false;
+    }
+
+    public void inorder(TreeNode root, List<Integer> nums) {
+        if (root == null)
+            return;
+        inorder(root.left, nums);
+        nums.add(root.val);
+        inorder(root.right, nums);
+    }
+
+    // Q645 Set mismatch
+    // The set S originally contains numbers from 1 to n.
+    // But unfortunately, due to the data error, one of the numbers in the set got duplicated to another number in the set,
+    // which results in repetition of one number and loss of another number.
+    // Given an array nums representing the data status of this set after the error.
+    // Your task is to firstly find the number occurs twice and then find the number that is missing.
+    // Return them in the form of an array.
+    public int[] findErrorNums(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        int duplicate = 0, n = nums.length;
+        long sum = (n * (n + 1)) / 2;
+        for (int i : nums) {
+            if (set.contains(i))
+                duplicate = i;
+            sum -= i;
+            set.add(i);
+        }
+        return new int[] { duplicate, (int) sum + duplicate };
+    }
+
+    public static void AddTwoArrays() {
+        int val = 0;
+        int carry = 0;
+        int arrA[] = { 5, 6, 6, 9 };
+        int i = arrA.length - 1;
+        int arrB[] = { 4, 6, 4 };
+        int j = arrB.length - 1;
+        int k;
+        if (i > j) {
+            k = i;
+        } else
+            k = j;
+        int result[] = new int[k + 1];
+        // int result1[] = new int[result.length + 1];
+        while (i >= 0 && j >= 0) {
+            val = arrA[i] + arrB[j] + carry; // what if val >10 and what if it
+            // doesnt
+            result[k] = val % 10;
+            carry = val / 10;
+            i--;
+            j--;
+            k--;
+        }
+        while (i >= 0) {
+            val = arrA[i] + carry; // what if val >10 and what if it doesnt
+            result[k] = val % 10;
+            carry = val / 10;
+            i--;
+            k--;
+        }
+        while (j >= 0) {
+            val = arrB[j] + carry; // what if val >10 and what if it doesnt
+            result[k] = val % 10;
+            carry = val / 10;
+            j--;
+            k--;
+        }
+        if (carry == 1) {
+            result = new int[k + 1];
+            result[0] = 1;
+        }
+        System.out.println("result comes out to be ");
+        for (i = 0; i < result.length; i++)
+            System.out.println(result[i]);
+    }
+
+    // Recursive Java program to print all files
+    // in a folder(and sub-folders)
+    static void RecursivePrint(File[] arr, int index, int level) {
+        // terminate condition
+        if (index == arr.length)
+            return;
+
+        // tabs for internal levels
+        for (int i = 0; i < level; i++)
+            System.out.print("\t");
+
+        // for files
+        if (arr[index].isFile())
+            System.out.println(arr[index].getName());
+
+            // for sub-directories
+        else if (arr[index].isDirectory()) {
+            System.out.println("[" + arr[index].getName() + "]");
+
+            // recursion for sub-directories
+            RecursivePrint(arr[index].listFiles(), 0, level + 1);
+        }
+
+        // recursion for main directory
+        RecursivePrint(arr, ++index, level);
+    }
+
+    // Find file duplicates in a directory
+    private static MessageDigest messageDigest;
+    static {
+        try {
+            messageDigest = MessageDigest.getInstance("SHA-512");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("cannot initialize SHA-512 hash function", e);
+        }
+    }
+
+    public static void findDuplicateFiles(Map<String, List<String>> filesList, File directory) {
+        for (File dirChild : directory.listFiles()) {
+            // Iterate all file sub directories recursively
+            if (dirChild.isDirectory()) {
+                findDuplicateFiles(filesList, dirChild);
+            } else {
+                try {
+                    // Read file as bytes
+                    FileInputStream fileInput = new FileInputStream(dirChild);
+                    byte fileData[] = new byte[(int) dirChild.length()];
+                    fileInput.read(fileData);
+                    fileInput.close();
+                    // Create unique hash for current file
+                    String uniqueFileHash = new BigInteger(1, messageDigest.digest(fileData)).toString(16);
+                    List<String> identicalList = filesList.get(uniqueFileHash);
+                    if (identicalList == null) {
+                        identicalList = new LinkedList<String>();
+                    }
+                    // Add path to list
+                    identicalList.add(dirChild.getAbsolutePath());
+                    // push updated list to Hash table
+                    filesList.put(uniqueFileHash, identicalList);
+                } catch (IOException e) {
+                    throw new RuntimeException("cannot read file " + dirChild.getAbsolutePath(), e);
+                }
+            }
+        }
+    }
+
+    public class HeapInsertion {
+        private void shiftUp(ArrayList<Integer> items) {
+            int k = items.size() - 1;
+            while (k > 0) {
+                int p = (k - 1) / 2;
+                int item = items.get(k);
+                int parent = items.get(p);
+
+                // swap
+                if (item > parent) {
+                    items.set(k, parent);
+                    items.set(p, item);
+
+                    // move up 1 level
+                    k = p;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        private void ShiftDown(ArrayList<Integer> items) {
+            int k = 0;
+            int l = 2 * k + 1;
+            while (l < items.size()) {
+                int max = l;
+                int r = l + 1;
+                if (r < items.size()) // there is a right child
+                {
+                    if (items.get(k) > items.get(l)) {
+                        max++;
+                    }
+                }
+                if (items.get(k) < items.get(l)) { // switch
+                    int temp = items.get(k);
+                    items.set(k, items.get(max));
+                    items.set(max, temp);
+                    k = max;
+                    l = 2 * k + 1;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
     // Range sum query - Immutable
     // Given an integer array nums, find the sum of the elements between indices
     // i and j (i ≤ j), inclusive.
