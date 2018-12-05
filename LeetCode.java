@@ -345,7 +345,7 @@ public class LeetCode {
 	// this is the best method
 	// same as the way we found if the number is pallindrome or not.. only difference is in the while loop
 	public int reverseNumber(int x) {
-		long rev = 0;
+		long rev = 0;  //keep in mind reverse is long
 		while (x != 0) {
 			rev = rev * 10 + x % 10;
 			x = x / 10;
@@ -542,7 +542,7 @@ public class LeetCode {
 
 	// Q20 Valid Parentheses #TopInterviewQuestion
 	public boolean isValidParentheses(String s) {
-		Stack<Character> stack = new Stack<Character>();
+		Stack<Character> stack = new Stack<>();
 		for (char c : s.toCharArray()) {
 			if (c == '(')
 				stack.push(')');
@@ -1034,7 +1034,8 @@ public class LeetCode {
 		int valley ;
 		int maxProfit = 0;
 		int len = prices.length;
-		while (i < len - 1) {
+		while (i < len - 1) {  //remember the sign i is not <= as it checks the price[i+1]
+			// and therfore it will be i < len - 1
 			while (i < len - 1 && prices[i] >= prices[i + 1]) {// down
 				i++;
 			}
@@ -1305,8 +1306,7 @@ public class LeetCode {
 	}
 
 	// Q258 add digits #GoodQuestion
-	// Given a non-negative integer num, repeatedly add all its digits until the
-	// result has only one digit.
+	// Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
 	public int addDigits(int num) {
 		while (num > 9) {
 			int temp = 0;
@@ -1398,104 +1398,6 @@ public class LeetCode {
 				noSuchElement = true;
 			}
 		}
-	}
-
-	// Q345 Reverse Vowels of a string
-	// Write a function that takes a string as input and reverse only the vowels
-	// of a string.
-	public String reverseVowels(String s) {
-		if (s == null || s.length() == 0)
-			return s;
-		String vowels = "aeiouAEIOU";
-		char[] chars = s.toCharArray();
-		int start = 0;
-		int end = s.length() - 1;
-		while (start < end) {
-			while (start < end && !vowels.contains(chars[start] + "")) {
-				start++;
-			}
-			while (start < end && !vowels.contains(chars[end] + "")) {
-				end--;
-			}
-			char temp = chars[start];
-			chars[start] = chars[end];
-			chars[end] = temp;
-			start++;
-			end--;
-		}
-
-		return new String(chars);
-	}
-
-	// Q400 nth digit of a number #GoodQuestion #HardlyAsked
-	// Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ...
-	// To make the problem much much more easier, I divide the problem into 3 parts:
-	// calculate how many digits the number has. calculate what the muber is.
-	// find out which digit in the number is we want.
-	// You can find the relative code part in the code section.
-	// Here is an example to help you to understand my code:
-	// Example: // Input: 250
-	// After step 1, you will find that the 250th digit must belong to a 3-digit
-	// number,since 1~9 can only provide 9 digits and 10~99 can only provide 180
-	// digits.Here, n = 250 - 9 - 90 * 2 = 61, and digits = 3.
-	// In step 2, we will find the target number, which named as number in my  code.
-	// From step 1, the n becomes to 61, which means "the 61st digit in 3-digit  number is the digit
-	// we are looking for ."Easily, we know the 61st digit in 3-digit number belongs to number = 100
-	// + 61 / 3 = 100 + 20 = 120.index is the index of the target digit in number.
-	// If index equals to 0, it means the target digit is the last digit of number.
-	// // Step 3, from step 2, we know index = n % digits = 61 % 3 = 1,
-	// which means the target digit is the 1st digit in number. Then, return 1.
-	// check the below method. for better understanding
-	// https://www.youtube.com/watch?v=VKYnABegaEI
-	public static int findNthDigit(int n) {
-		// step 1. calculate how many digits the number has.
-		long base = 9;
-		int digits = 1;
-		while (n - base * digits > 0) {
-			n -= base * digits;
-			base *= 10;
-			digits++;
-		}
-		// step 2. calculate what the number is.
-		int index = n % digits;
-		if (index == 0)
-			index = digits;
-		long num = 1;
-		for (int i = 1; i < digits; i++)
-			num *= 10;
-		num += (index == digits) ? n / digits - 1 : n / digits;
-
-		// step 3. find out which digit in the number is we want.
-		for (int i = index; i < digits; i++)
-			num /= 10;
-		return (int) num % 10;
-	}
-
-	// Straight forward way to solve the problem in 3 steps:
-	// find the length of the number where the nth digit is from like 1-9 is 1
-	// 10-99 is 2 and 100-999 is 3
-	// find the actual number where the nth digit is from
-	// find the nth digit and return
-	public int findNthDigit2(int n) {
-		int len = 1;
-		long count = 9;
-		int start = 1;
-
-		while (n > len * count) {
-			n -= len * count;
-			len += 1;
-			count *= 10;
-			start *= 10;
-		}
-
-		// Step 2
-		start += (n - 1) / len;
-		// String s = Integer.toString(start);
-		String num = Integer.toString(start);
-
-		// Step 3
-		int index = num.charAt((n - 1) % len);
-		return Character.getNumericValue(index);
 	}
 
 	// Q67 Add Binary
@@ -1591,7 +1493,6 @@ public class LeetCode {
 	}
 
 //    best solution
-
 public int findDuplicate4(int[] nums) {
     int slow = 0, fast = 0;
     do {
@@ -2657,10 +2558,8 @@ public int findDuplicate4(int[] nums) {
 	}
 
 	// Q143 reorder list
-	// Given a singly linked list L: L0→L1→…→Ln-1→Ln,
-	// reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
-	// You must do this in-place without altering the nodes' values.
-	// For example,
+	// Given a singly linked list L: L0→L1→…→Ln-1→Ln, reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
+	// You must do this in-place without altering the nodes' values.  For example,
 	// Given {1,2,3,4}, reorder it to {1,4,2,3}.
 	// This question is a combination of Reverse a linked list I & II. Second method is a better one
 	public void reorderList(ListNode head) {
@@ -2828,13 +2727,10 @@ public int findDuplicate4(int[] nums) {
 	}
 
 	// Q162 find peak element #TopInterviewQuestion
-	// since we have to find only 1 peak element, it is very obvious that using
-	// binary search we can achieve that
-	// if a[mid]< a[mid-1] that means, we have atleast one element on the left
-	// which is a peak element
+	// since we have to find only 1 peak element, it is very obvious that using binary search we can achieve that
+	// if a[mid]< a[mid-1] that means, we have atleast one element on the left  which is a peak element
 	// else element is on the right this way complexity will be reduced to logn
-	// second/third method is better ...explained the concept before the third
-	// method
+	// second/third method is better ...explained the concept before the third  method
 	public static Integer getPeakElement(int[] array) {
 		if (array == null || array.length == 0) {
 			return null;
@@ -3370,9 +3266,8 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return ((double) maxSum) / ((double) k);
 	}
 
-	// Q53 maximum subarray #TopInterviewQuestion
-	// Given an integer array nums, find the contiguous subarray (containing at
-	// least one number) which has the largest sum and return its sum.
+// Q53 maximum subarray #TopInterviewQuestion
+// Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
 	public static int maxSubArray(int[] A) {
 		int maxSoFar = A[0], maxEndingHere = A[0];
 		for (int i = 1; i < A.length; ++i) {
@@ -3700,8 +3595,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 				// keep track of the max length
 				res = Math.max(res, sum);
 
-				// extend the length to the boundary(s) of the sequence will do
-				// nothing if n has no neighbors
+				// extend the length to the boundary(s) of the sequence will do nothing if n has no neighbors
 				map.put(n - left, sum);
 				map.put(n + right, sum);
 			} else {
@@ -3794,11 +3688,10 @@ private Queue<Integer> q1 = new LinkedList<>();
 			res.add(new ArrayList(path));
 		dfs(root.left, sum - root.val, res, path);
 		dfs(root.right, sum - root.val, res, path);
-		path.remove(path.size() - 1);
+		path.remove(path.size() - 1); //dont forget this line
 	}
 
-	// Iterative approach for the above same question. would be a little
-	// difficult in solving
+	// Iterative approach for the above same question. would be a little difficult in solving
 	public List<List<Integer>> pathSumII(TreeNode root, int sum) {
 		List<List<Integer>> res = new ArrayList<>();
 		List<Integer> path = new ArrayList<>();
@@ -3820,7 +3713,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 			}
 			if (cur.left == null && cur.right == null && SUM == sum)
 				res.add(new ArrayList<Integer>(path));
-
 			pre = cur;
 			stack.pop();
 			path.remove(path.size() - 1);
@@ -3836,8 +3728,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 	// Find the number of paths that sum to a given value.
 	// The path does not need to start or end at the root or a leaf, but it must
 	// go downwards (traveling only from parent nodes to child nodes).
-	// The tree has no more than 1,000 nodes and the values are in the range
-	// -1,000,000 to 1,000,000.
+	// The tree has no more than 1,000 nodes and the values are in the range -1,000,000 to 1,000,000.
 	// So the idea is similar as Two sum, using HashTable to store ( key : the
 	// prefix sum, value : how many ways get to this prefix sum) , and whenever
 	// reach a node, we check if prefix sum - target exists in hashmap or not,
@@ -3861,25 +3752,17 @@ private Queue<Integer> q1 = new LinkedList<>();
 				+ pathSumFrom(node.right, sum - node.val);
 	}
 
-	// Q34 Find First and Last Position of Element in Sorted Array
-	// #TopInterviewQuestion
-	// Search for a Range
+	// Search for a Range Q34 Find First and Last Position of Element in Sorted Array  #TopInterviewQuestion
 	// Given an array of integers sorted in ascending order, find the starting
 	// and ending position of a given target value.
 	// Your algorithm's runtime complexity must be in the order of O(log n).
 	// If the target is not found in the array, return [-1, -1].
 
-	// Solution: If A[mid] < target, then the range must begins on the right of
-	// mid (hence i = mid+1 for the next iteration)
-	// If A[mid] > target, it means the range must begins on the left of mid (j
-	// = mid-1)
-	// If A[mid] = target, then the range must begins on the left of or at mid
-	// (j= mid)
+	// Solution: If A[mid] < target, then the range must begins on the right of mid (hence i = mid+1 for the next iteration)
+	// If A[mid] > target, it means the range must begins on the left of mid (j = mid-1)
+	// If A[mid] = target, then the range must begins on the left of or at mid (j= mid)
 	// Since we would move the search range to the same side for case 2 and 3,
-	// we might as well merge them as one single case so that less code is
-	// needed:
-	//
-	// If A[mid] >= target, j = mid;
+	// we might as well merge them as one single case so that less code is  needed: If A[mid] >= target, j = mid;
 	public int[] searchRange2(int[] nums, int target) {
 		int[] result = new int[2];
 		result[0] = findFirst(nums, target);
@@ -3922,8 +3805,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 	// Q54 Spiral Matrix #TopInterviewQuestion
-	// Given a matrix of m x n elements (m rows, n columns), return all elements
-	// of the matrix in spiral order.
+	// Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
 	private static void spiralOrder(int[][] arr, int row, int column) {
 		int T = 0;
 		int B = row - 1;
@@ -3965,18 +3847,13 @@ private Queue<Integer> q1 = new LinkedList<>();
 		}
 	}
 
-	// generate matrix
-	// Spiral Matrix II
-	// Given an integer n, generate a square matrix filled with elements from 1
-	// to n2 in spiral order.
-	// For example,
-	// Given n = 3,
+	// generate matrix  Spiral Matrix II
+	// Given an integer n, generate a square matrix filled with elements from 1 // to n2 in spiral order.
+	// For example, Given n = 3,
 	// You should return the following matrix:
-	// [
-	// [ 1, 2, 3 ],
-	// [ 8, 9, 4 ],
-	// [ 7, 6, 5 ]
-	// ]
+	// [ [ 1, 2, 3 ],
+	//   [ 8, 9, 4 ],
+	//   [ 7, 6, 5 ] ]
 	public static int[][] generateMatrix(int n) {
 		int[][] ret = new int[n][n];
 		int left = 0, top = 0;
@@ -4072,7 +3949,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 // Q153 find minimum in rotated sorted array  . No Duplicates #GoodQuestion
-
 // Solution	If the first element is larger than the last one, then we compute the element in the middle,
 // and compare it with the first element. If value of the element in the middle is larger than the first
 // element, we know the rotation is at the second half of this array. Else, it is in the first half in the array.
@@ -4178,13 +4054,10 @@ private Queue<Integer> q1 = new LinkedList<>();
 		A[j] = temp;
 	}
 	// Q11 Container with Most Water #TopInterviewQuestion
-	// Given n non-negative integers a1, a2, ..., an, where each represents a
-	// point at coordinate (i, ai).
-	// n vertical lines are drawn such that the two endpoints of line i is at
-	// (i, ai) and (i, 0).
+	// Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai).
+	// n vertical lines are drawn such that the two endpoints of line i is at  (i, ai) and (i, 0).
 	// Find two lines, which together with x-axis forms a container, such that
-	// the container contains
-	// the most water.
+	// the container contains the most water.
 
 	// AKA, the general idea to find some max is to go through all cases where max value can possibly occur
 	// and keep updating the max value. The efficiency of the scan depends on the size of cases you plan to
@@ -8915,6 +8788,103 @@ public boolean canPartition(int[] nums) {
 		// System.out.println(findRelativeRanks(nums));
 	}
 
+	// Q345 Reverse Vowels of a string
+	// Write a function that takes a string as input and reverse only the vowels
+	// of a string.
+	public String reverseVowels(String s) {
+		if (s == null || s.length() == 0)
+			return s;
+		String vowels = "aeiouAEIOU";
+		char[] chars = s.toCharArray();
+		int start = 0;
+		int end = s.length() - 1;
+		while (start < end) {
+			while (start < end && !vowels.contains(chars[start] + "")) {
+				start++;
+			}
+			while (start < end && !vowels.contains(chars[end] + "")) {
+				end--;
+			}
+			char temp = chars[start];
+			chars[start] = chars[end];
+			chars[end] = temp;
+			start++;
+			end--;
+		}
+
+		return new String(chars);
+	}
+
+	// Q400 nth digit of a number #GoodQuestion #HardlyAsked
+	// Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ...
+	// To make the problem much much more easier, I divide the problem into 3 parts:
+	// calculate how many digits the number has. calculate what the muber is.
+	// find out which digit in the number is we want.
+	// You can find the relative code part in the code section.
+	// Here is an example to help you to understand my code:
+	// Example: // Input: 250
+	// After step 1, you will find that the 250th digit must belong to a 3-digit
+	// number,since 1~9 can only provide 9 digits and 10~99 can only provide 180
+	// digits.Here, n = 250 - 9 - 90 * 2 = 61, and digits = 3.
+	// In step 2, we will find the target number, which named as number in my  code.
+	// From step 1, the n becomes to 61, which means "the 61st digit in 3-digit  number is the digit
+	// we are looking for ."Easily, we know the 61st digit in 3-digit number belongs to number = 100
+	// + 61 / 3 = 100 + 20 = 120.index is the index of the target digit in number.
+	// If index equals to 0, it means the target digit is the last digit of number.
+	// // Step 3, from step 2, we know index = n % digits = 61 % 3 = 1,
+	// which means the target digit is the 1st digit in number. Then, return 1.
+	// check the below method. for better understanding
+	// https://www.youtube.com/watch?v=VKYnABegaEI
+	public static int findNthDigit(int n) {
+		// step 1. calculate how many digits the number has.
+		long base = 9;
+		int digits = 1;
+		while (n - base * digits > 0) {
+			n -= base * digits;
+			base *= 10;
+			digits++;
+		}
+		// step 2. calculate what the number is.
+		int index = n % digits;
+		if (index == 0)
+			index = digits;
+		long num = 1;
+		for (int i = 1; i < digits; i++)
+			num *= 10;
+		num += (index == digits) ? n / digits - 1 : n / digits;
+
+		// step 3. find out which digit in the number is we want.
+		for (int i = index; i < digits; i++)
+			num /= 10;
+		return (int) num % 10;
+	}
+
+	// Straight forward way to solve the problem in 3 steps:
+	// find the length of the number where the nth digit is from like 1-9 is 1
+	// 10-99 is 2 and 100-999 is 3
+	// find the actual number where the nth digit is from
+	// find the nth digit and return
+	public int findNthDigit2(int n) {
+		int len = 1;
+		long count = 9;
+		int start = 1;
+
+		while (n > len * count) {
+			n -= len * count;
+			len += 1;
+			count *= 10;
+			start *= 10;
+		}
+
+		// Step 2
+		start += (n - 1) / len;
+		// String s = Integer.toString(start);
+		String num = Integer.toString(start);
+
+		// Step 3
+		int index = num.charAt((n - 1) % len);
+		return Character.getNumericValue(index);
+	}
     // Assign Cookies
     // Assume you are an awesome parent and want to give your children some
     // cookies. But, you should give each child at most one cookie. Each child i
