@@ -20,7 +20,17 @@ public class primeFactors {
         return factors;
     }
 
+    public static int trailingZeroes(int n) {
+        int r = 0;
+        while (n > 0) {
+            n /= 5;
+            r += n;
+        }
+        return r;
+    }
+
     public static void main(String [] args){
-        System.out.println(primeFactors(44));
+    //    System.out.println(primeFactors(44));
+        System.out.println(trailingZeroes(50));
     }
 }

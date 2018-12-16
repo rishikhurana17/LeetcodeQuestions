@@ -88,7 +88,7 @@ public class LongestSubstring {
             }
             map.put(s.charAt(i) , i);
             max = Math.max(max , i - j + 1);
-
+            // String str = s.substring(j,i); check if this line works
         }
         return max;
     }
