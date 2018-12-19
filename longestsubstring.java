@@ -80,7 +80,6 @@ public class LongestSubstring {
         int max = Integer.MIN_VALUE;
         HashMap<Character, Integer> map = new HashMap<>();
         int j = 0;
-        String substring = "";
         for(int i = 0 ; i < s.length() ; i++){
             if(map.containsKey(s.charAt(i))){
 
@@ -103,7 +102,7 @@ public class LongestSubstring {
         HashMap<Character,Integer> map = new HashMap<>();
         for(int i=0 ; i < str.length() ; i++){
             if(map.get(str.charAt(i))!= null){
-                if( (i) - low> result.length()){
+                if( i - low> result.length()){
                     result = str.substring(low,i);
                 }
 

@@ -21,9 +21,38 @@ public class maximalSquare {
         return result * result;
     }
 
+    private static int maximumSizeSquareSubmatrixWithAllOnes(int[][] matrix) {
+        int maxSize = 0;
+        int r = matrix.length;
+        int c = matrix[0].length;
+        // Step 1
+        int[][] table = new int[r][c];
+
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                // Step 2 a
+                if (i == 0 || j == 0) {
+                    table[i][j] = matrix[i][j];
+                    maxSize = table[i][j] > maxSize ? table[i][j] : maxSize;
+                }
+                // Step 2 b
+                else if (matrix[i][j] == 0) {
+                    table[i][j] = 0;
+                }
+                // Step 2 c
+                else {
+                    table[i][j] = Math.min(table[i - 1][j - 1], Math.min(table[i - 1][j], table[i][j - 1])) + 1;
+                    maxSize = table[i][j] > maxSize ? table[i][j] : maxSize;
+                }
+            }
+        }
+
+        return maxSize;
+    }
+
     public static void main(String []args){
-        char [][]matrix = {{1,0,1,0,0},{1,0,1,1,1},{1,1,1,1,1},{1,0,0,1,0}};
-        System.out.println(maximalSquare(matrix));
+        int [][]matrix = {{1,0,1,0,0},{1,0,1,1,1},{1,1,1,1,1},{1,0,0,1,0}};
+        System.out.println(maximumSizeSquareSubmatrixWithAllOnes(matrix));
     }
 
 }

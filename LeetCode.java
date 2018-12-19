@@ -55,7 +55,7 @@ public class LeetCode {
 		int left = -1;
 		for (int j = 0; j < s.length(); j++) {
 			if (s.charAt(j) == '(')
-				stack.push(j);
+				stack.push(j); //index is pushed
 			else {
 				if (stack.isEmpty())
 					left = j;
@@ -1101,7 +1101,7 @@ public class LeetCode {
 	public int titletoNum(String s) {
 		int value = 0;
 		int power = 0;
-		if (s == null || s.length() == 0)// if enpty or null
+		if (s == null || s.length() == 0)// if empty or null
 			return -1;
 		for (int i = s.length() - 1; i >= 0; i--) {
 			value = value + ((int) Math.pow(26, power)) * ((int) s.charAt(i) - 64);
@@ -6229,7 +6229,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		result.add(newInterval);
 		return result;
 	}
-//----done till here
+
 	// K closest point #GoodQuestion
 	public Point[] findKClosestPoints(Point[] points, int k, Point target) {
 		if (points == null || points.length == 0 || k < 1 || k > points.length)
@@ -7217,7 +7217,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		for (int i = 0; i < n - m; i++) {
 			start.next = then.next;
 			then.next = pre.next;
-			pre.next = then;
+			pre.next = then;  // this is to remember
 			then = start.next;
 		}
 		// first reversing : dummy->1 - 3 - 2 - 4 - 5; pre = 1, start = 2, then = 4

@@ -8,24 +8,9 @@ import java.util.PriorityQueue;
  */
 
 
-    public class KthSmallestElement {
-//    public int kthSmallest(int[][] matrix, int k) {
-//        int lo = matrix[0][0], hi = matrix[matrix.length - 1][matrix[0].length - 1] + 1;//[lo, hi)
-//        while(lo < hi) {
-//            int mid = lo + (hi - lo) / 2;
-//            int count = 0,  j = matrix[0].length - 1;
-//            for(int i = 0; i < matrix.length; i++) {
-//                while(j >= 0 && matrix[i][j] > mid)
-//                    j--;
-//                count += (j + 1);
-//            }
-//            if(count < k) lo = mid + 1;
-//            else hi = mid;
-//        }
-//        return lo;
-//    }
+    public class KthSmallestElementMatrix {
 
-    // Note that it is the kth smallest element in the sorted order, not the kth distinct element.
+// Note that it is the kth smallest element in the sorted order, not the kth distinct element.
 // Solution : Build a minHeap of elements from the first row.
 // Do the following operations k-1 times :
 // Every time when you poll out the root(Top Element in Heap), you need to know the row number and column number
@@ -53,17 +38,32 @@ import java.util.PriorityQueue;
 
     public static void main(String[] args)
         {
-            KthSmallestElement solution = new KthSmallestElement();
+            KthSmallestElementMatrix solution = new KthSmallestElementMatrix();
 
             int [][] matrix = {
                      { 1,  5,  9},
                      {10, 11, 13},
-                     {12, 13, 15}
+                     {12, 14, 15}
             };
 
             System.out.println("kth smallest element = "
                     + solution.kthSmallest(matrix,8));
 
         }
+//    public int kthSmallest(int[][] matrix, int k) {
+//        int lo = matrix[0][0], hi = matrix[matrix.length - 1][matrix[0].length - 1] + 1;//[lo, hi)
+//        while(lo < hi) {
+//            int mid = lo + (hi - lo) / 2;
+//            int count = 0,  j = matrix[0].length - 1;
+//            for(int i = 0; i < matrix.length; i++) {
+//                while(j >= 0 && matrix[i][j] > mid)
+//                    j--;
+//                count += (j + 1);
+//            }
+//            if(count < k) lo = mid + 1;
+//            else hi = mid;
+//        }
+//        return lo;
+//    }
 
 }
