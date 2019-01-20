@@ -44,7 +44,7 @@ public class RomantoInt {
 	public static void main(String[] args) {
 
         //System.out.println(romanToInt("IVIV"));
-        System.out.println(romanToInt("IV"));
+        System.out.println(romanToInt("VI"));
 	}
 
 }

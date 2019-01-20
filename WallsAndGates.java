@@ -58,9 +58,9 @@ public class WallsAndGates {
             for(int j=0; i<m; j++) {
                 if(maze[i][j] == -1)
                     setDistance(maze, i,j+1,1);
-                setDistance(maze, i+1,j,1);
-                setDistance(maze, i-1,j,1);
-                setDistance(maze, i,j-1,1);
+                    setDistance(maze, i+1,j,1);
+                    setDistance(maze, i-1,j,1);
+                    setDistance(maze, i,j-1,1);
             }
         }
 

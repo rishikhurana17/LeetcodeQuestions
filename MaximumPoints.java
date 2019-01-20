@@ -82,7 +82,7 @@ public class MaximumPoints {
         return max;
     }
     public static void main(String [] args ){
-        Point P = new Point();
+        //Point P = new Point();
 
     }
 }

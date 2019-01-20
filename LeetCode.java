@@ -89,7 +89,7 @@ public class LeetCode {
 		return low;
 	}
 
-	// Q219 Contain duplicates II
+	// Q219 Contain duplicates II  #HardlyAsked
 	// Given an array of integers and an integer k, find out whether there are two distinct indices
 	// i and j in the array such that nums[i] = nums[j]
 	// and the absolute difference between i and j is at most k.
@@ -149,13 +149,8 @@ public class LeetCode {
 		return true;
 	}
 
-	// Q1 two sum 2 sum working solution .. accepted in LeetcodePrograms ..twosum
-	// #TopInterviewQuestion
-	// Q167 two sum II - input array is sorted .. accepted in LeetcodePrograms
-	// Given an array of integers, return indices of the two numbers such that
-	// they add up to a specific target.
-	// You may assume that each input would have exactly one solution, and you
-	// may not use the same element twice.
+	// Q1 two sum 2 sum working solution .. accepted in LeetcodePrograms ..twosum #TopInterviewQuestion
+
 	public int[] twoSum(int[] nums, int target) {
 		int[] resultIndex = new int[2];
 		HashMap<Integer, Integer> map = new HashMap<>();
@@ -172,6 +167,19 @@ public class LeetCode {
 		return resultIndex;
 	}
 
+	// Q167 two sum II - input array is sorted .. accepted in LeetcodePrograms
+	// Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+	// You may assume that each input would have exactly one solution, and you may not use the same element twice.
+	public int[] twoSum2(int[] numbers, int target) {
+
+		int start = 0, end = numbers.length - 1;
+		while (start < end) {
+			if (numbers[start] + numbers[end] == target) break;
+			if (numbers[start] + numbers[end] < target) start++;
+			else end--;
+		}
+		return new int[]{start + 1, end + 1};
+	}
 	// Q9 Pallindrome Number #GoodQuestion
 	// Determine whether an integer is a palindrome. An integer is a palindrome
 	// when it reads the same backward as forward.
@@ -205,16 +213,42 @@ public class LeetCode {
 		return (x == rev || x == rev / 10);
 	}
 
-	// Q31 next permutation ... #GoodQuestion
+    // Q125 Valid Palindrome #TopInterviewQuestion
+    // Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+    // Input: "A man, a plan, a canal: Panama" Output: true
+    public boolean isPalindrome(String s) {
+        if (s.isEmpty()) {
+            return true;
+        }
+        int head = 0, tail = s.length() - 1;
+        char cHead, cTail;
+        while (head <= tail) {
+            cHead = s.charAt(head);
+            cTail = s.charAt(tail);
+
+            if (!Character.isLetterOrDigit(cHead)) {
+                head++;
+            } else if (!Character.isLetterOrDigit(cTail)) {
+                tail--;
+            } else {
+                if (Character.toLowerCase(cHead) != Character.toLowerCase(cTail)) {
+                    return false;
+                }
+                head++;
+                tail--;
+            }
+        }
+        return true;
+    }
+
+    // Q31 next permutation ... #GoodQuestion
 	// [6，3，4，9，8，7，1]
 	//      i-1 i     k
 	// (1) leftward find the first decreasing number @ index i - 1, (4)
 	// (2) then nums[i:] must be rightward decreasing (9,8,7,1)
 	// (3) leftward find the first number that is larger than i - 1, which is at k, (7)
-	// (4) swap i - 1 with k, (6,3,7,9,8,4,1). we can see that nums[i:] will
-	// still be rightward decreasing (9,8,4,1)
-	// (5) But we need them to be rightward increasing so that it's the smallest
-	// after swapping, so we reversed nums[i:],
+	// (4) swap i - 1 with k, (6,3,7,9,8,4,1). we can see that nums[i:] will still be rightward decreasing (9,8,4,1)
+	// (5) But we need them to be rightward increasing so that it's the smallest after swapping, so we reversed nums[i:],
 	// which get the result (6,3,7,1,4,8,9)
 	public static void nextPermutation(int[] nums) {
 		if (nums.length <= 1) {
@@ -222,14 +256,12 @@ public class LeetCode {
 		}
 		int i = nums.length - 1;
 		for (; i >= 1; i--) {
-			if (nums[i] > nums[i - 1]) { // find first number which is smaller
-											// than it's after number
+			if (nums[i] > nums[i - 1]) { // find first number which is smaller than it's after number
 				break;
 			}
 		}
 		if (i != 0) {
-			swap(nums, i - 1); // if the number exist,which means that the nums
-								// not like{5,4,3,2,1}
+			swap(nums, i - 1); // if the number exist,which means that the nums  not like{5,4,3,2,1}
 		}
 		reverse(nums, i);
 	}
@@ -245,8 +277,7 @@ public class LeetCode {
 		}
 	}
 
-	private static void reverse(int[] a, int i) {// reverse the number after the
-													// number we have found
+	private static void reverse(int[] a, int i) {// reverse the number after the number we have found
 		int first = i;
 		int last = a.length - 1;
 		while (first < last) {
@@ -285,8 +316,7 @@ public class LeetCode {
 	}
 
 	// Q118 Pascal Triangle #TopInterviewQuestion
-	// Given a non-negative integer numRows, generate the first numRows of
-	// Pascal's triangle. //this solution is better
+	// Given a non-negative integer numRows, generate the first numRows of Pascal's triangle. This solution is better
 	public static List<List<Integer>> pascalTriangle(int numRows) {
 		List<List<Integer>> result = new ArrayList<>();
 		if (numRows <= 0)
@@ -300,7 +330,7 @@ public class LeetCode {
 			for (int j = 0; j < pre.size() - 1; j++) {
 				cur.add(pre.get(j) + pre.get(j + 1)); // middle
 			}
-			cur.add(1);// last
+			cur.add(1); // last
 			result.add(cur);
 			pre = cur;
 		}
@@ -591,7 +621,7 @@ public class LeetCode {
 		return true;
 	}
 
-	// Q80 remove duplicates from the sorted array II
+	// Q80 remove duplicates from the sorted array II  #HardlyAsked
 	// What if duplicates are allowed at most twice?
 	// I think both Remove Duplicates from Sorted Array I and II could be solved in a consistent
 	// and more general way by allowing the duplicates to appear k times (k = 1 for problem I and k = 2 for problem II).
@@ -684,6 +714,11 @@ public class LeetCode {
 		return -1;
 	}
 
+	//  Second Method
+    public int strStr2(String haystack, String needle) {
+        return haystack.indexOf(needle);
+    }
+
 	// Given a sorted array and a target value, return the index if the target
 	// is found. If not, return the index where it would be if it were inserted in order.
 	public static int SearchInsertPosition(int A[], int target) {
@@ -765,8 +800,7 @@ public class LeetCode {
 	}
 
 	// Q152 Maximum Product SubArray #TopInterviewQuestion
-	// Find the contiguous subarray within an array (containing at least one
-	// number) which has the largest sum.
+	// Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
 	// For example, given the array [-2,1,-3,4,-1,2,1,-5,4],
 	// the contiguous subarray [4,-1,2,1] has the largest sum = 6.
 	public void maximumSubArray(int[] nums) {
@@ -779,7 +813,19 @@ public class LeetCode {
 		System.out.println("max is " + max);
 	}
 
-	// Q70 Climbing stairs problem #TopInterviewQuestion
+// Q53 maximum subarray #TopInterviewQuestion
+// Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+    public static int maxSubArray(int[] A) {
+        int maxSoFar = A[0], maxEndingHere = A[0];
+        for (int i = 1; i < A.length; ++i) {
+            maxEndingHere = Math.max(maxEndingHere + A[i], A[i]);
+            maxSoFar = Math.max(maxSoFar, maxEndingHere);
+        }
+        return maxSoFar;
+    }
+
+
+    // Q70 Climbing stairs problem #TopInterviewQuestion
 	// You are climbing a stair case. It takes n steps to reach to the top.
 	// Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 	public int fibonacciSeriesRecursive(int n) {
@@ -820,7 +866,28 @@ public class LeetCode {
 		return false;
 	}
 
-	// Q83 Remove Duplicates from sorted list I
+    // Q69 Sqrt(x) #TopInterviewQuestion
+    // Find the square root of a number
+    public static int sqrt(int x) {
+        if (0 == x)
+            return 0;
+        int left = 1, right = x;
+        int ans = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (mid <= x / mid) {
+                left = mid + 1;
+                ans = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return ans;
+    }
+
+
+
+    // Q83 Remove Duplicates from sorted list I
 	public ListNode deleteDuplicates(ListNode head) {
 		ListNode current = head;
 		while (current != null && current.next != null) {
@@ -1050,35 +1117,6 @@ public class LeetCode {
 		return maxProfit;
 	}
 
-	// Q125 Valid Palindrome #TopInterviewQuestion
-	// Given a string, determine if it is a palindrome, considering only
-	// alphanumeric characters and ignoring cases.
-	// Input: "A man, a plan, a canal: Panama" Output: true
-	public boolean isPalindrome(String s) {
-		if (s.isEmpty()) {
-			return true;
-		}
-		int head = 0, tail = s.length() - 1;
-		char cHead, cTail;
-		while (head <= tail) {
-			cHead = s.charAt(head);
-			cTail = s.charAt(tail);
-
-			if (!Character.isLetterOrDigit(cHead)) {
-				head++;
-			} else if (!Character.isLetterOrDigit(cTail)) {
-				tail--;
-			} else {
-				if (Character.toLowerCase(cHead) != Character.toLowerCase(cTail)) {
-					return false;
-				}
-				head++;
-				tail--;
-			}
-		}
-		return true;
-	}
-
 // Q136 Given an array of integers, every element appears twice except for one.Find that single one. #TopInterviewQuestion
 	public int singleNumber(int A[], int n) {
 		int result = A[0];
@@ -1236,11 +1274,9 @@ public class LeetCode {
 
 	// Q202 Happy Number #TopInterviewQuestion
 	// A happy number is a number defined by the following process:
-	// Starting with any positive integer, replace the number by the sum of the
-	// squares of its digits,
-	// and repeat the process until the number equals 1 (where it will stay), or
-	// it loops endlessly in a cycle which does not include 1. Those numbers for
-	// which this process ends in 1 are happy numbers.
+	// Starting with any positive integer, replace the number by the sum of the squares of its digits,
+	// and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle
+    // which does not include 1. Those numbers for which this process ends in 1 are happy numbers.
 	// Example: 19 is a happy number
 	// 12 + 92 = 82
 	// 82 + 22 = 68
@@ -1420,8 +1456,7 @@ public class LeetCode {
 			int sum = carry;
 			if (j >= 0)
 				sum += b.charAt(j--) - '0';
-			// '0' is for converting the char to its actual int value, otherwise
-			// the returned int is its ascii value
+			// '0' is for converting the char to its actual int value, otherwise the returned int is its ascii value
 			if (i >= 0)
 				sum += a.charAt(i--) - '0';
 			sb.append(sum % 2);
@@ -1572,8 +1607,7 @@ public int findDuplicate4(int[] nums) {
 	}
 
 	// Q204 Count Primes #TopInterviewQuestion
-	// the below two method is useful for counting the number of primes lesser
-	// than the given number
+	// the below two method is useful for counting the number of primes lesser than the given number
 	public static int countNumberofPrime(int n) {
 		int start = 2;
 		int count = 0;
@@ -1730,7 +1764,6 @@ public int findDuplicate4(int[] nums) {
 		if (root == null) {
 			return ret;
 		}
-
 		Stack<TreeNode> stack = new Stack<>();
 		Stack<String> path_stack = new Stack<>();
 		stack.push(root);
@@ -2198,6 +2231,31 @@ public int findDuplicate4(int[] nums) {
 		return (n % 2 == 0) ? pow(x * x, n / 2) : x * pow(x * x, n / 2);
 	}
 
+	//another way of doing the same method
+	public double myPow(double x, int n) {
+		double res=1;
+		while(n!=0)
+		{
+			if(n%2==0) {
+				x=x*x;
+				n/=2;
+			}
+			else {
+				if(n>0)
+				{
+					res*=x;
+					n--;
+				}
+				else
+				{
+					res/=x;
+					n++;
+				}
+			}
+		}
+		return res;
+	}
+
 	// Q43 Multiply String
 	// Given two non-negative integers num1 and num2 represented as strings,
 	// return the product of num1 and num2, also represented as a string.
@@ -2467,11 +2525,10 @@ public int findDuplicate4(int[] nums) {
 	// copy random pointers for all newly created nodes
 	// break the list to two
 	// Definition for singly-linked list with a random pointer.
-	// class RandomListNode {
-	// int label;
-	// RandomListNode next, random;
-	// RandomListNode(int x) { this.label = x; }
-	// };
+	// class RandomListNode { int label;
+                                // RandomListNode next, random;
+                                // RandomListNode(int x) { this.label = x; }
+	                            // };
 	public RandomListNode copyRandomList(RandomListNode head) {
 		if (head == null)
 			return null;
@@ -2506,6 +2563,7 @@ public int findDuplicate4(int[] nums) {
 	}
 
 // Q419 battleships in the board #GoodQuestion
+// At least one horizontal or vertical cell separates between two battleships - there are no adjacent battleships.
 // Solution : Going over all cells, we can count only those that are the "first" cell of the battleship.
 // First cell will be defined as the most top-left cell. We can check for first cells by only counting cells
 // that do not have an 'X' to the left and do not have an 'X' above them
@@ -2965,7 +3023,8 @@ public int findDuplicate4(int[] nums) {
 	}
 
 	// Q452 Minimum Number of Arrows to Burst Balloons #GoodQuestion #HardlyAsked
-	public int findMinArrowShots(int[][] points) {
+    // [[10,16], [2,8], [1,6], [7,12]]
+    public int findMinArrowShots(int[][] points) {
 		if (points.length == 0) {
 			return 0;
 		}
@@ -3023,10 +3082,8 @@ public int findDuplicate4(int[] nums) {
 	}
 	// Q223 Rectangle Area #GoodQuestion
 	// Find the total area covered by two rectilinear rectangles in a 2D plane.
-	// Each rectangle is defined by its bottom left corner and top right corner
-	// as shown in the figure.
-	// Rectangle Area.Assume that the total area is never beyond the maximum
-	// possible value of int.
+	// Each rectangle is defined by its bottom left corner and top right corner as shown in the figure.
+	// Rectangle Area.Assume that the total area is never beyond the maximum possible value of int.
 	// compute the intersection area
 	// first square left bottom co-ordinates (A,B) right top (C,D)
 	// second square left bottom co-ordinates (E,F) right top (G,H)
@@ -3272,17 +3329,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return ((double) maxSum) / ((double) k);
 	}
 
-// Q53 maximum subarray #TopInterviewQuestion
-// Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
-	public static int maxSubArray(int[] A) {
-		int maxSoFar = A[0], maxEndingHere = A[0];
-		for (int i = 1; i < A.length; ++i) {
-			maxEndingHere = Math.max(maxEndingHere + A[i], A[i]);
-			maxSoFar = Math.max(maxSoFar, maxEndingHere);
-		}
-		return maxSoFar;
-	}
-
 	// Q58 Length of the last word
 	// Given a string s consists of upper/lower-case alphabets and empty space
 	// characters ' ', return the length of last word in the string.
@@ -3297,25 +3343,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 				break;
 		}
 		return count;
-	}
-
-	// Q69 Sqrt(x) #TopInterviewQuestion
-	// Find the square root of a number
-	public static int sqrt(int x) {
-		if (0 == x)
-			return 0;
-		int left = 1, right = x;
-		int ans = -1;
-		while (left <= right) {
-			int mid = left + (right - left) / 2;
-			if (mid <= x / mid) {
-				left = mid + 1;
-				ans = mid;
-			} else {
-				right = mid - 1;
-			}
-		}
-		return ans;
 	}
 
 	// Q637 Average of levels in binary tree #GoodQuestion
@@ -4231,7 +4258,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return res;
 	}
 
-//----starting from here
 	// Q120 Triangle #GoodQuestion
 	// Given a triangle, find the minimum path sum from top to bottom. Each stepyou may move to adjacent numbers on the row below.
 	// For example, given the following triangle
@@ -4277,12 +4303,9 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 	// Q179 largest number #TopInterviewQuestino
-	// Given a list of non negative integers, arrange them such that they form
-	// the largest number.
-	// For example, given [3, 30, 34, 5, 9], the largest formed number is
-	// 9534330.
-	// Note: The result may be very large, so you need to return a string
-	// instead of an integer.
+	// Given a list of non negative integers, arrange them such that they form the largest number.
+	// For example, given [3, 30, 34, 5, 9], the largest formed number is 9534330.
+	// Note: The result may be very large, so you need to return a string instead of an integer.
 	public String largestNumber(int[] num) {
 		if (num == null || num.length == 0)
 			return "";
@@ -4297,7 +4320,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 			public int compare(String o1, String o2) {
 				String s1 = o1 + o2;
 				 String s2=o2+o1;
-				return o2.compareTo(o1);
+				return s2.compareTo(s1);
 			}
 		});
 		// Comparator to decide which string should come first in concatenation
@@ -4326,7 +4349,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 
 	}
 
-// Q134 Gas Station #TopInterviewQuestion
+// Q134 Gas Station #TopInterviewQuestion #OnlyGoogleAsked
 // There are N gas stations along a circular route, where the amount of gas at station i is gas[i].
 // You have a car with an unlimited gas tank and it costs cost[i] of gas to travel from station i to its next station (i+1).
 // You begin the journey with an empty tank at one of the gas stations. Return the starting gas station's index if you can
@@ -4600,10 +4623,8 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return list;
 	}
 
-	// Q221 Maximal square #GoodQuestion
-
-	// Given a 2D binary matrix filled with 0's and 1's, find the largest square
-	// containing only 1's and return its area.
+	// Q221 Maximal square #GoodQuestion  #SecondWayIsBetter
+	// Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
 //    https://www.youtube.com/watch?v=aYnEO53H4lw
 	// For example, given the following matrix:
 	// 1 0 1 0 0
@@ -4628,10 +4649,37 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return result * result;
 	}
 
+	private static int maximumSizeSquareSubmatrixWithAllOnes(int[][] matrix) {
+		int maxSize = 0;
+		int r = matrix.length;
+		int c = matrix[0].length;
+		int[][] table = new int[r][c];
+		for (int i = 0; i < r; i++) {
+			for (int j = 0; j < c; j++) {
+				if (i == 0 || j == 0) {
+					table[i][j] = matrix[i][j];
+					maxSize = table[i][j] > maxSize ? table[i][j] : maxSize;
+				}
+				else if (matrix[i][j] == 0) {
+					table[i][j] = 0;
+                }
+                else {
+					table[i][j] = min(table[i - 1][j - 1], table[i - 1][j], table[i][j - 1]) + 1;
+					maxSize = table[i][j] > maxSize ? table[i][j] : maxSize;
+				}
+			}
+        }
+		return maxSize;
+	}
+
+			    private static int min(int i, int j, int k) {
+			        return i <= j && i <= k ? i : (j <= i && j <= k ? j : k);
+			    }
+
+
 	// Maximal rectangle
 	// Given a 2D binary matrix filled with 0's and 1's, find the largest square
-	// containing only 1's and return its area.
-	// For example, given the following matrix:
+	// containing only 1's and return its area. For example, given the following matrix:
 	// 1 0 1 0 0
 	// 1 0 1 1 1
 	// 1 1 1 1 1
@@ -4752,11 +4800,9 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 	// Q173 Binary Search Tree Iterator BST iterator #GoodQuestion
-	// Implement an iterator over a binary search tree (BST). Your iterator will
-	// be initialized with the root node of a BST.
+	// Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
 	// Calling next() will return the next smallest number in the BST.
-	// Note: next() and hasNext() should run in average O(1) time and uses O(h)
-	// memory, where h is the height of the tree.
+	// Note: next() and hasNext() should run in average O(1) time and uses O(h) memory, where h is the height of the tree.
 	private Stack<TreeNode> stack = new Stack<>();
 
 	public void constructor(TreeNode root) {
@@ -4771,7 +4817,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 	/** @return the next smallest number */
 	public int next() {
 		TreeNode tmpNode = stack.pop();
-		pushAll(tmpNode.right);
+		pushAll(tmpNode.right);  //important step
 		return tmpNode.val;
 	}
 
@@ -4792,8 +4838,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 	Stack<Integer> stack1 = new Stack<Integer>();
 
 	public void push(int x) {
-		// only push the old minimum value when the current minimum value
-		// changes after pushing the new value x
+		// only push the old minimum value when the current minimum value changes after pushing the new value x
 		if (x <= min1) {
 			stack1.push(min1);
 			min1 = x;
@@ -4802,10 +4847,8 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 	public void pop() {
-		// if pop operation could result in the changing of the current minimum
-		// value,
-		// pop twice and change the current minimum value to the last minimum
-		// value.
+		// if pop operation could result in the changing of the current minimum value,
+		// pop twice and change the current minimum value to the last minimum value.
 		if (stack1.pop() == min1)
 			min1 = stack1.pop();
 	}
@@ -4900,8 +4943,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 						vertical++;
 					}
 				} else {
-//					double slope = points[j].y == points[i].y ? 0.0
-//							: (1.0 * (points[j].y - points[i].y)) / (points[j].x - points[i].x);
+// double slope = points[j].y == points[i].y ? 0.0 : (1.0 * (points[j].y - points[i].y)) / (points[j].x - points[i].x);
                     double slope = (double) (points[j].y - points[i].y) / (double) (points[j].x - points[i].x);
 					if (result.get(slope) != null) {
 						result.put(slope, result.get(slope) + 1);
@@ -4991,7 +5033,8 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 // Q253 Meeting Rooms II #TopInterviewQuestion
-// Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] find the minimum number of conference rooms required.
+// Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...]
+// find the minimum number of conference rooms required.
 	public int minMeetingRooms(Interval[] intervals) {
 		if (intervals == null || intervals.length == 0)
 			return 0;
@@ -5488,14 +5531,12 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 // Q378 kth smallest element in the sorted matrix #TopInterviewQuestion
-// Given a n x n matrix where each of the rows and columns are sorted in ascending order, find the kth smallest element
-// in the matrix.
+// Given a n x n matrix where each of the rows and columns are sorted in ascending order, find the kth smallest element in the matrix.
 // Note that it is the kth smallest element in the sorted order, not the kth distinct element.
 // Solution : Build a minHeap of elements from the first row. Do the following operations k-1 times :
 // Every time when you poll out the root(Top Element in Heap), you need to
 // know the row number and column number of that element(so we can create a tuple class here), replace that root
-// with the next element from the same column.
-// explained it very well https://www.youtube.com/watch?v=zIaMTdBQT34&t=309s
+// with the next element from the same column. explained it very well https://www.youtube.com/watch?v=zIaMTdBQT34&t=309s
     public int kthSmallest(int[][] matrix, int k) {
         int n = matrix.length;
         PriorityQueue<Tuple> pq = new PriorityQueue<>();
@@ -5594,8 +5635,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return results;
 	}
 
-	// or another way is below
-	// use treeMap. Use freqncy as the key so we can get all freqencies in order
+	// or another way is below. Use treeMap. Use freqncy as the key so we can get all freqencies in order
 	public List<Integer> topKFrequent2(int[] nums, int k) {
 		Map<Integer, Integer> map = new HashMap<>();
 		for (int n : nums) {
@@ -5622,10 +5662,8 @@ private Queue<Integer> q1 = new LinkedList<>();
 
 
 	// Q341 Flatten Nest List Iterator #TopInterviewQuestion
-	// In the constructor, we push all the nestedList into the stack from back
-	// to front, so when we pop the stack,
-	// it returns the very first element. Second, in the hasNext() function, we
-	// peek the first element in stack currently,
+	// In the constructor, we push all the nestedList into the stack from back to front, so when we pop the stack,
+	// it returns the very first element. Second, in the hasNext() function, we peek the first element in stack currently,
 	// and if it is an Integer, we will return true and pop the element. If it
 	// is a list, we will further flatten it.
 	// This is iterative version of flatting the nested list. Again, we need to
