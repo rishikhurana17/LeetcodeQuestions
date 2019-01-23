@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class Trie {
 
-    private class TrieNode {
+    public class TrieNode {
         Map<Character, TrieNode> children;
         boolean endOfWord;
 

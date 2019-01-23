@@ -2459,6 +2459,31 @@ public int findDuplicate4(int[] nums) {
 		return head;
 	}
 
+	// Q19 Remove Nth Node From End of List #TopInterviewQuestion
+	// Given a linked list, remove the nth node from the end of list and return its head.
+
+	// A one pass solution can be done using pointers.Move one pointer fast --> n+1 places forward,
+	// to maintain a gap of n between the two pointers and then move both at the same speed. Finally,
+	// when the fast pointer reaches the end,the slow pointer will be n+1 places behind - just the right spot
+	// for it to be able to skip the next node.Since the question gives that n is valid, not too many checks
+	// have to be put in place. Otherwise, this would be necessary.
+	public ListNode removeNthFromEnd(ListNode head, int n) {
+		ListNode start = new ListNode(0);
+		ListNode slow = start, fast = start;
+		slow.next = head; // Move fast in front so that the gap between slow and
+		// fast becomes n
+		for (int i = 1; i <= n + 1; i++) {
+			fast = fast.next;
+		}
+		// Move fast to the end, maintaining the gap
+		while (fast != null) {
+			slow = slow.next;
+			fast = fast.next;
+		}
+		// Skip the desired node
+		slow.next = slow.next.next;
+		return start.next;
+	}
 	// Q116 populating next right pointers in each node #TopInterviewQuestion
 	// both of the below methods are good
 	// perfect binary tree..that means every parent has two children
@@ -7236,7 +7261,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		p.next = null;
 	}
 
-	// Reverse Linked List II #GoodQuestion
+	// Q92 Reverse Linked List II #GoodQuestion
 	// Reverse a linked list from position m to n. Do it in-place and in one-pass. For example:
 	// Given 1->2->3->4->5->NULL, m = 2 and n = 4, return 1->4->3->2->5->NULL.
 	public ListNode reverseBetween(ListNode head, int m, int n) {
@@ -7415,67 +7440,6 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		return head.next;
 	}
 
-	// Q21 merge two sorted (linked) lists #TopInterviewQuestion
-	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-		if (l1 == null)
-			return l2;
-		if (l2 == null)
-			return l1;
-		if (l1.val < l2.val) {
-			l1.next = mergeTwoLists(l1.next, l2);
-			return l1;
-		} else {
-			l2.next = mergeTwoLists(l2.next, l1);
-			return l2;
-		}
-	}
-
-	// Non recursive Approach
-	public ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
-		if (l1 == null || l2 == null) {
-			return l1 == null ? l2 : l1;
-		}
-		ListNode head = new ListNode(-1), ptr = head;
-		while (l1 != null && l2 != null) {
-			if (l1.val <= l2.val) {
-				ptr.next = l1;
-				l1 = l1.next;
-			} else {
-				ptr.next = l2;
-				l2 = l2.next;
-			}
-			ptr = ptr.next;
-		}
-		ptr.next = l1 == null ? l2 : l1;
-		return head.next;
-	}
-
-	// Q19 Remove Nth Node From End of List #TopInterviewQuestion
-	// Given a linked list, remove the nth node from the end of list and return its head.
-
-	// A one pass solution can be done using pointers.Move one pointer fast --> n+1 places forward,
-	// to maintain a gap of n between the two pointers and then move both at the same speed. Finally,
-	// when the fast pointer reaches the end,the slow pointer will be n+1 places behind - just the right spot
-	// for it to be able to skip the next node.Since the question gives that n is valid, not too many checks
-	// have to be put in place. Otherwise, this would be necessary.
-	public ListNode removeNthFromEnd(ListNode head, int n) {
-		ListNode start = new ListNode(0);
-		ListNode slow = start, fast = start;
-		slow.next = head; // Move fast in front so that the gap between slow and
-							// fast becomes n
-		for (int i = 1; i <= n + 1; i++) {
-			fast = fast.next;
-		}
-		// Move fast to the end, maintaining the gap
-		while (fast != null) {
-			slow = slow.next;
-			fast = fast.next;
-		}
-		// Skip the desired node
-		slow.next = slow.next.next;
-		return start.next;
-	}
-
 	// Dynamic Programming
 	// Q300 Length of longest increasing subsequence #TopInterviewQuestion
 	// Given an unsorted array of integers, find the length of longest
@@ -7621,15 +7585,6 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	// A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
 	// The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner
 	// of the grid (marked 'Finish' in the diagram below). How many possible unique paths are there?
-
-	// This is a fundamental DP problem. First of all, let's make some observations.
-	// Since the robot can only move right and down, when it arrives at a point, there are only two possibilities:
-	// It arrives at that point from above (moving down to that point); It arrives at that point from left (moving right to that point).
-	// Thus, we have the following state equations: suppose the number of paths to arrive at a point (i, j) is denoted
-	// as P[i][j], it is easily concluded that P[i][j] = P[i - 1][j] + P[i][j - 1]. The boundary conditions of the above equation occur at the leftmost
-	// column (P[i][j - 1] does not exist) and the uppermost row (P[i - 1][j] does not exist). These conditions can
-	// be handled by initialization (pre-processing) initialize P[0][j] = 1, P[i][0] = 1 for all valid i, j. Note the initial
-	// value is 1 instead of 0!
 
 	public int uniquePaths(int m, int n) {
 		Integer[][] map = new Integer[m][n];
@@ -8093,13 +8048,46 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
         return l2;
         }
 
+	// Q21 merge two sorted (linked) lists #TopInterviewQuestion
+	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+		if (l1 == null)
+			return l2;
+		if (l2 == null)
+			return l1;
+		if (l1.val < l2.val) {
+			l1.next = mergeTwoLists(l1.next, l2);
+			return l1;
+		} else {
+			l2.next = mergeTwoLists(l2.next, l1);
+			return l2;
+		}
+	}
+
+	// Non recursive Approach
+	public ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
+		if (l1 == null || l2 == null) {
+			return l1 == null ? l2 : l1;
+		}
+		ListNode head = new ListNode(-1), ptr = head;
+		while (l1 != null && l2 != null) {
+			if (l1.val <= l2.val) {
+				ptr.next = l1;
+				l1 = l1.next;
+			} else {
+				ptr.next = l2;
+				l2 = l2.next;
+			}
+			ptr = ptr.next;
+		}
+		ptr.next = l1 == null ? l2 : l1;
+		return head.next;
+	}
+
 	// Backtracking Questions
 
 	// Q130 Surrounded Regions #TopInterviewQuestion
-	// Given a 2D board containing 'X' and 'O' (the letter O), capture all
-	// regions surrounded by 'X'.
-	// A region is captured by flipping all 'O's into 'X's in that surrounded
-	// region.
+	// Given a 2D board containing 'X' and 'O' (the letter O), capture all regions surrounded by 'X'.
+	// A region is captured by flipping all 'O's into 'X's in that surrounded region.
 	// For example,
 	// X X X X
 	// X O O X
@@ -8107,7 +8095,6 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	// X O X X
 
 	// After running your function, the board should be:
-	//
 	// X X X X
 	// X X X X
 	// X X X X
@@ -8420,7 +8407,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	Set<String> res = new HashSet<String>();
 
 	public List<String> findWords(char[][] board, String[] words) {
-		Trie trie = new Trie();
+		WordSearchTrie trie = new WordSearchTrie();
 		for (String word : words) {
 			trie.insert(word);
 		}
@@ -8435,7 +8422,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		return new ArrayList<String>(res);
 	}
 
-	public void dfs(char[][] board, boolean[][] visited, String str, int x, int y, Trie trie) {
+	public void dfs(char[][] board, boolean[][] visited, String str, int x, int y, WordSearchTrie trie) {
 		if (x < 0 || x >= board.length || y < 0 || y >= board[0].length)
 			return;
 		if (visited[x][y])
@@ -8632,8 +8619,7 @@ public boolean canPartition(int[] nums) {
 	}
 
 	// Q90 Subsets II
-	// Given a collection of integers that might contain duplicates, nums,
-	// return all possible subsets (the power set).
+	// Given a collection of integers that might contain duplicates, nums, return all possible subsets (the power set).
 	public List<List<Integer>> subsetsWithDup(int[] num) {
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		List<Integer> empty = new ArrayList<Integer>();
