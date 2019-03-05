@@ -34,7 +34,7 @@ public class MinimumArrowsToBurstBalloons {
     }
 
     public static void main(String [] args){
-        int [][]points = {{10,16}, {2,8}, {1,10}, {7,12}};
+        int [][]points = {{1,3}, {2,8}, {7,12}, {10,16}};
         System.out.println(findMinArrowShots(points));
     }
 }

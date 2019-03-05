@@ -20,15 +20,19 @@ public class FindMedian {
         if (even) {
 
             large.offer(num);
-            small.offer(large.poll());
+            int x = large.poll();
+            System.out.println(x);
+            small.offer(x);
         } else {
             small.offer(num);
-            large.offer(small.poll());
+            int x = small.poll();
+            System.out.println(x);
+
+            large.offer(x);
         }
         even = !even;
         System.out.println("Small " + small.peek());
         System.out.println("large " + large.peek());
-
     }
 
     public static void main(String [] args){
@@ -37,6 +41,9 @@ public class FindMedian {
         findMedian.addNum(3);
         findMedian.addNum(1);
         findMedian.addNum(5);
+        findMedian.addNum(6);
+        findMedian.addNum(10);
+        findMedian.addNum(9);
         System.out.println(findMedian.findMedian());
 
 

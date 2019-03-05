@@ -62,7 +62,6 @@ public class ListIterator2 {
 				this.currentIndex =0;
 				this.currentList++;
 				canRemove = true;
-
 				return thisList.get(temp);
 			}
 			else if (this.currentIndex < thisList.size()){

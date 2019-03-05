@@ -22,6 +22,8 @@ public class BTMaximumPathSum {
         return Math.max(left, right) + node.val;
     }
 
+
+
     public static void main(String [] args){
         BTMaximumPathSum tree = new BTMaximumPathSum();
         tree.root = new TreeNode(10);

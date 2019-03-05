@@ -42,7 +42,13 @@ public class integerComplement {
 		return i - num;
 	}
 
+	public static int findComplement2(int num) {
+		String s = Integer.toBinaryString(num);
+		int t = (int) (Math.pow(2, s.length()) - 1);
+		return t - num;
+	}
+
 	public static void main(String[] args) {
-		System.out.println(findComplement(10));
+		System.out.println(findComplement2(5));
 	}
 }

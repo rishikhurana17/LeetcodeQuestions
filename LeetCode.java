@@ -34,6 +34,7 @@
 // implement n-ary tree
 // design tic tac toe
 // Remove invalid parenthesis #facebook
+//https://stackoverflow.com/questions/32594710/generate-all-combinations-of-mathematical-expressions-that-add-to-target-java-h
 
 package LeetcodePrograms;
 
@@ -287,32 +288,6 @@ public class LeetCode {
 			first++;
 			last--;
 		}
-	}
-
-	// Q33 Search in a rotated sorted array #TopInterviewQuestion
-	public int search(int[] nums, int target) {
-		int start = 0;
-		int end = nums.length - 1;
-		while (start <= end) {
-			int mid = (start + end) / 2;
-			if (nums[mid] == target)
-				return mid;
-
-			if (nums[start] <= nums[mid]) {
-				if (target < nums[mid] && target >= nums[start])
-					end = mid - 1;
-				else
-					start = mid + 1;
-			}
-
-			if (nums[mid] <= nums[end]) { // right half is sorted
-				if (target > nums[mid] && target <= nums[end])
-					start = mid + 1;
-				else
-					end = mid - 1;
-			}
-		}
-		return -1;
 	}
 
 	// Q118 Pascal Triangle #TopInterviewQuestion
@@ -801,8 +776,7 @@ public class LeetCode {
 
 	// Q152 Maximum Product SubArray #TopInterviewQuestion
 	// Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
-	// For example, given the array [-2,1,-3,4,-1,2,1,-5,4],
-	// the contiguous subarray [4,-1,2,1] has the largest sum = 6.
+	// For example, given the array [-2,1,-3,4,-1,2,1,-5,4], the contiguous subarray [4,-1,2,1] has the largest sum = 6.
 	public void maximumSubArray(int[] nums) {
 		int max = nums[0];
 		int newsum = nums[0];
@@ -858,9 +832,9 @@ public class LeetCode {
 			if (mid * mid == num) {
 				return true;
 			} else if (mid * mid < num) {
-				low = (int) mid + 1;
+				low =  mid + 1;
 			} else {
-				high = (int) mid - 1;
+				high = mid - 1;
 			}
 		}
 		return false;
@@ -935,6 +909,43 @@ public class LeetCode {
         }
 
         return min;
+	}
+
+//Shortest Word Distance ii
+//	Design a class which receives a list of words in the constructor, and implements a method that takes two words word1 and word2
+// and return the shortest distance between these two words in the list. Your method will be called repeatedly many times with different parameters.
+// Duplicates are been taken care of in this method
+	private Map<String, List<Integer>> wordDistanceMap;
+
+	public void WordDistance2constructore(String[] words) {
+		wordDistanceMap = new HashMap<String, List<Integer>>();
+		for(int i = 0; i < words.length; i++) {
+			String w = words[i];
+			if(wordDistanceMap.containsKey(w)) {
+				wordDistanceMap.get(w).add(i);
+			} else {
+				List<Integer> list = new ArrayList<Integer>();
+				list.add(i);
+				wordDistanceMap.put(w, list);
+			}
+		}
+	}
+
+	public int shortest(String word1, String word2) {
+		List<Integer> list1 = wordDistanceMap.get(word1);
+		List<Integer> list2 = wordDistanceMap.get(word2);
+		int ret = Integer.MAX_VALUE;
+		for(int i = 0, j = 0; i < list1.size() && j < list2.size(); ) {
+			int index1 = list1.get(i), index2 = list2.get(j);
+			if(index1 < index2) {
+				ret = Math.min(ret, index2 - index1);
+				i++;
+			} else {
+				ret = Math.min(ret, index1 - index2);
+				j++;
+			}
+		}
+		return ret;
 	}
 
 	// Q101 Symmetric Tree #TopInterviewQuestion
@@ -1862,7 +1873,6 @@ public int findDuplicate4(int[] nums) {
 		HashMap<Character, Integer> map = new HashMap<>();
 		int max = 0;
 		int j = 0;
-
 		for (int i = 0; i < s.length(); i++) {
 			if (map.containsKey(s.charAt(i))) {
 				j = Math.max(j, map.get(s.charAt(i)) + 1); //find the old index
@@ -2147,7 +2157,7 @@ public int findDuplicate4(int[] nums) {
 	}
 
 	// Iterative nested list weight sum
-	public int depthSum(ArrayList<NestedInteger> nestedList) {
+	public int depthSumIterative(List<NestedInteger> nestedList) {
 		int level = 1, total = 0;
 		while (nestedList.size() != 0) {
 			List<NestedInteger> next = new LinkedList<>();
@@ -2158,9 +2168,26 @@ public int findDuplicate4(int[] nums) {
 					next.addAll(nInt.getList());
 			}
 			level++;
-			nestedList = (ArrayList<NestedInteger>) next;
+			nestedList =  next;
 		}
 		return total;
+	}
+
+	//nested list weight sum II (its the opposite of nested list weight sum. here weight is defined from bottom to top)
+	public int depthSumInverse(List<NestedInteger> nestedList) {
+		int unweighted = 0, weighted = 0;
+		while (!nestedList.isEmpty()) {
+			List<NestedInteger> nextLevel = new ArrayList<>();
+			for (NestedInteger ni : nestedList) {
+				if (ni.isInteger())
+					unweighted += ni.getInteger();
+				else
+					nextLevel.addAll(ni.getList());
+			}
+			weighted += unweighted;
+			nestedList = nextLevel;
+		}
+		return weighted;
 	}
 
 	// Q222 Count complete tree nodes Given a complete binary tree, count the number of nodes.
@@ -2199,10 +2226,8 @@ public int findDuplicate4(int[] nums) {
 	}
 
 	// Q66 plus one #TopInterviewQuestion
-	// Given a non-negative integer represented as a non-empty array of digits,
-	// plus one to the integer.
-	// You may assume the integer do not contain any leading zero, except the
-	// number 0 itself.
+	// Given a non-negative integer represented as a non-empty array of digits, plus one to the integer.
+	// You may assume the integer do not contain any leading zero, except the number 0 itself.
 	public static int[] plusOne(int[] digits) {
 		int n = digits.length;
 		for (int i = n - 1; i >= 0; i--) {
@@ -2333,11 +2358,12 @@ public int findDuplicate4(int[] nums) {
 		return false;
 	}
 
+
+
 	// Q71 Simplify Path
 	// Given an absolute path for a file (Unix-style), simplify it.For example,
 	// path = "/home/", => "/home" .... path = "/a/./b/../../c/", => "/c"
-	// The main idea is to push to the stack every valid file name (not in
-	// {"",".",".."}),
+	// The main idea is to push to the stack every valid file name (not in {"",".",".."}),
 	// popping only if there's smth to pop and we met "..".
 	public String simplifyPath(String path) {
 		Deque<String> stack = new LinkedList<>();
@@ -2485,7 +2511,6 @@ public int findDuplicate4(int[] nums) {
 		return start.next;
 	}
 	// Q116 populating next right pointers in each node #TopInterviewQuestion
-	// both of the below methods are good
 	// perfect binary tree..that means every parent has two children
 	public void connect3(TreeLinkNode root) {
 		if (root == null)
@@ -2753,7 +2778,7 @@ public int findDuplicate4(int[] nums) {
 		return helper.next;
 	}
 
-	// Q150 Evaluate Reverse polish notation #TopInterviewQuestion
+	// Q150 Evaluate Reverse polish notation #TopInterviewQuestion  #LinkedinQuestion
 	public int evalRPN(String[] tokens) {
 		int a, b;
 		Stack<Integer> S = new Stack<Integer>();
@@ -2784,10 +2809,8 @@ public int findDuplicate4(int[] nums) {
 	// 'B' -> 2
 	// ...
 	// 'Z' -> 26
-	// Given an encoded message containing digits, determine the total number of
-	// ways to decode it.
-	// For example, Given encoded message "12", it could be decoded as "AB" (1
-	// 2) or "L" (12).
+	// Given an encoded message containing digits, determine the total number of ways to decode it.
+	// For example, Given encoded message "12", it could be decoded as "AB" (1 2) or "L" (12).
 	public int numDecodings(String s) {
 		int n = s.length();
 		if (n == 0 || s.charAt(0) == '0')
@@ -2952,11 +2975,9 @@ public int findDuplicate4(int[] nums) {
 
 			MinMax m = new MinMax();
 
-			// if either of left or right subtree says its not BST or the data
-			// of this node is not greater/equal than max of left and less than
-			// min of right
-			// then subtree with this node as root will not be BST.
-			// Return false and max size of left and right subtree to parent
+// if either of left or right subtree says its not BST or the data of this node is not greater/equal than max of left
+// and less than min of right then subtree with this node as root will not be BST.
+// Return false and max size of left and right subtree to parent
 			if (leftMinMax.isBST == false || rightMinMax.isBST == false
 					|| (leftMinMax.max > root.data || rightMinMax.min <= root.data)) {
 				m.isBST = false;
@@ -2964,9 +2985,8 @@ public int findDuplicate4(int[] nums) {
 				return m;
 			}
 
-			// if we reach this point means subtree with this node as root is BST.
-			// Set isBST as true. Then set size as size of left + size of right + 1.
-			// Set min and max to be returned to parent.
+// if we reach this point means subtree with this node as root is BST. Set isBST as true.
+// Then set size as size of left + size of right + 1. Set min and max to be returned to parent.
 			m.isBST = true;
 			m.size = leftMinMax.size + rightMinMax.size + 1;
 
@@ -3126,8 +3146,7 @@ public int findDuplicate4(int[] nums) {
 		return areaOfSqrA + areaOfSqrB - overlap;
 	}
 
-// Q225 Implement stack using queues
-	// one Queue solution
+// Q225 Implement stack using queues   // one Queue solution
 	private Queue<Integer> q = new LinkedList<Integer>();
 
 	// Push element x onto stack.
@@ -3336,9 +3355,8 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 	// Q643 Maximum Average Sub array I
-	// Given an array consisting of n integers, find the contiguous subarray of
-	// given length k that has the maximum average value.
-	// And you need to output the maximum average value.
+	// Given an array consisting of n integers, find the contiguous subarray of given length k that has the maximum average
+	// value. And you need to output the maximum average value.
 	public double findMaxAverage(int[] nums, int k) {
 		int sum = 0;
 		for (int i = 0; i < k; i++) {
@@ -3371,8 +3389,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 	// Q637 Average of levels in binary tree #GoodQuestion
-	// Given a non-empty binary tree, return the average value of the nodes on
-	// each level in the form of an array.
+	// Given a non-empty binary tree, return the average value of the nodes on each level in the form of an array.
 	public List<Double> averageOfLevels(TreeNode root) {
 		List<Double> result = new ArrayList<>();
 		Queue<TreeNode> q = new LinkedList<>();
@@ -3597,12 +3614,9 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 	// Q543 Diameter of a binary tree
-	// Given a binary tree, you need to compute the length of the diameter of
-	// the tree. The diameter of a binary tree is the length
-	// of the longest path between any two nodes in a tree. This path may or may
-	// not pass through the root.
-	// Example:
-	// Given a binary tree
+	// Given a binary tree, you need to compute the length of the diameter of the tree. The diameter of a binary tree is
+	// the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.
+	// Example: Given a binary tree
 	// 1
 	// / \
 	// 2 3
@@ -3637,7 +3651,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 // and n will be the boundary point later. Store (left + right + 1) as the associated value to key n into
 // the map. Use left and right to locate the other end of the sequences to the left and right of n respectively, and
 // replace the value with the new length.
-
 	public int longestConsecutive(int[] num) {
 		int res = 0;
 		HashMap<Integer, Integer> map = new HashMap<>();
@@ -3663,8 +3676,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 		}
 		return res;
 	}
-
-
 
 	// Q476 Number Compliment #GoodQuestion
 	// Given a positive integer, output its complement number. The complement
@@ -3714,10 +3725,8 @@ private Queue<Integer> q1 = new LinkedList<>();
 
 
 	// Q113 PATH SUM II
-	// Given a binary tree and a sum, find all root-to-leaf paths where each
-	// path's sum equals the given sum.
-	// For example:
-	// Given the below binary tree and sum = 22,
+	// Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+	// For example: Given the below binary tree and sum = 22,
 	// 5
 	// / \
 	// 4 8
@@ -3781,22 +3790,14 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return res;
 	}
 
-	// Q437 Path Sum III
-	// You are given a binary tree in which each node contains an integer value.
-	// Find the number of paths that sum to a given value.
-	// The path does not need to start or end at the root or a leaf, but it must
-	// go downwards (traveling only from parent nodes to child nodes).
-	// The tree has no more than 1,000 nodes and the values are in the range -1,000,000 to 1,000,000.
-	// So the idea is similar as Two sum, using HashTable to store ( key : the
-	// prefix sum, value : how many ways get to this prefix sum) , and whenever
-	// reach a node, we check if prefix sum - target exists in hashmap or not,
-	// if it does, we added up the ways of prefix sum - target into res.
-	// For instance : in one path we have 1,2,-1,-1,2, then the prefix sum will
-	// be: 1, 3, 2, 1, 3, let's say we want to find target sum is 2, then we
-	// will have{2}, {1,2,-1}, {2,-1,-1,2} and {2}ways.
-	// I used global variable count, but obviously we can avoid global variable
-	// by passing the count from bottom up. The time complexity is O(n). This is
-	// my first post in discuss, open to any improvement or criticism. :)
+// Q437 Path Sum III
+// You are given a binary tree in which each node contains an integer value. Find the number of paths that sum to a given value.
+// The path does not need to start or end at the root or a leaf, but it must go downwards (traveling only from parent nodes to child nodes).
+// The tree has no more than 1,000 nodes and the values are in the range -1,000,000 to 1,000,000.  So the idea is similar as Two sum, using HashTable to store ( key : the
+// prefix sum, value : how many ways get to this prefix sum) , and whenever reach a node, we check if prefix sum - target exists in hashmap or not,
+// if it does, we added up the ways of prefix sum - target into res. For instance : in one path we have 1,2,-1,-1,2, then the prefix sum will
+// be: 1, 3, 2, 1, 3, let's say we want to find target sum is 2, then we will have{2}, {1,2,-1}, {2,-1,-1,2} and {2}ways.
+// I used global variable count, but obviously we can avoid global variable by passing the count from bottom up. The time complexity is O(n). This is
 	public int pathSum3(TreeNode root, int sum) {
 		if (root == null)
 			return 0;
@@ -3808,58 +3809,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 			return 0;
 		return (node.val == sum ? 1 : 0) + pathSumFrom(node.left, sum - node.val)
 				+ pathSumFrom(node.right, sum - node.val);
-	}
-
-	// Search for a Range Q34 Find First and Last Position of Element in Sorted Array  #TopInterviewQuestion
-	// Given an array of integers sorted in ascending order, find the starting
-	// and ending position of a given target value.
-	// Your algorithm's runtime complexity must be in the order of O(log n).
-	// If the target is not found in the array, return [-1, -1].
-
-	// Solution: If A[mid] < target, then the range must begins on the right of mid (hence i = mid+1 for the next iteration)
-	// If A[mid] > target, it means the range must begins on the left of mid (j = mid-1)
-	// If A[mid] = target, then the range must begins on the left of or at mid (j= mid)
-	// Since we would move the search range to the same side for case 2 and 3,
-	// we might as well merge them as one single case so that less code is  needed: If A[mid] >= target, j = mid;
-	public int[] searchRange2(int[] nums, int target) {
-		int[] result = new int[2];
-		result[0] = findFirst(nums, target);
-		result[1] = findLast(nums, target);
-		return result;
-	}
-
-	private int findFirst(int[] nums, int target) {
-		int idx = -1;
-		int start = 0;
-		int end = nums.length - 1;
-		while (start <= end) {
-			int mid = (start + end) / 2;
-			if (nums[mid] >= target) {
-				end = mid - 1;
-			} else {
-				start = mid + 1;
-			}
-			if (nums[mid] == target)
-				idx = mid;
-		}
-		return idx;
-	}
-
-	private int findLast(int[] nums, int target) {
-		int idx = -1;
-		int start = 0;
-		int end = nums.length - 1;
-		while (start <= end) {
-			int mid = (start + end) / 2;
-			if (nums[mid] <= target) {
-				start = mid + 1;
-			} else {
-				end = mid - 1;
-			}
-			if (nums[mid] == target)
-				idx = mid;
-		}
-		return idx;
 	}
 
 	// Q54 Spiral Matrix #TopInterviewQuestion
@@ -3938,7 +3887,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return ret;
 	}
 
-	// Q60 permutation sequence #GoodQuestion
+	// Q60 permutation sequence #GoodQuestion #HardlsyAsked (Only Google)
 	// The set [1,2,3,…,n] contains a total of n! unique permutations.
 	// By listing and labeling all of the permutations in order,
 	// We get the following sequence (ie, for n = 3):
@@ -3981,7 +3930,89 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return String.valueOf(sb);
 	}
 
-	// Q81 Search in rotated sorted array II
+	// Search for a Range Q34 Find First and Last Position of Element in Sorted Array  #TopInterviewQuestion
+	// Given an array of integers sorted in ascending order, find the starting
+	// and ending position of a given target value.
+	// Your algorithm's runtime complexity must be in the order of O(log n).
+	// If the target is not found in the array, return [-1, -1].
+
+	// Solution: If A[mid] < target, then the range must begins on the right of mid (hence i = mid+1 for the next iteration)
+	// If A[mid] > target, it means the range must begins on the left of mid (j = mid-1)
+	// If A[mid] = target, then the range must begins on the left of or at mid (j= mid)
+	// Since we would move the search range to the same side for case 2 and 3,
+	// we might as well merge them as one single case so that less code is  needed: If A[mid] >= target, j = mid;
+	public int[] searchRange2(int[] nums, int target) {
+		int[] result = new int[2];
+		result[0] = findFirst(nums, target);
+		result[1] = findLast(nums, target);
+		return result;
+	}
+
+	private int findFirst(int[] nums, int target) {
+		int idx = -1;
+		int start = 0;
+		int end = nums.length - 1;
+		while (start <= end) {
+			int mid = (start + end) / 2;
+			if (nums[mid] >= target) {
+				end = mid - 1;
+			} else {
+				start = mid + 1;
+			}
+			if (nums[mid] == target)   //point to remember
+				idx = mid;
+		}
+		return idx;
+	}
+
+	private int findLast(int[] nums, int target) {
+		int idx = -1;
+		int start = 0;
+		int end = nums.length - 1;
+		while (start <= end) {
+			int mid = (start + end) / 2;
+			if (nums[mid] <= target) {
+				start = mid + 1;
+			} else {
+				end = mid - 1;
+			}
+			if (nums[mid] == target)
+				idx = mid;
+		}
+		return idx;
+	}
+
+// Q33 Search in a rotated sorted array #TopInterviewQuestion
+//	Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.(i.e.,
+// [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]). You are given a target value to search. If found in the array return its index,
+// otherwise return -1. You may assume no duplicate exists in the array.
+//	Your algorithm's runtime complexity must be in the order of O(log n).
+	public int search(int[] nums, int target) {
+		int start = 0;
+		int end = nums.length - 1;
+		while (start <= end) {
+			int mid = (start + end) / 2;
+			if (nums[mid] == target)
+				return mid;
+
+			if (nums[start] <= nums[mid]) {
+				if (target < nums[mid] && target >= nums[start])
+					end = mid - 1;
+				else
+					start = mid + 1;
+			}
+
+			if (nums[mid] <= nums[end]) { // right half is sorted
+				if (target > nums[mid] && target <= nums[end])
+					start = mid + 1;
+				else
+					end = mid - 1;
+			}
+		}
+		return -1;
+	}
+
+	// Q81 Search in rotated sorted array II //duplicates allowed for the same above question
 	public boolean search(int A[], int n, int target) {
 		int lo = 0, hi = n - 1;
 		int mid = 0;
@@ -4088,8 +4119,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		}
 		return n + 1;
 	}
-
-	// this looks better
+	// this one is better
 	public int firstMissingPositive(int[] A) {
 		int i = 0;
 		while (i < A.length) {
@@ -4167,7 +4197,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 				}
 				right--;
 			}
-
 		}
 		return sum;
 	}
@@ -4327,7 +4356,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return triangle.get(0).get(0);
 	}
 
-	// Q179 largest number #TopInterviewQuestino
+	// Q179 largest number #TopInterviewQuestion
 	// Given a list of non negative integers, arrange them such that they form the largest number.
 	// For example, given [3, 30, 34, 5, 9], the largest formed number is 9534330.
 	// Note: The result may be very large, so you need to return a string instead of an integer.
@@ -4478,15 +4507,12 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return re;
 	}
 
-	// Q166 Fraction to recurring decimal #TopInterviewQuestion
-	// Given two integers representing the numerator and denominator of a
-	// fraction, return the fraction in string format.
-	// If the fractional part is repeating, enclose the repeating part in
-	// parentheses.
-	// For example,
-	// Given numerator = 1, denominator = 2, return "0.5".
-	// Given numerator = 2, denominator = 1, return "2".
-	// Given numerator = 2, denominator = 3, return "0.(6)".
+// Q166 Fraction to recurring decimal #TopInterviewQuestion Given two integers representing the numerator and denominator of a
+// fraction, return the fraction in string format. If the fractional part is repeating, enclose the repeating part in
+// parentheses. For example,
+// Given numerator = 1, denominator = 2, return "0.5".
+// Given numerator = 2, denominator = 1, return "2".
+// Given numerator = 2, denominator = 3, return "0.(6)".
 	public String fractionToDecimal(int numerator, int denominator) {
 		if (denominator == 0)
 			return "NaN";
@@ -4500,16 +4526,13 @@ private Queue<Integer> q1 = new LinkedList<>();
 			result.append("-");
 		n = Math.abs(n);
 		d = Math.abs(d);
-
 		result.append(Long.toString(n / d));
 		// result is integer or float
 		if (n % d == 0)
 			return result.toString();
 		else
 			result.append(".");
-
-		// deal with the float part
-		// key is the remainder, value is the start positon of possible repeat numbers
+		// deal with the float part. Key is the remainder, value is the start positon of possible repeat numbers
 		HashMap<Long, Integer> map = new HashMap<>();
 		Long r = n % d;
 		while (r > 0) {
@@ -4554,20 +4577,15 @@ private Queue<Integer> q1 = new LinkedList<>();
     public int minSubArrayLen(int s, int[] a) {
         if (a == null || a.length == 0)
             return 0;
-
         int i = 0, j = 0, sum = 0, min = Integer.MAX_VALUE;
-
         while (j < a.length) {
             sum += a[j++];
-
             while (sum >= s) {
                 min = Math.min(min, j - i);
                 sum -= a[i++];
             }
         }
-
         return min == Integer.MAX_VALUE ? 0 : min;
-
     }
 
 	// Q238 Product of Array Except Self #TopInterviewQuestion
@@ -4620,8 +4638,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 	// Summary Ranges
-	// Given a sorted integer array without duplicates, return the summary of
-	// its ranges.
+	// Given a sorted integer array without duplicates, return the summary of its ranges.
 	// Example 1:
 	// Input: [0,1,2,4,5,7]
 	// Output: ["0->2","4->5","7"]
@@ -4648,8 +4665,8 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return list;
 	}
 
-	// Q221 Maximal square #GoodQuestion  #SecondWayIsBetter
-	// Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+// Q221 Maximal square #GoodQuestion  #SecondWayIsBetter
+// Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
 //    https://www.youtube.com/watch?v=aYnEO53H4lw
 	// For example, given the following matrix:
 	// 1 0 1 0 0
@@ -4697,7 +4714,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return maxSize;
 	}
 
-			    private static int min(int i, int j, int k) {
+    private static int min(int i, int j, int k) {
 			        return i <= j && i <= k ? i : (j <= i && j <= k ? j : k);
 			    }
 
@@ -4747,7 +4764,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 				}
 // if stack is not empty then everythin from i-1 to input.peek() + 1 has to be greater or equal to input[top] so area = input[top]*(i - stack.peek() - 1);
 				else {
-					area = input[top] * (i - stack.peekFirst() - 1);
+					area = input[top] * (i - stack.peekFirst() - 1); //point to remember
 				}
 				if (area > maxArea) {
 					maxArea = area;
@@ -4912,6 +4929,47 @@ private Queue<Integer> q1 = new LinkedList<>();
 	public int getMin3() {
 		return help_stack.peek();
 	}
+
+//Implementing Min Stack withoug using Stack
+    class MinStack {
+        private Node head;
+
+        public void push(int x) {
+            if(head == null)
+                head = new Node(x, x);
+            else
+                head = new Node(x, Math.min(x, head.min), head);
+        }
+
+        public void pop() {
+            head = head.next;
+        }
+
+        public int top() {
+            return head.val;
+        }
+
+        public int getMin() {
+            return head.min;
+        }
+
+        private class Node {
+            int val;
+            int min;
+            Node next;
+
+            private Node(int val, int min) {
+                this(val, min, null);
+            }
+
+            private Node(int val, int min, Node next) {
+                this.val = val;
+                this.min = min;
+                this.next = next;
+            }
+        }
+    }
+
 
 	// Q149 Max Points on a line ( maximum points on a plane ) // #TopInterviewQuestion
 	// Given n points on a 2D plane, find the maximum number of points that lie on the same straight line.
@@ -5126,7 +5184,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 	// Given an array nums, there is a sliding window of size k which is moving from the very left of the array
 	// to the very right. You can only see the k numbers in the window. Each time the sliding window moves right
 	// by one position. Return the max sliding window.
-
+	// https://www.youtube.com/watch?v=39grPZtywyQ
 	public void printMaxfromEachSubarray(int[] array, int k) {
 		LinkedList<Integer> list = new LinkedList();
 		// list will be storing the indexed and the not the actual elements
@@ -5154,7 +5212,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 			}
 
 // and finally insert this new element at the back of the list
-			list.add(i);
+			list.add(i);  //remember this point
 		}
 
 		// now print the largest element from the last sub-array(window)
@@ -5242,7 +5300,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return (double) sum / n1;
 	}
 
-	// Q 454 4sumII #TopInterviewQuestion #AmazonAsked
+	// Q 454 4sumII #NotaTopInterviewQuestion #AmazonAsked (6-8 months back)
 	// Given four lists A, B, C, D of integer values, compute how many tuples
 	// (i, j, k, l) there are such that A[i] + B[j] + C[k] + D[l] is zero.
 
@@ -5466,8 +5524,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 
 	public void ContructorRandomizedSet() {
 		list = new ArrayList<>();
-		// map for storing the number and its index
-		map = new HashMap<>();
+		map = new HashMap<>();// map for storing the number and its index
 	}
 
 	// Inserts a value to the set. Returns true if the set did not already contain the specified element
@@ -5476,6 +5533,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		if (contain)
 			return false;
 		map.put(val, list.size());
+
 		list.add(val);
 		return true;
 	}
@@ -5501,8 +5559,28 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return list.get(rand.nextInt(list.size()));
 	}
 
-	// Q381 Insert Delete GetRandom O(1) -- Duplicates Allowed (follow up question for the above question)
+	//below are the two methods of the above question
+	public boolean remove1(int val) {
+		int ind = map.getOrDefault(val,-1);
+		if(ind == -1) return false;
+		Collections.swap(list,ind,list.size()-1);
+		int swappedWith = list.get(ind);
+		map.put(swappedWith,ind);
+		list.remove(list.size()-1);
+		map.remove(val);
+		return true;
+	}
 
+	/** Get a random element from the set. */
+	public int getRandom1() {
+		int max = list.size();
+		int min = 0;
+		int ind = (int)(Math.random() * (max - min) + min);
+		return list.get(ind);
+	}
+
+
+// Q381 Insert Delete GetRandom O(1) -- Duplicates Allowed (follow up question for the above question)
 	class RandomizedCollection {
 		ArrayList<Integer> nums;
 		HashMap<Integer, Set<Integer>> map;
@@ -5515,7 +5593,6 @@ private Queue<Integer> q1 = new LinkedList<>();
 		}
 
 // Inserts a value to the collection. Returns true if the collection did not already contain the specified element.
-
 		public boolean insert(int val) {
 			boolean contain = map.containsKey(val);
 			if (!contain)
@@ -5525,10 +5602,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 			return !contain;
 		}
 
-		/**
-		 * Removes a value from the collection. Returns true if the collection
-		 * contained the specified element.
-		 */
+// Removes a value from the collection. Returns true if the collection contained the specified element.
 		public boolean remove(int val) {
 			boolean contain = map.containsKey(val);
 			if (!contain)
@@ -5548,10 +5622,9 @@ private Queue<Integer> q1 = new LinkedList<>();
 			return true;
 		}
 
-		/** Get a random element from the collection. */
+/** Get a random element from the collection. */
 		public int getRandom() {
 			return nums.get(rand.nextInt(nums.size()));
-
 		}
 	}
 
@@ -5607,8 +5680,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		}
 		List<Map.Entry> list = new ArrayList(map.entrySet());
 
-		// Collections.sort(list, new Comparator<GenericHashMap.Entry<String,
-		// Integer>>() {
+		// Collections.sort(list, new Comparator<GenericHashMap.Entry<String, Integer>>() {
 		// public int compare(GenericHashMap.Entry<String, Integer> a,
 		// GenericHashMap.Entry<String, Integer> b) {
 		// return b.getValue() - a.getValue();
@@ -5644,8 +5716,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		}
 
 		List<Map.Entry<Integer, Integer>> entries = new ArrayList<>(freqs.entrySet());
-		// Collections.sort method is only applicable to list and thus we are
-		// adding the complete hashmap in the list
+		// Collections.sort method is only applicable to list and thus we are adding the complete hashmap in the list
 		Collections.sort(entries, new Comparator<Map.Entry<Integer, Integer>>() {
 			public int compare(Map.Entry<Integer, Integer> a, Map.Entry<Integer, Integer> b) {
 				return b.getValue() - a.getValue();
@@ -5684,16 +5755,11 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return res;
 	}
 
-
-
 	// Q341 Flatten Nest List Iterator #TopInterviewQuestion
 	// In the constructor, we push all the nestedList into the stack from back to front, so when we pop the stack,
 	// it returns the very first element. Second, in the hasNext() function, we peek the first element in stack currently,
-	// and if it is an Integer, we will return true and pop the element. If it
-	// is a list, we will further flatten it.
-	// This is iterative version of flatting the nested list. Again, we need to
-	// iterate from the back to front of the list.
-
+	// and if it is an Integer, we will return true and pop the element. If it is a list, we will further flatten it.
+	// This is iterative version of flatting the nested list. Again, we need to iterate from the back to front of the list.
 	// https://github.com/awangdev/LintCode/blob/master/Java/Flatten%20Nested%20List%20Iterator.java
 
 	public class NestedIterator implements Iterator<Integer> {
@@ -5981,9 +6047,9 @@ private Queue<Integer> q1 = new LinkedList<>();
 		//Deque<String> nodes = new LinkedList<>();
 		Queue<String> nodes1 = new LinkedList<>();
         //both the below statements will work
+
 		nodes1.addAll(Arrays.asList(data.split(splitter)));
 //		Collections.addAll(nodes1, data.split(splitter)); this works too
-
 		return buildTree(nodes1);
 	}
 
@@ -6116,35 +6182,32 @@ private Queue<Integer> q1 = new LinkedList<>();
 	// 2) Once we find the crossover point, we can compare elements on both sides of crossover point to print k closest elements.
 	// This step takes O(k) time.
 	class KClosest {
+// Function to find the cross over point (the point before which elements are smaller than or equal to x and after which greater than x)
 
-//		  Function to find the cross over point (the point before which
-//		  elements are smaller than or equal to x and after which greater than x)
+	int findCrossOver(int arr[], int low, int high, int x) {
+		// Base cases
+		if (arr[high] <= x) // x is greater than all
+			return high;
+		if (arr[low] > x) // x is smaller than all
+			return low;
 
-		int findCrossOver(int arr[], int low, int high, int x) {
-			// Base cases
-			if (arr[high] <= x) // x is greater than all
-				return high;
-			if (arr[low] > x) // x is smaller than all
-				return low;
+		// Find the middle point
+		int mid = (low + high) / 2; /* low + (high - low)/2 */
 
-			// Find the middle point
-			int mid = (low + high) / 2; /* low + (high - low)/2 */
-
-			/* If x is same as middle element, then return mid */
-			if (arr[mid] <= x && arr[mid + 1] > x)
-				return mid;
+		/* If x is same as middle element, then return mid */
+		if (arr[mid] <= x && arr[mid + 1] > x)
+			return mid;
 
 
-// If x is greater than arr[mid], then either arr[mid + 1] is
-// ceiling of x or ceiling lies in arr[mid+1...high]
+// If x is greater than arr[mid], then either arr[mid + 1] is ceiling of x or ceiling lies in arr[mid+1...high]
 
-			if (arr[mid] < x)
-				return findCrossOver(arr, mid + 1, high, x);
-			return findCrossOver(arr, low, mid - 1, x);
+		if (arr[mid] < x)
+			return findCrossOver(arr, mid + 1, high, x);
+
+		return findCrossOver(arr, low, mid - 1, x);
 		}
 
-		// This function prints k closest elements to x in arr[]. n is the
-		// number of elements in arr[]
+		// This function prints k closest elements to x in arr[]. n is the number of elements in arr[]
 		void printKclosest(int arr[], int x, int k, int n) {
 
 			// Find the crossover point
@@ -6152,13 +6215,11 @@ private Queue<Integer> q1 = new LinkedList<>();
 			int r = l + 1; // Right index to search
 			int count = 0; // To keep track of count of elements already printed
 
-			// If x is present in arr[], then reduce left index Assumption: all
-			// elements in arr[] are distinct
+			// If x is present in arr[], then reduce left index Assumption: all elements in arr[] are distinct
 			if (arr[l] == x)
 				l--;
 
-			// Compare elements on left and right of crossover point to find the
-			// k closest elements
+			// Compare elements on left and right of crossover point to find the k closest elements
 			while (l >= 0 && r < n && count < k) {
 				if (x - arr[l] < arr[r] - x)
 					System.out.print(arr[l--] + " ");
@@ -6167,15 +6228,13 @@ private Queue<Integer> q1 = new LinkedList<>();
 				count++;
 			}
 
-			// If there are no more elements on right side, then print left
-			// elements
+			// If there are no more elements on right side, then print left elements
 			while (count < k && l >= 0) {
 				System.out.print(arr[l--] + " ");
 				count++;
 			}
 
-			// If there are no more elements on left side, then print right
-			// elements
+			// If there are no more elements on left side, then print right elements
 			while (count < k && r < n) {
 				System.out.print(arr[r++] + " ");
 				count++;
@@ -6204,7 +6263,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return false;
 	}
 
-	// Q674 longest continuous increase subsequence #GoodQuestion
+	// Q674 longest continuous increase subsequence #GoodQuestion #faceBookQuestion
 	// Given an unsorted array of integers, find the length of longest continuous increasing subsequence (subarray).
 	public int findLengthOfLCIS(int[] nums) {
 		int res = 0, cnt = 0;
@@ -6244,9 +6303,31 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return jumps[n - 1];
 	}
 
+	// O(n) complexity for the jump game 2
+    public int jump (int A[]){
+        if(A.length <=1 )
+            return 0;
+        int ladder = A[0];
+        int stairs = A[0];
+        int jump = 1;
+        for(int level = 1; level < A.length ; level++){
+            if(level == A.length - 1)
+                return jump;
+            if(level + A[level] > ladder)
+                ladder = level + A[level]; //build up the ladder
+            stairs--; //use up the stairs
+            if(stairs ==0){
+                jump++;
+                stairs = ladder - level;
+            }
+        }
+        return jump;
+    }
+
 	// Q56 Merge Intervals
 	public List<Interval> merge(List<Interval> intervals) {
-		List<Interval> result = new ArrayList<Interval>();
+		List<Interval> result = new ArrayList<>();
+
 		if (intervals == null || intervals.size() == 0)
 			return result;
 
@@ -6275,23 +6356,31 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return result;
 	}
 
-	// Q57 Insert Interval
-	public ArrayList<Interval> insert(ArrayList<Interval> intervals, Interval newInterval) {
-		ArrayList<Interval> result = new ArrayList<Interval>();
-		for (Interval interval : intervals) {
-			if (interval.end < newInterval.start) {
-				result.add(interval);
-			} else if (interval.start > newInterval.end) {
-				result.add(newInterval);
-				newInterval = interval;
-			} else if (interval.end >= newInterval.start || interval.start <= newInterval.end) {
-				newInterval = new Interval(Math.min(interval.start, newInterval.start),
-						Math.max(newInterval.end, interval.end));
-			}
+	// Q57 Insert Interval  #TopInterviewQuestion
+	public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+
+		List<Interval> result = new ArrayList<>();
+		int i = 0;
+		int start = newInterval.start;
+		int end = newInterval.end;
+
+
+		while (i < intervals.size() && intervals.get(i).end < start) {
+			result.add(intervals.get(i++));
 		}
-		result.add(newInterval);
+
+		while (i < intervals.size() && intervals.get(i).start <= end) {
+			start = Math.min(start, intervals.get(i).start);
+			end = Math.max(end, intervals.get(i).end);
+			i++;
+		}
+
+		result.add(new Interval(start,end));
+
+		while (i < intervals.size()) result.add(intervals.get(i++));
 		return result;
 	}
+
 
 	// K closest point #GoodQuestion
 	public Point[] findKClosestPoints(Point[] points, int k, Point target) {
@@ -6316,11 +6405,10 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return res;
 	}
 
-	// Q127 Word ladder #TopInterviewQuestion
-	// Given two words (beginWord and endWord), and a dictionary's word list,
-	// find the length of shortest transformation sequence from beginWord to endWord, such that:
-	// Only one letter can be changed at a time.
-	// Each transformed word must exist in the word list. Note that beginWord is not a transformed word.
+// Q127 Word ladder #TopInterviewQuestion
+// Given two words (beginWord and endWord), and a dictionary's word list,
+// find the length of shortest transformation sequence from beginWord to endWord, such that Only one letter can be changed at a time.
+// Each transformed word must exist in the word list. Note that beginWord is not a transformed word.
 	public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
 		Set<String> beginSet = new HashSet<>();
 		Set<String> endSet = new HashSet<>();
@@ -6400,14 +6488,13 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return courseRemaining == 0;
 	}
 
-	//BuildOrder (//Removal of Dependencies)
+	//Build Order (//Removal of Dependencies)
 
 void findBuildOrder(String[] projects, String[][] dependencies) {
 		int courseRemaining =0;
 		Map<String , Set<String>> graph  =  new HashMap<String,Set<String>>();
 		for(String project : projects){
 			graph.put(project , new HashSet<>());
-
 		}
 
 		for(int i = 0 ; i < dependencies.length ; i++){
@@ -6487,12 +6574,11 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	// approach is to do the inorder traversal, and find the two pairs where elements are not sorted,
 	// when we find those, we will take the first element of the first pair and replace it with the second
 	// element of the second pair
-	// https://www.youtube.com/watch?v=LR3K5XAWV5k very well explained in this
+	// https://www.youtube.com/watch?v=LR3K5XAWV5k
 
     TreeNode firstElement = null;
     TreeNode secondElement = null;
-    // The reason for this initialization is to avoid null pointer exception in the first comparison when prevElement
-	// has not been initialized
+// The reason for this initialization is to avoid null pointer exception in the first comparison when prevElement has not been initialized
     TreeNode prevElement = new TreeNode(Integer.MIN_VALUE);
 
     public void recoverTree(TreeNode root) {
@@ -6526,7 +6612,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
         traverse(root.right);
     }
 
-	// Bottom view of a binary tree #Confused should be done or leave it ??
+	// Bottom view of a binary tree #Confused should we do or leave it ??
 	public void bottomView(Node root) {
 
 		if (root == null)
@@ -6768,9 +6854,8 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	}
 
 	// Q100 Same Tree
-	// Given two binary trees, write a function to check if they are the same or not.
-	// Two binary trees are considered the same if they are structurally
-	// identical and the nodes have the same value.
+	// Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same
+	// if they are structurally identical and the nodes have the same value.
 	public boolean isSameTree(TreeNode p, TreeNode q) {
 		if (p == null && q == null)
 			return true;
@@ -6800,7 +6885,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		}
 		return true;
 	}
-	// Q96 Unique Binary Search Trees   (leaving for now )
+	// Q96 Unique Binary Search Trees  #hardlyAsked
 	// Given n, how many structurally unique BST's (binary search trees) that store values 1...n?
 	// For example, Given n = 3, there are a total of 5 unique BST's.
 	//
@@ -6825,7 +6910,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		return G[n];
 	}
 
-	// Q95 Unique Binary Search Trees II
+	// Q95 Unique Binary Search Trees II  #hardlyAsked
 	// Given an integer n, generate all structurally unique BST's (binary search
 	// trees) that store values 1...n.
 	//
@@ -6872,7 +6957,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		return list;
 	}
 
-	// Q156 Binary Tree upside down #GoodQuestion #HardlyAsked
+	// Q156 Binary Tree upside down #GoodQuestion #HardlyAsked #LinkedinQuestion
 	// Given a binary tree where all the right nodes are either leaf nodes with
 	// a sibling (a left node that shares the same parent node) or empty, flip
 	// it upside down and turn it into a tree where the original right nodes
@@ -6888,11 +6973,11 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	// 4
 	/// \
 	// 5 2
-	/// \
-	// 3 1
+	//  / \
+	// 3  1
 
-	// see the diagram at https://www.geeksforgeeks.org/flip-binary-tree/ for
-	// better understanding of the recursion method
+// see the diagram at https://www.geeksforgeeks.org/flip-binary-tree/
+//	https://leetcode.com/problems/binary-tree-upside-down/discuss/49406/Java-recursive-(O(logn)-space)-and-iterative-solutions-(O(1)-space)-with-explanation-and-figure
 
 	public TreeNode upsideDownBinaryTree1(TreeNode root) {
 		if (root == null || root.left == null) {
@@ -6906,8 +6991,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		return newRoot;
 	}
 
-	// don't know if the below solution will work or not
-	// could not trace it
+	// don't know if the below solution will work or not could not trace it
 	public TreeNode upsideDownBinaryTree2(TreeNode root) {
 		TreeNode curr = root;
 		TreeNode next = null;
@@ -6994,7 +7078,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		return result;
 	}
 
-	// Q124 Binary Tree Maximum Path Sum #TopInterviewQuestion
+	// Q124 Binary Tree Maximum Path Sum #TopInterviewQuestion  //more understandable is the second solution
 	// https://www.youtube.com/watch?v=cSnETAcziS0&t=229s
 	// the same way we can do the minimum path sum
 	// Given a binary tree, find the maximum path sum.
@@ -7024,11 +7108,26 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 
         return Math.max(left, right) + node.val;
     }
+//or
+int max=Integer.MIN_VALUE;
 
-	// Q112 Path sum of a binary tree
-	// Given a binary tree and a sum, determine if the tree has a root-to-leaf
-	// path such that adding up all the
-	// values along the path equals the given sum.
+    public int maxPathSum2(TreeNode root) {
+        maxPathSumR(root);
+        return max;
+    }
+
+    public int maxPathSumR(TreeNode root) {
+
+        if(root==null) return 0;
+        int left=maxPathSumR(root.left);
+        int right=maxPathSumR(root.right);
+
+        int max1 = Math.max(root.val,Math.max(root.val+left,root.val+right));
+        max = Math.max(max,Math.max(max1,left+right+root.val));
+        return max1;
+    }
+// Q112 Path sum of a binary tree
+// Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
 	public boolean hasPathSum(TreeNode root, int sum) {
 		if (root == null)
 			return false;
@@ -7195,8 +7294,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		slow.next = fast;
 		while (fast != null) {
 			while (fast.next != null && fast.val == fast.next.val) {
-				fast = fast.next; // while loop to find the last node of the
-									// dups.
+				fast = fast.next; // while loop to find the last node of the dups.
 			}
 			if (slow.next != fast) { // duplicates detected.
 				slow.next = fast.next; // remove the dups.
@@ -7491,8 +7589,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	// Q322 Coin Change Problem #TopInterviewQuestion
 	// You are given coins of different denominations and a total amount of money amount.
 	// Write a function to compute the fewest number of coins that you need to  make up that amount.
-	// If that amount of money cannot be made up by any combination of the
-	// coins, return -1.
+	// If that amount of money cannot be made up by any combination of the coins, return -1.
 	/**
 	 * Bottom up way of solving this problem. Keep input sorted. Otherwise
 	 * temp[j-arr[i]) + 1 can become Integer.Max_value + 1 which can be very low
@@ -7538,11 +7635,10 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		System.out.print("\n");
 	}
 
-	// Given a total and coins of certain denominations find number of ways
-	// total * can be formed from coins assuming infinity supply of coins
+	// Given a total and coins of certain denominations find number of ways total * can be formed from coins assuming infinity supply of coins
 
 	// below solution tells you the number of ways we can achieve that total and not the combination
-	// go input of i step back on the same line and sum with the number above that
+	// go input of i step back on the same line and sum with the number above that   .. point to remember
     // tushar roy : https://www.youtube.com/watch?v=_fgjrs570YE&t=186s
 	public int numberOfSolutions(int total, int coins[]) {
 		int temp[][] = new int[coins.length + 1][total + 1];
@@ -7913,8 +8009,8 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	// Using larger integer types also prevents an overflow error when taking the mean of the two middle numbers.
 	// I think almost all solutions posted previously have that bug.
 
-	private PriorityQueue<Integer> small = new PriorityQueue<>(Collections.reverseOrder());
-	private PriorityQueue<Integer> large = new PriorityQueue<>();
+	private PriorityQueue<Integer> small = new PriorityQueue<>(Collections.reverseOrder()); // will keep smaller elements
+	private PriorityQueue<Integer> large = new PriorityQueue<>(); // will keep bigger elements
 	private boolean even = true;
 
 	public double findMedian() {
@@ -8358,6 +8454,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 			for (int j = 0; j < board[i].length; j++) {
 				if ((word.charAt(0) == board[i][j])
 						&& search(board, word, i, j, 0)) {
+
 					return true;
 				}
 			}
@@ -8389,14 +8486,10 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
     }
 
 	// Q212 Word Search 2 using trie #TopInterviewQuestion
-	// Given a 2D board and a list of words from the dictionary, find all words
-	// in the board.
-	// Each word must be constructed from letters of sequentially adjacent cell,
-	// where "adjacent" cells are those
-	// horizontally or vertically neighboring. The same letter cell may not be
-	// used more than once in a word.
-	// For example,
-	// Given words = ["oath","pea","eat","rain"] and board =
+	// Given a 2D board and a list of words from the dictionary, find all words in the board.
+	// Each word must be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those
+	// horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.
+	// For example, Given words = ["oath","pea","eat","rain"] and board =
 	// [
 	// ['o','a','a','n'],
 	// ['e','t','a','e'],
@@ -8414,9 +8507,11 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		int m = board.length;
 		int n = board[0].length;
 		boolean[][] visited = new boolean[m][n];
+
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
 				dfs(board, visited, "", i, j, trie);
+
 			}
 		}
 		return new ArrayList<String>(res);
@@ -8692,7 +8787,7 @@ public boolean canPartition(int[] nums) {
 		int nums[] = { 10, 3, 8, 9, 4 };
 		// System.out.println(findRelativeRanks(nums));
 	}
-    // Palindrome Partitioning - II #HardlyAsked #LeavingQuestion
+// Palindrome Partitioning - II #HardlyAsked #LeavingQuestion
 // Given a string s, partition s such that every substring of the partition is a palindrome.
 // Return the minimum cuts needed for a palindrome partitioning of s.
 // i is the starting index and j is the ending index. i must be passed as 0 and j as n-1
@@ -9627,50 +9722,6 @@ public boolean canPartition(int[] nums) {
             preorder(root.right, sb);
             sb.append(")");
         }
-    }
-
-    // Q605 Can Place Flowers
-    // Suppose you have a long flowerbed in which some of the plots are planted
-    // and some are not. However,
-    // flowers cannot be planted in adjacent plots - they would compete for
-    // water and both would die.
-    // Given a flowerbed (represented as an array containing 0 and 1, where 0
-    // means empty and 1 means not empty),
-    // and a number n, return if n new flowers can be planted in it without
-    // violating the no-adjacent-flowers rule.
-    public boolean canPlaceFlowers(int[] flowerbed, int n) {
-        int count = 0;
-        for (int i = 0; i < flowerbed.length && count < n; i++) {
-            if (flowerbed[i] == 0) {
-                // get next and prev flower bed slot values. If i lies at the
-                // ends the next and prev are considered as 0.
-                int next = (i == flowerbed.length - 1) ? 0 : flowerbed[i + 1];
-                int prev = (i == 0) ? 0 : flowerbed[i - 1];
-                if (next == 0 && prev == 0) {
-                    flowerbed[i] = 1;
-                    count++;
-                }
-            }
-        }
-        return count == n;
-    }
-
-    // difficult to thing about this solution but a good solution for the above
-    // question
-    public boolean canPlaceFlowers2(int[] flowerbed, int n) {
-        int count = 1;
-        int result = 0;
-        for (int i = 0; i < flowerbed.length; i++) {
-            if (flowerbed[i] == 0) {
-                count++;
-            } else {
-                result += (count - 1) / 2;
-                count = 0;
-            }
-        }
-        if (count != 0)
-            result += count / 2;
-        return result >= n;
     }
 
     // Q500 Keyboard Row

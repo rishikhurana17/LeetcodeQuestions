@@ -37,7 +37,7 @@ public class MergeKSorted {
         while (!queue.isEmpty()){
             tail.next=queue.poll();
             tail=tail.next;
-
+            System.out.println(tail.next);
             if (tail.next!=null)
                 queue.add(tail.next);
         }
@@ -46,8 +46,8 @@ public class MergeKSorted {
 
     public static void main(String [] args){
 // n = 6 -> 7 -> 9
-// m = 2 -> 3
-// o = 1 -> 7
+// m = 2 -> 3 -> 15
+// o = 1 -> 8 -> 10
         ListNode n =new ListNode();
 
 //        n.newNode(1);
@@ -58,10 +58,12 @@ public class MergeKSorted {
         ListNode m = new ListNode();
         m=m.newNode(2);
         m.next = m.newNode(3);
+        m.next.next = m.newNode(15);
 
         ListNode o = new ListNode();
         o = o.newNode(1);
-        o.next=o.newNode(7);
+        o.next=o.newNode(8);
+        o.next.next =o.newNode(10);
 
         List<ListNode> lists= new ArrayList<>();
         lists.add(n);

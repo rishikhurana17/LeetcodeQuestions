@@ -114,7 +114,6 @@ public class LongestSubstring {
 
     }
 
-
 //if you want all the strings (list) of the same size to be printed
 public static List<String> LongestContinousSubstring(String str){
     int low = 0 ;
@@ -126,7 +125,7 @@ public static List<String> LongestContinousSubstring(String str){
     HashMap<Character,Integer> map = new HashMap<>();
     for(int i=0 ; i < str.length() ; i++){
     if(map.get(str.charAt(i))!= null){
-        if( (i) - low> result.length()){
+        if( (i) - low > result.length()){
             list.clear();
             //result = str.substring(low,i);
             list.add(str.substring(low,i));

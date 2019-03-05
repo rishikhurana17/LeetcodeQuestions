@@ -2,7 +2,6 @@ package LeetcodePrograms;
 
 import java.util.HashMap;
 import java.util.Map;
-
 /**
  * Insert/delete/search into trie data structure
  *

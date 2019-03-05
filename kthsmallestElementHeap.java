@@ -12,6 +12,7 @@ public class kthsmallestElementHeap {
 		System.out.println("complete pq is " + pq);
 		int n = -1;
 		while (k > 0) {
+			System.out.println(pq.peek());
 			n = pq.poll();
 			// returns and removes the head of the queue
 			k--;

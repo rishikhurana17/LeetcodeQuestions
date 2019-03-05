@@ -9,19 +9,21 @@ import java.util.Queue;
  */
 public class KclosestPointToOrigin {
     public static Point[] findKClosestPoints(Point[] points, int k, Point target) {
-        if (points == null || points.length == 0 || k < 1 || k > points.length)   return points;
+        if (points == null || points.length == 0 || k < 1 || k > points.length)
+            return points;
         Queue<Point> pq = new PriorityQueue<>(k, new Comparator<Point>(){
             @Override
             public int compare(Point p1, Point p2) {
                 int d1 = (p1.x - target.x) * (p1.x - target.x) + (p1.y - target.y) * (p1.y - target.y);
                 int d2 = (p2.x - target.x) * (p2.x - target.x) + (p2.y - target.y) * (p2.y - target.y);
-                return d2 - d1;
+                return d1 - d2;  // will keep the smaller elements in the list
             }
         });
         for (Point p : points) {
             pq.offer(p);
             if (pq.size() > k)
-                pq.poll();
+                pq.poll(); //removes the element which is the biggest element there
+
         }
         Point[] res = new Point[k];
         for (int i = k - 1; i >= 0; i--)
@@ -29,27 +31,28 @@ public class KclosestPointToOrigin {
         return res;
     }
 
+    public static int findKthLargest(int[] nums, int k) {
+        final PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for (int val : nums) {
+            pq.offer(val);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+        return pq.peek();
+    }
+
+
     public static void main(String []args){
-      Point []points = new Point[5];
-
-      points[0].setX(2);
-      points[0].setY(3);
-
-        points[1].setX(1);
-        points[1].setY(4);
-
-        points[2].setX(7);
-        points[2].setY(8);
-
-        points[3].setX(1);
-        points[3].setY(1);
-
-        points[4].setX(5);
-        points[4].setY(5);
-
-        Point target = new Point(0,0);
-//        target.setX(0);
-//        target.setY(0);
-        System.out.println(findKClosestPoints(points,2,target));
+        Point []points = new Point[5];
+        points[0] = new Point(0,5);
+        points[1] = new Point(0,6);
+        points[2] = new Point(1,1);
+        points[3] = new Point(0,3);
+        points[4] = new Point(0,4);
+        Point target = new Point(0,7);
+       // System.out.println(findKClosestPoints(points,2,target));
+        int arr[]={4,5,2,1,3,8};
+        System.out.println(findKthLargest(arr,2));
     }
 }

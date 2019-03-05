@@ -26,6 +26,6 @@ public class Excel {
 	public static void main(String[] args) {
 		Excel ex = new Excel();
 
-		System.out.println(ex.titletoNum2("AA"));
+		System.out.println(ex.titletoNum("AA"));
 	}
 }

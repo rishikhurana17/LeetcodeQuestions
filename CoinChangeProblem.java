@@ -1,44 +1,35 @@
 package LeetcodePrograms;
 
+import java.util.Arrays;
+
 /**
- * Created by rkhurana on 11/2/18.
+ * Created by rkhurana on 2/27/19.
  */
+
+
+
+//minimum of being on the same line go j steps back + 1 or number above that
 public class CoinChangeProblem {
     public static int coinChange(int[] coins, int amount) {
-        Integer T[][] = new Integer [coins.length+1 ][amount+1];
-        for(int i =0 ; i <=coins.length ; i++ ) {
 
-                T[i][0] = 1;
-        }
-        for(int j =0 ; j <=amount ; j++ ) {
-            if (j == 0)
-                T[0][j] = 1;
-            else
-                T[0][j] = 0;
-        }
-
-
-        for(int i = 1; i <= coins.length ; i++){
-            for(int j = 1 ; j <= amount ; j++){
-
-                if(i==0 && j == 0 )
-                    T[i][j] = 1;
-                else if(i==0)
-                    T[i][j] = 0;
-                else
-                {    if(i > j)
-                    T[i][j] = T[i-1][j];
-
-                else
-                    T[i][j] = T[i-1][j] + T[i][j-i];
-                }
-
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+        for (int i = 0; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (i - coins[j] >= 0)
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
             }
         }
-        return T[coins.length ] [amount];
+
+
+
+        return dp[amount] > amount ? -1 : dp[amount];
     }
     public static void main(String []args){
-        int []coins = {1,2,5};
-        System.out.println(coinChange(coins , 11));
+        int []coins={1,2,5};
+        int amount = 11;
+        System.out.println(coinChange(coins,amount));
     }
+
 }
