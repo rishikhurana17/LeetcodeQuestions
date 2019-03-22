@@ -7,7 +7,7 @@ import java.util.Queue;
 /**
  * Created by rkhurana on 1/28/19.
  */
-public class priorityQueueExample {
+public class PriorityQueueExample {
 
     public static void prorityExample(int []arr , int k) {
         Queue<Integer> pq = new PriorityQueue<>(k, new Comparator<Integer>() {

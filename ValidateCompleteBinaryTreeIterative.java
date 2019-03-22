@@ -6,7 +6,7 @@ import java.util.Queue;
 /**
  * Created by rkhurana on 1/29/19.
  */
-public class validateCompleteBinaryTreeIterative {
+public class ValidateCompleteBinaryTreeIterative {
     static boolean isCompleteBT(Node root)
     {
 // Base Case: An empty tree is complete Binary Tree

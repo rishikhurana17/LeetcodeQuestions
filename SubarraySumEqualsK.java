@@ -16,8 +16,8 @@ public class SubarraySumEqualsK {
 
         HashMap<Integer, Integer> map = new HashMap<>();
 
-        // corner case: if the very first subarray that start from index 0 has preSum equals k, we will have to check whether we have key (preSum - k = 0),
-        // so must put(0, 1) as pre-processing, since this case is considered a valid case, we must add count value 1 to result
+// corner case: if the very first subarray that start from index 0 has preSum equals k, we will have to check whether we have key (preSum - k = 0),
+// so must put(0, 1) as pre-processing, since this case is considered a valid case, we must add count value 1 to result
         map.put(0, 1);
 
         for (int i = 0; i < nums.length; i++) {

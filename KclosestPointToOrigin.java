@@ -1,6 +1,7 @@
 package LeetcodePrograms;
 
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -32,10 +33,12 @@ public class KclosestPointToOrigin {
     }
 
     public static int findKthLargest(int[] nums, int k) {
-        final PriorityQueue<Integer> pq = new PriorityQueue<>();
+         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (int val : nums) {
             pq.offer(val);
             if (pq.size() > k) {
+                System.out.println(pq.peek());
+
                 pq.poll();
             }
         }
@@ -50,9 +53,9 @@ public class KclosestPointToOrigin {
         points[2] = new Point(1,1);
         points[3] = new Point(0,3);
         points[4] = new Point(0,4);
-        Point target = new Point(0,7);
-       // System.out.println(findKClosestPoints(points,2,target));
-        int arr[]={4,5,2,1,3,8};
+        Point target = new Point(0,0);
+  //     System.out.println(findKClosestPoints(points,3,target));
+        int[] arr = { 12, 5, 23, 9, 30, 2, 50, 1, 14, 7, 24, 51 };
         System.out.println(findKthLargest(arr,2));
     }
 }

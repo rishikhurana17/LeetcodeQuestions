@@ -34,14 +34,14 @@ public class MergeInterval {
 		// Given [1,3],[2,6],[8,10],[15,18],
 		// return [1,6],[8,10],[15,18].
 	}
-}
-
-class IntervalComparator implements Comparator<Interval> {
-	public int compare(Interval i1, Interval i2) {
-		return i1.start - i2.start;
+	class IntervalComparator implements Comparator<Interval> {
+		public int compare(Interval i1, Interval i2) {
+			return i1.start - i2.start;
 		/*
 		 * int i = i1.start; int j = i2.start; return i.compareTo(j);
 		 */
 
+		}
 	}
 }
+

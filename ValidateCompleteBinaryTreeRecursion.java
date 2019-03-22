@@ -3,7 +3,7 @@ package LeetcodePrograms;
 /**
  * Created by rkhurana on 1/29/19.
  */
-public class validateCompleteBinaryTreeRecursion {
+public class ValidateCompleteBinaryTreeRecursion {
 
     Node root;
 
@@ -33,7 +33,7 @@ public class validateCompleteBinaryTreeRecursion {
 
     public static void main(String args[])
     {
-        validateCompleteBinaryTreeRecursion tree = new validateCompleteBinaryTreeRecursion();
+        ValidateCompleteBinaryTreeRecursion tree = new ValidateCompleteBinaryTreeRecursion();
 
         // Le us create tree in the last diagram above
         Node NewRoot = null;

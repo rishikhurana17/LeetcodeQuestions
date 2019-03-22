@@ -10,7 +10,7 @@ import java.util.HashMap;
 //        Output: ”you gtbeaiful es”
 //        Allowed Time Complexity was O(n) and Space Complexity was O(1)
 
-public class removeInplaceOddOccuranceDuplicates {
+public class RemoveInplaceOddOccuranceDuplicates {
 
     public static char[] removeDuplicates(char[] ch) {
         int j=0;

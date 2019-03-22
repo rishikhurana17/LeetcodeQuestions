@@ -1,6 +1,6 @@
 package LeetcodePrograms;
 
-public class towersOfHanoi {
+public class TowersOfHanoi {
 	public static void tower(int n, char sourceRod, char destinationRod,char auxiliaryRod) {
 		if (n == 0) {
 			return;

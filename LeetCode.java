@@ -31,11 +31,12 @@
 // a very important link
 //https://leetcode.com/problems/combination-sum/?tab=Solutions
 //longest increasing path in a matrix #TopInterviewQuestion
+//https://www.programcreek.com/2014/05/leetcode-longest-increasing-path-in-a-matrix-java/
 // implement n-ary tree
 // design tic tac toe
 // Remove invalid parenthesis #facebook
-//https://stackoverflow.com/questions/32594710/generate-all-combinations-of-mathematical-expressions-that-add-to-target-java-h
-
+// https://stackoverflow.com/questions/32594710/generate-all-combinations-of-mathematical-expressions-that-add-to-target-java-h
+// 523 continous subarray sum facebook question
 package LeetcodePrograms;
 
 import java.io.File;
@@ -2673,7 +2674,7 @@ public int findDuplicate4(int[] nums) {
 		}
 	}
 
-	// Q143 reorder list
+	// Q143 reorder list   #FaceBookQuestion
 	// Given a singly linked list L: L0→L1→…→Ln-1→Ln, reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
 	// You must do this in-place without altering the nodes' values.  For example,
 	// Given {1,2,3,4}, reorder it to {1,4,2,3}.
@@ -6242,12 +6243,10 @@ private Queue<Integer> q1 = new LinkedList<>();
 		}
 	}
 
-	// Q334 Increasing triplet subsequence #NOTaTopInterviewQuestion
-	// Given an unsorted array return whether an increasing subsequence of
-	// length 3 exists or not in the array.
+// Q334 Increasing triplet subsequence #NOTaTopInterviewQuestion #FacebookTwice
+// Given an unsorted array return whether an increasing subsequence of length 3 exists or not in the array.
 	public boolean increasingTriplet(int[] nums) {
-		// start with two largest values, as soon as we find a number bigger
-		// than both, while both have been updated, return true.
+// start with two largest values, as soon as we find a number bigger than both, while both have been updated, return true.
 		int small = Integer.MAX_VALUE, big = Integer.MAX_VALUE;
 		for (int n : nums) {
 			if (n <= small) {
@@ -6294,7 +6293,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		for (i = 1; i < n; i++) {
 			jumps[i] = Integer.MAX_VALUE;
 			for (j = 0; j < i; j++) {
-				if (i <= j + arr[j] && jumps[j] != Integer.MAX_VALUE) {   // can i reach i from j
+				if (i <= j + arr[j]) {   // can i reach i from j
 					jumps[i] = Math.min(jumps[i], jumps[j] + 1);
 					break;
 				}
@@ -6349,7 +6348,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 			} else {
 
 				Interval merged = new Interval(pre.start, Math.max(pre.end, curr.end));
-				pre = merged;
+				pre = merged; //over here it is not getting merged as there is a possibility that next element could be merged
 			}
 		}
 		result.add(pre);
@@ -6377,7 +6376,8 @@ private Queue<Integer> q1 = new LinkedList<>();
 
 		result.add(new Interval(start,end));
 
-		while (i < intervals.size()) result.add(intervals.get(i++));
+		while (i < intervals.size())
+			result.add(intervals.get(i++));
 		return result;
 	}
 
@@ -6448,9 +6448,8 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 	// Q207 Course Schedule #TopInterviewQuestion
-	// There are a total of n courses you have to take, labeled from 0 to n-1.
-	// Some courses may have prerequisites, for example to take course 0 you
-	// have to first take course 1, which is expressed as a pair:
+	// There are a total of n courses you have to take, labeled from 0 to n-1. Some courses may have prerequisites,
+	// for example to take course 0 you have to first take course 1, which is expressed as a pair:
 	public boolean canFinish(int numCourses, int[][] prerequisites) {
 		if (numCourses <= 1)
 			return true;
@@ -6611,7 +6610,44 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 
         traverse(root.right);
     }
+	//see this if time permits
+	public void recoverTreeIterative(TreeNode root) {
+		TreeNode first = null;
+		TreeNode second = null;
 
+		TreeNode curr = root;
+		TreeNode prev = null;
+
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+
+		while(!stack.isEmpty() ||  curr != null){
+			if(curr != null){
+				//visit curr's left subtree
+				stack.push(curr);
+				curr = curr.left;
+			}else{
+				//done left subtree of curr Node
+				curr = stack.pop();
+
+				//compare curr.val with prev.val if we have one
+				if(prev != null && curr.val <= prev.val){
+					//incorrect smaller node is always found as prev node
+					if(first == null) first = prev;
+					//incorrect larger node is always found as curr node
+					second = curr;
+				}
+
+				//visit curr's right subtree
+				prev = curr;
+				curr = curr.right;
+			}
+		}
+
+		//recover swapped nodes
+		int temp = first.val;
+		first.val = second.val;
+		second.val = temp;
+	}
 	// Bottom view of a binary tree #Confused should we do or leave it ??
 	public void bottomView(Node root) {
 
@@ -6732,7 +6768,10 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 	// a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
 	// second method looks more reasonable and self explanatory
 
-	// below method is DFS recursion
+// below method is DFS recursion
+// this method is better in terms of complexit O(n)
+// In this bottom up approach, each node in the tree only need to be accessed once. Thus the time complexity is O(N),
+// better than the first solution.
 	public int dfsHeight(TreeNode root) {
 		if (root == null)
 			return 0;
@@ -6885,77 +6924,6 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		}
 		return true;
 	}
-	// Q96 Unique Binary Search Trees  #hardlyAsked
-	// Given n, how many structurally unique BST's (binary search trees) that store values 1...n?
-	// For example, Given n = 3, there are a total of 5 unique BST's.
-	//
-	// 1 3 3 2 1
-	// \ / / / \ \
-	// 3 2 1 1 3 2
-	/// / \ \
-	// 2 1 2 3
-
-	// very well explained by tushar roy
-	// https://www.youtube.com/watch?v=YDf982Lb84o
-	public int numTrees(int n) {
-		int[] G = new int[n + 1];
-		G[0] = G[1] = 1;
-
-		for (int i = 2; i <= n; ++i) {
-			for (int j = 0; j < i; j++) {
-				G[i] += G[j] * G[i - j - 1];
-			}
-		}
-
-		return G[n];
-	}
-
-	// Q95 Unique Binary Search Trees II  #hardlyAsked
-	// Given an integer n, generate all structurally unique BST's (binary search
-	// trees) that store values 1...n.
-	//
-	// For example,
-	// Given n = 3, your program should return all 5 unique BST's shown below.
-	//
-	// 1 3 3 2 1
-	// \ / / / \ \
-	// 3 2 1 1 3 2
-	/// / \ \
-	// 2 1 2 3
-
-	// Solution: I start by noting that 1..n is the in-order traversal for any BST with nodes 1 to n.
-	// So if I pick i-th node as my root, the left subtree will contain elements 1 to (i-1), and the
-	// right subtree will contain elements (i+1) to n. I use recursive calls to get back all possible
-	// trees for left and right subtrees and combine them in all possible ways with the root.
-	public List<TreeNode> generateTrees(int n) {
-		return genTrees(1, n);
-	}
-
-	public List<TreeNode> genTrees(int start, int end) {
-		List<TreeNode> list = new ArrayList<TreeNode>();
-		if (start > end) {
-			list.add(null);
-			return list;
-		}
-		if (start == end) {
-			list.add(new TreeNode(start));
-			return list;
-		}
-		List<TreeNode> left, right;
-		for (int i = start; i <= end; i++) {
-			left = genTrees(start, i - 1);
-			right = genTrees(i + 1, end);
-			for (TreeNode lnode : left) {
-				for (TreeNode rnode : right) {
-					TreeNode root = new TreeNode(i);
-					root.left = lnode;
-					root.right = rnode;
-					list.add(root);
-				}
-			}
-		}
-		return list;
-	}
 
 	// Q156 Binary Tree upside down #GoodQuestion #HardlyAsked #LinkedinQuestion
 	// Given a binary tree where all the right nodes are either leaf nodes with
@@ -7077,7 +7045,7 @@ void findBuildOrder(String[] projects, String[][] dependencies) {
 		}
 		return result;
 	}
-
+		//Facebook Famous Question
 	// Q124 Binary Tree Maximum Path Sum #TopInterviewQuestion  //more understandable is the second solution
 	// https://www.youtube.com/watch?v=cSnETAcziS0&t=229s
 	// the same way we can do the minimum path sum
@@ -7127,7 +7095,8 @@ int max=Integer.MIN_VALUE;
         return max1;
     }
 // Q112 Path sum of a binary tree
-// Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
+// Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the
+// values along the path equals the given sum.
 	public boolean hasPathSum(TreeNode root, int sum) {
 		if (root == null)
 			return false;
@@ -7208,11 +7177,24 @@ int max=Integer.MIN_VALUE;
 		return false;
 	}
 
+//2.1) L1 is defined as the distance between the head point and entry point
+//2.2) L2 is defined as the distance between the entry point and the meeting point
+//2.3) C is defined as the length of the cycle
+//2.4) n is defined as the travel times of the fast pointer around the cycle When the first encounter of the slow pointer and the fast pointer
+//	According to the definition of L1, L2 and C, we can obtain:
+//	the total distance of the slow pointer traveled when encounter is L1 + L2
+//	the total distance of the fast pointer traveled when encounter is L1 + L2 + n * C
+//	Because the total distance the fast pointer traveled is twice as the slow pointer, Thus:
+// 2 * (L1+L2) = L1 + L2 + n * C => L1 + L2 = n * C => L1 = (n - 1) C + (C - L2)*
+//	It can be concluded that the distance between the head location and entry location is equal to the distance between the meeting location and the entry location along the direction of forward movement.
+//So, when the slow pointer and the fast pointer encounter in the cycle, we can define a pointer "entry" that point to the head, this "entry" pointer moves one step each time so as the slow pointer. When this "entry" pointer and the slow pointer both point to the same location, this location is the node where the cycle begins.
+
 	// Q142 Linked List cycle II find the start of the cycle
 	public ListNode detectCycle(ListNode head) {
+    	if(head == null ) return null;
 		ListNode slow = head;
 		ListNode fast = head;
-		while (slow != null && fast != null && fast.next != null) {
+		while ( fast.next != null  && fast.next.next != null) {
 			slow = slow.next; // Slow moves by 1 step
 			fast = fast.next.next; // Fast moves by two steps
 			// If they meet then there is a loop
@@ -7244,18 +7226,19 @@ int max=Integer.MIN_VALUE;
 	}
 
 	public ListNode swapPairsNonRecursive(ListNode head) {
-		ListNode dummy = new ListNode(0);
-		dummy.next = head;
-		ListNode current = dummy;
-		while (current.next != null && current.next.next != null) {
-			ListNode first = current.next;
-			ListNode second = current.next.next;
-			first.next = second.next;
-			current.next = second;
-			current.next.next = first;
-			current = current.next.next;
-		}
-		return dummy.next;
+			if(head==null || head.next==null) return head;
+			ListNode newHead = head.next, a=head,b=a.next,pre = null;
+			while(a!=null && b!=null){
+				a.next = b.next;
+				b.next = a;
+				if(pre!=null) pre.next = b;
+				if(a.next==null) break;
+				b = a.next.next;
+				pre = a;
+				a = a.next;
+			}
+			return newHead;
+
 	}
 
 // Q160 Intersection of two LinkedLists #TopInterviewQuestion
@@ -7421,7 +7404,7 @@ int max=Integer.MIN_VALUE;
 		return prev;
 	}
 
-	// Q148 Sort List (linked list) #TopInterviewQuestion
+	// Q148 Sort List (linked list) #TopInterviewQuestion  #FacebookQuestion
 	// Sort a linked list in O(n log n) time using constant space complexity.
 	public ListNode sortList(ListNode head) {
 		if (head == null || head.next == null)
@@ -7430,6 +7413,7 @@ int max=Integer.MIN_VALUE;
 		// step 1. cut the list to two halves
 		ListNode prev = null, slow = head, fast = head;
 
+		//slow move 1 step every time, fast move 2 step every time, pre record node before slow
 		while (fast != null && fast.next != null) {
 			prev = slow;
 			slow = slow.next;
@@ -7446,24 +7430,24 @@ int max=Integer.MIN_VALUE;
 		return merge(l1, l2);
 	}
 
-	ListNode merge(ListNode l1, ListNode l2) {
-		ListNode l = new ListNode(0), p = l;
-
-		while (l1 != null && l2 != null) {
-			if (l1.val < l2.val) {
-				p.next = l1;
-				l1 = l1.next;
-			} else {
-				p.next = l2;
-				l2 = l2.next;
-			}
-			p = p.next;
+	//merge two sorted list, return result head
+	public ListNode merge(ListNode h1, ListNode h2){
+		if(h1 == null){
+			return h2;
 		}
-		if (l1 != null)
-			p.next = l1;
-		if (l2 != null)
-			p.next = l2;
-		return l.next;
+		if(h2 == null){
+			return h1;
+		}
+
+		if(h1.val < h2.val){
+			h1.next = merge(h1.next, h2);
+			return h1;
+		}
+		else{
+			h2.next = merge(h1, h2.next);
+			return h2;
+		}
+
 	}
 
 // Q86 partition list
@@ -7540,8 +7524,7 @@ int max=Integer.MIN_VALUE;
 
 	// Dynamic Programming
 	// Q300 Length of longest increasing subsequence #TopInterviewQuestion
-	// Given an unsorted array of integers, find the length of longest
-	// increasing subsequence.
+	// Given an unsorted array of integers, find the length of longest increasing subsequence.
 	// Very well explained by tushar https://www.youtube.com/watch?v=CE2b_-XfVDk
 	// basic condition if arr[j] < arr[i] then T[i] = Max (T[i] , T[j]+1)
 
@@ -8485,6 +8468,37 @@ int max=Integer.MIN_VALUE;
         return false;
     }
 
+//    check this
+	private int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+	public boolean exist2(char[][] board, String word) {
+		// sanity check
+		if(board == null || word == null || word.length() == 0) return false;
+		int n = board.length;
+		int m = board[0].length;
+		boolean[][] visited = new boolean[n][m];
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < m; j++){
+				if(dfs(i, j, board, word, 0, n, m, visited)) return true;
+			}
+		}
+		return false;
+	}
+	private boolean dfs(int i, int j, char[][] board, String word, int start, int n, int m, boolean[][] visited){
+		if(board[i][j] != word.charAt(start)) return false;
+		if(start + 1 == word.length()) return true;
+
+		visited[i][j] = true;
+		for(int[] dir : dirs){
+			int x = i + dir[0];
+			int y = j + dir[1];
+			// check boundary
+			if(x < 0 || y < 0 || x >= n || y >= m || visited[x][y]) continue;
+			if(dfs(x, y, board, word, start + 1, n, m, visited)) return true;
+		}
+		visited[i][j] = false;
+		return false;
+
+	}
 	// Q212 Word Search 2 using trie #TopInterviewQuestion
 	// Given a 2D board and a list of words from the dictionary, find all words in the board.
 	// Each word must be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those
@@ -8561,6 +8575,7 @@ int max=Integer.MIN_VALUE;
 	private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums, int start) {
 		list.add(new ArrayList<>(tempList));
 		for (int i = start; i < nums.length; i++) {
+			if(i > start && nums[i] == nums[i-1]) continue; // for skipping duplicates
 			tempList.add(nums[i]);
 			backtrack(list, tempList, nums, i + 1);
 			tempList.remove(tempList.size() - 1);
@@ -8631,7 +8646,9 @@ public boolean canPartition(int[] nums) {
 }
 
 	public boolean backtrack(int sum, int start, int[] nums) {
-		if (start < 0) return false;
+		if (start < 0)
+
+			return false;
 		//System.out.println("here is: "+ "target sum "+ sum + " current value " + nums[start] );
 		if (sum == nums[start]) {
 			//System.out.println("i have succeeded");
@@ -8662,6 +8679,7 @@ public boolean canPartition(int[] nums) {
 		else {
 			for (int i = start; i < s.length(); i++) {
 				if (isPalindrome1(s, start, i)) {
+
 					tempList.add(s.substring(start, i + 1));
 					backtrack(list, tempList, s, i + 1);
 					tempList.remove(tempList.size() - 1);
@@ -8787,7 +8805,80 @@ public boolean canPartition(int[] nums) {
 		int nums[] = { 10, 3, 8, 9, 4 };
 		// System.out.println(findRelativeRanks(nums));
 	}
-// Palindrome Partitioning - II #HardlyAsked #LeavingQuestion
+
+	// Q96 Unique Binary Search Trees  #hardlyAsked
+	// Given n, how many structurally unique BST's (binary search trees) that store values 1...n?
+	// For example, Given n = 3, there are a total of 5 unique BST's.
+	//
+	// 1 3 3 2 1
+	// \ / / / \ \
+	// 3 2 1 1 3 2
+	/// / \ \
+	// 2 1 2 3
+
+	// very well explained by tushar roy
+	// https://www.youtube.com/watch?v=YDf982Lb84o
+	public int numTrees(int n) {
+		int[] G = new int[n + 1];
+		G[0] = G[1] = 1;
+
+		for (int i = 2; i <= n; ++i) {
+			for (int j = 0; j < i; j++) {
+				G[i] += G[j] * G[i - j - 1];
+			}
+		}
+
+		return G[n];
+	}
+
+	// Q95 Unique Binary Search Trees II  #hardlyAsked
+	// Given an integer n, generate all structurally unique BST's (binary search
+	// trees) that store values 1...n.
+	//
+	// For example,
+	// Given n = 3, your program should return all 5 unique BST's shown below.
+	//
+	// 1 3 3 2 1
+	// \ / / / \ \
+	// 3 2 1 1 3 2
+	/// / \ \
+	// 2 1 2 3
+
+	// Solution: I start by noting that 1..n is the in-order traversal for any BST with nodes 1 to n.
+	// So if I pick i-th node as my root, the left subtree will contain elements 1 to (i-1), and the
+	// right subtree will contain elements (i+1) to n. I use recursive calls to get back all possible
+	// trees for left and right subtrees and combine them in all possible ways with the root.
+	public List<TreeNode> generateTrees(int n) {
+		return genTrees(1, n);
+	}
+
+	public List<TreeNode> genTrees(int start, int end) {
+		List<TreeNode> list = new ArrayList<TreeNode>();
+		if (start > end) {
+			list.add(null);
+			return list;
+		}
+		if (start == end) {
+			list.add(new TreeNode(start));
+			return list;
+		}
+		List<TreeNode> left, right;
+		for (int i = start; i <= end; i++) {
+			left = genTrees(start, i - 1);
+			right = genTrees(i + 1, end);
+			for (TreeNode lnode : left) {
+				for (TreeNode rnode : right) {
+					TreeNode root = new TreeNode(i);
+					root.left = lnode;
+					root.right = rnode;
+					list.add(root);
+				}
+			}
+		}
+		return list;
+	}
+
+	// Palindrome Partitioning - II #HardlyAsked #LeavingQuestion
 // Given a string s, partition s such that every substring of the partition is a palindrome.
 // Return the minimum cuts needed for a palindrome partitioning of s.
 // i is the starting index and j is the ending index. i must be passed as 0 and j as n-1

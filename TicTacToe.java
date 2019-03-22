@@ -1,13 +1,13 @@
 package LeetcodePrograms;
 
-public class tictactoe {
+public class TicTacToe {
 private int[] rows;
 private int[] cols;
 private int diagonal;
 private int antiDiagonal;
 
 /** Initialize your data structure here. */
-public tictactoe(int n) {
+public TicTacToe(int n) {
     rows = new int[n];
     cols = new int[n];
 }

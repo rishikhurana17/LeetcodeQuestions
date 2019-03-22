@@ -6,12 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class database {
+public class JDBCConnection {
 	private Connection con;
 	private Statement st;
 	private ResultSet rs;
 
-	public database() throws SQLException {
+	public JDBCConnection() throws SQLException {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory", "root", "");

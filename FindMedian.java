@@ -45,8 +45,5 @@ public class FindMedian {
         findMedian.addNum(10);
         findMedian.addNum(9);
         System.out.println(findMedian.findMedian());
-
-
-
     }
 }

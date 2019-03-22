@@ -1,6 +1,6 @@
 package LeetcodePrograms;
 
-public class printSpiralOrder {
+public class PrintSpiralOrderMatrix {
 	private static void spiralOrder(int[][] arr, int row, int column) {
 		int T = 0;
 		int B = row - 1;

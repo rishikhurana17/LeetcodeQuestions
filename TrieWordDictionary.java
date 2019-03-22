@@ -1,9 +1,14 @@
 package LeetcodePrograms;
-
+// 211. Add and Search Word - Data structure design
 /**
  * Created by rkhurana on 3/3/19.
  */
 public class TrieWordDictionary {
+    public class TrieNode1 {
+        TrieNode1[] children = new TrieNode1[26];
+        public boolean isWord;
+
+    }
 
     private TrieNode1 root = new TrieNode1();
 

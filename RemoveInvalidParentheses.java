@@ -55,8 +55,10 @@ public class RemoveInvalidParentheses {
 
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if (c == '(') count++;
-            if (c == ')' && count-- == 0) return false;
+            if (c == '(')
+                count++;
+            if (c == ')' && count-- == 0)
+                return false;
         }
 
         return count == 0;
@@ -65,6 +67,6 @@ public class RemoveInvalidParentheses {
     public static void main(String []args){
         RemoveInvalidParentheses o = new RemoveInvalidParentheses();
 
-        System.out.println(o.removeInvalidParentheses("()())()"));
+        System.out.println(o.removeInvalidParentheses(")(()a)())()"));
     }
 }

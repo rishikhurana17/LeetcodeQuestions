@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
  */
 
 
-    public class KthSmallestElementMatrix {
+public class KthSmallestElementMatrix {
 
 // Note that it is the kth smallest element in the sorted order, not the kth distinct element.
 // Solution : Build a minHeap of elements from the first row.

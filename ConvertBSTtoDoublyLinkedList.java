@@ -26,7 +26,7 @@ public class ConvertBSTtoDoublyLinkedList {
             prev = node;
         }
 
-        prev.right = head.right;
+        prev.right = head.right; //did not understand these 2 lines
         head.right.left = prev;
 
         return head.right;

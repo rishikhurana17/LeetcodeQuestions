@@ -10,11 +10,13 @@ import java.util.*;
 
 class TrieAutocomplete {
 
+
     static class Autocomplete {
 
         class Node {
             public Map<Character, Node> children = new HashMap<>();
             public Map<Integer,String> wordTreeMap = new TreeMap<>();
+            List<String> wordforthatSearch = new ArrayList<>();  // i added it later on, not needed though
         }
 
         Node root = new Node();
@@ -27,6 +29,7 @@ class TrieAutocomplete {
                 }
                 p = p.children.get(c);
                 p.wordTreeMap.put(count, word);
+                p.wordforthatSearch.add(word);
 
             }
         }
@@ -41,10 +44,12 @@ class TrieAutocomplete {
             }
 
             List<String> words = new ArrayList<String>();
-
+            List<String> justWordswithoutCount = new ArrayList<>();
             words.addAll(p.wordTreeMap.values());
+            justWordswithoutCount.addAll(p.wordforthatSearch);
             //Collections.sort(words, Collections.reverseOrder()); //this doesnt work
             Collections.reverse(words);
+            System.out.println("all the words without order is "+ justWordswithoutCount);
             return words;
         }
 
@@ -69,7 +74,7 @@ class TrieAutocomplete {
         a.addWord("alpha", 1);
         a.addWord("badger", 1);
 
-        System.out.println("Search for query a in descending order is " + a.search("a"));  //[apple2, ape, apple,ant,app,alpha]
+        System.out.println("Search for query a in descending order is " + a.search("app"));  //[apple2, ape, apple,ant,app,alpha]
 
         System.out.println("All Hits print");
         // "z" -> no hits
@@ -79,7 +84,6 @@ class TrieAutocomplete {
         // "ap" -> 4
 
         a.printAllHits(a.root, "");
-
 
         String query = "a";
 
