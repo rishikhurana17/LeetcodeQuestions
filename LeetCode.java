@@ -90,7 +90,18 @@ public class LeetCode {
 		}
 		return low;
 	}
-
+	//both same above and below
+	public int searchInsert2(int[] nums, int target) {
+		int low = 0, high = nums.length;
+		while(low < high) {
+			int mid = low + (high - low) / 2;
+			if(nums[mid] < target)
+				low = mid + 1;
+			else
+				high = mid;
+		}
+		return low;
+	}
 	// Q219 Contain duplicates II  #HardlyAsked
 	// Given an array of integers and an integer k, find out whether there are two distinct indices
 	// i and j in the array such that nums[i] = nums[j]
@@ -129,6 +140,8 @@ public class LeetCode {
 	// The Sudoku board could be partially filled, where empty cells are filled
 	// with the character '.'.
 
+// The underlying data structure for HashSet is hashtable. So amortize (average or usual case) time complexity for add,
+// remove and look-up (contains method) operation of HashSet takes O(1) time.
 	public boolean isValidSudoku2(char[][] board) {
 		Set<String> set = new HashSet<>();
 		for (int row = 0; row < board.length; row++) {
@@ -176,8 +189,10 @@ public class LeetCode {
 
 		int start = 0, end = numbers.length - 1;
 		while (start < end) {
-			if (numbers[start] + numbers[end] == target) break;
-			if (numbers[start] + numbers[end] < target) start++;
+			if (numbers[start] + numbers[end] == target)
+				break;
+			if (numbers[start] + numbers[end] < target)
+				start++;
 			else end--;
 		}
 		return new int[]{start + 1, end + 1};
@@ -199,7 +214,7 @@ public class LeetCode {
 	// better solution
 // compare half of the digits in x, so don't need to deal with overflow.
 	public boolean isPalindrome2(int x) {
-		if (x < 0 || (x != 0 && x % 10 == 0))
+		if (x < 0 || (x != 0 && x % 10 == 0)) //a good point
 // As discussed above, when x < 0, x is not a palindrome.
 // Also if the last digit of the number is 0, in order to be a palindrome,
 // the first digit of the number also needs to be 0. Only 0 satisfy this property.
@@ -215,7 +230,7 @@ public class LeetCode {
 		return (x == rev || x == rev / 10);
 	}
 
-    // Q125 Valid Palindrome #TopInterviewQuestion
+    // Q125 Valid Palindrome #TopInterviewQuestion #FacebookQuestion
     // Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
     // Input: "A man, a plan, a canal: Panama" Output: true
     public boolean isPalindrome(String s) {
@@ -450,6 +465,8 @@ public class LeetCode {
 	// M 1000
 	public static int romantoint(String str) {
 		int sum = 0;
+//	The complexity of Java's implementation of indexOf is O(m*n) where n and m are the length of the search string
+//   and pattern respectively.
 		if (str.indexOf("IV") != -1) {
 			sum -= 2;
 		}
@@ -671,7 +688,7 @@ public class LeetCode {
 	}
 
 
-	// Q28 Implement strStr() #TopInterviewQuestion
+	// Q28 Implement strStr() #TopInterviewQuestion  look for KMP algorithm that will make it in O(n+m) complexity
 	// function to find the first occurrence of the substring needle in the string haystack
 	public int strStr(String haystack, String needle) { // haystack.lastIndexOf(needle);
 
@@ -799,7 +816,6 @@ public class LeetCode {
         return maxSoFar;
     }
 
-
     // Q70 Climbing stairs problem #TopInterviewQuestion
 	// You are climbing a stair case. It takes n steps to reach to the top.
 	// Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
@@ -912,14 +928,14 @@ public class LeetCode {
         return min;
 	}
 
-//Shortest Word Distance ii
-//	Design a class which receives a list of words in the constructor, and implements a method that takes two words word1 and word2
-// and return the shortest distance between these two words in the list. Your method will be called repeatedly many times with different parameters.
-// Duplicates are been taken care of in this method
+// 244 Shortest Word Distance ii
+// Design a class which receives a list of words in the constructor, and implements a method that takes two words word1 and word2
+// and return the shortest distance between these two words in the list. Your method will be called repeatedly many times with different
+// parameters. Duplicates are been taken care of in this method
 	private Map<String, List<Integer>> wordDistanceMap;
 
-	public void WordDistance2constructore(String[] words) {
-		wordDistanceMap = new HashMap<String, List<Integer>>();
+	public void WordDistance2constructor(String[] words) {
+		wordDistanceMap = new HashMap<String, List<Integer>>(); //list to include all the duplicate values index's
 		for(int i = 0; i < words.length; i++) {
 			String w = words[i];
 			if(wordDistanceMap.containsKey(w)) {
@@ -1024,6 +1040,28 @@ public class LeetCode {
 		if (root.right == null)
 			return 1 + minDepth(root.left);
 		return 1 + Math.min(minDepth(root.left), minDepth(root.right));
+	}
+
+	public int minDepth2(TreeNode root) {
+		if(root == null)
+			return 0;
+
+		// leaf node
+		if(root.left == null && root.right == null)
+			return 1;
+
+		// leaf nodes are in right subtree
+		if(root.left == null)
+			return minDepth(root.right) + 1;
+
+		// leaf nodes are in left subtree
+		if(root.right == null)
+			return minDepth(root.left) + 1;
+
+		// left/right subtrees both contains leaf nodes
+		int left = minDepth(root.left);
+		int right = minDepth(root.right);
+		return Math.min(left, right) + 1;
 	}
 
 	public int minDepthNonRecursive(TreeNode root) {
@@ -1141,8 +1179,7 @@ public class LeetCode {
 	}
 
 	// Q171 excel sheet column number #TopInterviewQuestion
-	// Given a column title as appear in an Excel sheet, return its
-	// corresponding column number.
+	// Given a column title as appear in an Excel sheet, return its corresponding column number.
 	// A -> 1
 	// B -> 2
 	// C -> 3
@@ -1248,7 +1285,7 @@ public class LeetCode {
 	public int trailingZeroes(int n) {
 		int r = 0;
 		while (n > 0) {
-			n /= 5;
+			n /= 5;  //divide first
 			r += n;
 		}
 		return r;
@@ -1294,24 +1331,21 @@ public class LeetCode {
 	// 82 + 22 = 68
 	// 62 + 82 = 100
 	// 12 + 02 + 02 = 1
-	public static boolean isHappy(int n) {
-		Set<Integer> inLoop = new HashSet<Integer>();
-		int squareSum, remain;
-		while (inLoop.add(n)) {
-			squareSum = 0;
-			while (n > 0) {
-				remain = n % 10;
-				squareSum += remain * remain;
-				n /= 10;
+	public boolean isHappy(int n) {
+		Set<Integer> seen = new HashSet();
+		while(n != 1){
+			int sum = 0;
+			while(n != 0) {
+				sum += (n%10) * (n%10);
+				n = n/10;
 			}
-			if (squareSum == 1)
-				return true;
-			else
-				n = squareSum;
+			n = sum;
+			if(seen.contains(n))
+				return false;
+			seen.add(n);
 		}
-		return false;
+		return true;
 	}
-
 	// Alternate Solution and a very good solution based on Floyds Cycle Detection Algorithm
 	public static boolean isHappy2(int n) {
 		int slow = n, fast = n;
@@ -1331,6 +1365,18 @@ public class LeetCode {
 			sum += i * i;
 		}
 		return sum;
+	}
+
+	public boolean isHappy5(int n) {
+		if(n == 1 || n == 7) return true;
+		else if(n < 10) return false;
+		int m = 0;
+		while(n != 0){
+			int tail = n % 10;
+			m += tail * tail;
+			n = n/10;
+		}
+		return isHappy5(m);
 	}
 
     public static boolean isMagicNumber(int num) {
@@ -1378,12 +1424,46 @@ public class LeetCode {
 		return num;
 	}
 
-	// Amazing solution for the above same question
-	int addDigits2(int num) {
-		int res = num % 9;
-		return (res != 0 || num == 0) ? res : 9;
+	public int sumDigits(int n){
+		if(n==0)
+			return 0;
+		return (n%10) + sumDigits(n/10);
 	}
 
+// Amazing solution for the above same question
+//	explanation of the below solution
+// First you should understand:
+//
+// 10^k % 9 = 1
+// a*10^k % 9 = a % 9
+// Then let's use an example to help explain.
+//
+// Say a number x = 23456
+//
+//			x = 2* 10000 + 3 * 1000 + 4 * 100 + 5 * 10 + 6
+//
+//			2 * 10000 % 9 = 2 % 9
+//
+//			3 * 1000 % 9 = 3 % 9
+//
+//			4 * 100 % 9 = 4 % 9
+//
+//			5 * 10 % 9 = 5 % 9
+//
+//	Then x % 9 = ( 2+ 3 + 4 + 5 + 6) % 9, note that x = 2* 10000 + 3 * 1000 + 4 * 100 + 5 * 10 + 6
+//
+//	So we have 23456 % 9 = (2 + 3 + 4 + 5 + 6) % 9
+	public int addDigits2(int num) {
+		if (num == 0){
+			return 0;
+		}
+		if (num % 9 == 0){
+			return 9;
+		}
+		else {
+			return num % 9;
+		}
+	}
 // Q26 remove duplicates from sorted array #TopInterviewQuestion
 // Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
 // Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
@@ -1698,52 +1778,26 @@ public int findDuplicate4(int[] nums) {
 		return root;
 	}
 
-	// one more method is given on LeetcodePrograms to do the same no need to do the recursion method.
+	// asked in facebook thatswhy just have a look ... level order traversal
 	// question is hardly been asked
 	public TreeNode invertTree2(TreeNode root) {
-		if (root == null) {
-			return null;
-		}
-		final Deque<TreeNode> stack = new LinkedList<>();
-		stack.push(root);
-		while (!stack.isEmpty()) {
-			final TreeNode node = stack.pop();
-			final TreeNode left = node.left;
-			node.left = node.right;
-			node.right = left;
-			if (node.left != null) {
-				stack.push(node.left);
+			if(root == null) return root;
+			Queue<TreeNode> queue = new LinkedList<TreeNode>();
+			queue.offer(root);
+			while(!queue.isEmpty()){
+				TreeNode node = queue.poll();
+				TreeNode tmp = node.left;
+				node.left = node.right;
+				node.right = tmp;
+				if(node.left != null)
+					queue.offer(node.left);
+				if(node.right != null)
+					queue.offer(node.right);
 			}
-			if (node.right != null) {
-				stack.push(node.right);
-			}
+			return root;
 		}
-		return root;
-	}
 
-	// one more method given on LeetcodePrograms to invert the tree
-	public TreeNode invertTree3(TreeNode root) {
-		if (root == null) {
-			return null;
-		}
-		final Queue<TreeNode> queue = new LinkedList<>();
-		queue.offer(root);
-		while (!queue.isEmpty()) {
-			final TreeNode node = queue.poll();
-			final TreeNode left = node.left;
-			node.left = node.right;
-			node.right = left;
-			if (node.left != null) {
-				queue.offer(node.left);
-			}
-			if (node.right != null) {
-				queue.offer(node.right);
-			}
-		}
-		return root;
-	}
-
-	// Q257 Binary Tree Paths
+	// Q257 Binary Tree Paths   #facebookfavouriteQuestion
 	// Given a binary tree, return all root-to-leaf paths.
 	// For example, given the following binary tree:
 	//  1
@@ -1800,7 +1854,8 @@ public int findDuplicate4(int[] nums) {
 		return ret;
 	}
 
-	// Q278 first bad version
+// Q278 first bad version
+//	'left + right' may cause the Integer Overflow, meaning that left+right > 2147483647
 	public static int firstBadVersion(int n) {
 		int start = 1, end = n;
 		while (start < end) {
@@ -1816,6 +1871,20 @@ public int findDuplicate4(int[] nums) {
 	public static boolean isBadVersion(int x) {
 		// an api which will return whether version is bad.
 		return false;
+	}
+	public int firstBadVersion2(int n) {
+		int lo = 1, hi = n;
+		int last = 0;
+		while(lo <= hi){
+			int mid = lo + (hi - lo)/2;
+			if(isBadVersion(mid)){
+				hi = mid - 1;
+				last = mid;
+			}else{
+				lo = mid + 1;
+			}
+		}
+		return last;
 	}
 
 // Q263 Write a program to check whether a given number is an ugly number.
@@ -1880,6 +1949,7 @@ public int findDuplicate4(int[] nums) {
 			}
 			map.put(s.charAt(i), i);
 			max = Math.max(max, i - j + 1);
+
 
 		}
 		return max;
@@ -2093,7 +2163,7 @@ public int findDuplicate4(int[] nums) {
 		}
 	}
 
-	// Q17 letter combination of a phone number #TopInterviewQuestion
+	// Q17 letter combination of a phone number #TopInterviewQuestion  #FacebookQuestion
 	// this is how it works for the string 23
 	// i=0 -> result=combine("abc", [""]) ---> [a,b,c];
 	// i=1 -> result=combine("def", [a,b,c]) ---> [ad,bd,cd, ae,be,ce, af,bf,cf];
@@ -2282,7 +2352,7 @@ public int findDuplicate4(int[] nums) {
 		return res;
 	}
 
-	// Q43 Multiply String
+	// Q43 Multiply String   #FacebookQuestion
 	// Given two non-negative integers num1 and num2 represented as strings,
 	// return the product of num1 and num2, also represented as a string.
 	public static String multiply(String num1, String num2) {
@@ -2332,21 +2402,20 @@ public int findDuplicate4(int[] nums) {
 		return false;
 	}
 
-	// Q55 jump game #TopInterviewQuestion
-	// Given an array of non-negative integers, you are initially positioned at the first index of the array.
-	// Each element in the array represents your maximum jump length at that position.
-	// Determine if you are able to reach the last index.
-	// The basic idea is this: at each step, we keep track of the furthest reachable index.
-	// The nature of the problem (eg. maximal jumps where you can hit a range of
-	// targets instead of singular jumps where you can only hit one target) is
-	// that for an index to be reachable,each of the previous indices have to be reachable.
-	// Hence, it suffices that we iterate over each index,
-	// and If we ever encounter an index that is not reachable, we abort and return false.
-	// By the end, we will have iterated to the last index. If the loop finishes, then the last index is reachable.
-	// Given an array of non-negative integers, you are initially positioned at the first index of the array.
-	// Each element in the array represents your maximum jump length at that position.
-	// Determine if you are able to reach the last index.
-	// For example:  A = [2,3,1,1,4], return true.  A = [3,2,1,0,4], return false.
+// Q55 jump game #TopInterviewQuestion
+// Given an array of non-negative integers,u r initially positioned at the first index of the array. Each element in
+// the array represents your maximum jump length at that position. Determine if you are able to reach the last index.
+// The basic idea is this: at each step, we keep track of the furthest reachable index.
+// The nature of the problem (eg. maximal jumps where you can hit a range of
+// targets instead of singular jumps where you can only hit one target)
+// that for an index to be reachable,each of the previous indices have to be reachable.
+// Hence, it suffices that we iterate over each index,
+// and If we ever encounter an index that is not reachable, we abort and return false.
+// By the end, we will have iterated to the last index. If the loop finishes, then the last index is reachable.
+// Given an array of non-negative integers, you are initially positioned at the first index of the array.
+// Each element in the array represents your maximum jump length at that position
+// Determine if you are able to reach the last index.
+// For example:  A = [2,3,1,1,4], return true.  A = [3,2,1,0,4], return false.
 	public boolean canJump(int[] nums) {
 		int n = nums.length, reachablesofar = 0;
 		for (int i = 0; i < n; i++) {
@@ -2358,8 +2427,6 @@ public int findDuplicate4(int[] nums) {
 		}
 		return false;
 	}
-
-
 
 	// Q71 Simplify Path
 	// Given an absolute path for a file (Unix-style), simplify it.For example,
@@ -2383,8 +2450,7 @@ public int findDuplicate4(int[] nums) {
 	}
 
 	// Q73 Set Matrix Zeroes #TopInterviewQuestion
-	// Given a m x n matrix, if an element is 0, set its entire row and column
-	// to 0. Do it in place.
+	// Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in place.
 	public static void setZero(int[][] matrix) {
 		boolean[] row = new boolean[matrix.length];
 		boolean[] column = new boolean[matrix[0].length];
@@ -2408,15 +2474,12 @@ public int findDuplicate4(int[] nums) {
 		}
 	}
 
-	// Q75 sort colors #TopInterviewQuestion
-	// Given an array with n objects colored red, white or blue, sort them so
-	// that objects of the same color
-	// are adjacent, with the colors in the order red, white and blue. Here, we
-	// will use the integers 0, 1, and 2
-	// to represent the color red, white, and blue respectively.
+// Q75 sort colors #TopInterviewQuestion
+// Given an array with n objects colored red, white or blue, sort them so that objects of the same color
+// are adjacent, with the colors in the order red, white and blue. Here, we will use the integers 0, 1, and 2
+// to represent the color red, white, and blue respectively.
 
-	// The idea is to sweep all 0s to the left and all 2s to the right, then all
-	// 1s are left in the middle.
+// The idea is to sweep all 0s to the left and all 2s to the right, then all 1s are left in the middle.
 	//second solution is the better solution
 	void sortColors(int A[], int n) {
 		int second = n - 1, zero = 0;
@@ -2461,7 +2524,7 @@ public int findDuplicate4(int[] nums) {
 	// My solution has O(n) time complexity and O(1) memory. The basic idea is to connect the list into a circle.
 	// First, count the length of list while going through the list to find the end of it.
 	// Connect the tail to head. The problem asked to rotate k nodes, however, now the tail is at the end of the list
-	// and its difficult to move backward, so move (k - len) nodes along thelist instead. "k = k % len" saves the unnecessary
+// & its difficult to move backward, so move (k - len) nodes along thelist instead. "k = k % len" saves the unnecessary
     // moves because rotate a list with length = len by len times doesn't change the list at all.
 	ListNode rotateRight(ListNode head, int k) {
 		if (head == null || head.next == null || k == 0)
@@ -2510,6 +2573,22 @@ public int findDuplicate4(int[] nums) {
 		// Skip the desired node
 		slow.next = slow.next.next;
 		return start.next;
+	}
+
+	//ths one looks better
+	public ListNode RemoveNthFromEnd(ListNode head, int n) {
+		ListNode h1=head, h2=head;
+		while(n-->0)
+			h2=h2.next;
+		if(h2==null)
+			return head.next;  // The head need to be removed, do it.
+		h2=h2.next;
+		while(h2!=null){
+			h1=h1.next;
+			h2=h2.next;
+		}
+		h1.next=h1.next.next;   // the one after the h1 need to be removed
+		return head;
 	}
 	// Q116 populating next right pointers in each node #TopInterviewQuestion
 	// perfect binary tree..that means every parent has two children
@@ -2571,11 +2650,9 @@ public int findDuplicate4(int[] nums) {
 	// linked list is given such that each node contains an additional random
 	// pointer which could point to any node in the list or null. Return a deep copy of the list.
 
-	// We can solve this problem by doing the following steps:
-	// copy every node, i.e., duplicate every node, and insert it to the list
-	// copy random pointers for all newly created nodes
-	// break the list to two
-	// Definition for singly-linked list with a random pointer.
+	// We can solve this problem by doing the following steps: copy every node, i.e., duplicate every node, and insert
+	// it to the list copy random pointers for all newly created nodes break the list to two
+
 	// class RandomListNode { int label;
                                 // RandomListNode next, random;
                                 // RandomListNode(int x) { this.label = x; }
@@ -2640,7 +2717,7 @@ public int findDuplicate4(int[] nums) {
 	}
 
 	// Q273 Integer to English words #TopInterviewQuestion .. #GoodQuestion
-	public class Solution {
+
 		private final String[] belowTen = new String[] { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven",
 				"Eight", "Nine" };
 		private final String[] belowTwenty = new String[] { "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen",
@@ -2672,7 +2749,7 @@ public int findDuplicate4(int[] nums) {
 				result = helper(num / 1000000000) + " Billion " + helper(num % 1000000000);
 			return result.trim();
 		}
-	}
+
 
 	// Q143 reorder list   #FaceBookQuestion
 	// Given a singly linked list L: L0→L1→…→Ln-1→Ln, reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
@@ -2866,22 +2943,6 @@ public int findDuplicate4(int[] nums) {
 		return null;
 	}
 
-	// or this one is a better method
-	int findPeakElement(int[] num) {
-		int low = 0;
-		int high = num.length - 1;
-
-		while (low < high) {
-			int mid1 = (low + high) / 2;
-			int mid2 = mid1 + 1;
-			if (num[mid1] < num[mid2])
-				low = mid2;
-			else
-				high = mid1;
-		}
-		return low;
-	}
-
 	// Best Solution So Far
 	// This problem is similar to Local Minimum. And according to the given
 	// condition, num[i] != num[i+1],
@@ -3016,19 +3077,6 @@ public int findDuplicate4(int[] nums) {
 		return Math.max(evensum, oddsum);
 	}
 
-	public int rob2(int[] nums) {
-
-		if (nums.length == 0) return 0;
-		int[] memo = new int[nums.length + 1];
-		memo[0] = 0;
-		memo[1] = nums[0];
-		for (int i = 1; i < nums.length; i++) {
-			int val = nums[i];
-			memo[i+1] = Math.max(memo[i], memo[i-1] + val);
-		}
-		return memo[nums.length];
-	}
-
 // Q213 House Robber -2
 // This problem is a little tricky at first glance. However, if you have finished the House Robber problem,
 // this problem can simply be decomposed into two House Robber problems.
@@ -3126,13 +3174,12 @@ public int findDuplicate4(int[] nums) {
 		return 0;
 
 	}
-	// Q223 Rectangle Area #GoodQuestion
-	// Find the total area covered by two rectilinear rectangles in a 2D plane.
-	// Each rectangle is defined by its bottom left corner and top right corner as shown in the figure.
-	// Rectangle Area.Assume that the total area is never beyond the maximum possible value of int.
-	// compute the intersection area
-	// first square left bottom co-ordinates (A,B) right top (C,D)
-	// second square left bottom co-ordinates (E,F) right top (G,H)
+// Q223 Rectangle Area #GoodQuestion #HardlyAsked
+// Find the total area covered by two rectilinear rectangles in a 2D plane.
+// Each rectangle is defined by its bottom left corner and top right corner as shown in the figure.
+// Rectangle Area.Assume that the total area is never beyond the maximum possible value of int. compute the intersection area
+// first square left bottom co-ordinates (A,B) right top (C,D)
+// second square left bottom co-ordinates (E,F) right top (G,H)
 	public int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
 		int areaOfSqrA = (C - A) * (D - B);
 		int areaOfSqrB = (G - E) * (H - F);
@@ -4159,7 +4206,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 	public int maxArea(int[] height) {
 		int left = 0, right = height.length - 1;
 		int maxArea = 0;
-		while (left < right) {
+		while (left <= right) {
 //			maxArea = Math.max(maxArea, Math.min(height[left], height[right]) * (right - left));
             int currentSum = (right - left )* Math.min(height[left] , height[right]);
             maxArea = Math.max(maxArea, currentSum);
@@ -4357,7 +4404,7 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return triangle.get(0).get(0);
 	}
 
-	// Q179 largest number #TopInterviewQuestion
+	// Q179 largest number #TopInterviewQuestion #NobdyAskedthisQuestioninLast6Months
 	// Given a list of non negative integers, arrange them such that they form the largest number.
 	// For example, given [3, 30, 34, 5, 9], the largest formed number is 9534330.
 	// Note: The result may be very large, so you need to return a string instead of an integer.
@@ -4550,14 +4597,13 @@ private Queue<Integer> q1 = new LinkedList<>();
 		return result.toString();
 	}
 
-	// Q209 minimum size subarray sum #GoodQuestion
-	// Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous subarray
-	// of which the sum ≥ s. If there isn't one, return 0 instead.
-
-	// good explanation https://www.youtube.com/watch?v=NKoHjWl2m8Y
-	// keeping two pointers start and end both innitialized at 0 when sum exceeds the target, increment start else keep
-    // on incrementing the end Returns length of smallest subarray with sum greater than s.
-    // If there is no subarray with given sum, then returns n+1
+// Q209 minimum size subarray sum #GoodQuestion
+// Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous subarray of which the sum ≥ s.
+// If there isn't one, return 0 instead.
+// good explanation https://www.youtube.com/watch?v=NKoHjWl2m8Y
+// keeping two pointers start and end both innitialized at 0 when sum exceeds the target, increment start else keep
+// on incrementing the end Returns length of smallest subarray with sum greater than s.
+// If there is no subarray with given sum, then returns n+1
 
     //second solution is better
     public int minSubArrayLen2(int s, int[] nums) {
@@ -4575,6 +4621,12 @@ private Queue<Integer> q1 = new LinkedList<>();
         return minLen == Integer.MAX_VALUE ? 0 : minLen;
     }
 //or
+//	Don't be fooled by the nested loops.
+//
+//	j will iterate from 0 to n.
+//	i is a pointer that cannot go backwards and cannot exceed j, so it will iterate at most n times.
+//
+//	At worst, the number of operations is 2n, it is O(n).
     public int minSubArrayLen(int s, int[] a) {
         if (a == null || a.length == 0)
             return 0;
@@ -4932,44 +4984,48 @@ private Queue<Integer> q1 = new LinkedList<>();
 	}
 
 //Implementing Min Stack withoug using Stack
-    class MinStack {
-        private Node head;
+class MinimumStack {
+	class Node {
+		int value;
+		int min;
+		Node next;
 
-        public void push(int x) {
-            if(head == null)
-                head = new Node(x, x);
-            else
-                head = new Node(x, Math.min(x, head.min), head);
-        }
+		Node(int x, int min) {
+			this.value = x;
+			this.min = min;
+			next = null;
+		}
+	}
 
-        public void pop() {
-            head = head.next;
-        }
+	private Node head;
 
-        public int top() {
-            return head.val;
-        }
+	public void push(int x) {
+		if (null == head) {
+			head = new Node(x, x);
+		} else {
+			Node n = new Node(x, Math.min(x, head.min));
+			n.next = head;
+			head = n;
+		}
+	}
 
-        public int getMin() {
-            return head.min;
-        }
+	public void pop() {
+		if (head != null)
+			head = head.next;
+	}
 
-        private class Node {
-            int val;
-            int min;
-            Node next;
+	public int top() {
+		if (head != null)
+			return head.value;
+		return -1;
+	}
 
-            private Node(int val, int min) {
-                this(val, min, null);
-            }
-
-            private Node(int val, int min, Node next) {
-                this.val = val;
-                this.min = min;
-                this.next = next;
-            }
-        }
-    }
+	public int getMin() {
+		if (null != head)
+			return head.min;
+		return -1;
+	}
+}
 
 
 	// Q149 Max Points on a line ( maximum points on a plane ) // #TopInterviewQuestion
@@ -5700,6 +5756,34 @@ private Queue<Integer> q1 = new LinkedList<>();
 			return (String) (list.get(k)).getKey();
 		return null;
 	}
+
+//	or
+public List<Integer> topKFrequent3(int[] nums, int k) {
+
+	List<Integer>[] bucket = new List[nums.length + 1];
+	Map<Integer, Integer> frequencyMap = new HashMap<Integer, Integer>();
+
+	for (int n : nums) {
+		frequencyMap.put(n, frequencyMap.getOrDefault(n, 0) + 1);
+	}
+
+	for (int key : frequencyMap.keySet()) {
+		int frequency = frequencyMap.get(key);
+		if (bucket[frequency] == null) {
+			bucket[frequency] = new ArrayList<>();
+		}
+		bucket[frequency].add(key);
+	}
+
+	List<Integer> res = new ArrayList<>();
+
+	for (int pos = bucket.length - 1; pos >= 0 && res.size() < k; pos--) {
+		if (bucket[pos] != null) {
+			res.addAll(bucket[pos]);
+		}
+	}
+	return res;
+}
 
 	// same logic as above but above they have string below we have set of integers.
 	// Q347 Top k frequent elements #TopInterviewQuestion
@@ -7618,11 +7702,33 @@ int max=Integer.MIN_VALUE;
 		System.out.print("\n");
 	}
 
-	// Given a total and coins of certain denominations find number of ways total * can be formed from coins assuming infinity supply of coins
+// 322. Coin Change
+// You are given coins of different denominations and a total amount of money amount. Write a function to compute the
+// fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination
+// of the coins, return -1.
 
-	// below solution tells you the number of ways we can achieve that total and not the combination
-	// go input of i step back on the same line and sum with the number above that   .. point to remember
-    // tushar roy : https://www.youtube.com/watch?v=_fgjrs570YE&t=186s
+//Solution : minimum of being on the same line go j steps back + 1 or number above that
+//if you just need the minimum number of coins and not the actual coin..use the below method
+
+		public static int coinChange(int[] coins, int amount) {
+
+			int[] dp = new int[amount + 1];
+			Arrays.fill(dp, amount + 1);
+			dp[0] = 0;
+			for (int i = 0; i <= amount;     i++) {
+				for (int j = 0; j < coins.length; j++) {
+					if (i - coins[j] >= 0)
+						dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+				}
+			}
+			return dp[amount] > amount ? -1 : dp[amount];
+		}
+// coin change 2
+// Given a total and coins of certain denominations find number of ways total * can be formed from coins assuming infinity supply of coins
+
+// below solution tells you the number of ways we can achieve that total and not the combination
+// go input of i step back on the same line and sum with the number above that   .. point to remember
+// tushar roy : https://www.youtube.com/watch?v=_fgjrs570YE&t=186s
 	public int numberOfSolutions(int total, int coins[]) {
 		int temp[][] = new int[coins.length + 1][total + 1];
 		for (int i = 0; i <= coins.length; i++) {
@@ -7979,18 +8085,14 @@ int max=Integer.MIN_VALUE;
 		return pq.peek();
 	}
 
-	// 295. Find Median from Data Stream #TopInterviewQuestion
-	// I keep two heaps (or priority queues):
-	// Max-heap / small has the smaller half of the numbers.
-	// Min-heap / large has the larger half of the numbers.
-	// This gives me direct access to the one or two middle values (they're the tops of the heaps), so getting
-	// the median takes O(1) time. And adding a number takes O(log n) time.
-	// Supporting both min- and max-heap is more or less cumbersome, depending on the language,
-	// so I simply negate the numbers in the heap in which I want the reverse of the default order.
-	// To prevent this from causing a bug with -231 (which negated is itself, when using 32-bit ints),
-	// I use integer types larger than 32 bits.
-	// Using larger integer types also prevents an overflow error when taking the mean of the two middle numbers.
-	// I think almost all solutions posted previously have that bug.
+// 295. Find Median from Data Stream #TopInterviewQuestion
+// I keep two heaps (or priority queues)/ Max-heap / small has the smaller half of the numbers.
+// Min-heap / large has the larger half of the numbers. This gives me direct access to the one or two middle values
+// (they're the tops of the heaps), so getting the median takes O(1) time. And adding a number takes O(log n) time.
+// Supporting both min- and max-heap is more or less cumbersome, depending on the language, so I simply negate the numbers
+// in the heap in which I want the reverse of the default order. To prevent this from causing a bug with -231 (which negated
+// is itself, when using 32-bit ints), I use integer types larger than 32 bits. Using larger integer types also prevents an
+// overflow error when taking the mean of the two middle numbers. I think almost all solutions posted previously have that bug.
 
 	private PriorityQueue<Integer> small = new PriorityQueue<>(Collections.reverseOrder()); // will keep smaller elements
 	private PriorityQueue<Integer> large = new PriorityQueue<>(); // will keep bigger elements
@@ -8015,27 +8117,63 @@ int max=Integer.MIN_VALUE;
 		even = !even;
 	}
 
-	// Another way of doing the same question
-	PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());// smaller half
-	PriorityQueue<Integer> minHeap = new PriorityQueue<>();; // higher half
+	// using binary search
+	class MedianFinder {
+		ArrayList<Integer> nums;
 
-	public void addNum2(int num) {
-		maxHeap.offer(num);
-		minHeap.offer(maxHeap.poll());
-		if (maxHeap.size() < minHeap.size()) {
-			maxHeap.offer(minHeap.poll());
+		public int findInsertIndex(int target) {
+			int low = 0;
+			int high = nums.size() - 1;
+			while (low <= high) {
+				int mid = (low + high) / 2;
+				if (nums.get(mid) >= target)
+					high = mid - 1;
+				else
+					low = mid + 1;
+			}
+			return low;
 		}
-	}
 
-	public double findMedian2() {
-		if (maxHeap.size() == minHeap.size()) {
-			return (double) (maxHeap.peek() + (minHeap.peek())) / 2;
-		} else {
-			return maxHeap.peek();
+		public MedianFinder() {
+			nums = new ArrayList<>();
+		}
+
+		public void addNum(int num) {
+			if (nums.size() == 0) {
+				nums.add(num);
+			} else {
+				int index = findInsertIndex(num);
+				if (index == nums.size()) {
+					nums.add(num);
+				} else {
+					nums.add(index, num);
+				}
+			}
+		}
+
+		public double findMedian() {
+			int mid = (nums.size() - 1) / 2;
+			return nums.size() % 2 == 0 ? (nums.get(mid) + nums.get(mid + 1)) / 2.0 : nums.get(mid);
 		}
 	}
 
 	// Merge k sorted array //not a LeetcodePrograms question but similar to merge k sorted lists
+	public class MergedContainer implements Comparable<MergedContainer>{
+		int[] arr;
+		int index;
+
+
+		public MergedContainer(int[] arr, int index) {
+			this.arr = arr;
+			this.index = index;
+		}
+
+
+
+		public int compareTo(MergedContainer o) {
+			return this.arr[this.index] - o.arr[o.index];
+		}
+	}
 	public static int[] mergeKLists(int[][] array) {
 		if (array == null || array.length == 0)
 			return null;

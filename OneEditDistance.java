@@ -1,8 +1,12 @@
 package LeetcodePrograms;
 
-/**
- * Created by rkhurana on 3/13/19.
- */
+//161. One Edit Distance
+//Given two strings s and t, determine if they are both one edit distance apart.
+//        Note:
+//        There are 3 possiblities to satisify one edit distance apart:
+//        Insert a character into s to get t
+//        Delete a character from s to get t
+//        Replace a character of s to get t
 public class OneEditDistance {
     /*
  * There're 3 possibilities to satisfy one edit distance apart:

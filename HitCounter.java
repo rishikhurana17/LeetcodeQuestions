@@ -1,12 +1,12 @@
 package LeetcodePrograms;//O(s) s is total seconds in given time interval, in this case 300.
 //basic ideal is using buckets. 1 bucket for every second because we only need to keep the recent hits info for 300 seconds. hit[] array is wrapped around by mod operation. Each hit bucket is associated with times[] bucket which record current time. If it is not current time, it means it is 300s or 600s... ago and need to reset to 1.
 
-public class HItCounter {
+public class HitCounter {
 	private int[] times;
 	private int[] hits;
 
 	/** Initialize your data structure here. */
-	public HItCounter() {
+	public HitCounter() {
 		times = new int[300];
 		hits = new int[300];
 	}

@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Created by rkhurana on 6/16/18.
  */
-public class MergeKSorted {
+public class MergeKSortedviaPriorityQueue {
     public static ListNode mergeKLists(List<ListNode> lists) {
         if (lists==null||lists.size()==0) return null;
 

@@ -3,6 +3,9 @@ import java.util.*;
 /**
  * Created by rkhurana on 3/3/19.
  */
+//Facebook Question
+//560. Subarray Sum Equals K
+
 public class SubarraySumEqualsK {
 // Use a hash map to store preSum and its frequency, if map contains key of current preSum - k, then the original
 // array must contain a subarray sum equals k */

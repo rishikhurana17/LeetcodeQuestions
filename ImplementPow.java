@@ -29,5 +29,7 @@ public class ImplementPow {
     }
     public static void main(String []args){
         System.out.println(myPow(2,-2));
+        System.out.println(myPow(7,2));
+        System.out.println(myPow(9,3));
     }
 }

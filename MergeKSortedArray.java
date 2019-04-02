@@ -10,6 +10,22 @@ import java.util.*;
  * Created by rkhurana on 6/16/18.
  */
 public class MergeKSortedArray {
+    public class MergedContainer implements Comparable<LeetCode.MergedContainer>{
+        int[] arr;
+        int index;
+
+
+        public MergedContainer(int[] arr, int index) {
+            this.arr = arr;
+            this.index = index;
+        }
+
+
+
+        public int compareTo(LeetCode.MergedContainer o) {
+            return this.arr[this.index] - o.arr[o.index];
+        }
+    }
     public static int mergeKLists(int [][] array) {
         if (array==null||array.length==0) return 0;
         PriorityQueue<Integer> queue= new PriorityQueue<Integer>(array.length,new Comparator<Integer>(){

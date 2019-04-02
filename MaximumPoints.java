@@ -42,7 +42,7 @@ public class MaximumPoints {
         return result;
     }
     //or
-    public int maxPoints2(LeetcodePrograms.Point[] points) {
+    public int maxPoints2(Point[] points) {
         if(points == null || points.length == 0) return 0;
 
         HashMap<Double, Integer> result = new HashMap<Double, Integer>();
@@ -82,7 +82,15 @@ public class MaximumPoints {
         return max;
     }
     public static void main(String [] args ){
-        //Point P = new Point();
+        Point P1 = new Point(1,1);
+        Point P2 = new Point(3,2);
+        Point P3 = new Point(5,3);
+        Point P4 = new Point(4,1);
+        Point P5 = new Point(2,3);
+        Point P6 = new Point(1,4);
+        Point []points = {P1,P2,P3,P4,P5,P6};
+        MaximumPoints maxPoints = new MaximumPoints();
+        System.out.println(maxPoints.maxPoints2(points));
 
     }
 }

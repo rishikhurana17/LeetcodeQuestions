@@ -1,12 +1,9 @@
 package LeetcodePrograms;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by rkhurana on 3/21/19.
  */
-public class MergeKSortedII {
+public class MergeKSortedviaMergeSort {
     public ListNode mergeKLists(ListNode[] lists) {
         // corner case
         if(lists == null || lists.length == 0) return null;
@@ -56,34 +53,34 @@ public class MergeKSortedII {
         return dummy.next;
     }
     public static void main(String [] args){
-// n = 6 -> 12 -> 14
-// m = 2 -> 8 -> 15
-// o = 1 -> 8 -> 10
-// p = 3 -> 13 -> 19
-        MergeKSortedII x = new MergeKSortedII();
-        ListNode n =new ListNode();
+// a = 6 -> 12 -> 14
+// b = 2 -> 8 -> 15
+// c = 1 -> 8 -> 10
+// d = 3 -> 13 -> 19
+        MergeKSortedviaMergeSort x = new MergeKSortedviaMergeSort();
+        ListNode a =new ListNode();
 
 //        n.newNode(1);
-        n = n.newNode(6);
-        n.next=n.newNode(12);
-        n.next.next = n.newNode(14);
+        a = a.newNode(6);
+        a.next=a.newNode(12);
+        a.next.next = a.newNode(14);
 
-        ListNode m = new ListNode();
-        m=m.newNode(2);
-        m.next = m.newNode(8);
-        m.next.next = m.newNode(15);
+        ListNode b = new ListNode();
+        b=b.newNode(2);
+        b.next = b.newNode(8);
+        b.next.next = b.newNode(15);
 
-        ListNode o = new ListNode();
-        o = o.newNode(1);
-        o.next=o.newNode(8);
-        o.next.next =o.newNode(10);
+        ListNode c = new ListNode();
+        c = c.newNode(1);
+        c.next=c.newNode(8);
+        c.next.next =c.newNode(10);
 
-        ListNode p = new ListNode();
-        p= p.newNode(3);
-        p.next=p.newNode(13);
-        p.next.next =p.newNode(19);
+        ListNode d = new ListNode();
+        d= d.newNode(3);
+        d.next=d.newNode(13);
+        d.next.next =d.newNode(19);
 
-        ListNode [] lists = {n,m,o,p};
+        ListNode [] lists = {a,b,c,d};
 //        lists.add(n);
 //        lists.add(m);
 //        lists.add(o);
