@@ -1,8 +1,9 @@
 package LeetcodePrograms;
-
-/**
- * Created by rkhurana on 3/13/19.
- */
+// #FacebookQuestion
+// 896. Monotonic Array
+// An array is monotonic if it is either monotone increasing or monotone decreasing.
+// An array A is monotone increasing if for all i <= j, A[i] <= A[j].  An array A is monotone decreasing if for all i <= j, A[i] >= A[j].
+// Return true if and only if the given array A is monotonic.
 public class isMonotonic {
     public boolean isMonotonic(int[] A) {
         int inc=1;

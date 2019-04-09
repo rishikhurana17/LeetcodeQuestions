@@ -3,7 +3,7 @@ package LeetcodePrograms;
 /**
  * Created by rkhurana on 3/12/19.
  */
-//https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/discuss/108231/C%2B%2BJava-DP-with-explanation-O(n)
+//Leetcode 689 Maximum Sum of 3 non overlapping Subarrays #FacebookQuestion
 /**
 
  Since it's 3 non-overlapping sub-array, we can divide it into left, mid, right.

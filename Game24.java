@@ -1,21 +1,14 @@
 package LeetcodePrograms;
-import DesignPatterns.Chess.Game;
-
 import java.util.*;
 /**
  * Created by rkhurana on 3/17/19.
  */
+// #Uber
 //679. 24 Game
 //You have 4 cards each containing a number from 1 to 9. You need to judge whether they could operated through
 // *, /, +, -, (, ) to get the value of 24.
+// this method only tells true or false. What if we need the comeplete expression ?
 public class Game24 {
-
-    public static void main(String []args){
-        Game24 game = new Game24();
-        int []nums = {4,1,8,7};
-        System.out.println(game.judgePoint24(nums));
-    }
-
 
 public boolean judgePoint24(int[] nums) {
     List<Double> list = new ArrayList<>();
@@ -61,4 +54,13 @@ public boolean judgePoint24(int[] nums) {
         res.add(b / a);
         return res;
     }
+
+
+    public static void main(String []args){
+        Game24 game = new Game24();
+        int []nums = {4,1,8,7};
+        System.out.println(game.judgePoint24(nums));
+    }
+
+
 }

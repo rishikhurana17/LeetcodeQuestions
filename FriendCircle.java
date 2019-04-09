@@ -3,6 +3,7 @@ package LeetcodePrograms;
 /**
  * Created by rkhurana on 2/25/19.
  */
+//#LinkedinQuestion #FacebookQuestion
 public class FriendCircle {
     public int findCircleNum(int[][] M) {
         boolean[] visited = new boolean[M.length]; //visited[i] means if ith person is visited in this algorithm

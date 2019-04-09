@@ -3,9 +3,10 @@ import java.util.*;
 /**
  * Created by rkhurana on 3/28/19.
  */
-// 359. Logger Rate Limiter
+// 359. Logger Rate Limiter   #UberQuestion
 // Design a logger system that receive stream of messages along with its timestamps, each message should be printed if and only
-// if it is not printed in the last 10 seconds. Given a message and a timestamp (in seconds granularity), return true if the message should be printed in the given timestamp, otherwise returns false.
+// if it is not printed in the last 10 seconds. Given a message and a timestamp (in seconds granularity), return true if the message
+// should be printed in the given timestamp, otherwise returns false.
 class LoggerRateLimiter {
     Map<String, Integer> map;
 

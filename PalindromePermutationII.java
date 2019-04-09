@@ -3,6 +3,8 @@ import java.util.*;
 /**
  * Created by rkhurana on 3/18/19.
  */
+//    267. Palindrome Permutation II   #UberQuestion
+//    Given a string s, return all the palindromic permutations (without duplicates) of it. Return an empty list if no palindromic permutation could be form.
 class PalindromePermutationII {
     public List<String> generatePalindromes(String s) {
         List<String> res = new ArrayList<>();
@@ -28,7 +30,8 @@ class PalindromePermutationII {
             if(odd>1) return res;
         }
         //no odds, the string is initialized as empty
-        if(odd==0) getPalindromes(new HashMap<Character,Integer>(map),"",s,res);
+        if(odd==0)
+            getPalindromes(new HashMap<Character,Integer>(map),"",s,res);
             // one odd, the initialized string is oddvalue
         else {
             map.put(oddvalue,map.get(oddvalue)-1);

@@ -37,7 +37,14 @@
 // Remove invalid parenthesis #facebook
 // https://stackoverflow.com/questions/32594710/generate-all-combinations-of-mathematical-expressions-that-add-to-target-java-h
 // 523 continous subarray sum facebook question
+// minimum edit distance dynamic programming https://www.youtube.com/watch?v=b6AGUjqIPsA needs to be done
+// employee free time merge sort
 package LeetcodePrograms;
+
+import LeetcodePrograms.MinMax;
+import LeetcodePrograms.NestedInteger;
+import LeetcodePrograms.RandomListNode;
+import LeetcodePrograms.TreeLinkNode;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,6 +52,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Time;
 import java.util.*;
 
 public class LeetCode {
@@ -8073,7 +8081,7 @@ int max=Integer.MIN_VALUE;
 
 	// Priority Queue related questions
 
-	// Q215 kth largest element in an array #TopInterviewQuestion
+	// Q215 kth largest element in an array #TopInterviewQuestion  time complexity O(nlogn)
 	public int findKthLargest(int[] nums, int k) {
 		final PriorityQueue<Integer> pq = new PriorityQueue<>();
 		for (int val : nums) {
@@ -8084,6 +8092,40 @@ int max=Integer.MIN_VALUE;
 		}
 		return pq.peek();
 	}
+
+//	Time complexity O(n)
+	public int findKthLargest2(int[] nums, int k) {
+		if (nums == null || nums.length == 0) return Integer.MAX_VALUE;
+		return findKthLargest(nums, 0, nums.length - 1, nums.length - k);   //for smallest send k+1
+	}
+
+	public  int findKthLargest(int[] nums, int start, int end, int k) {// quick select: kth smallest
+		if (start > end)
+			return Integer.MAX_VALUE;
+
+		int pivot = nums[end];// Take A[end] as the pivot,
+		//int left = start;
+		int partitionIndex = start;
+		for (int i = start; i < end; i++) {
+			if (nums[i] <= pivot) // Put numbers < pivot to pivot's left
+				swap(nums, partitionIndex, i);  //sending the index here
+			partitionIndex++;
+		}
+		swap(nums, partitionIndex, end);// Finally, swap A[end] with A[left]
+
+		if (partitionIndex == k)// Found kth smallest number
+			return nums[partitionIndex];
+		else if (partitionIndex < k)// Check right part
+			return findKthLargest(nums, partitionIndex + 1, end, k);
+		else // Check left part
+			return findKthLargest(nums, start, partitionIndex - 1, k);
+	}
+
+//	static void swap(int[] A, int i, int j) {
+//		int tmp = A[i];
+//		A[i] = A[j];
+//		A[j] = tmp;
+//	}
 
 // 295. Find Median from Data Stream #TopInterviewQuestion
 // I keep two heaps (or priority queues)/ Max-heap / small has the smaller half of the numbers.

@@ -63,9 +63,10 @@ public class DesignSnakeGame {
     public int process(int x, int y){
 
         if(index==food.length){
-            queue.poll();
+            queue.poll();  // this is to avoid array out of bounds exception. so whenever you have more moves left but the food is all gone that
+            // time index will be increased and  on the very next line when snake meets the food, it will give the array out of bounds exception
 
-        }else if(food[index][0]==x && food[index][1]==y){
+        }else if(food[index][0]==x && food[index][1]==y){  // when the snake meets the food
             len++;
             index++;
         }else{
@@ -73,7 +74,7 @@ public class DesignSnakeGame {
         }
 
         for(int[] p: queue){
-            if(p[0]==x&&p[1]==y)
+            if(p[0]==x&&p[1]==y)  //this is basically to make sure that when the size of the snake grows and hits its own tail
                 return -1;
         }
 
@@ -83,13 +84,29 @@ public class DesignSnakeGame {
     }
 
     public static void main(String []args){
-        int width = 3, height = 2; int [][] food = {{1,2},{0,1}};
+        int width = 2, height = 2; int [][] food = {{0,1}};
         DesignSnakeGame game = new DesignSnakeGame(width,height,food);
         System.out.println(game.move("R"));
         System.out.println(game.move("D"));
-        System.out.println(game.move("R"));
-        System.out.println(game.move("U"));
-        System.out.println(game.move("L"));
-        System.out.println(game.move("U"));
+//        System.out.println(game.move("R"));
+//        System.out.println(game.move("U"));
+//        System.out.println(game.move("U"));
+//        System.out.println(game.move("L"));
+//        System.out.println(game.move("D"));
+//        System.out.println(game.move("R"));
+//        System.out.println(game.move("R"));
+//        System.out.println(game.move("U"));
+//        System.out.println(game.move("L"));
+//        System.out.println(game.move("L"));
+//        System.out.println(game.move("D"));
+//        System.out.println(game.move("R"));
+//        System.out.println(game.move("U"));
+
+
     }
 }
+
+
+//["SnakeGame","move","move","move","move","move","move","move","move","move","move","move","move","move","move","move"]
+//        [[3,3,[[2,0],[0,0],[0,2],[0,1],[2,2],[0,1]]],["D"],["D"],["R"],["U"],["U"],["L"],
+//        ["D"],["R"],["R"],["U"],["L"],["L"],["D"],["R"],["U"]]

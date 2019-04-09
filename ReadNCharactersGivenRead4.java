@@ -6,6 +6,7 @@ import java.io.Reader;
 /**
  * Created by rkhurana on 3/14/19.
  */
+// #Facebook
 // Understand how read4() works, Initially, I thought it takes input buf as the parameter. But actually, *buf is just as the name refers, it's a buffer char array of size 4.
 // Realize the corner case where buf = "abcdef", n = 5. The last iteration within the while loop gets count = 2, while we only need 1 last character. This is why we need to compare "count" with "n - total".
 // If the length of buf can be divided by 4, then we need this check if (count == 0) break; to terminate the loop

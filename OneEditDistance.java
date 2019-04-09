@@ -1,12 +1,11 @@
 package LeetcodePrograms;
 
-//161. One Edit Distance
-//Given two strings s and t, determine if they are both one edit distance apart.
-//        Note:
-//        There are 3 possiblities to satisify one edit distance apart:
-//        Insert a character into s to get t
-//        Delete a character from s to get t
-//        Replace a character of s to get t
+// 161. One Edit Distance  #FacebookQuestion #UberQuestion
+// Given two strings s and t, determine if they are both one edit distance apart.
+// Note: There are 3 possiblities to satisify one edit distance apart:
+//       Insert a character into s to get t
+//       Delete a character from s to get t
+//       Replace a character of s to get t
 public class OneEditDistance {
     /*
  * There're 3 possibilities to satisfy one edit distance apart:
@@ -21,6 +20,8 @@ public class OneEditDistance {
 	  s: a   b c
 	  t: a D b c
  */
+    // time complexity of s.substring is O(n) after java 7 before it was O(1)
+    // this below method looks like O(n square complexity as substring as O(n) complexity)
     public boolean isOneEditDistance(String s, String t) {
         for (int i = 0; i < Math.min(s.length(), t.length()); i++) {
             if (s.charAt(i) != t.charAt(i)) {
@@ -34,6 +35,35 @@ public class OneEditDistance {
         }
         //All previous chars are the same, the only possibility is deleting the end char in the longer one of s and t
         return Math.abs(s.length() - t.length()) == 1;
+    }
+
+    public boolean isOneEditDistance2(String s, String t) {
+        if(Math.abs(s.length() - t.length()) > 1)
+            return false;
+        int i = 0, j = 0,err = 0;
+        while(i<s.length() && j<t.length())
+        {
+            if(s.charAt(i) != t.charAt(j))
+            {
+                err++;
+                if(err > 1)
+                    return false;
+                if(s.length() > t.length())
+                    j--;
+                else if(s.length() < t.length())
+                    i--;
+            }
+            i++;
+            j++;
+        }
+        return err == 1 || (err == 0 && t.length() != s.length());
+        //return (err == 1 || (err == 0 && t.length() != s.length()))? true: false;
+    }
+
+    public static void main(String []args){
+        OneEditDistance distance = new OneEditDistance();
+        String a ="ab" , b = "acb";
+        System.out.println(distance.isOneEditDistance(a,b));
     }
 
 }

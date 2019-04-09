@@ -3,6 +3,11 @@ package LeetcodePrograms;
 /**
  * Created by rkhurana on 3/28/19.
  */
+//    780. Reaching Points   #Uber #Salesforce
+//    A move consists of taking a point (x, y) and transforming it to either (x, x+y) or (x+y, y).
+//    Given a starting point (sx, sy) and a target point (tx, ty), return True if and only if a sequence of moves exists
+//    to transform the point (sx, sy) to (tx, ty). Otherwise, return False.
+
 public class ReachingPoints {
 // We can solve this problem recursively from tx and ty.
 // In each recursive call, if tx > ty, it should derive from (tx % ty, ty), otherwise, from (tx, ty % tx) because the

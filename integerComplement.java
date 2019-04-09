@@ -2,7 +2,7 @@ package LeetcodePrograms;
 
 //get the compliment of a number
 //50 stands for 110010 and complement of that is 001101 which is 13
-public class integerComplement {
+public class IntegerComplement {
 	public static int getIntegerComplement(int n) {
 		int i = 0, temp[] = new int[25];
 		int j;

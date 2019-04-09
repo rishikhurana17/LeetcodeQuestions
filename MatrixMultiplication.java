@@ -3,6 +3,9 @@ package LeetcodePrograms;
 /**
  * Created by rkhurana on 3/14/19.
  */
+//    311. Sparse Matrix Multiplication  #FacebookQuestion
+//    Given two sparse matrices A and B, return the result of AB.
+//    You may assume that A's column number is equal to B's row number.
 public class MatrixMultiplication {
     public int[][] multiply(int[][] A, int[][] B) {
         int m = A.length, n = A[0].length, nB = B[0].length;

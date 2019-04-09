@@ -4,41 +4,11 @@ import java.util.*;
 /**
  * Created by rkhurana on 3/17/19.
  */
-//Leetcode 986 Given two lists of closed intervals, each list of intervals is pairwise disjoint and in sorted order.
-//Return the intersection of these two interval lists.
+// Leetcode 986 Given two lists of closed intervals, each list of intervals is pairwise disjoint and in sorted order.
+// Return the intersection of these two interval lists.
+// #Uber #Facebook
 
 public class IntervalListIntersections {
-    public Interval[] intervalIntersection(Interval[] A, Interval[] B) {
-        if (A == null || A.length == 0 || B == null || B.length == 0) {
-            return new Interval[] {};
-        }
-
-        int m = A.length, n = B.length;
-        int i = 0, j = 0;
-        List<Interval> res = new ArrayList<>();
-        while (i < m && j < n) {
-            Interval a = A[i];
-            Interval b = B[j];
-
-            // find the overlap... if there is any...
-            int startMax = Math.max(a.start, b.start);
-            int endMin = Math.min(a.end, b.end);
-
-            if (endMin >= startMax) {
-                res.add(new Interval(startMax, endMin));
-            }
-
-            //update the pointer with smaller end value...
-            if (a.end == endMin) { i++; }
-            if (b.end == endMin) { j++; }
-        }
-
-        //thanks EOAndersson for the concice expression of converting a list to an array
-        //thanks Sithis for the explaination of using toArray (new T[0]) intead fo toArray newT[size])
-        return res.toArray(new Interval[0]);
-    }
-
-    //or second way is
     public Interval[] intervalIntersection2(Interval[] A, Interval[] B) {
 
         List<Interval> retList = new ArrayList<Interval>();
@@ -64,6 +34,25 @@ public class IntervalListIntersections {
             ret[i++] = item;
         }
         return ret;
+    }
+//    Input: A = [[0,2],[5,10],[13,23],[24,25]], B = [[1,5],[8,12],[15,24],[25,26]]
+
+    public static void main(String []args){
+        IntervalListIntersections intersections = new IntervalListIntersections();
+        Interval []intervalA = new Interval[4];
+        intervalA[0] = new Interval(0,2);
+        intervalA[1] = new Interval(5,10);
+        intervalA[2] = new Interval(13,23);
+        intervalA[3] = new Interval(24,25);
+
+        Interval []intervalB = new Interval[4];
+        intervalB[0] = new Interval(1,5);
+        intervalB[1] = new Interval(8,12);
+        intervalB[2] = new Interval(15,24);
+        intervalB[3] = new Interval(25,26);
+        System.out.println(intersections.intervalIntersection2(intervalA,intervalB));
+
+
     }
 
 }

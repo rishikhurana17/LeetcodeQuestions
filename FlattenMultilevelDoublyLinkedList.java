@@ -1,11 +1,9 @@
 package LeetcodePrograms;
 
-/**
- * Created by rkhurana on 3/29/19.
- */
+// #Uber #Facebook
 // 430 Start form the head , move one step each time to the next node
-// When meet with a node with child, say node p, follow its child chain to the end and connect the tail node with p.next, by doing this we merged the child chain back to the main thread
-// Return to p and proceed until find next node with child.
+// When meet with a node with child, say node p, follow its child chain to the end and connect the tail node with p.next,
+// by doing this we merged the child chain back to the main thread. Return to p and proceed until find next node with child.
 // Repeat until reach null
 public class FlattenMultilevelDoublyLinkedList {
     class Node {
@@ -41,7 +39,8 @@ public class FlattenMultilevelDoublyLinkedList {
                     temp = temp.next;
                 // Connect tail with p.next, if it is not null
                 temp.next = p.next;
-                if (p.next != null) p.next.prev = temp;
+                if (p.next != null)
+                    p.next.prev = temp;
                 // Connect p with p.child, and remove p.child
                 p.next = p.child;
                 p.child.prev = p;
