@@ -1,8 +1,5 @@
 package LeetcodePrograms;
 
-import jdk.nashorn.internal.runtime.SharedPropertyMap;
-import sun.nio.cs.ext.SJIS;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
