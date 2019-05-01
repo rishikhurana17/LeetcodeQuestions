@@ -1,26 +1,35 @@
 package LeetcodePrograms;
 
-/**
- * Created by rkhurana on 12/19/18.
- */
+// 152. Maximum Product Subarray
+// Given an integer array nums, find the contiguous subarray within an array (containing at least one number) which has the largest product.
 public class MaximumProductSubarray {
-    public static int maximumSubArray(int[] a) {
-        int max_so_far = a[0];
-        int curr_max = a[0];
-        int index1,index2 = -1;
-        int index1Number,index2Number = 1;
-        for (int i = 1; i < a.length; i++)
-        {
-            curr_max = Math.max(a[i], curr_max+a[i]);
+// Its all about having odd or even numbers of negative integers. if the negative numbers are even, then the first pass will
+// give the solution. If the negative numbers are odd, the second pass will give the solution.
+    public static int maximumSubArray(int[] nums) {
+        int prod = 1;
+        int result = Integer.MIN_VALUE;
 
-            max_so_far = Math.max(max_so_far, curr_max);
-
+        for(int i = 0; i < nums.length; i++) {
+            prod = prod * nums[i];
+            result = Math.max(prod, result);
+            if(prod == 0) {
+                prod = 1;
+            }
         }
+        prod = 1;
 
-        return max_so_far;
+        for(int i = nums.length - 1; i >= 0; i--) {
+
+            prod = prod * nums[i];
+            result = Math.max(prod, result);
+            if(prod == 0) {
+                prod = 1;
+            }
+        }
+        return result;
     }
     public static void main(String []args){
-        int []nums = {-2,1,-3,4,-1,2,1,-5,4};
+        int []nums = {-2, -2,3,0,4};
         int max_sum = maximumSubArray(nums);
         System.out.println(max_sum);
     }

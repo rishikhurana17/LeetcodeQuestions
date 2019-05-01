@@ -55,7 +55,7 @@ public class MergeKSortedviaMergeSort {
     public static void main(String [] args){
 // a = 6 -> 12 -> 14
 // b = 2 -> 8 -> 15
-// c = 1 -> 8 -> 10
+// c = 1 -> 9 -> 10
 // d = 3 -> 13 -> 19
         MergeKSortedviaMergeSort x = new MergeKSortedviaMergeSort();
         ListNode a =new ListNode();
@@ -72,7 +72,7 @@ public class MergeKSortedviaMergeSort {
 
         ListNode c = new ListNode();
         c = c.newNode(1);
-        c.next=c.newNode(8);
+        c.next=c.newNode(9);
         c.next.next =c.newNode(10);
 
         ListNode d = new ListNode();

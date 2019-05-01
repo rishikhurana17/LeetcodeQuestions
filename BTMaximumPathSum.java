@@ -43,9 +43,9 @@ public class BTMaximumPathSum {
         maxRootPath.put(null, 0); // for simplicity we want to handle null nodes
         for (TreeNode node : topSort(root)) {
             // as we process nodes in post-order their children are already cached
-            if(node.left!=null)
+            if (node.left != null)
                 System.out.println("node.left" + node.left.val);
-            if(node.right!=null)
+            if (node.right != null)
                 System.out.println("node.right" + node.right.val);
             int left = Math.max(maxRootPath.get(node.left), 0);
             int right = Math.max(maxRootPath.get(node.right), 0);

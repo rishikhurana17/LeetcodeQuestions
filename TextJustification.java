@@ -72,7 +72,8 @@ public class TextJustification {
 
     public static void main(String [] args){
         String [] words = {"This", "is", "an", "example", "of", "text", "justification."};
-        List<String> wordJustification = fullJustify(words,16);
+        String []words1 = {"What","must","be","acknowledgment","shall","be"};
+        List<String> wordJustification = fullJustify(words1,16);
         System.out.println(wordJustification);
 
     }

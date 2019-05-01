@@ -27,6 +27,47 @@ public class RomantoInt {
         return result;
         
     }
+    public static int romantoInt2(String str) {
+        int sum = 0;
+//	The complexity of Java's implementation of indexOf is O(m*n) where n and m are the length of the search string and pattern respectively.
+        if (str.indexOf("IV") != -1) {
+            sum -= 2;
+        }
+        if (str.indexOf("IX") != -1) {
+            sum -= 2;
+        }
+        if (str.indexOf("XL") != -1) {
+            sum -= 20;
+        }
+        if (str.indexOf("XC") != -1) {
+            sum -= 20;
+        }
+        if (str.indexOf("CD") != -1) {
+            sum -= 200;
+        }
+        if (str.indexOf("CM") != -1) {
+            sum -= 200;
+        }
+        int count = 0;
+        char c[] = str.toCharArray();
+        for (; count <= str.length() - 1; count++) {
+            if (c[count] == 'M')
+                sum += 1000;
+            if (c[count] == 'D')
+                sum += 500;
+            if (c[count] == 'C')
+                sum += 100;
+            if (c[count] == 'L')
+                sum += 50;
+            if (c[count] == 'X')
+                sum += 10;
+            if (c[count] == 'V')
+                sum += 5;
+            if (c[count] == 'I')
+                sum += 1;
+        }
+        return sum;
+    }
 
     // Q12 Integer to Roman
     public static String intToRoman(int num) {
@@ -44,7 +85,7 @@ public class RomantoInt {
 	public static void main(String[] args) {
 
         //System.out.println(romanToInt("IVIV"));
-        System.out.println(romanToInt("VI"));
+        System.out.println(romantoInt2("IVIV"));
 	}
 
 }

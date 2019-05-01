@@ -4,6 +4,24 @@ import java.util.Arrays;
 /**
  * Created by rkhurana on 3/25/19.
  */
+//Assupmtion:
+//        Go from (0, 0) -> (n-1, n-1) -> (0, 0) can be opt to two men go from (0, 0) -> (n-1, n-1) together, but when they go into
+//        the same cell, the cur state can only be added 1 (use once)
+//        Using DP to solve the problem:
+//        1.  dp[x1][y1][x2] to represent the largest ans we can get when first guy (marked as A) at(x1, y2) and second guy(marked as B) at (x2, x1 + y1 - x2)
+//        * because we can only go right and down, so we have x1 + y1 = x2 + y2
+//        2.  Induction: every time we calculate the maximum of :
+//        * dp[x1 - 1][y1][x2] : A down, B right
+//        * dp[x1][y1 - 1][x2] : A right, B right
+//        * dp[x1 - 1][y1][x2 - 1]: A down, B down
+//        * dp[x1][y1 - 1][x2 - 1]: A right, B down
+//        if the Max of these values is negative, then we don't have a path to this point
+//        else we have: dp[x1][y1][x2] = Max + grid[x1 - 1][y1 - 1] + grid[x2 - 1][y2 - 1](if x1 != x2 && y1 != y2) else we
+//        only add once.
+//        3.  Base case; we use dp[][][]from 1 - n, so we have:  dp[1][1][1] = 1 and all other values are MIN_VALUE
+//        4.  Ans:  dp[n][n][n]
+//        5.  Direction: from top left -> bottom right
+//        6.  Time: O(n^3) Space:  O(n^3)
 public class CherryPickup {
     public int cherryPickup(int[][] grid) {
         if (grid==null || grid.length==0 || grid[0].length==0) return 0;
@@ -46,5 +64,13 @@ public class CherryPickup {
 
     int max(int a, int b, int c, int d) {
         return Math.max(Math.max(a, b), Math.max(c, d));
+    }
+    public static void main(String []args){
+        CherryPickup cherryPickup = new CherryPickup();
+        int [][]grid ={ {0, 1, -1},
+                        {1, 0, -1},
+                        {1, 1,  1}
+                        };
+        cherryPickup.cherryPickup(grid);
     }
 }

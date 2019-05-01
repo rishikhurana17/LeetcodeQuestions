@@ -83,11 +83,12 @@ public class KClosest {
     public static void main(String args[])
     {
         KClosest ob = new KClosest();
-        int arr[] = {12, 16, 22, 30, 35, 39, 42,
-                45, 48, 50, 53, 55, 56
-        };
-        int n = arr.length;
-        int x = 36, k = 4;
-        ob.printKclosest(arr, x, 4, n);
+//        int arr[] = {12, 16, 22, 30, 35, 39, 42,
+//                45, 48, 50, 53, 55, 56
+//        };
+//        int n = arr.length;
+//        int x = 36, k = 4;
+        int arr[] = {0,1,2,3,4,5,6,7,8,9};
+        ob.printKclosest(arr, 3, 4, arr.length);
     }
 }

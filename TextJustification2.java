@@ -36,7 +36,7 @@ public class TextJustification2 {
             i++;
         }
 
-        if (next == -1)
+        if (next == -1)       //when total is exactly equal to width it will come to this part
             next = i;
 
         addList(words, start, next, len, width);
@@ -47,27 +47,30 @@ public class TextJustification2 {
     public  void addList(String[] words, int i, int j, int len, int width) {
         StringBuilder sb = new StringBuilder("");
         int count = j-i-1, space = 0, more = 0, s = 0;
-        if (count == 0 || j == words.length) { // the last line
+        if (count == 0 || j == words.length) { // the last line or only one word in that line
             for (int k = i; k < j; k++) {
                 sb.append(words[k]);
-                if (k == j-1) break;
+                if (k == j-1)
+                    break;
                 sb.append(" ");
             }
             space = width - sb.length();
             s = 0;
-            while (s++ < space) sb.append(" ");
+            while (s++ < space)
+                sb.append(" ");
         } else {
             space = (width - len) / count; more = (width - len) % count;
             for (int k = i; k < j; k++) {
                 sb.append(words[k]);
                 s = 0;
-                if (k == j-1) break;
+                if (k == j-1)
+                    break;
                 while (s++ < space) {
-                    System.out.println(s);
+                    //System.out.println(s);
                     sb.append(" ");
                 }
                 if (more-- > 0) {
-                    System.out.println(more);
+                    //System.out.println(more);
                     sb.append(" ");
                 }
             }
@@ -78,7 +81,8 @@ public class TextJustification2 {
     public static void main(String [] args){
         TextJustification2 t = new TextJustification2();
         String [] words = {"This", "is", "an", "example", "of", "text", "justification."};
-        List<String> wordJustification = t.fullJustify(words,16);
+        String []words1 = {"What","must","be","acknowledgment","shall","be"};
+        List<String> wordJustification = t.fullJustify(words1,16);
         System.out.println(wordJustification);
 
     }

@@ -10,7 +10,6 @@ import java.util.Queue;
 public class SerializeDeserializeBinaryTree {
     private static final String splitter = ",";
     private static final String NN = "X";
-    private static final String AN = "AN";
 
     // Encodes a tree to a single string.
     public String serialize2(TreeNode root) {

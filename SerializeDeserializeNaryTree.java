@@ -4,17 +4,21 @@ import java.util.*;
  * Created by rkhurana on 3/17/19.
  */
 public class SerializeDeserializeNaryTree {
+
     public static class NaryTreeNode {
         String data;
         List<NaryTreeNode> children = null;
+
         public NaryTreeNode(String data) {
             this.data = data;
-            this.children = new ArrayList<NaryTreeNode>();
+            this.children = new ArrayList<>();
         }
+
         public void addChild(NaryTreeNode child) {
             this.children.add(child);
         }
     }
+
     String NN="X";
     String spliter=",";
 
@@ -44,16 +48,18 @@ public class SerializeDeserializeNaryTree {
         Deque<String> deque=new ArrayDeque<>(Arrays.asList(data.split(spliter)));
         return buildTree(deque);
     }
+
     private NaryTreeNode buildTree(Deque<String> deque){
         String s1=deque.removeFirst();
-        if(s1.equals(NN)) return null;
+        if(s1.equals(NN))
+            return null;
 
         int rootVal=Integer.valueOf(s1);
         int childrenNumber=Integer.valueOf(deque.removeFirst());
 
         NaryTreeNode root=new NaryTreeNode(String.valueOf(rootVal));
         root.children=new ArrayList<>();
-        for (int i=0;i<childrenNumber;i++){
+        for (int i=0; i<childrenNumber; i++){
             root.children.add(buildTree(deque));
         }
         return root;

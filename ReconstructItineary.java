@@ -49,6 +49,6 @@ public class ReconstructItineary {
         String example2 [][] = {{"JFK","SFO"},{"JFK","ATL"},{"SFO","ATL"},{"ATL","JFK"},{"ATL","SFO"}};
         String [][]tickets = {{"MUC", "LHR"}, {"JFK", "MUC"}, {"SFO", "SJC"}, {"LHR", "SFO"}};
         ReconstructItineary itineary = new ReconstructItineary();
-        System.out.println(itineary.findItinerary2(example2));
+        System.out.println(itineary.findItinerary3(example2));
     }
 }

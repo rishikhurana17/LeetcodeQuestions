@@ -17,11 +17,13 @@ public class KclosestPointToOrigin {
             public int compare(Point p1, Point p2) {
                 int d1 = (p1.x - target.x) * (p1.x - target.x) + (p1.y - target.y) * (p1.y - target.y);
                 int d2 = (p2.x - target.x) * (p2.x - target.x) + (p2.y - target.y) * (p2.y - target.y);
-                return d1 - d2;  // will keep the smaller elements in the list
+                return d2 - d1;  // will keep the smaller elements in the list
             }
         });
         for (Point p : points) {
+
             pq.offer(p);
+
             if (pq.size() > k)
                 pq.poll(); //removes the element which is the biggest element there
 
@@ -54,8 +56,9 @@ public class KclosestPointToOrigin {
         points[3] = new Point(0,3);
         points[4] = new Point(0,4);
         Point target = new Point(0,0);
-  //     System.out.println(findKClosestPoints(points,3,target));
-        int[] arr = { 12, 5, 23, 9, 30, 2, 50, 1, 14, 7, 24, 51 };
-        System.out.println(findKthLargest(arr,2));
+        Point []result = findKClosestPoints(points,3,target);
+        System.out.println("hey ");
+      //  int[] arr = { 12, 5, 23, 9, 30, 2, 50, 1, 14, 7, 24, 51 };
+      //  System.out.println(findKthLargest(arr,2));
     }
 }

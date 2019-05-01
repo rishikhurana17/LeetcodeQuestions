@@ -26,25 +26,18 @@ public class LongestIncreasingPathInAMatrix {
             return 0;
         }
         int[][] cache = new int[matrix.length][matrix[0].length];
-        int[][] cache2 = new int[matrix.length][matrix[0].length];
         int max = 0;
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 int length = findSmallAround(i, j, matrix, cache, Integer.MIN_VALUE);
                 if(length > max) {
                     max = Math.max(length, max);
-                    cache2 = cache; // for tracking the path
+
 
                 }
             }
         }
-        // for tracking down the path  //not sure if this is the right way or not
-        for (int i = 0; i < cache2.length; i++) {
-            for (int j = 0; j < cache2[0].length; j++) {
-                System.out.print(cache2[i][j] + "  ");
-            }
-            System.out.println();
-        }
+
         return max;
     }
     private int findSmallAround(int i, int j, int[][] matrix, int[][] cache, int pre) {

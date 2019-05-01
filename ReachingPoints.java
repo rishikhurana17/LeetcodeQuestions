@@ -17,9 +17,12 @@ public class ReachingPoints {
 
 
         public boolean reachingPoints(int sx, int sy, int tx, int ty) {
-            if (sx > tx || sy > ty) return false;
-            if (sx == tx && (ty - sy) % sx == 0) return true;
-            if (sy == ty && (tx - sx) % sy == 0) return true;
+            if (sx > tx || sy > ty)
+                return false;
+            if (sx == tx && (ty - sy) % sx == 0)
+                return true;
+            if (sy == ty && (tx - sx) % sy == 0)
+                return true;
             return reachingPoints(sx, sy, tx % ty, ty % tx);
         }
 
@@ -33,4 +36,39 @@ public class ReachingPoints {
 // If we were to do tx %=ty (11%2) we would get sx = 1 which is not right answer. Hence when sy == ty we need to check if we have
 // a condition (tx = sx + n * sy) or (11 = 3 + 4 * 2) this also means (tx-sx) % sy should be 0 or (11-3) % 2 should be 0.
 // The same reasoning can be applied when sx == tx
+
+    public static void main(String []args){
+        ReachingPoints reachingPoints = new ReachingPoints();
+        System.out.println(reachingPoints.reachingPoints(1,1,3,5));
+    }
+
+
+    public boolean ReachingPointsIterative (int sx, int sy, int tx, int ty) {
+        if ((tx == sx && sy == ty) ||
+                (tx == sx && ty%sx == sy%sx) ||
+                (ty == sy && tx%ty == sx%sy)){
+            return true;
+        }
+        if ((tx == sx && ty%sx != sy%sx) ||
+                (ty == sy && tx%ty != sx%sy)){
+            return false;
+        }
+
+        while (tx > 0 && ty > 0) {
+            if (tx > ty) {
+                tx = tx -ty;
+            } else {
+                ty= ty-tx;
+            }
+
+            if (tx==sx && ty==sy) {
+                return true;
+            }
+
+            if (tx < sx || ty < sy) {
+                return false;
+            }
+        }
+        return false;
+    }
 }

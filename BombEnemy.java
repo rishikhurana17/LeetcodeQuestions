@@ -11,7 +11,7 @@ public class BombEnemy {
     public int maxKilledEnemies(char[][] grid) {
         int m = grid.length, n = m == 0 ? 0 : grid[0].length;
         int result = 0, rowHits = 0, colHits[] = new int[n];
-        for (int i = 0; i < m; i++) {
+         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (j == 0 || grid[i][j - 1] == 'W') {
                     rowHits = 0;

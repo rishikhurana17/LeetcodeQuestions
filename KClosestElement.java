@@ -42,9 +42,10 @@ public class KClosestElement {
         for (int i = 0; i < k; i++) res.add(A[left + i]);
         return res;
     }
+
     public static void main(String []args){
         KClosestElement kClosestElement = new KClosestElement();
-        int []arr = {1,2,3,4,5};
+        int []arr = {1,2,3,4,5,6,7,8,9,10};
         int k=2 , x=3;
         kClosestElement.findClosestElements(arr,k,x);
     }
