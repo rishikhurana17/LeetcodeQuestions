@@ -3,7 +3,7 @@ package LeetcodePrograms; /**
  */
 
 import java.util.*;
-public class primeFactors {
+public class PrimeFactors {
 
     public static List<Integer> primeFactors(int numbers) {
         int n = numbers;
@@ -30,7 +30,7 @@ public class primeFactors {
     }
 
     public static void main(String [] args){
-    //    System.out.println(primeFactors(44));
+    //    System.out.println(PrimeFactors(44));
         System.out.println(trailingZeroes(50));
     }
 }
