@@ -5,26 +5,18 @@ package LeetcodePrograms;
  */
 //Leetcode 689 Maximum Sum of 3 non overlapping Subarrays #FacebookQuestion
 /**
-
  Since it's 3 non-overlapping sub-array, we can divide it into left, mid, right.
  Suppose mid is [i, i+k-1] because it needs to hav at least k elements, then
  we can have left is from [0,i-1] and right is from [i+k, n-1].
-
  Since left must have at least k elements then i-1-0+1 >= k , thus we have i>=k
  Same thing for the right, since n-1-(i-k)+1 >= k, thus we have i<=n-2k
  Thus we have k<=i<=n-2k , this is very important math to figure out.
-
  Then we have 2 arrays which stores the maximum starting index from left and from right.
-
  Finally, we figure out when i is in the range mentioned above, what would be the max from left and right and take
  the global max.
-
  */
 
-
 public class MaxSum3NonOverlappingSubarrays {
-
-
         public int[] maxSumOfThreeSubarrays(int[] nums, int k) {
             if(nums==null || nums.length==0) {
                 return null;

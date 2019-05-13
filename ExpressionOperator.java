@@ -4,6 +4,9 @@ import java.util.*;
 /**
  * Created by rkhurana on 2/24/19.
  */
+// 282. Expression Add Operators
+// Given a string that contains only digits 0-9 and a target value, return all possibilities to add binary operators
+// (not unary) +, -, or * between the digits so they evaluate to the target value.
 public class ExpressionOperator {
     /**
      * When we use dfs to do this question, the most tricky part is that how to deal with multiplication. For every
@@ -64,6 +67,6 @@ public class ExpressionOperator {
 
     public static void main(String []args){
         ExpressionOperator eo =new ExpressionOperator();
-        System.out.println(eo.addOperators("123",6));
+        System.out.println(eo.addOperators("205",7));
     }
 }

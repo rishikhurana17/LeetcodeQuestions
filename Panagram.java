@@ -1,6 +1,6 @@
-package LeetcodePrograms;//panagram means it contains all the letters of the alphabet
+package LeetcodePrograms;//Panagram means it contains all the letters of the alphabet
 
-public class panagram {
+public class Panagram {
 
 	public static int isPangram(String n) {
 		// n.toLowerCase()
@@ -43,7 +43,7 @@ public class panagram {
 	}
 
 	public static void main(String[] args) {
- System.out.println(panagram.checkPanagram("abcdef#hijklmnopqrstuvwxyz"));
+ System.out.println(Panagram.checkPanagram("abcdef#hijklmnopqrstuvwxyz"));
 		String x = "ABC";
 		for (int i = 0; i < x.length(); i++) {
 			int y = x.charAt(i);

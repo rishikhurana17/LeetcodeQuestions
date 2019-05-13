@@ -686,13 +686,13 @@ public class LeetCode {
 
         int l1 = haystack.length(), l2 = needle.length();
         if (l1 < l2) {
-            return -1;
+            return -1; //base condition to check for valid string
         } else if (l2 == 0) {
             return 0;
         }
         int threshold = l1 - l2;
-        for (int i = 0; i <= threshold; ++i) {
-            if (haystack.substring(i, i + l2).equals(needle)) {
+        for (int i = 0; i <= threshold; ++i) { //and iterating till its required not till d end
+            if (haystack.substring(i, i + l2).equals(needle)) { // comparing the string
                 return i;
             }
         }
@@ -6149,7 +6149,7 @@ public class LeetCode {
             }
         }
         if (count == 26) {
-            System.out.println("panagram means every character between a to z comes atleast once");
+            System.out.println("Panagram means every character between a to z comes atleast once");
             return true;
         } else {
             return false;
@@ -8660,6 +8660,45 @@ public class LeetCode {
         dfs(board, i + 1, j);
         dfs(board, i, j - 1);
         dfs(board, i, j + 1);
+    }
+
+// Q329. Longest Increasing Path in a matrix
+    public int longestIncreasingPath(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return 0;
+        }
+        int[][] cache = new int[matrix.length][matrix[0].length];
+        int max = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                int length = findSmallAround(i, j, matrix, cache, Integer.MIN_VALUE);
+                if(length > max) {
+                    max = Math.max(length, max);
+
+
+                }
+            }
+        }
+
+        return max;
+    }
+    private int findSmallAround(int i, int j, int[][] matrix, int[][] cache, int pre) {
+        // if out of bond OR current cell value larger than previous cell value.
+        if (i < 0 || i >= matrix.length || j < 0 || j >= matrix[0].length || matrix[i][j]<=pre) {
+            return 0;
+        }
+        // if calculated before, no need to do it again
+        if (cache[i][j] != 0) {
+            return cache[i][j];
+        } else {
+            int cur = matrix[i][j];
+            int up = findSmallAround(i - 1, j, matrix, cache, cur);
+            int down = findSmallAround(i + 1, j, matrix, cache, cur);
+            int left = findSmallAround(i, j - 1, matrix, cache, cur);
+            int right = findSmallAround(i, j + 1, matrix, cache, cur);
+            cache[i][j] = Math.max(left , Math.max(right , Math.max(up , down ))) +1;
+            return cache[i][j];
+        }
     }
 
     // Q200 Number of islands #TopInterviewQuestion

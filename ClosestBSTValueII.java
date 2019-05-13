@@ -33,7 +33,8 @@ public class ClosestBSTValueII {
         return res;
     }
     private void inorder(TreeNode root,double target , int k , LinkedList<Integer> res) {
-        if (root == null) return;
+        if (root == null)
+            return;
         inorder(root.left, target, k, res);
         if (res.size() == k) {
             if (Math.abs(target - root.val) < Math.abs(target - res.peek())) {

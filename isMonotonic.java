@@ -26,10 +26,13 @@ public class isMonotonic {
     boolean desciende = false;
         for (int i = 1; i < A.length; i++)
     {
-        if (A[i] > A[i - 1]) asciende = true;
-        if (A[i] < A[i - 1]) desciende = true;
+        if (A[i] > A[i - 1])
+            asciende = true;
+        if (A[i] < A[i - 1])
+            desciende = true;
 
-        if (asciende && desciende) return false;
+        if (asciende && desciende)
+            return false;
     }
 
         return true;

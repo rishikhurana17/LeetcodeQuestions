@@ -27,7 +27,8 @@ public class All0oneDataStructure {
         if(vals.get(val) == null)
             vals.put(val, new HashSet<>());
         vals.get(val).add(key);
-        if(vals.containsKey(val - 1)){  //checking if the element is just been incremented was already there in the map or not. If it was then it is supposed to be deleted for the old value
+        if(vals.containsKey(val - 1)){  //checking if the element is just been incremented was already there in the map or not.
+            // If it was then it is supposed to be deleted for the old value
             vals.get(val - 1).remove(key);
             if(vals.get(val - 1).size() == 0)
                 vals.remove(val - 1); // remove the value and if the size of that entry becomes 0 then remove the entry as well

@@ -24,3 +24,15 @@ public class MatrixMultiplication {
         return C;
     }
 }
+
+
+// if there are two matrix of 2 (a) *3 (b) and 3(x) * 2(y)
+// b and z needs to be equal
+// and multiplication would be
+// int finalMatrix = new int [a][y]
+//    for (int i = 0 ; i < a ; i++)
+//        for(int j = 0 ; j < y ; j++)
+//                for(int k = 0 ; k < b ; k++)
+//                    sum+= m1[i][k] * m2[k][j]
+//                finalmatrix[i][j] = sum
+//                 sum=0;

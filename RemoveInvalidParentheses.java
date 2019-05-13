@@ -29,7 +29,8 @@ public class RemoveInvalidParentheses {
                 found = true;
             }
 
-            if (found) continue;
+            if (found)
+                continue;
 
             // generate all possible states
             for (int i = 0; i < s.length(); i++) {
@@ -68,6 +69,6 @@ public class RemoveInvalidParentheses {
     public static void main(String []args){
         RemoveInvalidParentheses o = new RemoveInvalidParentheses();
 
-        System.out.println(o.removeInvalidParentheses(")(()a)())()"));
+        System.out.println(o.removeInvalidParentheses("()())()"));
     }
 }

@@ -1,24 +1,32 @@
 package LeetcodePrograms;
-//#LinkedIn Question
+//#LinkedIn Question #FacebookQuestion
 import java.util.*;
 /**
  * Created by rkhurana on 2/26/19.
  */
+// first method is better
+// https://www.youtube.com/watch?v=VqN4cqa3vgI
 public class ExclusiveTimeofFunctions {
     public static int[] exclusiveTime(int n, List<String> logs) {
         int[] res = new int[n];
         Stack<Integer> stack = new Stack<>();
-        int prevTime = 0;
-        for (String log : logs) {
-            String[] parts = log.split(":");
-            if (!stack.isEmpty())
-                res[stack.peek()] += Integer.parseInt(parts[2]) - prevTime;
-            prevTime = Integer.parseInt(parts[2]);
-            if (parts[1].equals("start"))
-                stack.push(Integer.parseInt(parts[0]));
+        int prev = 0;
+        String []s = logs.get(0).split(":");
+        stack.push(Integer.valueOf(s[0]));
+        prev = Integer.valueOf(s[2]);
+        for (int i = 1 ; i < logs.size() ; i++){
+            s = logs.get(i).split(":");
+            int func  = Integer.valueOf(s[0]);
+            int time  = Integer.valueOf(s[2]);
+            if(s[1].equals("start")) {
+                if (!stack.isEmpty())
+                    res[stack.peek()] += time - prev;
+                stack.push(func);
+                prev = time;
+            }
             else {
-                res[stack.pop()]++;
-                prevTime++;
+                res[stack.pop()]+=time-prev + 1;
+                prev = time + 1;
             }
         }
         return res;
@@ -57,6 +65,8 @@ public class ExclusiveTimeofFunctions {
         logs.add("0:end:6");
 
 
-        System.out.println(exclusiveTime2(2, logs));
+        int res[] = exclusiveTime(2, logs);
+        for(int i = 0 ; i < res.length ; i++)
+            System.out.println(res[i] + " ");
     }
 }
