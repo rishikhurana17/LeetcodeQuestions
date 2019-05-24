@@ -4,9 +4,10 @@ import java.util.*;
 
 public class BoundaryofBinaryTree {
     List<Integer> nodes = new ArrayList<>(1000);
-    public List<Integer> boundaryOfBinaryTree(TreeNode root) {
+    public  List<Integer> boundaryOfBinaryTree(TreeNode root) {
 
-        if(root == null) return nodes;
+        if(root == null)
+            return nodes;
 
         nodes.add(root.val);
         leftBoundary(root.left);
@@ -19,13 +20,17 @@ public class BoundaryofBinaryTree {
     public void leftBoundary(TreeNode root) {
         if(root == null || (root.left == null && root.right == null)) return;
         nodes.add(root.val);
-        if(root.left == null) leftBoundary(root.right);
-        else leftBoundary(root.left);
+        if(root.left == null)
+            leftBoundary(root.right);
+        else
+            leftBoundary(root.left);
     }
     public void rightBoundary(TreeNode root) {
         if(root == null || (root.right == null && root.left == null)) return;
-        if(root.right == null)rightBoundary(root.left);
-        else rightBoundary(root.right);
+        if(root.right == null)
+            rightBoundary(root.left);
+        else
+            rightBoundary(root.right);
         nodes.add(root.val); // add after child visit(reverse)
     }
     public void leaves(TreeNode root) {
@@ -36,5 +41,16 @@ public class BoundaryofBinaryTree {
         }
         leaves(root.left);
         leaves(root.right);
+    }
+
+    public static void main(String []args){
+        BoundaryofBinaryTree BTree = new BoundaryofBinaryTree();
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.right = new TreeNode(6);
+        BTree.boundaryOfBinaryTree(root);
     }
 }

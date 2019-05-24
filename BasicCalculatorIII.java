@@ -59,8 +59,8 @@ public class BasicCalculatorIII {
     }
     public static void main(String []args) {
         BasicCalculatorIII calculator = new BasicCalculatorIII();
-        //System.out.println(calculator.calculate("1 + 1"));
-        //System.out.println(calculator.calculate(" 6-4 / 2 "));
+        System.out.println(calculator.calculate("1 + 1"));
+        System.out.println(calculator.calculate(" 6-4 / 2 "));
         System.out.println(calculator.calculate("2*(5+5*2)/3+(6/2+8)"));
         //System.out.println(calculator.calculate("(2+6* 3+5- (3*14/7+2)*5)+3"));
     }

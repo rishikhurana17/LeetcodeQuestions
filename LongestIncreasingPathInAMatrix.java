@@ -64,9 +64,10 @@ public class LongestIncreasingPathInAMatrix {
         int [][]matrix = {{9,9,4},
         {6,6,8},
         {2,1,1}};
-        int [][]matrix2 = {{3,4,5},
-                    {3,2,6},
-                    {2,2,1}};
-        Lip.longestIncreasingPath(matrix2);
+        int [][]matrix2 = { {3,4,5},
+                            {3,2,6},
+                            {2,2,1}
+                          };
+        Lip.longestIncreasingPath(matrix);
     }
 }

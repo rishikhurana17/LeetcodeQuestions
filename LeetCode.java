@@ -424,7 +424,7 @@ public class LeetCode {
             index++;
 
         if (index == str.length())
-            return 0; // this should be return total*sign
+            return 0; // if the string is only empty string like '    '
 
         // get the sign
         if (str.charAt(index) == '+' || str.charAt(index) == '-') {
@@ -1279,7 +1279,8 @@ public class LeetCode {
         return result;
     }
 
-// Q172 factorial trailing zeros #TopInterviewQuestion Given an integer n, return the number of trailing zeroes in n!.
+// Q172 factorial trailing zeros #TopInterviewQuestion
+// Given an integer n, return the number of trailing zeroes in n!.
 // 10 is the product of 2 and 5. In n!, we need to know how many 2 and 5, and the number of zeros is the minimum of the number of 2 and the number of 5.
 // Since multiple of 2 is more than multiple of 5, the number of zeros is dominant by the number of 5.
     public int trailingZeroes(int n) {
@@ -1451,13 +1452,14 @@ public class LeetCode {
         return num;
     }
 
+    //this will only be useful for adding the digits and not for getting into just 1 digit
     public int sumDigits(int n){
         if(n==0)
             return 0;
         return (n%10) + sumDigits(n/10);
     }
 
-    // Amazing solution for the above same question
+// Amazing solution for the above same question
 //	explanation of the below solution
 // First you should understand:
 //
@@ -3141,7 +3143,7 @@ public class LeetCode {
         return root.val;
     }
 
-    // Q452 Minimum Number of Arrows to Burst Balloons #GoodQuestion #HardlyAsked  #FacebookQuestionb
+    // Q452 Minimum Number of Arrows to Burst Balloons #GoodQuestion #HardlyAsked  #FacebookQuestion
     // [[10,16], [2,8], [1,6], [7,12]]
     public int findMinArrowShots(int[][] points) {
         if (points.length == 0) {
@@ -3676,7 +3678,7 @@ public class LeetCode {
             arr[r--] = temp;
         }
     }
-
+    //this is the length of the longest path ..not the actual sum of elements in the longest path
     // Q543 Diameter of a binary tree  #FacebookFavouriteQuestion
     // Given a binary tree, you need to compute the length of the diameter of the tree. The diameter of a binary tree is
     // the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.
@@ -3699,8 +3701,59 @@ public class LeetCode {
             return 0;
         int left = maxDepth1(root.left);
         int right = maxDepth1(root.right);
-        int max2 = Math.max(max1, left + right);
+         max1 = Math.max(max1, left + right);
         return Math.max(left, right) + 1;
+    }
+
+    //Facebook Famous Question
+    // Q124 Binary Tree Maximum Path Sum #TopInterviewQuestion  //more understandable is the second solution
+    // https://www.youtube.com/watch?v=cSnETAcziS0&t=229s
+    // the same way we can do the minimum path sum
+    // Given a binary tree, find the maximum path sum.
+    // For this problem, a path is defined as any sequence of nodes from some
+    // starting node to any node in the tree along the parent-child connections.
+    // The path must contain at least one node and does not need to go through
+    // the root.
+    // For example: Given the below binary tree,
+    //  1
+    // / \
+    // 2 3
+    // Return 6.
+
+    int maxValue;
+
+    public int maxPathSum(TreeNode root) {
+        maxValue = Integer.MIN_VALUE;
+        maxPathDown(root);
+        return maxValue;
+    }
+
+    private int maxPathDown(TreeNode node) {
+        if (node == null)
+            return 0;
+        int left = Math.max(0, maxPathDown(node.left));
+        int right = Math.max(0, maxPathDown(node.right));
+        maxValue = Math.max(maxValue, left + right + node.val);
+
+        return Math.max(left, right) + node.val;
+    }
+    //or
+    int max=Integer.MIN_VALUE;
+
+    public int maxPathSum2(TreeNode root) {
+        maxPathSumR(root);
+        return max;
+    }
+
+    public int maxPathSumR(TreeNode root) {
+
+        if(root==null) return 0;
+        int left=maxPathSumR(root.left);
+        int right=maxPathSumR(root.right);
+
+        int max1 = Math.max(root.val,Math.max(root.val+left,root.val+right));
+        max = Math.max(max,Math.max(max1,left+right+root.val));
+        return max1;
     }
 
 // Q128 Longest consecutive sequence #TopInterviewQuestion #GoodQuestion #Facebook #Uber
@@ -4110,31 +4163,36 @@ public class LeetCode {
     }
 
     // Q81 Search in rotated sorted array II //duplicates allowed for the same above question
-    public boolean search(int[] A, int target) {
-        if(A.length == 0)
-            return false;
-        int lo = 0 ;
-        int hi = A.length - 1;
-        int mid = 0;
-        while (lo < hi) {
-            mid = (lo + hi) / 2;
-            if (A[mid] == target)
+    public boolean search7(int[] nums, int target) {
+        int start = 0, end = nums.length - 1, mid = -1;
+        while(start <= end) {
+            mid = (start + end) / 2;
+            if (nums[mid] == target) {
                 return true;
-            if (A[mid] > A[hi]) {
-                if (A[mid] > target && A[lo] <= target)
-                    hi = mid;
-                else
-                    lo = mid + 1;
-            } else if (A[mid] < A[hi]) {
-                if (A[mid] < target && A[hi] >= target)
-                    lo = mid + 1;
-                else
-                    hi = mid;
+            }
+            //If we know for sure right side is sorted or left side is unsorted
+            if (nums[mid] < nums[end] || nums[mid] < nums[start]) {
+                if (target > nums[mid] && target <= nums[end]) {
+                    start = mid + 1;
+                } else {
+                    end = mid - 1;
+                }
+                //If we know for sure left side is sorted or right side is unsorted
+            } else if (nums[mid] > nums[start] || nums[mid] > nums[end]) {
+                if (target < nums[mid] && target >= nums[start]) {
+                    end = mid - 1;
+                } else {
+                    start = mid + 1;
+                }
+                //If we get here, that means nums[start] == nums[mid] == nums[end], then shifting out
+                //any of the two sides won't change the result but can help remove duplicate from
+                //consideration, here we just use end-- but left++ works too
             } else {
-                hi--; // this is for the situation when array is [1,1] and target is 0. So to avoid TLE this will do it
+                end--;
             }
         }
-        return A[lo] == target ? true : false;
+
+        return false;
     }
 
 // Q153 find minimum in rotated sorted array  . No Duplicates #GoodQuestion
@@ -4179,7 +4237,7 @@ public class LeetCode {
     public int findMin(int[] nums) {
 
         int lo = 0, hi = nums.length - 1;
-        while (lo < hi) {
+        while (lo <= hi) {
             int mi = lo + (hi - lo) / 2;
             if (nums[mi] > nums[hi]) {
                 lo = mi + 1;
@@ -5253,6 +5311,26 @@ public class LeetCode {
             queue.offer(intervals[i].end); //this is the main point to remember
         }
         return count;
+    }
+
+    public int minMeetingRooms2(Interval[] intervals) {
+        int[] starts = new int[intervals.length];
+        int[] ends = new int[intervals.length];
+        for(int i=0; i<intervals.length; i++) {
+            starts[i] = intervals[i].start;
+            ends[i] = intervals[i].end;
+        }
+        Arrays.sort(starts);
+        Arrays.sort(ends);
+        int rooms = 0;
+        int endsItr = 0;
+        for(int i=0; i<starts.length; i++) {
+            if(starts[i]<ends[endsItr])
+                rooms++;
+            else
+                endsItr++;
+        }
+        return rooms;
     }
 
     // NOT a LeetcodePrograms question BUT similar to the above one. Only difference
@@ -6937,7 +7015,7 @@ public class LeetCode {
     // second method looks more reasonable and self explanatory
 
     // below method is DFS recursion
-// this method is better in terms of complexit O(n)
+// this method is better in terms of complexity O(n)
 // In this bottom up approach, each node in the tree only need to be accessed once. Thus the time complexity is O(N),
 // better than the first solution.
     public int dfsHeight(TreeNode root) {
@@ -7213,55 +7291,7 @@ public class LeetCode {
         }
         return result;
     }
-    //Facebook Famous Question
-    // Q124 Binary Tree Maximum Path Sum #TopInterviewQuestion  //more understandable is the second solution
-    // https://www.youtube.com/watch?v=cSnETAcziS0&t=229s
-    // the same way we can do the minimum path sum
-    // Given a binary tree, find the maximum path sum.
-    // For this problem, a path is defined as any sequence of nodes from some
-    // starting node to any node in the tree along the parent-child connections.
-    // The path must contain at least one node and does not need to go through
-    // the root.
-    // For example: Given the below binary tree,
-    //  1
-    // / \
-    // 2 3
-    // Return 6.
 
-    int maxValue;
-
-    public int maxPathSum(TreeNode root) {
-        maxValue = Integer.MIN_VALUE;
-        maxPathDown(root);
-        return maxValue;
-    }
-
-    private int maxPathDown(TreeNode node) {
-        if (node == null) return 0;
-        int left = Math.max(0, maxPathDown(node.left));
-        int right = Math.max(0, maxPathDown(node.right));
-        maxValue = Math.max(maxValue, left + right + node.val);
-
-        return Math.max(left, right) + node.val;
-    }
-    //or
-    int max=Integer.MIN_VALUE;
-
-    public int maxPathSum2(TreeNode root) {
-        maxPathSumR(root);
-        return max;
-    }
-
-    public int maxPathSumR(TreeNode root) {
-
-        if(root==null) return 0;
-        int left=maxPathSumR(root.left);
-        int right=maxPathSumR(root.right);
-
-        int max1 = Math.max(root.val,Math.max(root.val+left,root.val+right));
-        max = Math.max(max,Math.max(max1,left+right+root.val));
-        return max1;
-    }
     // Q112 Path sum of a binary tree
 // Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the
 // values along the path equals the given sum.
@@ -7511,7 +7541,7 @@ public class LeetCode {
         p.next = null;
     }
 
-    // Q92 Reverse Linked List II #GoodQuestion
+    // Q92 Reverse Linked List II #GoodQuestion  #FacebookQuestion
     // Reverse a linked list from position m to n. Do it in-place and in one-pass. For example:
     // Given 1->2->3->4->5->NULL, m = 2 and n = 4, return 1->4->3->2->5->NULL.
     public ListNode reverseBetween(ListNode head, int m, int n) {
@@ -7618,7 +7648,6 @@ public class LeetCode {
         }
 
     }
-
     // Q86 partition list
 // Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
 // You should preserve the original relative order of the nodes in each of the two partitions. For example,
@@ -7945,7 +7974,7 @@ public class LeetCode {
         return T[str.length][writeIndex];
     }
 
-    // Q10 Regular Expression #TopInterviewQuestion
+    // Q10 Expression #TopInterviewQuestion
     // * matches 0 or more occurances of character before *
     // . matches any single character
 
@@ -8199,7 +8228,8 @@ public class LeetCode {
         if(len2 == str2.length){
             return str1.length - len1;
         }
-        return min(recEditDistance(str1, str2, len1 + 1, len2 + 1) + str1[len1] == str2[len2] ? 0 : 1, recEditDistance(str1, str2, len1, len2 + 1) + 1, recEditDistance(str1, str2, len1 + 1, len2) + 1);
+        return min(recEditDistance(str1, str2, len1 + 1, len2 + 1) + str1[len1] == str2[len2] ? 0 : 1,
+                recEditDistance(str1, str2, len1, len2 + 1) + 1, recEditDistance(str1, str2, len1 + 1, len2) + 1);
     }
 
     private int min(int a,int b, int c){
@@ -8645,8 +8675,10 @@ public class LeetCode {
         // make all the remaining 'O' to 'X'
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (board[i][j] == 'O') board[i][j] = 'X';
-                if (board[i][j] == '*') board[i][j] = 'O';
+                if (board[i][j] == 'O')
+                    board[i][j] = 'X';
+                if (board[i][j] == '*')
+                    board[i][j] = 'O';
             }
         }
     }
@@ -9004,7 +9036,8 @@ public class LeetCode {
     private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] nums, int start) {
         list.add(new ArrayList<>(tempList));
         for (int i = start; i < nums.length; i++) {
-            if(i > start && nums[i] == nums[i-1]) continue; // for skipping duplicates
+            if(i > start && nums[i] == nums[i-1])
+                continue; // for skipping duplicates
             tempList.add(nums[i]);
             backtrack(list, tempList, nums, i + 1);
             tempList.remove(tempList.size() - 1);

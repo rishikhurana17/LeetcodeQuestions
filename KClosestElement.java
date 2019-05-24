@@ -18,7 +18,7 @@ public class KClosestElement {
             if (Math.abs(x - arr[mid]) > Math.abs(x - arr[mid+k])) {
                 lo = mid + 1; // arr[mid] is the one further away from x, eliminate range[lo, mid]
             } else {
-                hi = mid - 1; // arr[mid+k] is the one further away, all [mid, hi] will have simiar situation, elimiate them
+                hi = mid - 1; // arr[mid+k] is the one further away, all [mid, hi] will have similar situation, eliminate them
             }
         }
         // return subarray

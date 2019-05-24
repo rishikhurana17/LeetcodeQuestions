@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * Created by rkhurana on 2/24/19.
  */
-public class All0oneDataStructure {
+public class All0OneDataStructure {
     HashMap<String, Integer> map;
     HashMap<Integer, HashSet<String>> vals;
     String maxKey;
@@ -12,7 +12,7 @@ public class All0oneDataStructure {
     int max;
     int min;
 
-    public All0oneDataStructure() {
+    public All0OneDataStructure() {
         map = new HashMap<>();
         vals = new HashMap<>();
         maxKey = "";
@@ -110,7 +110,7 @@ public class All0oneDataStructure {
     }
 
     public static void main(String []args){
-        All0oneDataStructure ds = new All0oneDataStructure();
+        All0OneDataStructure ds = new All0OneDataStructure();
         ds.inc("A");
         ds.inc("A");
         ds.inc("B");

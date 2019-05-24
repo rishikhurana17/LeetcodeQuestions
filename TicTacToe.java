@@ -20,29 +20,36 @@ public TicTacToe(int n) {
             0: No one wins.
             1: Player 1 wins.
             2: Player 2 wins. */
-public int move(int row, int col, int player) {
-    int toAdd = player == 1 ? 1 : -1;    
-    rows[row] += toAdd;
-    cols[col] += toAdd;
-    if (row == col)
-    {
-        diagonal += toAdd;
+    public int move(int row, int col, int player) {
+        int toAdd = player == 1 ? 1 : -1;
+        rows[row] += toAdd;
+        cols[col] += toAdd;
+        if (row == col) {
+            diagonal += toAdd;
+        }
+
+        if (col == (cols.length - row - 1)) {
+            antiDiagonal += toAdd;
+        }
+
+        int size = rows.length;
+        if (Math.abs(rows[row]) == size || Math.abs(cols[col]) == size ||
+                Math.abs(diagonal) == size  || Math.abs(antiDiagonal) == size) {
+            return player;
+        }
+
+        return 0;
     }
-    
-    if (col == (cols.length - row - 1))
-    {
-        antiDiagonal += toAdd;
+    public static void main(String []args){
+        TicTacToe toe = new TicTacToe(3);
+        System.out.println(toe.move(0, 0, 1)); // -> Returns 0 (no one wins)
+        System.out.println(toe.move(0, 2, 2)); //-> Returns 0 (no one wins)
+        System.out.println(toe.move(2, 2, 1)); //-> Returns 0 (no one wins)
+        System.out.println(toe.move(1, 1, 2)); // -> Returns 0 (no one wins)
+        System.out.println(toe.move(2, 0, 1)); //-> Returns 0 (no one wins)
+        System.out.println(toe.move(1, 0, 2)); //-> Returns 0 (no one wins)
+        System.out.println(toe.move(2, 1, 1)); //-> Returns 1 (player 1 wins)
+
     }
-    
-    int size = rows.length;
-    if (Math.abs(rows[row]) == size ||
-        Math.abs(cols[col]) == size ||
-        Math.abs(diagonal) == size  ||
-        Math.abs(antiDiagonal) == size)
-    {
-        return player;
-    }
-    
-    return 0;
-}
+
 }

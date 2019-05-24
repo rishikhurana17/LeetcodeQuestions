@@ -4,9 +4,10 @@ import java.util.*;
 /**
  * Created by rkhurana on 2/26/19.
  */
-// first method is better
+
 // https://www.youtube.com/watch?v=VqN4cqa3vgI
-public class ExclusiveTimeofFunctions {
+public class  ExclusiveTimeofFunctions {
+    // first method is better
     public static int[] exclusiveTime(int n, List<String> logs) {
         int[] res = new int[n];
         Stack<Integer> stack = new Stack<>();

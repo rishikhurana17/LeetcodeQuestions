@@ -46,4 +46,15 @@ public class ClosestBSTValueII {
         res.add(root.val);
         inorder(root.right, target, k, res);
     }
+    public static void main(String []args){
+        ClosestBSTValueII closestBST = new ClosestBSTValueII();
+        TreeNode root = new TreeNode(4);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(5);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(3);
+        //root.right.right = new TreeNode(6);
+        List<Integer> list = closestBST.closestKValues2(root,3.714,2);
+        System.out.println(list.get(0));
+    }
 }

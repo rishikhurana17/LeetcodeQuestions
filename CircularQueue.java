@@ -64,7 +64,8 @@ class CircularQueue {
     final int[] a;
     int front, rear = -1, len = 0;
 
-    public CircularQueue(int k) { a = new int[k];
+    public CircularQueue(int k) {
+        a = new int[k];
     }
 
     public boolean enQueue(int val) {

@@ -59,12 +59,14 @@ public class InsertDeleteGetRandomDuplicates {
         o.insert(10);
         o.insert(10);
         o.insert(11);
+        o.insert(13);
         o.insert(11);
-        o.remove(10);
         o.insert(13);
-        o.remove(14);
-        o.insert(13);
-        o.insert(150);
+
+        o.insert(15);
+        o.insert(15);
+        o.remove(13);
+
 
     }
 }

@@ -17,7 +17,8 @@ public class Node {
     public int hd;
 List<Node> children;
     public Node(int key) {
-        
+        this.val = key;
+        this.key = key;
     }
 
     public Node(int i, Object o, Object o1) {

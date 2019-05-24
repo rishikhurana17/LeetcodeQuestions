@@ -9,7 +9,8 @@ public class RemoveInvalidParentheses {
         List<String> res = new ArrayList<>();
 
         // sanity check
-        if (s == null) return res;
+        if (s == null)
+            return res;
 
         Set<String> visited = new HashSet<>();
         Queue<String> queue = new LinkedList<>();
