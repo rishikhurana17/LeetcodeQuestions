@@ -21,14 +21,27 @@ class TrieAutocomplete {
 
         Node root = new Node();
 
-        public void addWord(String word,int count) {
+//        public void addWord(String word,int count) {
+//            Node p = root;
+//            for (char c : word.toCharArray()) {
+//                if (!p.children.containsKey(c)) {
+//                    p.children.put(c, new Node());
+//                }
+//                p = p.children.get(c);
+//                p.wordTreeMap.put(count, word);
+//                p.wordforthatSearch.add(word);
+//
+//            }
+//        }
+
+        public void addWord(String word) {
             Node p = root;
             for (char c : word.toCharArray()) {
                 if (!p.children.containsKey(c)) {
                     p.children.put(c, new Node());
                 }
                 p = p.children.get(c);
-                p.wordTreeMap.put(count, word);
+//                p.wordTreeMap.put(count, word);
                 p.wordforthatSearch.add(word);
 
             }
@@ -66,13 +79,13 @@ class TrieAutocomplete {
 
     public static void main(String[] args) {
         Autocomplete a = new Autocomplete();
-        a.addWord("app", 10);
-        a.addWord("apple", 1000);
-        a.addWord("ant", 100);
-        a.addWord("ape", 1000000);
-        a.addWord("apple2", 1000000000);
-        a.addWord("alpha", 1);
-        a.addWord("badger", 1);
+        a.addWord("app");
+        a.addWord("apple");
+        a.addWord("ant");
+        a.addWord("ape");
+//        a.addWord("apple2", 1000000000);
+//        a.addWord("alpha", 1);
+//        a.addWord("badger", 1);
 
         System.out.println("Search for query a in descending order is " + a.search("app"));  //[apple2, ape, apple,ant,app,alpha]
 

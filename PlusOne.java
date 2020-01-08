@@ -19,7 +19,7 @@ public class PlusOne {
     }
 
     public static void main(String [] args){
-        int []num = {8,9};
+        int []num = {9,9};
         System.out.println(plusOne(num));
     }
 }

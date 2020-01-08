@@ -1,7 +1,8 @@
 package LeetcodePrograms;
 
 import java.util.*;
-public class LetterCombinationPhoneNumber {
+public class
+LetterCombinationPhoneNumber {
     public static ArrayList<String> letterCombinations(String digits) {
         ArrayList<String> res = new ArrayList<>();
         String[] charmap = { "0", "1", "abc", "def", "ghi", "jkl", "mno",

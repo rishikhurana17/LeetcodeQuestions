@@ -4,8 +4,7 @@ import java.util.*;
 
 public class RomantoInt {
 	 public static int romanToInt(String s) {
-         
-		 Map<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map = new HashMap<>();
         map.put('I', 1);
         map.put('V', 5);
         map.put('X', 10);
@@ -85,7 +84,7 @@ public class RomantoInt {
 	public static void main(String[] args) {
 
         //System.out.println(romanToInt("IVIV"));
-        System.out.println(romantoInt2("IVIV"));
+        System.out.println(romanToInt("VI"));
 	}
 
 }

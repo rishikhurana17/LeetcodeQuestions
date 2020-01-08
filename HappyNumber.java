@@ -1,5 +1,9 @@
 package LeetcodePrograms;
 
+import java.util.HashSet;
+import java.util.Set;
+
+
 /**
  * Created by rkhurana on 7/19/18.
  */
@@ -23,19 +27,40 @@ public class HappyNumber {
         return sum;
     }
 
-    public static int titletoNum2(String s) {
-        int result = 0;
-        for(int i = 0 ; i < s.length(); i++) {
-            result = result * 26 + (s.charAt(i) - 'A' + 1);
+    public static boolean isHappy(int n) {
+        Set<Integer> seen = new HashSet();
+        while(n != 1){
+            int sum = 0;
+            while(n != 0) {
+                sum += (n%10) * (n%10);
+                n = n/10;
+            }
+            n = sum;
+            if(seen.contains(n))
+                return false;
+            seen.add(n);
         }
-        return result;
+        return true;
     }
 
+    // Magic number is when you replace the number by the sum of its digits,
+    public static boolean isMagicNumber(int num) {
+        if(num ==1 || num == -1)
+            return true;
+        if(num/10 == 0 )
+            return false;
+        int sumOfDigits = 0;
+        while(num!=0){
+            sumOfDigits+=num%10;
+            num = num/10;
+        }
+        return isMagicNumber(sumOfDigits);
+    }
 
     public static void main(String [] args){
-        //System.out.println(isHappy2(15));
+        System.out.println(isMagicNumber(19));
   //      System.out.println(titletoNum2("AA"));
-        System.out.println(Math.pow(-13,10));
-        System.out.println(Math.pow(-13,25));
+//        System.out.println(Math.pow(-13,10));
+//        System.out.println(Math.pow(-13,25));
     }
 }

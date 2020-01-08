@@ -20,12 +20,44 @@ public class Excel {
 			result = result * 26 + (s.charAt(i) - 'A' + 1);
 		}
 		return result;
+
+
+	}
+
+	public String convertToTitle(int n) {
+		StringBuilder result = new StringBuilder();
+		while (n > 0) {
+			n--;
+			// result.insert(0, (char)('A' + n % 26)); //either insert it at the
+			// 0th position or append it and later on reverse it.
+
+			result.append((char) ('A' + n % 26));
+
+			// e.g. if n is 25, n%26 = 25, so 'A' + 25 = 'Z'
+			// e.g. if n is 26, n%26 = 0, so 'A' + 0 = 'A'.
+			// e.g. if n is 27, n%26 = 1, so 'A' + 1 = 'B'
+			n /= 26;
+
+
+		}
+
+		result.reverse();
+		return result.toString();
 	}
 
 
 	public static void main(String[] args) {
+
+
+//		String s = "A";
+//		System.out.println((s.charAt(0)-64));
+
+
+
 		Excel ex = new Excel();
 
-		System.out.println(ex.titletoNum("AA"));
+		System.out.println(ex.convertToTitle(27));
+
+//		System.out.println(ex.convertToTitle(1));
 	}
 }

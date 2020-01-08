@@ -1,7 +1,10 @@
 package LeetcodePrograms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+
 
 /**
  * Created by rkhurana on 7/15/18.
@@ -77,6 +80,57 @@ public class LongestSubstringWithoutRepeatingCharacters {
     }
 
     public static void main(String [] args){
-        System.out.println(longestSubstringWithoutRepeatingCharacter("abcabcbb"));
+        System.out.println(LongestContinousSubstring2("abcabcdbb"));
+    }
+
+    public static String LongestContinousSubstring2(String str){
+        int low = 0 ;
+        //List<String> list = new ArrayList<String>();
+        String result="";
+        if(str.length() == 0)
+            return "";
+
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(int i=0 ; i < str.length() ; i++){
+            if(map.get(str.charAt(i))!= null){
+                if( i - low> result.length()){
+                    result = str.substring(low,i);
+                }
+
+                low = Math.max(map.get(str.charAt(i)) +1,low);
+            }
+            map.put(str.charAt(i),i);
+        }
+        return result;
+
+    }
+
+    //if you want all the strings (list) of the same size to be printed
+    public static List<String> LongestContinousSubstringList(String str){
+        int low = 0 ;
+        List<String> list = new ArrayList<String>();
+
+        if(str.length() == 0)
+            return list;
+        String result ="";
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(int i=0 ; i < str.length() ; i++){
+            if(map.get(str.charAt(i))!= null){
+                if( (i) - low > result.length()){
+                    list.clear();
+                    //result = str.substring(low,i);
+                    list.add(str.substring(low,i));
+                }
+                else if((i) - low == result.length()){
+                    list.add(str.substring(low,i));
+
+                }
+
+                low = Math.max(map.get(str.charAt(i)) +1,low);
+            }
+            map.put(str.charAt(i),i);
+        }
+        return list;
+
     }
 }

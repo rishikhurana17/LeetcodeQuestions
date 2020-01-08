@@ -11,6 +11,7 @@ public class KthLargestElement {
         final PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (int val : nums) {
             pq.offer(val);
+            System.out.println("peeked element is " + pq.peek());
             if (pq.size() > k) {
                 pq.poll();
             }
@@ -57,6 +58,6 @@ public class KthLargestElement {
     public static void main(String []args) {
         int []nums = {3,2,1,5,6,8,10 ,4,7,9};
         int []nums2 = {3,2,3,1,2,4,5,5,};
-        System.out.println(findKthLargest2(nums , 7));
+        System.out.println(findKthLargest(nums , 7));
     }
 }

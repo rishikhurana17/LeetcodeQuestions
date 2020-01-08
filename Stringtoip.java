@@ -25,18 +25,22 @@ public class Stringtoip {
 		  }
 
 
+
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 	//	long x = ipToLong("111.11.11.111");
 	//	System.out.println(x);
 
-		int y[][]  = {{1,2},{3,4}};
-		Deque<Integer> S = new ArrayDeque<>();
+//		int y[][]  = {{1,2},{3,4}};
+//		Deque<Integer> S = new ArrayDeque<>();
+//
+//		for(int i = 0 ;i < y.length;i++)
+//			System.out.print(y[i]) ;
 
-		for(int i = 0 ;i < y.length;i++)
-			System.out.print(y[i]) ;
-
-
+		int n =2 ;
+		while (n-->0)
+			System.out.println(n);
 	}
 
 }

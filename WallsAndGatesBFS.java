@@ -30,7 +30,9 @@ public class WallsAndGatesBFS {
             if (col < rooms[0].length - 1 && rooms[row][col + 1] == Integer.MAX_VALUE) {
                 rooms[row][col + 1] = rooms[row][col] + 1;
                 queue.add(new int[]{row, col + 1});
+
             }
+
         }
     }
 

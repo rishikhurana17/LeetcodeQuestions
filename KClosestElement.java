@@ -39,7 +39,8 @@ public class KClosestElement {
                 right = mid;
         }
         List<Integer> res = new ArrayList<>();
-        for (int i = 0; i < k; i++) res.add(A[left + i]);
+        for (int i = 0; i < k; i++)
+            res.add(A[left + i]);
         return res;
     }
 

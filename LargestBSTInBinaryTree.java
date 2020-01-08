@@ -29,12 +29,12 @@ public class LargestBSTInBinaryTree {
     // largest BST in a binary tree concept is to use postorder traversal and make sure min of right side > root
     // and max of left side should be < than root to get the bst
 
-        public int largestBST(LeetcodePrograms.Node root){
+        public int largestBST(Node root){
             MinMax m = largest(root);
             return m.size;
         }
 
-        private MinMax largest(LeetcodePrograms.Node root){
+        private MinMax largest(Node root){
             //if root is null return min as Integer.MAX and max as Integer.MIN
             if(root == null){
                 return new MinMax();

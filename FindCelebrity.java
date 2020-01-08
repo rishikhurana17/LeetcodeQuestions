@@ -1,50 +1,34 @@
 package LeetcodePrograms;
 import java.util.*;
 public class FindCelebrity {
-    int [][]matrix ={{1,1,0},
-                     {0,1,0},
-                     {1,1,1}};
-    public int findCelebrity(int n) {
-        // base case
-        if (n <= 0) return -1;
-        if (n == 1) return 0;
 
-        Stack<Integer> stack = new Stack<>();
 
-        // put all people to the stack
-        for (int i = 0; i < n; i++)
-            stack.push(i);
+    public static int numSquares(int n) {
+        int max = (int) Math.sqrt(n);
 
-        int a = 0, b = 0;
+        int[] dp = new int[n+1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
 
-        while (stack.size() > 1) {
-            a = stack.pop();
-            b = stack.pop();
-
-            if (knows(a, b))
-                // a knows b, so a is not the celebrity, but b may be
-                stack.push(b);
-            else
-                // a doesn't know b, so b is not the celebrity, but a may be
-                stack.push(a);
+        for(int i=1; i<=n; i++){
+            for(int j=1; j<=max; j++){
+                if(i==j*j){
+                    dp[i]=1;
+                }else if(i>j*j){
+                    dp[i]=Math.min(dp[i], dp[i-j*j] + 1);
+                }
+            }
         }
 
-        // double check the potential celebrity
-        int c = stack.pop();
-
-        for (int i = 0; i < n; i++)
-            // c should not know anyone else
-            if (i != c && (knows(c, i) || !knows(i, c)))
-                return -1;
-
-        return c;
+        return dp[n];
     }
 
-    private boolean knows(int c, int i) {
-        if(matrix[c][i] == 1)
-            return true;
-        else
-            return false;
+
+
+    public static void main(String []args){
+       System.out.println(numSquares(17
+       ));
+
+
     }
 
 

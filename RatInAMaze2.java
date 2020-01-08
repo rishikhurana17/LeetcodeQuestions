@@ -74,10 +74,10 @@ public class RatInAMaze2 {
     public static void main(String args[])
     {
         RatInAMaze2 rat = new RatInAMaze2();
-        int maze[][] = {{1, 0, 0, 0},
+        int maze[][] = {{1, 0, 0, 1},
                 {1, 1, 0, 1},
-                {0, 1, 0, 0},
-                {1, 1, 1, 1}
+                {1, 1, 0, 0},
+                {0, 1, 1, 1}
         };
         rat.solveMaze(maze);
     }

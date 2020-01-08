@@ -1,4 +1,4 @@
-//#LinkedIn Question
+//#LinkedIn WeWorkQuestion
 package LeetcodePrograms;
 import java.util.*;
 /**

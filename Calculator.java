@@ -13,7 +13,7 @@ import java.util.Stack;
 //Finally if there is only one number, from the above solution, we haven't add the number to the result, so we do a check see if the number is zero.
 
 public class Calculator {
-    public static int calculate2(String s) {
+    public static int calculate1(String s) {
         int len = s.length(), sign = 1, result = 0;
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < len; i++) {
@@ -41,7 +41,7 @@ public class Calculator {
         return result;
     }
 
-    public static int calculate1(String s) {
+    public static int calculate2(String s) {
         int len;
         if(s==null || (len = s.length())==0) return 0;
         Stack<Integer> stack = new Stack<Integer>();
@@ -77,7 +77,7 @@ public class Calculator {
 
     public static void main(String [] args){
 
-        System.out.println(calculate1 ("-24-5+3"));
+        System.out.println(calculate1 ("-24-(5+3)-6"));
     //   System.out.println(calculate2 ("-25+2 / 2"));
 
     }

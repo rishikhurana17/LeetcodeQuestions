@@ -27,9 +27,18 @@ public class ImplementPow {
         }
         return res;
     }
+
+    public static boolean isPowerOfTwo(int n) {
+        if (n == 0)
+            return false;
+        while (n % 2 == 0)
+            n /= 2;
+        return (n == 1);
+    }
     public static void main(String []args){
-        System.out.println(myPow(2,-2));
-        System.out.println(myPow(7,2));
-        System.out.println(myPow(9,3));
+//        System.out.println(isPowerOfTwo(8));
+        System.out.println(myPow(5,2));
+//        System.out.println(myPow(7,2));
+//        System.out.println(myPow(9,3));
     }
 }

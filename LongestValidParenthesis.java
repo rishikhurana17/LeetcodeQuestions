@@ -30,6 +30,6 @@ public class LongestValidParenthesis {
 
 
     public static void main(String []args){
-        System.out.println(longestValidParentheses2("(()()))"));
+        System.out.println(longestValidParentheses2("(()"));
     }
 }

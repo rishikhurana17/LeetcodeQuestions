@@ -1,5 +1,6 @@
 package LeetcodePrograms;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -24,7 +25,19 @@ public class PriorityQueueExample {
         }
         Integer[] res = new Integer[k];
         for (int i = k - 1; i >= 0; i--)
-            res[i] = pq.poll();
+            System.out.println(pq.poll());
+    }
+
+    public static void example(){
+        Queue<Integer> pq = new PriorityQueue<>();
+        Queue<Integer> pq1 = new PriorityQueue<>(Collections.reverseOrder());
+        pq1.add(4);
+        pq1.add(3);
+        pq1.add(5);
+        pq1.add(1);
+        System.out.println("peek is " + pq1.peek());
+        System.out.println("poll is " + pq1.poll());
+
     }
     public static void stringCheck(){
         String s1= "hello";
@@ -43,7 +56,8 @@ public class PriorityQueueExample {
     public static void main(String []args){
         int []arr = {24,12,6,46,5,19,1};
         int k=3;
-        //prorityExample(arr,k);
-        stringCheck();
+//        prorityExample(arr,k);
+        example();
+        //stringCheck();
     }
 }

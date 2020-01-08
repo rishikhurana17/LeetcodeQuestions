@@ -31,7 +31,7 @@ public class TopKFrequentElements {
     }
     public static void main(String []args){
         TopKFrequentElements topKFrequentElements = new TopKFrequentElements();
-        int a[] = {1,1,1,2,2,3,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5};
+        int a[] = {1,1,1,2,2,2,3,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5};
         int k=3;
         System.out.println(topKFrequentElements.topKFrequent(a,k));
     }

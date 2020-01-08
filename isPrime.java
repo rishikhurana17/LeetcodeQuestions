@@ -24,7 +24,6 @@ public class isPrime {
 	public static int countNumberofPrime(int n) {
 		int start = 2;
 		int count = 0;
-		int m = (int) Math.ceil(Math.sqrt(n));
 		for (int i = start; i < n; i++) {
 			if (isPrime(i)) {
 				System.out.println(i);
@@ -45,7 +44,7 @@ public class isPrime {
 
 	public static void main(String[] args) {
 
-		 System.out.println("Next prime number is " + nextPrime(5)); //11
+		 System.out.println("Next prime number is " + nextPrime(25)); //11
 //		System.out.println("Count Number of prime number is "
 //				+ countNumberofPrime(2)); // 11
 

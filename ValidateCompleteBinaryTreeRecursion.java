@@ -36,7 +36,6 @@ public class ValidateCompleteBinaryTreeRecursion {
         ValidateCompleteBinaryTreeRecursion tree = new ValidateCompleteBinaryTreeRecursion();
 
         // Le us create tree in the last diagram above
-        Node NewRoot = null;
         tree.root = new Node(1);
         tree.root.left = new Node(2);
         tree.root.right = new Node(3);

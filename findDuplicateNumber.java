@@ -5,29 +5,37 @@ package LeetcodePrograms;
  */
 public class findDuplicateNumber {
     public static int findDuplicate(int[] nums) {
-        int n = nums.length - 1;
-        int left = 0, right = n;
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            int count = numBelow(nums, mid);
-            if (count > mid)
-                right = mid;
-            else
-                left = mid + 1;
+        int low = 1, high = nums.length - 1;
+        while (low <= high) {
+            int mid = (int) (low + (high - low) * 0.5);
+            int cnt = 0;
+            for (int a : nums) {
+                if (a <= mid) ++cnt;
+            }
+            if (cnt <= mid) low = mid + 1;
+            else high = mid - 1;
         }
-        return left;
+        return low;
     }
 
-    public static int numBelow(int[] nums, int target) {
-        int result = 0;
-        for (int i = 0; i < nums.length; i++)
-            if (nums[i] <= target)
-                result++;
-        return result;
+    public static int findDuplicate4(int[] nums) {
+        int slow = 0, fast = 0;
+        do {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        } while (slow != fast);
+        slow = 0;
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
     }
+
+
 
     public static void main(String []args){
-        int []nums = {1,3,4,2,2};
-        System.out.println(findDuplicate(nums));
+        int []nums = {5,3,4,2,2};
+        System.out.println(findDuplicate4(nums));
     }
 }

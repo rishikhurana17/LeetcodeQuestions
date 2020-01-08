@@ -38,6 +38,13 @@ public class LongestIncreasingPathInAMatrix {
             }
         }
 
+        for(int i = 0 ; i < matrix.length ; i++){
+            for(int j = 0 ; j < matrix[0].length ; j++){
+                System.out.print(cache[i][j] + " ");
+            }
+            System.out.println();
+        }
+
         return max;
     }
     private int findSmallAround(int i, int j, int[][] matrix, int[][] cache, int pre) {
@@ -62,12 +69,13 @@ public class LongestIncreasingPathInAMatrix {
     public static void main(String []args){
         LongestIncreasingPathInAMatrix Lip = new LongestIncreasingPathInAMatrix();
         int [][]matrix = {{9,9,4},
-        {6,6,8},
-        {2,1,1}};
+                          {6,6,8},
+                          {2,1,1}
+                         };
         int [][]matrix2 = { {3,4,5},
                             {3,2,6},
                             {2,2,1}
                           };
-        Lip.longestIncreasingPath(matrix);
+        Lip.longestIncreasingPath(matrix2);
     }
 }

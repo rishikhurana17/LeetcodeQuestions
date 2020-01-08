@@ -51,7 +51,7 @@ public class ReverseString {
 
 //		System.out.println(output);
 
-		System.out.println(reverseWordsInAString("My name"));
+		System.out.println(reverseWordsInAString("My name is Rishi"));
 
 	}
 

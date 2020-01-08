@@ -7,9 +7,9 @@ import java.util.List;
  * Created by rkhurana on 2/12/19.
  */
 public class TextJustification2 {
-    private  List<String> result;
+    private static List<String> result;
 
-    public  List<String> fullJustify(String[] words, int maxWidth) {
+    public static List<String> fullJustify(String[] words, int maxWidth) {
         result = new ArrayList<String>();
         if (words == null || words.length == 0 || maxWidth < 0)
             return result;
@@ -21,7 +21,7 @@ public class TextJustification2 {
         return result;
     }
 
-    public  void helper(String[] words, int start, int width) {
+    public static void helper(String[] words, int start, int width) {
         if (start >= words.length) return;
 
         int i = start, len = 0, total = 0, next = -1;
@@ -44,7 +44,7 @@ public class TextJustification2 {
         helper(words, next, width);
     }
 
-    public  void addList(String[] words, int i, int j, int len, int width) {
+    public  static void addList(String[] words, int i, int j, int len, int width) {
         StringBuilder sb = new StringBuilder("");
         int count = j-i-1, space = 0, more = 0, s = 0;
         if (count == 0 || j == words.length) { // the last line or only one word in that line
@@ -78,13 +78,35 @@ public class TextJustification2 {
 
         result.add(sb.toString());
     }
-    public static void main(String [] args){
-        TextJustification2 t = new TextJustification2();
-        String [] words = {"This", "is", "an", "example", "of", "text", "justification."};
-        String []words1 = {"What","must","be","acknowledgment","shall","be"};
-        List<String> wordJustification = t.fullJustify(words1,16);
-        System.out.println(wordJustification);
 
+    public static String textSize(String message , int maxWidth){
+        String []messageArray = message.split(" ");
+        List<String> strinArray= fullJustify(messageArray , maxWidth);
+        String finalString =null;
+        int maxlength =0 ;
+        for(int i = 0 ; i < strinArray.size() ; i++){
+            String str = strinArray.get(i);
+            StringBuilder sb = new StringBuilder();
+            int space = 0 ;
+            for(int j = 0 ; j < str.length() ; j++){
+                char ch = str.charAt(j);
+                if(ch == ' '){
+                    if(space == 0) {
+                        sb.append(" ");
+                        space++;
+                    }
+                }
+                else{
+                    sb.append(str.charAt(j));
+                }
+            }
+
+            if(sb.toString().length() > maxlength) {
+                maxlength = str.length();
+                finalString = str;
+            }
+        }
+        return finalString;
     }
 
 }
