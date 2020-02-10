@@ -1,5 +1,5 @@
 package LeetcodePrograms;
-
+// #Salesforce question
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +77,20 @@ public class PathExists {
         exist1(board , "FIND");
     }
 
+    public static List exist2(char[][] board, String word) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if ((word.charAt(0) == board[i][j] )) {
+                    callMethod(board,word);
+                }
+            }
+        }
 
+                    return null;
+    }
+
+    private static void callMethod(final char[][] board, final String word) {
+
+    }
 
 }

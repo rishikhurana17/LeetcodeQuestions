@@ -55,7 +55,7 @@ public class WordLadder {
 public static void main (String [] args){
     WordLadder w = new WordLadder();
     String beginWord = "hit";
-    String             endWord = "cog";
+    String endWord = "cog";
     Set<String> list = new HashSet<>();
 
     list.add("hot");

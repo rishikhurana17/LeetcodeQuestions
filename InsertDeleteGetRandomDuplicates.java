@@ -56,16 +56,12 @@ public class InsertDeleteGetRandomDuplicates {
 
     public static void main(String []args){
         InsertDeleteGetRandomDuplicates o = new InsertDeleteGetRandomDuplicates();
-        o.insert(10);
-        o.insert(10);
-        o.insert(11);
-        o.insert(13);
-        o.insert(11);
-        o.insert(13);
-
-        o.insert(15);
-        o.insert(15);
-        o.remove(13);
+        o.insert(24);
+        o.insert(27);
+        o.insert(24);
+        o.insert(24);
+        o.insert(27);
+        o.remove(27);
 
 
     }

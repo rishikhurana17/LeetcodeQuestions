@@ -43,7 +43,8 @@ public class  BoundaryofBinaryTree {
 
     }
     public void rightBoundary(TreeNode root) {
-        if(root == null || (root.right == null && root.left == null)) return;
+        if(root == null || (root.right == null && root.left == null))
+            return;
         if(root.right == null)
             rightBoundary(root.left);
         else
@@ -77,6 +78,17 @@ public class  BoundaryofBinaryTree {
         }
         leaves(root.left);
         leaves(root.right);
+
+
+    //vivekanand styke of codinh
+        if(root!=null){
+            leaves(root.left);
+            if(root.left==null && root.right == null)
+                System.out.println(root.val);
+            leaves(root.root);
+
+        }
+
     }
 
     public static void main(String []args){

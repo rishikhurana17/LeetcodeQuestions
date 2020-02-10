@@ -50,7 +50,7 @@ public class LeetCode {
 // Given a string containing just the characters '(' and ')', find the
 // length of the longest valid (well-formed) parentheses substring.
     public static int longestValidParentheses2(String s) {
-        Stack<Integer> stack = new Stack<Integer>();
+        Stack<Integer> stack = new Stack<>();
         int max = 0;
         int left = -1;
         for (int j = 0; j < s.length(); j++) {
@@ -2603,7 +2603,7 @@ public class LeetCode {
         }
     }
 
-    // Q61 Rotate List (#Microsft asked 4 times in last 6mnths)
+    // Q61 Rotate List (#Microsft #Amazon asked 4 times in last 6mnths)
     // Given a linked list, rotate the list to the right by k places, where k is non-negative.
     // My solution has O(n) time complexity and O(1) memory. The basic idea is to connect the list into a circle.
     // First, count the length of list while going through the list to find the end of it.
@@ -4539,7 +4539,7 @@ public class LeetCode {
         return f[s.length()];
     }
 
-    // Word break II #TopInterviewQuestion  #NeedsAttention
+    // Word break II #TopInterviewQuestion  #NeedsAttention  #Amazon #Facebook
     // Given a non-empty string s and a dictionary wordDict containing a list of non-empty words,
     // add spaces in s to construct a sentence where each word is a valid dictionary word.
     // You may assume the dictionary does not contain duplicate words.]
@@ -4579,7 +4579,8 @@ public class LeetCode {
     }
 
     // Q120 Triangle #GoodQuestion  #NobdyAskedthisQuestioninLast6Months
-    // Given a triangle, find the minimum path sum from top to bottom. Each stepyou may move to adjacent numbers on the row below.
+    // Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on
+    // the row below.
     // For example, given the following triangle
     // [
     // [2],
@@ -5559,7 +5560,7 @@ public class LeetCode {
         return result;
     }
 
-    // Q239 Sliding Window Maximum #TopInterviewQuestion
+    // Q239 Sliding Window Maximum #TopInterviewQuestion #Amazon
     // Given an array nums, there is a sliding window of size k which is moving from the very left of the array
     // to the very right. You can only see the k numbers in the window. Each time the sliding window moves right
     // by one position. Return the max sliding window.
@@ -6032,7 +6033,7 @@ public class LeetCode {
     }
 
     // or
-
+// see later
     public int kthSmallest2(int[][] matrix, int k) {
         int lo = matrix[0][0], hi = matrix[matrix.length - 1][matrix[0].length - 1] + 1;// [lo , hi)
         while (lo < hi) {
@@ -6079,6 +6080,14 @@ public class LeetCode {
 
         if (list.size() > k)
             return (String) (list.get(k)).getKey();
+
+        Iterator iter = list.iterator();
+        int total = 0;
+        while (iter.hasNext()) {
+            Map.Entry entry = (Map.Entry) iter.next();
+            System.out.println(entry.getKey() + " " + entry.getValue());
+            total += ((int)entry.getValue());
+        }
         return null;
     }
 
@@ -6205,6 +6214,7 @@ public class LeetCode {
 
     // Q94 Binary Tree Inorder Traversal #TopInterviewQuestion
     void inorderTraversal(TreeNode root) {
+        if(root==null) return;
         Stack<TreeNode> stack = new Stack<>();
         TreeNode current = root;
         boolean done = false;
@@ -6646,7 +6656,7 @@ public class LeetCode {
         return table[0][n - 1];
     }
 
-    // Q658 K closest points to the given value #GoodQuestion  #UberQuestion #FacebookQuestion
+    // Q658 K closest points to the given value #GoodQuestion  #UberQuestion #FacebookQuestion  #HardlyAsked
     // Given a sorted array, two integers k and x, find the k closest elements to x in the array.
     // The result should also be sorted in ascending order. If there is a tie, the smaller elements are always preferred.
     // In the following solutions, it is assumed that all elements of array are distinct.
@@ -7734,7 +7744,7 @@ public class LeetCode {
     public ListNode swapPairs(ListNode head) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode current = dummy;
+        ListNode current = dummy;   //remember this line..current is pointing to dummy..name it as prev
         while (current.next != null && current.next.next != null) {
             ListNode first = current.next;
             ListNode second = current.next.next;
