@@ -28,7 +28,7 @@ public class FirstMissingPositive {
 
 
     public static void main(String [] args){
-        int num [] = {1,2,0 , 4,5,3};
+        int num [] = {0,4,2,7 , 1,5,3};
         System.out.println( firstMissingPositiveAnd0(num));
     }
 }

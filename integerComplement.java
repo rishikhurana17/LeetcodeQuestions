@@ -3,7 +3,7 @@ package LeetcodePrograms;
 //get the compliment of a number
 //50 stands for 110010 and complement of that is 001101 which is 13
 public class IntegerComplement {
-	public static int getIntegerComplement(int n) {
+	public static int getIntegerComplement(int n) throws InterruptedException {
 		int i = 0, temp[] = new int[25];
 		int j;
 		StringBuffer toBinary = new StringBuffer();
@@ -29,6 +29,7 @@ public class IntegerComplement {
 
 		}
 		System.out.println("complement is " + compl);
+		Thread.sleep(2000);
 		return Integer.parseInt(compl, 2);
 	}
 

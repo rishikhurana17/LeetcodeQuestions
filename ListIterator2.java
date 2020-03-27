@@ -2,7 +2,7 @@ package LeetcodePrograms;
 
 import static java.util.Arrays.asList;
 
-
+// working solution
 // Array List Iterator
 
 //Given an array of arrays, implement an iterator class to allow the client to traverse and remove elements in the array list in place.  This _iterator_ should provide three public class member functions:

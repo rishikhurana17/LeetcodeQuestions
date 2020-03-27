@@ -24,8 +24,28 @@ public class JumpGame {
         return jump;
     }
 
+    private static int minJumps2(int[] arr, int n) {
+        int jumps[] = new int[n]; // jumps[n-1] will hold the result ..
+        // this is basically the minimum number of jumps needed to reach to that point
+        int i, j;
+        if (n == 0 || arr[0] == 0)
+            return Integer.MAX_VALUE; // if first element is 0, END CANNOT BE REACHED
+        jumps[0] = 0;
+        // Find the minimum number of jumps to reach arr[i] from arr[0], and assign this value to jumps[i]
+        for (i = 1; i < n; i++) {
+            jumps[i] = Integer.MAX_VALUE;
+            for (j = 0; j < i; j++) {
+                if (i <= j + arr[j]) {   // can i reach i from j
+                    jumps[i] = Math.min(jumps[i], jumps[j] + 1);
+                    break;
+                }
+            }
+        }
+        return jumps[n - 1];
+    }
+
     public static void main(String []args){
         int a[]={2,3,1,1,4};
-        System.out.print(jump(a));
+        System.out.print(minJumps2(a,a.length));
     }
 }

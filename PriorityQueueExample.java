@@ -29,8 +29,8 @@ public class PriorityQueueExample {
     }
 
     public static void example(){
-        Queue<Integer> pq = new PriorityQueue<>();
-        Queue<Integer> pq1 = new PriorityQueue<>(Collections.reverseOrder());
+        Queue<Integer> pq1 = new PriorityQueue<>();
+        Queue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         pq1.add(4);
         pq1.add(3);
         pq1.add(5);

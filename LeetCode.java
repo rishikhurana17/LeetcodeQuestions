@@ -869,50 +869,50 @@ public class LeetCode {
         return max_so_far;
     }
 
-    static int maxSubArraySumNoIndices(int a[])
-    {
-        int size = a.length;
-        int max_so_far = Integer.MIN_VALUE, max_ending_here = 0;
-
-        for (int i = 0; i < size; i++)
+        static int maxSubArraySumNoIndices(int a[])
         {
-            max_ending_here = max_ending_here + a[i];
-            if (max_so_far < max_ending_here)
-                max_so_far = max_ending_here;
-            if (max_ending_here < 0)
-                max_ending_here = 0;
+            int size = a.length;
+            int max_so_far = Integer.MIN_VALUE, max_ending_here = 0;
+
+            for (int i = 0; i < size; i++)
+            {
+                max_ending_here = max_ending_here + a[i];
+                if (max_so_far < max_ending_here)
+                    max_so_far = max_ending_here;
+                if (max_ending_here < 0)
+                    max_ending_here = 0;
+            }
+            return max_so_far;
         }
-        return max_so_far;
-    }
 
-    static int maxSubArraySumWithIndices(int a[], int size)
-    {
-        int max_so_far = Integer.MIN_VALUE, max_ending_here = 0,
-                start =0, end = 0, s=0;
-
-        for (int i=0; i< size; i++ )
+        static int maxSubArraySumWithIndices(int a[], int size)
         {
-            max_ending_here += a[i];
+            int max_so_far = Integer.MIN_VALUE, max_ending_here = 0,
+                    start =0, end = 0, s=0;
 
-            if (max_so_far < max_ending_here)
+            for (int i=0; i< size; i++ )
             {
-                max_so_far = max_ending_here;
-                start = s;
-                end = i;
-            }
+                max_ending_here += a[i];
 
-            if (max_ending_here < 0)
-            {
-                max_ending_here = 0;
-                s = i + 1;
+                if (max_so_far < max_ending_here)
+                {
+                    max_so_far = max_ending_here;
+                    start = s;
+                    end = i;
+                }
+
+                if (max_ending_here < 0)
+                {
+                    max_ending_here = 0;
+                    s = i + 1;
+                }
             }
+           System.out.println("Maximum contiguous sum is "
+                    +max_so_far );
+            System.out.println( "Starting index "+start
+                    + "Ending index " + end);
+            return max_so_far;
         }
-       System.out.println("Maximum contiguous sum is "
-                +max_so_far );
-        System.out.println( "Starting index "+start
-                + "Ending index " + end);
-        return max_so_far;
-    }
 
     // Q70 Climbing stairs problem #TopInterviewQuestion
     // You are climbing a stair case. It takes n steps to reach to the top.
@@ -1032,7 +1032,7 @@ public class LeetCode {
     private Map<String, List<Integer>> wordDistanceMap;
 
     public void WordDistance2constructor(String[] words) {
-        wordDistanceMap = new HashMap<String, List<Integer>>(); //list to include all the duplicate values index's
+        wordDistanceMap = new HashMap<>(); //list to include all the duplicate values index's
         for(int i = 0; i < words.length; i++) {
             String w = words[i];
             if(wordDistanceMap.containsKey(w)) {
@@ -1528,7 +1528,6 @@ public class LeetCode {
     // otherwise [mid+1 n]. I do this until search space is only one number.
 
 //    My understanding of this algo is that:   #NeedsAttention
-//
 //    you perceive the indices as the values.
 //    Then count the number of values lesser than the mid
 //    If the if the count is lesser than mid, we assume the duplicate number should be on the higher side of the number scale.
@@ -1805,7 +1804,7 @@ public class LeetCode {
             // the returned int is its ascii value
             if (i >= 0)
                 sum += a.charAt(i--) - '0';
-            sb.append(sum);
+            sb.append(sum%10);
             carry = sum / 10;
         }
         if (carry != 0)
@@ -2019,8 +2018,6 @@ public class LeetCode {
         }
         return last;
     }
-
-
 
     // Q3 Given a string, find the length of the longest substring without repeating characters. #TopInterviewQuestion
     public int lengthOfLongestSubstring2(String s) {
@@ -2379,7 +2376,7 @@ public class LeetCode {
                 map.put(keyStr, new ArrayList<>());
             map.get(keyStr).add(s);
         }
-        return new ArrayList<List<String>>(map.values());
+        return new ArrayList<>(map.values());
     }
 
     // Q66 plus one #TopInterviewQuestion
@@ -2961,7 +2958,7 @@ public class LeetCode {
     // the following mapping:
     // 'A' -> 1
     // 'B' -> 2
-    // ...
+    // ...bk
     // 'Z' -> 26
     // Given an encoded message containing digits, determine the total number of ways to decode it.
     // For example, Given encoded message "12", it could be decoded as "AB" (1 2) or "L" (12).
@@ -4313,28 +4310,8 @@ public class LeetCode {
 // nums[lo] > nums[mi] <= nums[hi], (lo, mi] is not sorted, min is inside
 // nums[lo] <= nums[mi] > nums[hi], (mi, hi] is not sorted, min is inside
 // nums[lo] > nums[mi] > nums[hi], impossible
-    public int findMin(int[] nums) {
 
-        int lo = 0, hi = nums.length - 1;
-        while (lo <= hi) {
-            int mi = lo + (hi - lo) / 2;
-            if (nums[mi] > nums[hi]) {
-                lo = mi + 1;
-            }
-            else if (nums[mi] < nums[lo]) {
-                hi = mi;
-
-            }
-            else { // nums[lo] <= nums[mi] <= nums[hi]
-// When num[mid] == num[hi], we couldn't sure the position of minimum in mid's left or right, so just let upper bound reduce one.
-                hi--;
-            }
-        }
-
-        return nums[lo];
-    }
-
-// the below example is same as that of the find minimum in rotated sorted array no duplicates(only difference is high--)
+    //same as that of the above one but with one more condition
     public int findMininRSA(int[] num) {
 
         int low = 0, high = num.length - 1;
@@ -4349,8 +4326,29 @@ public class LeetCode {
             else
                 high--;
         }
-
         return num[low];
+    }
+
+// or
+    public int findMin(int[] nums) {
+
+        int lo = 0, hi = nums.length - 1;
+        while (lo <= hi) {
+            int mi = lo + (hi - lo) / 2;
+            if (nums[mi] > nums[hi]) {
+                lo = mi + 1;
+            }
+            else if (nums[mi] < nums[lo]) {
+                hi = mi;
+
+            }
+            else { // nums[lo] <= nums[mi] <= nums[hi]
+                // When num[mid] == num[hi], we couldn't sure the position of minimum in mid's left or right, so just let upper bound reduce one.
+                hi--;
+            }
+        }
+
+        return nums[lo];
     }
 
     // Q41 First Missing Positive #TopInterviewQuestion
@@ -6082,7 +6080,7 @@ public class LeetCode {
             return (String) (list.get(k)).getKey();
 
         Iterator iter = list.iterator();
-        int total = 0;
+        int total =0;
         while (iter.hasNext()) {
             Map.Entry entry = (Map.Entry) iter.next();
             System.out.println(entry.getKey() + " " + entry.getValue());
@@ -6214,7 +6212,8 @@ public class LeetCode {
 
     // Q94 Binary Tree Inorder Traversal #TopInterviewQuestion
     void inorderTraversal(TreeNode root) {
-        if(root==null) return;
+        if(root==null)
+            return;
         Stack<TreeNode> stack = new Stack<>();
         TreeNode current = root;
         boolean done = false;
@@ -7848,12 +7847,12 @@ public class LeetCode {
         ReversePrintRecursive(p.next);
     }
 
-    public void ReversePrintNonRecursive(ListNode p) {
+    public void ReverseLinkedListRecursive(ListNode p) {
         if (p.next == null) {
             ListNode head = p;
             return;
         }
-        ReversePrintNonRecursive(p.next);
+        ReverseLinkedListRecursive(p.next);
         ListNode q = p.next;
         q.next = p;
         p.next = null;

@@ -77,7 +77,7 @@ public class Calculator {
 
     public static void main(String [] args){
 
-        System.out.println(calculate1 ("-24-(5+3)-6"));
+        System.out.println(calculate1 ("-24-6"));
     //   System.out.println(calculate2 ("-25+2 / 2"));
 
     }

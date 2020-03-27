@@ -5,7 +5,7 @@ import java.util.*;
 public class TopKFrequentElements {
     public List<Integer> topKFrequent(int[] nums, int k) {
 
-        List<Integer>[] bucket = new List[nums.length + 1];
+        List<Integer>[] bucket = new ArrayList[nums.length + 1];
         Map<Integer, Integer> frequencyMap = new HashMap<Integer, Integer>();
 
         for (int n : nums) {
@@ -31,7 +31,7 @@ public class TopKFrequentElements {
     }
     public static void main(String []args){
         TopKFrequentElements topKFrequentElements = new TopKFrequentElements();
-        int a[] = {1,1,1,2,2,2,3,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5};
+        int a[] = {1,1,1,2,2,2,3,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,35,35};
         int k=3;
         System.out.println(topKFrequentElements.topKFrequent(a,k));
     }

@@ -79,9 +79,9 @@ public class FriendlyStone {
             }
         }
         if(flagStone)
-            System.out.println("stonre is not friendly stone");
+            System.out.println("stone is not friendly stone");
         else{
-            System.out.println("stonre is a friendly stone");
+            System.out.println("stone is a friendly stone");
         }
     }
 }

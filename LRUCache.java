@@ -3,75 +3,91 @@ import java.util.*;
 
 //programcreek solution
 public class LRUCache {
-	int capacity;
-	HashMap<Integer, Node> map = new HashMap<Integer, Node>();
-	Node head=null;
-	Node end=null;
+	class Node{
+		int key;
+		int value;
+		Node prev;
+		Node next;
+
+		public Node(int key, int value){
+			this.key=key;
+			this.value=value;
+		}
+	}
+
+	Node head;
+	Node tail;
+	HashMap<Integer, Node> map = null;
+	int cap = 0;
 
 	public LRUCache(int capacity) {
-		this.capacity = capacity;
+		this.cap = capacity;
+		this.map = new HashMap<>();
 	}
 
 	public int get(int key) {
-		if(map.containsKey(key)){
-			Node n = map.get(key);
-			remove(n);
-			setHead(n);
-			return n.value;
+		if(map.get(key)==null){
+			return -1;
 		}
 
-		return -1;
+		//move to tail
+		Node t = map.get(key);
+
+		removeNode(t);
+		offerNode(t);
+
+		return t.value;
 	}
 
-	public void remove(Node n){
-		if(n.pre!=null){
-			n.pre.next = n.next;
+	public void put(int key, int value) {
+		if(map.containsKey(key)){
+			Node t = map.get(key);
+			t.value = value;
+
+			//move to tail
+			removeNode(t);
+			offerNode(t);
+		}else{
+			if(map.size()>=cap){
+				//delete head
+				map.remove(head.key);
+				removeNode(head);
+			}
+
+			//add to tail
+			Node node = new Node(key, value);
+			offerNode(node);
+			map.put(key, node);
+		}
+	}
+
+	private void removeNode(Node n){
+		if(n.prev!=null){
+			n.prev.next = n.next;
 		}else{
 			head = n.next;
 		}
 
 		if(n.next!=null){
-			n.next.pre = n.pre;
+			n.next.prev = n.prev;
 		}else{
-			end = n.pre;
-		}
-
-	}
-
-	public void setHead(Node n){
-		n.next = head;
-		n.pre = null;
-
-		if(head!=null)
-			head.pre = n;
-
-		head = n;
-
-		if(end ==null)
-			end = head;
-	}
-
-	public void set(int key, int value) {
-		if(map.containsKey(key)){
-			Node old = map.get(key);
-			old.value = value;
-			remove(old);
-			setHead(old);
-		}else{
-			Node created = new Node(key);
-			if(map.size()>=capacity){
-				map.remove(end.key);
-				remove(end);
-				setHead(created);
-
-			}else{
-				setHead(created);
-			}
-
-			map.put(key, created);
+			tail = n.prev;
 		}
 	}
 
+	private void offerNode(Node n){
+		if(tail!=null){
+			tail.next = n;
+		}
+
+		n.prev = tail;
+		n.next = null;
+		tail = n;
+
+		if(head == null){
+			head = tail;
+		}
+	}
 
 
 }
