@@ -22,7 +22,7 @@ import java.util.Arrays;
 //        4.  Ans:  dp[n][n][n]
 //        5.  Direction: from top left -> bottom right
 //        6.  Time: O(n^3) Space:  O(n^3)
-public class CherryPickup {
+public class  CherryPickup {
     public int cherryPickup(int[][] grid) {
         if (grid==null || grid.length==0 || grid[0].length==0) return 0;
         int n=grid.length;
@@ -55,7 +55,8 @@ public class CherryPickup {
                     dp[x1][y1][x2] = max + grid[x1-1][y1-1];
 
                     // if the current positions are different for P1, P2, we collect the cherry from both positions
-                    if (x2!=x1) dp[x1][y1][x2] += grid[x2-1][y2-1];
+                    if (x2!=x1)
+                        dp[x1][y1][x2] += grid[x2-1][y2-1];
                 }
             }
         }

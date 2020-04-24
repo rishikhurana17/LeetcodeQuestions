@@ -44,5 +44,14 @@ public class ShortestWordDistanceII {
         }
         return ret;
     }
+    public static void main(String []args){
+        String []words = {"practice", "makes", "perfect", "coding", "makes","practice"};
+
+        String word1 = "coding";
+        String word2 = "practice";
+        ShortestWordDistanceII s = new ShortestWordDistanceII(words);
+        System.out.println(s.shortest(word1,word2));
+
+    }
 
 }

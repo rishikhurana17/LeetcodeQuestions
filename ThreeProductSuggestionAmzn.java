@@ -1,11 +1,10 @@
 package LeetcodePrograms;
 import java.util.*;
 
+// Search AutoComplete System.
+// Amzn Question
+// ImplementTrie Data striucte
 public class ThreeProductSuggestionAmzn {
-    // IMPORT LIBRARY PACKAGES NEEDED BY YOUR PROGRAM
-    // SOME CLASSES WITHIN A PACKAGE MAY BE RESTRICTED
-    // DEFINE ANY CLASS AND METHOD NEEDED
-    // CLASS BEGINS, THIS CLASS IS REQUIRED
 
         public class Node {
             Map<Character, Node> children = new HashMap<>();
@@ -78,8 +77,4 @@ public class ThreeProductSuggestionAmzn {
 
             return result;
         }
-        // METHOD SIGNATURE ENDS
-
-
-
     }

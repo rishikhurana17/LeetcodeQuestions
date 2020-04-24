@@ -4,7 +4,6 @@ import java.util.*;
 
 public class ServerAmzn
 {
-    // METHOD SIGNATURE BEGINS, THIS METHOD IS REQUIRED
     int[][] cacheMemory;
     int minimumHours(int rs, int cs, List<List<Integer> > grid)     {
         if(grid == null || grid.size() == 0) return 0;

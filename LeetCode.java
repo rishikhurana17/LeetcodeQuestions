@@ -169,7 +169,7 @@ public class LeetCode {
 
     public int[] twoSum(int[] nums, int target) {
         int[] resultIndex = new int[2];
-        HashMap<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             map.put(nums[i], i);
         }
@@ -1561,7 +1561,7 @@ public class LeetCode {
    Use two pointers the fast and the slow. The fast one goes forward two steps each time, while the slow one goes only
    step each time. They must meet the same item when slow==fast. In fact, they meet in a circle, the duplicate number
   must be the entry point of the circle when visiting the array from nums[0]. Next we just need to find the entry point.
-  We use a point(we can use the fast one before) to visit form begining with one step each time, do the same job to slow.
+  We use a point(we can use the fast one before) to visit form beginning with one step each time, do the same job to slow.
   When fast==slow, they meet at the entry point of the circle. The easy understood code is as follows.*/
     public int findDuplicate4(int[] nums) {
         int slow = 0, fast = 0;
@@ -2345,6 +2345,10 @@ public class LeetCode {
 
     // Q222 Count complete tree nodes Given a complete binary tree, count the number of nodes.
     // #GoogleFavouriteQuestion #Facebook
+    // its taking the advantage of the property of a perfect binary tree. If it is perfect binary tree,
+    // number of nodes will be 2 raised to the power of height - 1
+    // thats why in the solution left and right nodes height is been calculated and compared.
+    // if it is equal then use the above formula else apply the standard formula
     int countNodes(TreeNode root) {
         if (root == null)
             return 0;
@@ -4837,7 +4841,7 @@ public class LeetCode {
         return result.toString();
     }
 
-// Q209 minimum size subarray sum #GoodQuestion
+// Q209 minimum size subarray sum #GoodQuestion #Google
 // Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous subarray of which the sum ≥ s.
 // If there isn't one, return 0 instead.
 // good explanation https://www.youtube.com/watch?v=NKoHjWl2m8Y
@@ -4954,7 +4958,7 @@ public class LeetCode {
         return list;
     }
 
-    // Q221 Maximal square #GoodQuestion  #SecondWayIsBetter
+    // Q221 Maximal square #GoodQuestion  #SecondWayIsBetter  #Google
 // Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
 //    https://www.youtube.com/watch?v=aYnEO53H4lw
     // For example, given the following matrix:
@@ -8047,13 +8051,14 @@ public class LeetCode {
         int T[] = new int[arr.length];
         int actualSolution[] = new int[arr.length];
         for (int i = 0; i < arr.length; i++) {
-            T[i] = 1;
+            T[i] = 1; // since every element itself will be a longeset consecutive sequence. Therefore 1 for all the
+            // positions
             actualSolution[i] = i;
         }
 
         for (int i = 1; i < arr.length; i++) {
             for (int j = 0; j < i; j++) {
-                if (arr[i] > arr[j]) {
+                if (arr[i] > arr[j]) {  // if element at it is greater than element at j meaning there is a subsequence
                     if (T[j] + 1 > T[i]) {
                         T[i] = T[j] + 1;
                         // set the actualSolution to point to guy before me
@@ -8141,7 +8146,15 @@ public class LeetCode {
 // if you just need the minimum number of coins and not the actual coin..use the below method
 // https://www.youtube.com/watch?v=Y0ZqKpToTic&t=235s
     public static int coinChange(int[] coins, int amount) {
-
+//        rows will be up to the total amount from 0 to the amount
+//        column will be the coins
+// now see if you have a certain total, how many number of coins would it take to make that total
+// coins 1,5,6,8 and total is 11
+// then first row will be 1 ,2,3,4,5
+// if amount is less than the coin, value will come from the top
+// if we have two coins like at coin 5 (1 & 5) for amount 5, minimum will be the number coming from the top
+// which is 5 or within the same row (where you are right now), you go number of steps back as that
+// of the count +1 . In this example 5 steps going back
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, amount + 1);
         dp[0] = 0;
@@ -8160,6 +8173,14 @@ public class LeetCode {
 // below solution tells you the number of ways we can achieve that total and not the combination
 // go input of i step back on the same line and sum with the number above that   .. point to remember
 // tushar roy : https://www.youtube.com/watch?v=_fgjrs570YE&t=186s
+
+// Solution: total will be the rows(L->R) and T->B will be the type of coins
+// if we have 1 total and 1 coin how many different ways we can achieve this total
+// if you have 1 coin of 1 and you have a total of 2. there will only 1 way you can get 2 ie. two ones
+// if coin is bigger than the amount then tak the number from top.
+// we have two coins 1 and 2 and how many ways you can form two will be all the ways you can get only using 1 and
+// all the ways you can get using only 2 (for this go two steps back)
+
     public int numberOfSolutions(int total, int coins[]) {
         int temp[][] = new int[coins.length + 1][total + 1];
         for (int i = 0; i <= coins.length; i++) {
@@ -8180,10 +8201,15 @@ public class LeetCode {
     // Subset Sum
     // go to i - 1 (one step above1) and input steps back from the current j value
     // https://www.youtube.com/watch?v=s6FhG--P7z0&t=222s
+
+// Solution
+// if amount value is less than the actual elements, get the value from the top
+//  for this problem, you go one step above and n steps back were n is the coin
+//   value where we are right now. if that is true, you'll make this true
     public boolean subsetSum(int input[], int total) {
         boolean T[][] = new boolean[input.length + 1][total + 1];
         for (int i = 0; i <= input.length; i++) {
-            T[i][0] = true;
+            T[i][0] = true; //if my total is 0, i can make that total by any empty set
         }
 
         for (int i = 1; i <= input.length; i++) {
@@ -8291,16 +8317,21 @@ public class LeetCode {
         return T[str.length][writeIndex];
     }
 
-    // Q10 Expression #TopInterviewQuestion
-    // * matches 0 or more occurances of character before *
-    // . matches any single character
+// Q10 Regular Expression #TopInterviewQuestion
+// https://www.youtube.com/watch?v=l3hda49XcDE
+// * matches 0 or more occurances of character before *
+// . matches any single character
+// i is text and j is pattern
+// T[i][j] = T[i-1][j-1] if str[i]=pat[j] || pat[j] = . // if current indexes are matching, check if the previous
+// strings are completely matching. if yes then copy from [i-1][j-1]
+// = T[i][j-2] if 0 occurance for pat[j] = *
+//
+// = T[i-1][j] if str[i]=pat[j-1] || pat[j-1] == . for pat[j] = *
 
-    // T[i][j] = T[i-1][j-1] if str[i]=pat[j] || pat[j] = .
-    // = T[i][j-2] if 0 occurance for pat[j] = *
-    // = T[i-1][j] if str[i]=pat[j-1] || pat[j-1] == . for pat[j] = *
+// Solution pattern is L->R and text is T -> B
     public boolean matchRegex(char[] text, char[] pattern) {
         boolean T[][] = new boolean[text.length + 1][pattern.length + 1];
-        T[0][0] = true;
+        T[0][0] = true; // if we have an empty string with no pattern that will be true
         // Deals with patterns like a* or a*b* or a*b*c* //these things can be matched with empty text as well
         for (int i = 1; i < T[0].length; i++) {
             if (pattern[i - 1] == '*') {
@@ -8312,7 +8343,7 @@ public class LeetCode {
                 if (pattern[j - 1] == '.' || pattern[j - 1] == text[i - 1]) { // first condition
                     T[i][j] = T[i - 1][j - 1];
                 } else if (pattern[j - 1] == '*') {
-                    T[i][j] = T[i][j - 2];
+                    T[i][j] = T[i][j - 2]; // * meaning it can have 0 occurrence
                     if (pattern[j - 2] == '.' || pattern[j - 2] == text[i - 1]) { // second condition
 
                         T[i][j] = T[i][j] | T[i - 1][j];
@@ -10641,9 +10672,9 @@ public class LeetCode {
     // the one-to-one mapping relationship
     // between the string and the original binary tree.
     // Input: Binary tree: [1,2,3,4]
-    // 1
-    // / \
-    // 2 3
+    //   1
+    //  / \
+    //  2 3
     // /
     // 4
     // Output: "1(2(4))(3)"

@@ -3,7 +3,7 @@ import java.util.*;
 /**
  * Created by rkhurana on 3/3/19.
  */
-//Facebook WeWorkQuestion
+//Facebook WeWorkQuestion Google
 // 560. Subarray Sum Equals K
 // Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum equals to k.
 
@@ -39,7 +39,7 @@ public class SubarraySumEqualsK {
         return result;
     }
     public static void main(String []args){
-        int a[]={1,1,1};
-        System.out.println(subarraySum(a,2));
+        int a[]={1,4,3,-2,3,1};
+        System.out.println(subarraySum(a,5));
     }
 }

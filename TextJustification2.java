@@ -59,7 +59,9 @@ public class TextJustification2 {
             while (s++ < space)
                 sb.append(" ");
         } else {
-            space = (width - len) / count; more = (width - len) % count;
+            space = (width - len) / count; // this is done to put the equal spaces in the line when forming it
+            more = (width - len) % count; // to check if the spaces among the words are uniform. there is a
+            // possibility that there may be 1 space more. In that case we add that while forming a line
             for (int k = i; k < j; k++) {
                 sb.append(words[k]);
                 s = 0;
@@ -79,36 +81,11 @@ public class TextJustification2 {
         result.add(sb.toString());
     }
 
-    public static String textSize(String message , int maxWidth){
-        String []messageArray = message.split(" ");
-        List<String> strinArray= fullJustify(messageArray , maxWidth);
-        String finalString =null;
-        int maxlength =0 ;
-        for(int i = 0 ; i < strinArray.size() ; i++){
-            String str = strinArray.get(i);
-            StringBuilder sb = new StringBuilder();
-            int space = 0 ;
-            for(int j = 0 ; j < str.length() ; j++){
-                char ch = str.charAt(j);
-                if(ch == ' '){
-                    if(space == 0) {
-                        sb.append(" ");
-                        space++;
-                    }
-                }
-                else{
-                    sb.append(str.charAt(j));
-                }
-            }
-
-            if(sb.toString().length() > maxlength) {
-                maxlength = str.length();
-                finalString = str;
-            }
-        }
-        return finalString;
+    public static void main(String []args){
+        String [] words = {"This", "is", "an", "example", "of", "text", "justification."};
+        String []words1 = {"What","must","be","acknowledgment","shall","be"};
+        int maxWidth = 16;
+        System.out.println(fullJustify(words,16));
     }
-
-
 
 }

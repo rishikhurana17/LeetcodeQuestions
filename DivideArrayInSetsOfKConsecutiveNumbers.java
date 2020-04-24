@@ -5,26 +5,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-
 // https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/
-// #Salesforce
-//Given an array of integers nums and a positive integer k, find whether it's possible to divide this array into sets of k consecutive numbers
+// #Salesforce  #OnsiteInterview
+// 1296 Given an array of integers nums and a positive integer k, find whether it's possible to divide this array into
+// sets of k consecutive numbers
 //        Return True if its possible otherwise return False.
-//
-//
-//
 //        Example 1:
 //
 //        Input: nums = [1,2,3,3,4,4,5,6], k = 4
 //        Output: true
 //        Explanation: Array can be divided into [1,2,3,4] and [3,4,5,6].
-public class PossibleDivide {
+
+public class DivideArrayInSetsOfKConsecutiveNumbers {
 
     // firstIndex = element fetched from the arraylist .. elements can be deleted
     // secondIndex = location in which element is to be added in the templist
 
     public static boolean findPossibleDivide(List<Integer> nums  , int k){
-        Map<Integer, Integer> map = new TreeMap<>();
+        Map<Integer, Integer> map = new TreeMap<>(); // could be hashmap
         if(nums.size()%k != 0)
             return false;
 
@@ -46,8 +44,7 @@ public class PossibleDivide {
                     secondIndex++;
                     prevElement = element;
 
-                }else if (
-                        (element- prevElement) == 1) {
+                }else if ((element- prevElement) == 1) {
                     tempList.add(nums.get(firstIndex));
                     map.put(element , map.get(element) - 1 );
                     if(map.get(element)== 0 )

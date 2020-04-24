@@ -17,7 +17,7 @@ public class TopNCompetitors {
         List<String> competitors,
         int numReviews,
         List<String> reviews)
-{
+    {
     if (Objects.isNull(reviews) || reviews.isEmpty()
             || Objects.isNull(competitors) || competitors.isEmpty()
             || numReviews < 1 || numCompetitors < 1)

@@ -2,9 +2,10 @@ package LeetcodePrograms;
 
 import java.util.*;
 //https://www.geeksforgeeks.org/rearrange-characters-string-no-two-adjacent/
-
+// not working solution
 /**
  * Created by rkhurana on 3/19/19.
+ * Rearrange characters in a string such that no two adjacent are same
  */
 public class TransformString {
     public void transformString(String str){
