@@ -37,7 +37,7 @@ public class ImplementPow {
     }
     public static void main(String []args){
 //        System.out.println(isPowerOfTwo(8));
-        System.out.println(myPow(7,3));
+        System.out.println(myPow(5,3));
 //        System.out.println(myPow(7,2));
 //        System.out.println(myPow(9,3));
     }

@@ -22,7 +22,7 @@ public class ShortestSubarrayWithSumAtleastK {
         for (int i = 0; i < N + 1; i++) {
             while (d.size() > 0 && B[i] - B[d.getFirst()] >=  K)
                 res = Math.min(res, i - d.pollFirst());
-            while (d.size() > 0 && B[i] <= B[d.getLast()])
+            while (d.size() > 0 && B[i] <= B[d.getLast()]) // keep the elements increasing
                 d.pollLast();
             d.addLast(i);
         }

@@ -17,6 +17,8 @@ public class PriorityQueueExample {
             }
         });
 
+
+
         for (Integer i : arr) {
             pq.offer(i);
             if (pq.size() > k)

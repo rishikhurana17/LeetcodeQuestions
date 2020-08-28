@@ -24,7 +24,7 @@ public class StringTransformsIntoAnotherString {
                 return false;
             dp.put(s1.charAt(i), s2.charAt(i));
         }
-        return new HashSet<Character>(dp.values()).size() < 26;
+        return new HashSet<>(dp.values()).size() < 26;
 //        return true;
 // the above line cannot be directly used because
 // when we say the hashset value should be less than 26 that means , there should be one temp variable to which
@@ -35,13 +35,13 @@ public class StringTransformsIntoAnotherString {
 // str 1 becomes aa..and if now a is changed to b, final string becomes aa
 // which we are not looking
 // so here first we are transforming b to c making str1 as ac
-// and then transformin a to b and c to a one by one
+// and then transforming a to b and c to a one by one
 // thus you need one extra character for temporary swapping and thatswhy
 // during the return size of hashset is been checked
     }
     public static void main(String [] args){
-        String str1 = "abcdefghijklmnopqrstuvwxyz", str2 = "bcdefghijklmnopqrstuvwxyza";
-        System.out.println(isHomomorphicII(str1,str2));
+        String str1 = "aabcc", str2 = "ccdee";
+        System.out.println(canConvert(str1,str2));
     }
 
     //did not understand completely the below commented logic
@@ -82,37 +82,9 @@ public class StringTransformsIntoAnotherString {
         if (uniq_count < 26)
             return true;
 
-
         // at this point we don't have any characters available for swap space
         // so if even a single circular dependency exists then the strings
         // cannot be converted from one to the other using the global replaceAll
-
-
-        // dont know why the below commented part is getting used. Directly returning the false will also give the
-        // right solution
-//        for (int i = 0; i < 26; i++) {
-//            visited[i] = false;
-//        }
-//        for (int i = 0; i < length; i++) {
-//            int sc = s.charAt(i) - 'a';
-//            if (!visited[sc]) {
-//                visited[sc] = true;
-//                // use fast and slow pointers
-//                int slow = sc, fast = sc;
-//                while (true) {
-//                    slow = mapping[slow];
-//                    if ((fast = mapping[fast]) == -1) break;
-//                    visited[fast] = true;
-//                    if ((fast = mapping[fast]) == -1) break;
-//                    visited[fast] = true;
-//                    // if fast == slow then a cycle was detected, and there aren't any swap characters available so fail
-//                    if (fast == slow)
-//                        return false;
-//                }
-//            }
-//        }
-//        // if we made it this far, they are homomorphic and s can be transformed to t
-//        return true;
 
         return false;
 

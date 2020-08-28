@@ -22,6 +22,7 @@ public class ValidateStackSequences {
         }
         return stack.empty();
     }
+
     // only to have with no using stack solution
     public static boolean validateStackSequences2(int[] pushed, int[] popped) {
         if (pushed.length < 3) {

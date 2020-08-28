@@ -66,4 +66,10 @@ public boolean confusingNumber2(int N) {
 
         return rotated != N;
     }
+
+    public static void main(String []args){
+        ConfusingNumber CN = new ConfusingNumber();
+        int n = 8;
+        System.out.println(CN.confusingNumber3(n));
+    }
 }

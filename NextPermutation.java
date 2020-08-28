@@ -1,5 +1,6 @@
 package LeetcodePrograms;
 
+// time complexity O(n) space O(1)
 public class NextPermutation {
     // Q31 next permutation ... #GoodQuestion
     // [6，3，4，9，8，7，1]
@@ -22,7 +23,10 @@ public class NextPermutation {
         }
         if (i != 0) {
             swap(nums, i - 1); // if the number exist,which means that the nums  not like{5,4,3,2,1}
+            // After the above swap, array will be 6,3,7,9,8,4,1    // 7 and 4 are swapped
         }
+
+        // now on the below line we have 7 at the right position, so swap all the elements after that
         reverse(nums, i);
     }
 

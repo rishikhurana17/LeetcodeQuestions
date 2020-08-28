@@ -47,7 +47,8 @@ public List<TreeNode> delNodesNonRecursive(TreeNode root, int[] to_delete) {
         return new ArrayList<>(resSet);
 
     Set<Integer> toDelete = new HashSet<>();
-    for (int val : to_delete) toDelete.add(val);
+    for (int val : to_delete)
+        toDelete.add(val);
 
     Queue<TreeNode> q = new LinkedList<>();
     q.offer(root);
@@ -55,16 +56,20 @@ public List<TreeNode> delNodesNonRecursive(TreeNode root, int[] to_delete) {
         TreeNode node = q.poll();
         if (toDelete.contains(node.val)) {
             resSet.remove(node);
-            if (node.left != null) resSet.add(node.left);
-            if (node.right != null) resSet.add(node.right);
+            if (node.left != null)
+                resSet.add(node.left);
+            if (node.right != null)
+                resSet.add(node.right);
         }
         if (node.left != null) {
             q.offer(node.left);
-            if (toDelete.contains(node.left.val)) node.left = null;
+            if (toDelete.contains(node.left.val))
+                node.left = null;
         }
         if (node.right != null) {
             q.offer(node.right);
-            if (toDelete.contains(node.right.val)) node.right = null;
+            if (toDelete.contains(node.right.val))
+                node.right = null;
         }
     }
     return new ArrayList<>(resSet);

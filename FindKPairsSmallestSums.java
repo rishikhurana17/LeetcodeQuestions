@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
-
 public class FindKPairsSmallestSums {
     public  List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         PriorityQueue<int[]> que = new PriorityQueue<>((a, b) -> a[0] + a[1] - b[0] - b[1]);

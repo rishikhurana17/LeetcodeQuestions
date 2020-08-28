@@ -9,11 +9,8 @@ public class LeetcodeExtraShots {
     //1007. Minimum Domino Rotations For Equal Row
     //    In a row of dominoes, A[i] and B[i] represent the top and bottom halves of the i-th domino.  (A domino is a tile
     //    with two numbers from 1 to 6 - one on each half of the tile.)
-    //
     //    We may rotate the i-th domino, so that A[i] and B[i] swap values.
-    //
     //    Return the minimum number of rotations so that all the values in A are the same, or all the values in B are the same.
-    //
     //    If it cannot be done, return -1.
 
     public int minDominoRotations(int[] A, int[] B) {
@@ -46,6 +43,148 @@ public class LeetcodeExtraShots {
         return Math.min(countBot, countTop);
     }
 
+    /**
+     * @author Rishi Khurana
+     * 1056. Confusing Number
+     * Given a number N, return true if and only if it is a confusing number, which satisfies the following condition:
+     *
+     * We can rotate digits by 180 degrees to form new digits. When 0, 1, 6, 8, 9 are rotated 180 degrees, they become 0,
+     * 1, 9, 8, 6 respectively. When 2, 3, 4, 5 and 7 are rotated 180 degrees, they become invalid. A confusing number is
+     * a number that when rotated 180 degrees becomes a different number with each digit valid.
+     */
+    public boolean confusingNumber3(int N) {
+    int[] rotate = {0, 1, -1, -1, -1, -1, 9, -1, 8, 6};
+    int num = N;
+    int rotated = 0;
+
+    while (num > 0) {
+    int d = num % 10;
+    if (rotate[d] < 0)
+    return false;
+    rotated = rotated * 10 + rotate[d];
+    num /= 10;
+    }
+    return rotated != N;
+    }
+//    or
+    public boolean confusingNumber2(int N) {
+    Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+    map.put(6, 9);
+    map.put(9, 6);
+    map.put(0, 0);
+    map.put(1, 1);
+    map.put(8, 8);
+    int newNum = 0;
+    int x = N;
+    while (x != 0) {
+        int remainder = x % 10;
+        if (!map.containsKey(remainder))
+            return false;
+        if(newNum > Integer.MAX_VALUE/10)
+            return false;
+        newNum = newNum * 10 + map.get(remainder);
+        x /= 10;
+    }
+    return N == newNum? false: true;
+}
+
+    /**
+     *
+     *  1088. Confusing Number II
+     * We can rotate digits by 180 degrees to form new digits. When 0, 1, 6, 8, 9 are rotated 180 degrees, they become 0,
+     * 1, 9, 8, 6 respectively. When 2, 3, 4, 5 and 7 are rotated 180 degrees, they become invalid.
+     *
+     * A confusing number is a number that when rotated 180 degrees becomes a different number with each digit valid.
+     * (Note that the rotated number can be greater than the original number.)
+     *
+     * Given a positive integer N, return the number of confusing numbers between 1 and N inclusive.
+     *
+     */
+// second solution is better
+// basically the same idea. However, we generate numbers in the natural order, so we can pause when it reaches N.
+
+        Map<Integer, Integer> map = new HashMap<>();
+        int res = 0;
+        public int confusingNumberII(int N) {
+            map.put(0, 0);
+            map.put(1, 1);
+            map.put(6, 9);
+            map.put(8, 8);
+            map.put(9, 6);
+            helper(N, 0);
+            return res;
+        }
+        private void helper(int N, long cur) {
+            if (isConfusingNumber(cur)) {
+                res++;
+            }
+            for (Integer i : map.keySet()) {
+                if (cur * 10 + i <= N && cur * 10 + i != 0) {
+                    helper(N, cur * 10 + i);
+                }
+            }
+        }
+        private boolean isConfusingNumber(long n) {
+            long src = n;
+            long res = 0;
+            while (n > 0) {
+                res = res * 10 + map.get((int) n % 10);
+                n /= 10;
+            }
+            return res != src;
+        }
+
+        // -------------------------
+
+        int[] digits = new int[]{0, 1, 6, 8, 9};
+        int[] rotate = new int[]{0, 1, -1, -1, -1, -1, 9, -1, 8, 6};
+
+        public int confusingNumberIIIterative(int N) {
+            int res = 0;
+
+            List<Integer> list = new ArrayList<>();
+            list.add(0);
+
+            boolean found = false;
+
+            while (!found) {
+                List<Integer> tmp = new ArrayList<>();
+                for (Integer n : list) {
+
+                    for (int i = 0; i < 5; i++) {
+                        int nn = n * 10 + digits[i];
+
+                        if (nn > N) {
+                            found = true;
+                            break;
+                        }
+                        if (nn != 0) {
+                            tmp.add(nn);
+                        }
+                        if (isConfusing(nn)) {
+                            res++;
+                        }
+                    }
+                    if (found) {
+                        break;
+                    }
+                }
+                list = tmp;
+            }
+
+            return res;
+        }
+
+        private boolean isConfusing(int num) {
+            int tmp = num;
+            int rot = 0;
+            while (tmp > 0) {
+                int d = tmp % 10;
+                rot = rot * 10 + rotate[d];
+                tmp /= 10;
+            }
+            return rot != num;
+        }
 
     /* 809. Expressive Words
      *
@@ -119,9 +258,140 @@ public class LeetcodeExtraShots {
         }
     }
 
+
+//    1231. Divide Chocolate
+//    You have one chocolate bar that consists of some chunks. Each chunk has its own sweetness given by the array sweetness.
+//    You want to share the chocolate with your K friends so you start cutting the chocolate bar into K+1 pieces using K cuts,
+//    each piece consists of some consecutive chunks.
+//    Being generous, you will eat the piece with the minimum total sweetness and give the other pieces to your friends.
+//    Find the maximum total sweetness of the piece you can get by cutting the chocolate bar optimally.
+//            Example 1:
+//
+//    Input: sweetness = [1,2,3,4,5,6,7,8,9], K = 5
+//    Output: 6
+//    Explanation: You can divide the chocolate to [1,2,3], [4,5], [6], [7], [8], [9]
+
+// second solution is better
+public int maximizeSweetness(int[] sweetness, int K) {
+    K=K+1; // Include yourself.
+    int lo = getMin(sweetness);
+    int hi = getSum(sweetness);
+    while (lo < hi) {
+        int mid = (lo + hi + 1) / 2; // +1 is basically to target the high if difference is 1
+        if (split2(sweetness, mid) < K) {
+            hi = mid - 1;
+        } else {
+            lo = mid; // we have already reached the target, we might have to have the right amount
+        }
+    }
+    return lo;
+}
+
+    private int split2(int[] arr, int minSweetness) {
+        int peopleCount = 0;
+        int sweetness = 0;
+        for (int val : arr) {
+            sweetness += val;
+            if (sweetness >= minSweetness) {
+                peopleCount++;
+                sweetness = 0;
+            }
+        }
+        return peopleCount;
+    }
+
+    private int getMin(int[] arr) {
+        int min = Integer.MAX_VALUE;
+        for (int val : arr) {
+            min = Math.min(min, val);
+        }
+        return min;
+    }
+
+    private int getSum(int[] arr) {
+        int sum = 0;
+        for (int val : arr) {
+            sum += val;
+        }
+        return sum;
+    }
+// or
+    public int maximizeSweetness2(int[] sweetness, int K) {
+        int low = getMin(sweetness);
+        int high = getSum(sweetness);
+        while(low < high) {
+            int mid = low + (high - low + 1) / 2; // between lo and hi if difference is 1 return high
+            int slice = 0;
+            int sum = 0;
+            for(int s : sweetness) {
+                sum += s;
+                if(sum >= mid) {
+                    sum = 0;
+                    slice++;
+                    if(slice > K)
+                        break;
+                }
+            }
+            if(slice > K) {
+                low = mid;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return low;
+    }
+
+//    951. Flip Equivalent Binary Trees
+//    For a binary tree T, we can define a flip operation as follows: choose any node, and swap the left and right child subtrees.
+//
+//    A binary tree X is flip equivalent to a binary tree Y if and only if we can make X equal to Y after some number of flip
+//    operations. Write a function that determines whether two binary trees are flip equivalent.  The trees are given
+//    by root nodes root1 and root2.
+
+    public boolean flipEquiv(TreeNode root1, TreeNode root2) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root1);
+        queue.offer(root2);
+        while (!queue.isEmpty()) {
+            TreeNode curr1 = queue.poll();
+            TreeNode curr2 = queue.poll();
+
+            if (curr1 == null && curr2 == null) {
+                continue;
+            }
+            if (!isEquals(curr1, curr2)) {
+                return false;
+            }
+            if (isEquals(curr1.left, curr2.left) && isEquals(curr1.right, curr2.right)) {
+                queue.offer(curr1.left);
+                queue.offer(curr2.left);
+                queue.offer(curr1.right);
+                queue.offer(curr2.right);
+            } else if (isEquals(curr1.left, curr2.right) && isEquals(curr1.right, curr2.left)) {
+                queue.offer(curr1.left);
+                queue.offer(curr2.right);
+                queue.offer(curr1.right);
+                queue.offer(curr2.left);
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isEquals(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null) {
+            return true;
+        } else if (root1 != null && root2 != null && root1.val == root2.val) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // * 659. Split Array into Consecutive Subsequences
     // * Given an array nums sorted in ascending order, return true if and only if you can split it into 1 or more
-    // * subsequences such that each subsequence consists of consecutive integers and has length at least 3
+    // * subsequences such that each subsequence consists of consecutive integers and has length atleast 3
     //            * Input: [1,2,3,3,4,5]
     //            * Output: True
     // * Explanation:
@@ -131,7 +401,7 @@ public class LeetcodeExtraShots {
 
     //first (below) way is better
     //    https://www.youtube.com/watch?v=uJ8BAQ8lASE
-    // this method is better...  explanation in the abvoe link
+    // this method is better...  explanation in the abovex link
     // Solution
     // an incoming number will first try to see if it can be inserted into the existing the subsequence
     // before it tries to create one
@@ -334,6 +604,8 @@ public class LeetcodeExtraShots {
     //  Input: secret = "1807", guess = "7810"
     //  Output: "1A3B"
     //  Explanation: 1 bull and 3 cows. The bull is 8, the cows are 0, 1 and 7.
+
+    //first method is better
     public static String getHint(String secret, String guess) {
         int bulls = 0;
         int[] nums1 = new int[10];
@@ -526,7 +798,7 @@ public class LeetcodeExtraShots {
         //   cannot be converted from one to the other using the global replaceAll
         // for exampple str1 = "ab" str2 = "ba"
         // now if in the first iteration b is changed to a in str 1
-        // str 1 becomes aa..and if now a is changed to b, final string becomes aa
+        // str 1 becomes aa..and if now a is changed to b, final string becomes bb
         // which we are not looking
         // so here first we are transforming b to c making str1 as ac
         // and then transformin a to b and c to a one by one
@@ -667,11 +939,14 @@ public class LeetcodeExtraShots {
     }
 
     //  1055. Shortest Way to Form String
-    //  From any string, we can form a subsequence of that string by deleting some number of characters (possibly no
+//  From any string, we can form a subsequence of that string by deleting some number of characters (possibly no
     //  deletions).
     //  Given two strings source and target, return the minimum number of subsequences of source such that their
     //  concatenation equals target. If the task is impossible, return -1.
-    //
+    // Example 1:
+    // Input: source = "abc", target = "abcbc"
+    // Output: 2
+    // Explanation: The target "abcbc" can be formed by "abc" and "bc", which are subsequences of source "abc".
 
     //Accepted Solution
     public static int shortestWay(String source, String target) {
@@ -689,7 +964,6 @@ public class LeetcodeExtraShots {
                 return -1;
             } else if (jTarget >= target.length())
                 return count;
-
             else if (iSource >= source.length()) {
                 //reinnitialise iSource to 0
                 iSource = 0;
@@ -843,6 +1117,117 @@ public class LeetcodeExtraShots {
             }
         }
     }
+
+    // 679. 24 Game
+    // You have 4 cards each containing a number from 1 to 9. You need to judge whether they could operated through
+    // *, /, +, -, (, ) to get the value of 24.
+    // this method only tells true or false. What if we need the comeplete expression ?
+        public boolean judgePoint24(int[] nums) {
+            List<Double> list = new ArrayList<>();
+            for (int i : nums) {
+                list.add((double) i);
+            }
+            return dfs(list);
+        }
+
+        private boolean dfs(List<Double> list) {
+            if (list.size() == 1) {
+                if (Math.abs(list.get(0)- 24.0) < 0.001) {
+                    return true;
+                }
+                return false;
+            }
+
+            for(int i = 0; i < list.size(); i++) {
+                for(int j = i + 1; j < list.size(); j++) {
+                    for (double c : generatePossibleResults(list.get(i), list.get(j))) {
+                        List<Double> nextRound = new ArrayList<>();
+                        nextRound.add(c);
+                        for(int k = 0; k < list.size(); k++) {
+                            if(k == j || k == i)
+                                continue;
+                            nextRound.add(list.get(k));
+                        }
+                        if(dfs(nextRound))
+                            return true;
+                    }
+                }
+            }
+            return false;
+
+        }
+        private List<Double> generatePossibleResults(double a, double b) {
+            List<Double> res = new ArrayList<>();
+            res.add(a + b);
+            res.add(a - b);
+            res.add(b - a);
+            res.add(a * b);
+            res.add(a / b);
+            res.add(b / a);
+            return res;
+        }
+
+    /**
+     * 221. Maximal Square
+     * Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+     */
+    public static int maximalSquare(char[][] a) {
+        if (a.length == 0)
+            return 0;
+        int m = a.length, n = a[0].length, result = 0;
+        int[][] b = new int[m + 1][n + 1];
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (a[i - 1][j - 1] == '1') {
+                    // minimum of all the three (i,j-1),(i-1,j-1),(i-1,j) + 1
+                    b[i][j] = Math.min(Math.min(b[i][j - 1], b[i - 1][j - 1]), b[i - 1][j]) + 1;
+                    result = Math.max(b[i][j], result); // update result
+                }
+            }
+        }
+        return result * result;
+    }
+
+    /**
+     * 1146. Snapshot Array
+     *
+     * SnapshotArray(int length) initializes an array-like data structure with the given length.  Initially, each element
+     * equals 0.
+     * void set(index, val) sets the element at the given index to be equal to val.
+     * int snap() takes a snapshot of the array and returns the snap_id: the total number of times we called snap() minus 1.
+     * int get(index, snap_id) returns the value at the given index, at the time we took the snapshot with the given snap_id
+     *
+     * Time O(logS)
+     * Space O(S)
+     * where S is the number of set called.
+     *
+     * SnapshotArray(int length) is O(N) time
+     * set(int index, int val) is O(1) in Python and O(logSnap) in Java
+     * snap() is O(1)
+     * get(int index, int snap_id) is O(logSnap)
+     *
+     */
+     TreeMap<Integer, Integer>[] A; // treemap array with key as snap id and value as value
+     int snap_id = 0;
+     public void SnapshotArrayConstruct(int length) {
+         A = new TreeMap[length];
+         for (int i = 0; i < length; i++) {
+             A[i] = new TreeMap<Integer, Integer>(); // treemap of snapId and value
+             A[i].put(0, 0);
+         }
+     }
+
+     public void set(int index, int val) {
+         A[index].put(snap_id, val);
+     }
+
+     public int snap() {
+         return snap_id++;
+     }
+
+     public int get(int index, int snap_id) {
+         return A[index].floorEntry(snap_id).getValue();
+     }
 
     //  1057. Campus Bikes
     // On a campus represented as a 2D grid, there are N workers and M bikes, with N <= M. Each worker and bike is a 2D
@@ -1038,7 +1423,6 @@ public class LeetcodeExtraShots {
     }
 
     /**
-     * @author Rishi Khurana
      * 1048. Longest String Chain
      * Given a list of words, each word consists of English lowercase letters.
      * Let's say word1 is a predecessor of word2 if and only if we can add exactly one letter anywhere in word1 to make
@@ -1069,7 +1453,6 @@ public class LeetcodeExtraShots {
     }
 
     /**
-     * @author Rishi Khurana
      * Two images A and B are given, represented as binary, square matrices of the same size.  (A binary matrix has only
      * 0s and 1s as values.)
      * We translate one image however we choose (sliding it left, right, up, or down any number of units), and place it
@@ -1276,7 +1659,6 @@ public class LeetcodeExtraShots {
     }
 
     /**
-     * @author Rishi Khurana
      * 743. Network Delay Time
      * There are N network nodes, labelled 1 to N.
      * Given times, a list of travel times as directed edges times[i] = (u, v, w), where u is the source node, v is the
@@ -1505,6 +1887,69 @@ public class LeetcodeExtraShots {
             }
         }
         return res;
+    }
+
+    /**
+     * 752. Open the Lock
+     * You have a lock in front of you with 4 circular wheels. Each wheel has 10 slots: '0', '1', '2', '3', '4', '5',
+     * '6', '7', '8', '9'. The wheels can rotate freely and wrap around: for example we can turn '9' to be '0', or '0' to
+     * be '9'. Each move consists of turning one wheel one slot.
+     *
+     * The lock initially starts at '0000', a string representing the state of the 4 wheels.
+     *
+     * You are given a list of deadends dead ends, meaning if the lock displays any of these codes, the wheels of the
+     * lock will stop turning and you will be unable to open it.
+     *
+     * Given a target representing the value of the wheels that will unlock the lock, return the minimum total number of
+     * turns required to open the lock, or -1 if it is impossible.
+     */
+
+    public static int openLock3(String[] deadends, String target) {
+        //bfs initial  is 0000
+        //each time go from 0 to next 1 or 9
+        //check if visited and locked combination, skip and continue
+        //record levels
+        Set<String> visited = new HashSet<>();
+        Set<String> locked = new HashSet<>(Arrays.asList(deadends));
+
+        visited.add("0000");
+        Queue<String> qu = new LinkedList<>();
+        qu.add("0000");
+        int level = 0;
+        while (!qu.isEmpty()) {
+            int size = qu.size();
+            // level++;
+            for (int i = 0; i < size; i++) {
+                String prev = qu.poll();
+                if (locked.contains(prev))
+                    continue;
+                if (target.equals(prev))
+                    return level;
+
+                List<String> nt = getNext(prev);
+                for (String next : nt) {
+                    if (visited.contains(next) || locked.contains(next))
+                        continue;
+                    qu.offer(next);
+                    visited.add(next);
+                }
+            }
+            level++;
+        }
+
+        return -1;
+    }
+
+    private static List<String> getNext(String prev) {
+        List<String> nt = new ArrayList<>();
+        for (int i = 0; i < prev.length(); i++) {
+            int wheel = prev.charAt(i) - '0';
+            nt.add(prev.substring(0, i) + String.valueOf((10 + wheel + 1) % 10) +
+                    prev.substring(i+1));
+            nt.add(prev.substring(0, i) + String.valueOf((10 + wheel - 1) % 10) +
+                    prev.substring(i+1));
+        }
+        return nt;
     }
 
     /**
@@ -2084,6 +2529,74 @@ public class LeetcodeExtraShots {
          }
         return dp[m][n];
     }
+
+    /**
+     * 1110. Delete Nodes And Return Forest
+     * Given the root of a binary tree, each node in the tree has a distinct value.
+     * After deleting all nodes with a value in to_delete, we are left with a forest (a disjoint union of trees).
+     * Return the roots of the trees in the remaining forest.  You may return the result in any order.
+     */
+
+    // iterative solution is better
+        // Recursive Method
+        Set<Integer> to_delete_set;
+        List<TreeNode> res1;
+        public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+            to_delete_set = new HashSet<>();
+            res1 = new ArrayList<>();
+            for (int i : to_delete)
+                to_delete_set.add(i);
+            helper(root, true);
+            return res1;
+        }
+
+        private TreeNode helper(TreeNode node, boolean is_root) {
+            if (node == null) return null;
+            boolean deleted = to_delete_set.contains(node.val);
+            if (is_root && !deleted)
+                res1.add(node);
+            node.left = helper(node.left, deleted);
+            node.right =  helper(node.right, deleted);
+            return deleted ? null : node;
+        }
+
+        // Non Recursive method
+        public List<TreeNode> delNodesNonRecursive(TreeNode root, int[] to_delete) {
+            if (root == null)
+                return new ArrayList<>();
+
+            Set<TreeNode> resSet = new HashSet<>();
+            resSet.add(root);
+            if (to_delete.length == 0)
+                return new ArrayList<>(resSet);
+
+            Set<Integer> toDelete = new HashSet<>();
+            for (int val : to_delete) toDelete.add(val);
+
+            Queue<TreeNode> q = new LinkedList<>();
+            q.offer(root);
+            while (!q.isEmpty()) {
+                TreeNode node = q.poll();
+                if (toDelete.contains(node.val)) {
+                    resSet.remove(node);
+                    if (node.left != null)
+                        resSet.add(node.left);
+                    if (node.right != null)
+                        resSet.add(node.right);
+                }
+                if (node.left != null) {
+                    q.offer(node.left);
+                    if (toDelete.contains(node.left.val))
+                        node.left = null;
+                }
+                if (node.right != null) {
+                    q.offer(node.right);
+                    if (toDelete.contains(node.right.val))
+                        node.right = null;
+                }
+            }
+            return new ArrayList<>(resSet);
+        }
 }
 
 

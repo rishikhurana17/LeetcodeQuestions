@@ -31,19 +31,37 @@ public class LongestSubstringWithoutRepeatingCharacters {
     }
 
     //below method will take O(n) complexity
-    public int lengthOfLongestSubstring2(String s) {
-        if (s.length()==0) return 0;
+    public static List<String> lengthOfLongestSubstring2(String s) {
+        List<String> maxLengthString = new ArrayList<>();
+        if (s.length()==0) return null;
         HashMap<Character, Integer> map = new HashMap<Character, Integer>();
         int max=0;
         for (int i=0, j=0; i<s.length(); ++i){
             if (map.containsKey(s.charAt(i))){
-                j = Math.max(j,map.get(s.charAt(i))+1);
+                j = Math.max(j,map.get(s.charAt(i))+1); // j is the point from where the next string will start
             }
             map.put(s.charAt(i),i);
+
+            // for storing the biggest string
+            if(i-j+1 > max){
+                maxLengthString.clear();
+                maxLengthString.add(s.substring(j,i+1));
+            }
+            if(i-j+1 == max){
+                //maxLengthString.clear();
+                maxLengthString.add(s.substring(j,i+1));
+            }
+
             max = Math.max(max,i-j+1);
+            System.out.println("max string " + s.substring(j,i+1));
         }
-        return max;
+        return maxLengthString;
     }
+
+    public static void main(String [] args){
+        System.out.println(lengthOfLongestSubstring2("abcabcdba"));
+    }
+
 
     //	can do the above same thing using ascii solution
     public int lengthOfLongestSubstring3(String s) {
@@ -79,9 +97,6 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
     }
 
-    public static void main(String [] args){
-        System.out.println(LongestContinousSubstring2("abcabcdbb"));
-    }
 
     public static String LongestContinousSubstring2(String str){
         int low = 0 ;

@@ -58,6 +58,6 @@ public class KthLargestElement {
     public static void main(String []args) {
         int []nums = {3,2,1,5,6,8,10 ,4,7,9};
         int []nums2 = {3,2,3,1,2,4,5,5,};
-        System.out.println(findKthLargest(nums , 7));
+        System.out.println(findKthLargest(nums , 3));
     }
 }

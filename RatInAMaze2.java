@@ -2,6 +2,7 @@ package LeetcodePrograms;
 
 /**
  * Created by rkhurana on 1/19/19.
+ * second solution gives you the path as well as the directions via numbers
  */
 public class RatInAMaze2 {
     final int N = 4;
@@ -11,8 +12,7 @@ public class RatInAMaze2 {
     void printSolution(int sol[][]) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++)
-                System.out.print(" " + sol[i][j] +
-                        " ");
+                System.out.print(" " + sol[i][j] + " ");
             System.out.println();
         }
     }
@@ -74,11 +74,40 @@ public class RatInAMaze2 {
     public static void main(String args[])
     {
         RatInAMaze2 rat = new RatInAMaze2();
-        int maze[][] = {{1, 0, 0, 1},
-                {1, 1, 0, 1},
-                {1, 1, 0, 0},
-                {0, 1, 1, 1}
+        int maze[][] = {  {1, 0, 0, 1},
+                          {1, 1, 0, 1},
+                          {1, 1, 0, 0},
+                          {1, 1, 1, 1}
         };
-        rat.solveMaze(maze);
+        rat.rateInAMaze(maze , maze.length);
     }
+
+// second solution
+    public void mazeHelp(int maze [][] , int n,int solution[][],int x , int y , int move ){
+        if(x == n - 1 && y == n-1){
+            solution[x][y]  = move+1;
+            printSolution(solution);
+            System.out.println("solution finished");
+        }
+
+        if(x>= n || x <0 || y>=n || y<0 || solution[x][y]>= 1 || maze[x][y]==0){
+            return;
+        }
+            move++;
+        solution[x][y]=move;
+        mazeHelp(maze , n , solution , x-1, y , move);
+        mazeHelp(maze , n , solution , x+1, y , move );
+        mazeHelp(maze , n , solution , x, y - 1 , move );
+        mazeHelp(maze , n , solution , x, y + 1, move );
+        move--;
+        solution[x][y]=0;
+    }
+
+    public void rateInAMaze(int maze[][], int n){
+        int move  = 0;
+        int solution [][] = new int[n][n];
+        mazeHelp(maze,n,solution , 0 , 0 , move );
+    }
+
+
 }

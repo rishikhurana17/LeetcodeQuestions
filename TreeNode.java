@@ -7,7 +7,7 @@ public class TreeNode {
 	public TreeNode next;
 	public int val;
 
-	TreeNode(int x) {
+	public TreeNode(int x) {
 		val = x;
 	}
 }

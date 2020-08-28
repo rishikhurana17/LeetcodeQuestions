@@ -13,6 +13,15 @@ import java.util.TreeMap;
  * int snap() takes a snapshot of the array and returns the snap_id: the total number of times we called snap() minus 1.
  * int get(index, snap_id) returns the value at the given index, at the time we took the snapshot with the given snap_id
  *
+ * Time O(logS)
+ * Space O(S)
+ * where S is the number of set called.
+ *
+ * SnapshotArray(int length) is O(N) time
+ * set(int index, int val) is O(1) in Python and O(logSnap) in Java
+ * snap() is O(1)
+ * get(int index, int snap_id) is O(logSnap)
+ *
  */
 public class SnapshotArray {
     TreeMap<Integer, Integer>[] A; // treemap array with key as snap id and value as value

@@ -4,10 +4,13 @@ import java.util.Stack;
 
 /**
  * Created by rkhurana on 10/21/18.
+ * 32. Longest Valid Parenthesis
+ * Given a string containing just the characters '(' and ')', find the
+ * length of the longest valid (well-formed) parentheses substring.
  */
 public class LongestValidParenthesis {
     public static int longestValidParentheses2(String s) {
-        Stack<Integer> stack = new Stack<Integer>();
+        Stack<Integer> stack = new Stack<>();
         int max=0;
         int left = -1;
         for(int j=0;j<s.length();j++){
@@ -30,6 +33,6 @@ public class LongestValidParenthesis {
 
 
     public static void main(String []args){
-        System.out.println(longestValidParentheses2("(()"));
+        System.out.println(longestValidParentheses2(")(())"));
     }
 }

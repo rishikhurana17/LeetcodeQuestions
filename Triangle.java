@@ -25,32 +25,32 @@ public class Triangle {
 //        return result.get(0);
 //    }
 
-//    public static int minimumTotal2(List<List<Integer>> triangle) {
-//        Deque<Integer> queue = new LinkedList<Integer>();
-//        int count=triangle.size();
-//        queue.add(triangle.get(0).get(0));
-//        for (int i=1;i<count;i++){
-//            List<Integer> list= triangle.get(i);
-//            for (int j=0;j<=i;j++){
-//                int min=0;
-//                if (j==0)
-//                    min=list.get(0)+queue.peekFirst();
-//                else if (j==i)
-//                    min =list.get(j)+queue.pollFirst();
-//                else {
-//                    System.out.println(queue.peekFirst());
-//                    min = Math.min(queue.pollFirst(), queue.peekFirst()) + list.get(j);
-//                }
-//                queue.addLast(min);
-//            }
-//        }
-//        int result=Integer.MAX_VALUE;
-//        for (int i=0;i<count;i++)
-//            result=Math.min(result, queue.pollFirst());
-//        return result;
-//    }
+    public static int minimumTotal2(List<List<Integer>> triangle) {
+        Deque<Integer> queue = new LinkedList<Integer>();
+        int count=triangle.size();
+        queue.add(triangle.get(0).get(0));
+        for (int i=1;i<count;i++){
+            List<Integer> list= triangle.get(i);
+            for (int j=0;j<=i;j++){
+                int min=0;
+                if (j==0)
+                    min=list.get(0)+queue.peekFirst();
+                else if (j==i)
+                    min =list.get(j)+queue.pollFirst();
+                else {
+                    System.out.println(queue.peekFirst());
+                    min = Math.min(queue.pollFirst(), queue.peekFirst()) + list.get(j);
+                }
+                queue.addLast(min);
+            }
+        }
+        int result=Integer.MAX_VALUE;
+        for (int i=0;i<count;i++)
+            result=Math.min(result, queue.pollFirst());
+        return result;
+    }
 
-    //the below code looks more sensible to me ... check tomorrow once
+    //the below code looks more sensible to me ...
 //    The idea is simple.
 //
 //    Go from bottom to top.
@@ -87,7 +87,7 @@ public class Triangle {
         mainList.add(sublist2);
         mainList.add(sublist3);
         mainList.add(sublist4);
-        minimumTotal3(mainList);
+        minimumTotal2(mainList);
 
     }
 }

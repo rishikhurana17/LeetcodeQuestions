@@ -95,9 +95,9 @@ public class OpenLocks {
     }
     public static void main(String []args){
         String []deadends = {"0201","0101","0102","1212","2002"};String  target = "0202";
-        System.out.println(openLock(deadends,target));
+        System.out.println(openLock3(deadends,target));
     }
-    public int openLock3(String[] deadends, String target) {
+    public static int openLock3(String[] deadends, String target) {
         //bfs initial  is 0000
         //each time go from 0 to next 1 or 9
         //check if visited and locked combination, skip and continue
@@ -133,7 +133,7 @@ public class OpenLocks {
         return -1;
     }
 
-    private List<String> getNext(String prev) {
+    private static List<String> getNext(String prev) {
         List<String> nt = new ArrayList<>();
         for (int i = 0; i < prev.length(); i++) {
             int wheel = prev.charAt(i) - '0';

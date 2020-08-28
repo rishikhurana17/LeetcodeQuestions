@@ -59,7 +59,7 @@ public class TextJustification3  {
     }
 
     public static void main(String []args){
-        String [] words = {"This", "is", "an", "example", "of", "this", "is","an"};
+        String [] words = {"This", "is", "an", "example", "of", "text", "justification"};
         String []words1 = {"What","must","be","acknowledgment","shall","be"};
         int maxWidth = 16;
         System.out.println(fullJustify(words,maxWidth));

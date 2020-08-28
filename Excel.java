@@ -53,7 +53,9 @@ public class Excel {
 //		System.out.println((s.charAt(0)-64));
 
 
-
+		String s  = "aIshi";
+		int x = s.charAt(0) - '0';
+		System.out.println("x value" + x);
 		Excel ex = new Excel();
 
 		System.out.println(ex.convertToTitle(27));

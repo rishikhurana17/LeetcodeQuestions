@@ -2,6 +2,7 @@ package LeetcodePrograms;
 import java.util.*;
 /**
  * @author Rishi Khurana
+ * Guesstheword.java is better
  */
 public class GuessTheWord2 {
     class Master{
