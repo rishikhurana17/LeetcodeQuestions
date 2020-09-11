@@ -1,5 +1,10 @@
 package LeetcodePrograms;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+
 //get the compliment of a number
 //50 stands for 110010 and complement of that is 001101 which is 13
 public class IntegerComplement {
@@ -49,7 +54,11 @@ public class IntegerComplement {
 		return t - num;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(findComplement2(5));
+	public static void main(String[] args) throws InterruptedException {
+		System.out.println(getIntegerComplement(5));
+
+
+
+
 	}
 }
