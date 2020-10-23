@@ -19,7 +19,6 @@
 //a very good page to study sliding window algorithm
 //https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/
 //contains duplicates III
-//count complete tree nodes
 //https://leetcode.com/problems/subsets/discuss/
 //the maze question
 //partition equal subset sum , target sum and subset sum all are similar and needs to be done together
@@ -4421,7 +4420,7 @@ public class LeetCode {
         return best;
     }
 
-// Q476 Number Compliment #GoodQuestion
+// Q476 Number complement number Compliment #GoodQuestion
 // Given a positive integer, output its complement number. The complement
 // strategy is to flip the bits of its binary representation.
 //    https://www.youtube.com/watch?v=TXglsM_B1E4
@@ -6365,7 +6364,8 @@ public class LeetCode {
         }
 
     // Q346 Moving Average from the data stream #GoodQuestion
-     // The idea is to keep the sum so far and update the sum just by replacing the oldest number with the new entry.
+    // The idea is to keep the sum so far and update the sum just by replacing the oldest number with the new entry.
+    // few companies have asked this question
         private int[] window;
         private int n1, insert;
         private long sum;
@@ -6930,6 +6930,35 @@ public class LeetCode {
             return res;
         }
 
+    public List<String> topKFrequent(String[] words, int k) {
+
+        List<String> result = new LinkedList<>();
+        Map<String, Integer> map = new HashMap<>();
+        for(int i=0; i<words.length; i++)
+        {
+            if(map.containsKey(words[i]))
+                map.put(words[i], map.get(words[i])+1);
+            else
+                map.put(words[i], 1);
+        }
+
+        PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>(
+                (a,b) -> a.getValue()==b.getValue() ? b.getKey().compareTo(a.getKey()) : a.getValue()-b.getValue()
+        );
+
+        for(Map.Entry<String, Integer> entry: map.entrySet())
+        {
+            pq.offer(entry);
+            if(pq.size()>k)
+                pq.poll();
+        }
+
+        while(!pq.isEmpty())
+            result.add(0, pq.poll().getKey());
+
+        return result;
+    }
+
         // Q341 Flatten Nest List Iterator #TopInterviewQuestion   #Facebook #UberQuestion
         // In the constructor, we push all the nestedList into the stack from back to front, so when we pop the stack,
         // it returns the very first element. Second, in the hasNext() function, we peek the first element in stack currently,
@@ -7470,7 +7499,8 @@ public class LeetCode {
             return table[0][n - 1];
         }
 
-        // Q658 K closest points to the given value #GoodQuestion  #UberQuestion #FacebookQuestion  #HardlyAsked
+        // 658. Find K Closest Elements
+        // Q658 K closest points to the given value #GoodQuestion  #UberQuestion #FacebookQuestion
         // Given a sorted array, two integers k and x, find the k closest elements to x in the array.
         // The result should also be sorted in ascending order. If there is a tie, the smaller elements are always preferred.
         // In the following solutions, it is assumed that all elements of array are distinct.
@@ -10607,10 +10637,8 @@ public class LeetCode {
         }
 
         // Q292 Nim Game
-        // heap of stones on the table, each time one of you take turns to remove 1
-        // to 3 stones.
-        // The one who removes the last stone will be the winner. You will take the
-        // first turn to remove the stones.
+        // heap of stones on the table, each time one of you take turns to remove 1 to 3 stones.
+        // The one who removes the last stone will be the winner. You will take the first turn to remove the stones.
         boolean canWinNim(int n) {
             return n % 4 != 0;
         }
@@ -12440,6 +12468,7 @@ public class LeetCode {
             return cnt <= 1;
         }
 
+        // Robot Return to Origin
         // Q657 judge route circle
         // Initially, there is a Robot at position (0, 0). Given a sequence of its moves, judge if this robot makes a circle,
         // which means it moves back to the original place. The move sequence is represented by a string. And each move is
@@ -12888,7 +12917,7 @@ public class LeetCode {
             return Integer.bitCount(x ^ y);
         }
 
-        // Q409 Longest pallindrome .. useless question
+        // Q409 Longest pallindrome .. useless question lyft and google asked a couple of times
         // Given a string which consists of lowercase or uppercase letters, find the
         // length of the longest palindromes
         // that can be built with those letters.
