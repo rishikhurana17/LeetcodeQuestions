@@ -22,7 +22,8 @@ public class TextJustification2 {
     }
 
     public static void helper(String[] words, int start, int width) {
-        if (start >= words.length) return;
+        if (start >= words.length)
+            return;
 
         int i = start, len = 0, total = 0, next = -1;
         while (total < width && i < words.length) {
@@ -82,7 +83,7 @@ public class TextJustification2 {
     }
 
     public static void main(String []args){
-        String [] words = {"This", "is", "an", "example", "of", "text", "justification."};
+        String [] words = {"This", "is", "an", "example", "of", "text1", "justification."};
         String []words1 = {"What","must","be","acknowledgment","shall","be"};
         int maxWidth = 16;
         System.out.println(fullJustify(words,16));

@@ -1,4 +1,4 @@
-package LeetcodePrograms;
+package LeetcodePrograms.InterviewQuestions;
 
 /**
  * @author Rishi Khurana

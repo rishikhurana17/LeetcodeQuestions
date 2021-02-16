@@ -1,4 +1,4 @@
-package LeetcodePrograms.InmemoryDatabase;
+package LeetcodePrograms.BoxInmemoryDatabase;
 
 import java.util.*;
 

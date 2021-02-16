@@ -1,4 +1,4 @@
-package LeetcodePrograms;
+package LeetcodePrograms.InterviewQuestions;
 
 /**
  * @author Rishi Khurana
@@ -21,7 +21,7 @@ public class eBayQuestion2 {
                 i++;
             }
             output[outputIndex] = sum;
-             outputIndex++;
+            outputIndex++;
         }
         return output;
     }

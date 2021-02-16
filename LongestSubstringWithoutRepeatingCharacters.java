@@ -8,8 +8,53 @@ import java.util.List;
 
 /**
  * Created by rkhurana on 7/15/18.
+ * 3. Longest Substring Without Repeating Characters
+
+ * Given a string s, find the length of the longest substring without repeating characters.
+
+ * Example 1:
+ * Input: s = "abcabcbb"
+ * Output: 3
+ * Explanation: The answer is "abc", with the length of 3.
+ * Example 2:
+ * Input: s = "bbbbb"
+ * Output: 1
+ * Explanation: The answer is "b", with the length of 1.
  */
 public class LongestSubstringWithoutRepeatingCharacters {
+
+    // longest substring with no same characters adjacent
+    public static String longestSubstringThing(String s ){
+        //abcabcbb
+        StringBuilder sb = new StringBuilder();
+        int index = 1;
+        sb.append(s.charAt(0));
+        int currentLength = 1;
+        int maxLength = 0;
+        int low = 0;
+        String finalString = s.substring(0,1);
+        while(index < s.length()){
+            if(s.charAt(index)!=s.charAt(index-1)){
+                sb.append(s.charAt(index));
+                if(maxLength < currentLength){
+                    maxLength = currentLength;
+                    finalString = s.substring(low,index+1);
+
+                }
+                currentLength++;
+            }else{
+                low = index;
+                currentLength = 1;
+            }
+            index++;
+        }
+        return finalString;
+    }
+
+    public static void main(String [] args){
+        System.out.println(longestSubstringThing("bbbbbdd"));
+    }
+
     public static int longestSubstringWithoutRepeatingCharacter(String s){
         HashMap<Character,Integer> map = new HashMap<>();
         int maxLength=0;
@@ -57,11 +102,6 @@ public class LongestSubstringWithoutRepeatingCharacters {
         }
         return maxLengthString;
     }
-
-    public static void main(String [] args){
-        System.out.println(lengthOfLongestSubstring2("abcabcdba"));
-    }
-
 
     //	can do the above same thing using ascii solution
     public int lengthOfLongestSubstring3(String s) {

@@ -1,4 +1,6 @@
-//https://leetcode.com/problems/binary-tree-level-order-traversal/discuss/114449/a-general-approach-to-level-order-traversal-questions-in-java
+
+//hzttps://leetcode.com/problems/binary-tree-level-order-traversal/discuss/114449/a-general-approach-to-level-order
+// -traversal-questions-in-java
 //did not understand the degree of an array
 //image smoother
 //largest pallindrome product
@@ -17,6 +19,8 @@
 //2 elements which are not sorted and you have to return the index
 //single number I, II its a bitwise manipulation question..needs to be understood first
 //a very good page to study sliding window algorithm
+
+//438. Find All Anagrams in a String
 //https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/
 //contains duplicates III
 //https://leetcode.com/problems/subsets/discuss/
@@ -27,9 +31,343 @@
 //https://leetcode.com/problems/combination-sum/?tab=Solutions
 // Remove invalid parenthesis #facebook
 // https://stackoverflow.com/questions/32594710/generate-all-combinations-of-mathematical-expressions-that-add-to-target-java-h
-// 523 continous subarray sum facebook question
+
+
 // minimum edit distance dynamic programming https://www.youtube.com/watch?v=b6AGUjqIPsA needs to be done
 // employee free time merge sort
+
+// 39. Combination Sum
+// Given an array of distinct integers candidates and a target integer target, return a list of all unique
+// combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
+// The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the
+// frequency of at least one of the chosen numbers is different.
+//
+// It is guaranteed that the number of unique combinations that sum up to target is less than 150 combinations for
+// the given input.
+// Example 1:
+// Input: candidates = [2,3,6,7], target = 7
+// Output: [[2,2,3],[7]]
+// Explanation:
+// 2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+// 7 is a candidate, and 7 = 7.
+// These are the only two combinations.
+
+// 53. Maximum Subarray  cadence algorothm
+// Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum
+// and return its sum.
+// Follow up: If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach,
+// which is more subtle.
+// Example 1:
+// Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+// Output: 6
+// Explanation: [4,-1,2,1] has the largest sum = 6.
+// Example 2:
+// Input: nums = [1]
+// Output: 1
+// Example 3:
+// Input: nums = [0]
+// Output: 0
+
+// 76. Minimum Window Substring
+// Given two strings s and t, return the minimum window in s which will contain all the characters in t. If there is
+// no such window in s that covers all characters in t, return the empty string "".
+// Note that If there is such a window, it is guaranteed that there will always be only one unique minimum window in s
+// Example 1:
+// Input: s = "ADOBECODEBANC", t = "ABC"
+// Output: "BANC"
+// Example 2:
+// Input: s = "a", t = "a"
+// Output: "a"
+
+//78. Subsets
+// Given an integer array nums, return all possible subsets (the power set).
+// The solution set must not contain duplicate subsets.
+// Example 1:
+// Input: nums = [1,2,3]
+// Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+// Example 2:
+// Input: nums = [0]
+// Output: [[],[0]]
+
+// 128. Longest Consecutive Sequence
+// Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+// Example 1:
+//
+// Input: nums = [100,4,200,1,3,2]
+// Output: 4
+// Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+
+// 266. Palindrome Permutation #palindrome #permutation
+// Given a string, determine if a permutation of the string could form a palindrome.
+// Example 1:
+// Input: "code"
+// Output: false
+
+// 300. Longest Increasing Subsequence
+//Given an integer array nums, return the length of the longest strictly increasing subsequence.
+//A subsequence is a sequence that can be derived from an array by deleting some or no elements without changing the
+// order of the remaining elements. For example, [3,6,2,7] is a subsequence of the array [0,3,1,6,2,2,7].
+// Example 1:
+// Input: nums = [10,9,2,5,3,7,101,18]
+// Output: 4
+// Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+
+// 325. Maximum Size Subarray Sum Equals k
+// Given an array nums and a target value k, find the maximum length of a subarray that sums to k. If there isn't one,
+// return 0 instead.
+// Note:
+// The sum of the entire nums array is guaranteed to fit within the 32-bit signed integer range.
+// Example 1:
+// Input: nums = [1, -1, 5, -2, 3], k = 3
+// Output: 4
+// Explanation: The subarray [1, -1, 5, -2] sums to 3 and is the longest.
+
+// 336. Palindrome Pairs
+// Given a list of unique words, return all the pairs of the distinct indices (i, j) in the given list,
+// so that the concatenation of the two words words[i] + words[j] is a palindrome.
+// Example 1:
+// Input: words = ["abcd","dcba","lls","s","sssll"]
+// Output: [[0,1],[1,0],[3,2],[2,4]]
+// Explanation: The palindromes are ["dcbaabcd","abcddcba","slls","llssssll"]
+
+// 340. Longest Substring with At Most K Distinct Characters facebook
+// Given a string s and an integer k, return the length of the longest substring of s that contains at most k distinct characters.
+// Example 1
+// Input: s = "eceba", k = 2
+// Output: 3
+// Explanation: The substring is "ece" with length 3.
+
+// 373. Find K Pairs with Smallest Sums
+// You are given two integer arrays nums1 and nums2 sorted in ascending order and an integer k.
+// Define a pair (u,v) which consists of one element from the first array and one element from the second array.
+// Find the k pairs (u1,v1),(u2,v2) ...(uk,vk) with the smallest sums.
+// Example 1:
+// Input: nums1 = [1,7,11], nums2 = [2,4,6], k = 3
+// Output: [[1,2],[1,4],[1,6]]
+// Explanation: The first 3 pairs are returned from the sequence:
+// [1,2],[1,4],[1,6],[7,2],[7,4],[11,2],[7,6],[11,4],[11,6]
+
+// 416. Partition Equal Subset Sum.  #split #subset #sum
+// Given a non-empty array containing only positive integers, find if the array can be partitioned into two subsets
+// such that the sum of elements in both subsets is equal.
+// Note:
+// 1.	Each of the array element will not exceed 100.
+// 2.	The array size will not exceed 200.
+// Example 1:
+// Input: [1, 5, 11, 5]
+// Output: true
+// Explanation: The array can be partitioned as [1, 5, 5] and [11].
+
+// 494. Target Sum #sum #target
+// You are given a list of non-negative integers, a1, a2, ..., an, and a target, S. Now you have 2 symbols + and -.
+// For each integer, you should choose one from + and - as its new symbol.
+// Find out how many ways to assign symbols to make sum of integers equal to target S.
+// Example 1:
+// Input: nums is [1, 1, 1, 1, 1], S is 3.
+// Output: 5
+// Explanation:
+// -1+1+1+1+1 = 3
+// +1-1+1+1+1 = 3
+// +1+1-1+1+1 = 3
+// +1+1+1-1+1 = 3
+
+// 523. Continuous Subarray Sum #facebook
+// Given a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous
+// subarray of size at least 2 that sums up to a multiple of k, that is, sums up to n*k where n is also an integer.
+// Example 1
+// Input: [23, 2, 4, 6, 7],  k=6
+// Output: True
+// Explanation: Because [2, 4] is a continuous subarray of size 2 and sums up to 6.
+
+// 525. Contiguous Array
+// Given a binary array, find the maximum length of a contiguous subarray with equal number of 0 and 1.
+// Example 1: Input: [0,1] Output: 2
+// Explanation: [0, 1] is the longest contiguous subarray with equal number of 0 and 1.
+
+// 548. Split Array with Equal Sum
+//Given an array with n integers, you need to find if there are triplets (i, j, k) which satisfies following conditions:
+//
+// 0 < i, i + 1 < j, j + 1 < k < n - 1
+// Sum of subarrays (0, i - 1), (i + 1, j - 1), (j + 1, k - 1) and (k + 1, n - 1) should be equal.
+// where we define that subarray (L, R) represents a slice of the original array starting from the element indexed L
+// to the element indexed R.
+// Example: Input: [1,2,1,2,1,2,1]
+// Output: True
+// Explanation:
+// i = 1, j = 3, k = 5.
+// sum(0, i - 1) = sum(0, 0) = 1
+// sum(i + 1, j - 1) = sum(2, 2) = 1
+// sum(j + 1, k - 1) = sum(4, 4) = 1
+// sum(k + 1, n - 1) = sum(6, 6) = 1
+
+// 560. Subarray Sum Equals K #facebook
+// Given an array of integers nums and an integer k, return the total number of continuous subarrays whose sum equals to k.
+// Example 1: Input: nums = [1,1,1], k = 2 Output: 2
+// Example 2: Input: nums = [1,2,3], k = 3 Output: 2
+
+// 581. Shortest Unsorted Continuous Subarray
+// Given an integer array, you need to find one continuous subarray that if you only sort this subarray in ascending
+// order, then the whole array will be sorted in ascending order, too.
+// You need to find the shortest such subarray and output its length.
+// Example 1:
+// Input: [2, 6, 4, 8, 10, 9, 15]
+// Output: 5
+// Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order
+
+//594. Longest Harmonious Subsequence
+// We define a harmonious array as an array where the difference between its maximum value and its minimum value is
+// exactly 1.
+// Given an integer array nums, return the length of its longest harmonious subsequence among all its possible
+// subsequences.
+// A subsequence of array is a sequence that can be derived from the array by deleting some or no elements without
+// changing the order of the remaining elements.
+// Example 1:
+// Input: nums = [1,3,2,2,5,2,3,7]
+// Output: 5
+// Explanation: The longest harmonious subsequence is [3,2,2,2,3].
+
+//647. Palindromic Substrings
+// Given a string, your task is to count how many palindromic substrings in this string.
+// The substrings with different start indexes or end indexes are counted as different substrings even they consist
+// of same characters.
+// Example 1:
+// Input: "abc" Output: 3
+// Explanation: Three palindromic strings: "a", "b", "c".
+
+// 659. Split Array into Consecutive Subsequences salesforce asked me this
+// Given an array nums sorted in ascending order, return true if and only if you can split it into 1 or more
+// subsequences such that each subsequence consists of consecutive integers and has length at least 3.
+// Example 1:
+// Input: [1,2,3,3,4,5]
+// Output: True
+// Explanation:
+// You can split them into two consecutive subsequences :
+// 1, 2, 3
+// 3, 4, 5
+
+// 698. Partition to K Equal Sum Subsets facebook
+// Given an array of integers nums and a positive integer k, find whether it's possible to divide this array into k
+// non-empty subsets whose sums are all equal.
+
+//Example 1:
+
+//Input: nums = [4, 3, 2, 3, 5, 2, 1], k = 4
+//Output: True
+//Explanation: It's possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3) with equal sums.
+
+// 920. Number of Music Playlists
+// Your music player contains N different songs and she wants to listen to L (not necessarily different) songs during
+// your trip.  You create a playlist so that:
+// Every song is played at least once
+// A song can only be played again only if K other songs have been played
+// Return the number of possible playlists.  As the answer can be very large, return it modulo 10^9 + 7.
+
+//Example 1:
+//Input: N = 3, L = 3, K = 1
+//Output: 6
+//Explanation: There are 6 possible playlists. [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1].
+
+// 956. Tallest Billboard   ...  looks like equal subset sum
+// You are installing a billboard and want it to have the largest height.  The billboard will have two steel supports,
+// one on each side.  Each steel support must be an equal height.
+//
+// You have a collection of rods which can be welded together.  For example, if you have rods of lengths 1, 2, and 3,
+// you can weld them together to make a support of length 6.
+//Return the largest possible height of your billboard installation.  If you cannot support the billboard, return 0.
+//
+//Example 1:
+//
+//Input: [1,2,3,6]
+//Output: 6
+//Explanation: We have two disjoint subsets {1,2,3} and {6}, which have the same sum = 6.
+//Example 2:
+//
+//Input: [1,2,3,4,5,6]
+//Output: 10
+//Explanation: We have two disjoint subsets {2,3,5} and {4,6}, which have the same sum = 10.
+
+//967. Numbers With Same Consecutive Differences
+//Medium
+//Return all non-negative integers of length n such that the absolute difference between every two consecutive digits
+// is k.
+//Note that every number in the answer must not have leading zeros. For example, 01 has one leading zero and is invalid.
+//You may return the answer in any order.
+//Example 1:
+//Input: n = 3, k = 7
+//Output: [181,292,707,818,929]
+//Explanation: Note that 070 is not a valid number, because it has leading zeroes.
+
+//974. Subarray Sums Divisible by K
+
+//Given an array A of integers, return the number of (contiguous, non-empty) subarrays that have a sum divisible by K.
+
+//Example 1:
+//
+//Input: A = [4,5,0,-2,-3,1], K = 5
+//Output: 7
+//Explanation: There are 7 subarrays with a sum divisible by K = 5:
+//[4, 5, 0, -2, -3, 1], [5], [5, 0], [5, 0, -2, -3], [0], [0, -2, -3], [-2, -3]
+//
+// 992. Subarrays with K Different Integers
+//Given an array A of positive integers, call a (contiguous, not necessarily distinct) subarray of A good if the
+// number of different integers in that subarray is exactly K.
+//
+//(For example, [1,2,3,1,2] has 3 different integers: 1, 2, and 3.)
+//
+//Return the number of good subarrays of A.
+
+//Example 1:
+//
+//Input: A = [1,2,1,2,3], K = 2
+//Output: 7
+//Explanation: Subarrays formed with exactly 2 different integers: [1,2], [2,1], [1,2], [2,3], [1,2,1], [2,1,2], [1,
+// 2,1,2].
+
+//995. Minimum Number of K Consecutive Bit Flips
+//Hard
+//In an array A containing only 0s and 1s, a K-bit flip consists of choosing a (contiguous) subarray of length K and
+// simultaneously changing every 0 in the subarray to 1, and every 1 in the subarray to 0.
+//Return the minimum number of K-bit flips required so that there is no 0 in the array.  If it is not possible,
+// return -1.
+//Example 1:
+//Input: A = [0,1,0], K = 1
+//Output: 2
+//Explanation: Flip A[0], then flip A[2].
+
+// 1249. Minimum Remove to Make Valid Parentheses
+//Given a string s of '(' , ')' and lowercase English characters.
+//Your task is to remove the minimum number of parentheses ( '(' or ')', in any positions ) so that the resulting
+// parentheses string is valid and return any valid string.
+//Formally, a parentheses string is valid if and only if:
+//It is the empty string, contains only lowercase characters, or
+//It can be written as AB (A concatenated with B), where A and B are valid strings, or
+//It can be written as (A), where A is a valid string.
+//Example 1:
+//Input: s = "lee(t(c)o)de)"
+//Output: "lee(t(c)o)de"
+//Explanation: "lee(t(co)de)" , "lee(t(c)ode)" would also be accepted.
+
+// 1262. Greatest Sum Divisible by Three
+// Given an array nums of integers, we need to find the maximum possible sum of elements of the array such that it is divisible by three.
+// Example 1:
+//
+// Input: nums = [3,6,5,1,8]
+// Output: 18
+// Explanation: Pick numbers 3, 6, 1 and 8 their sum is 18 (maximum sum divisible by 3).
+
+// 1498. Number of Subsequences That Satisfy the Given Sum Condition
+// Given an array of integers nums and an integer target.
+// Return the number of non-empty subsequences of nums such that the sum of the minimum and maximum element on it is
+// less or equal to target. Since the answer may be too large, return it modulo 109 + 7.
+// Example 1:
+// Input: nums = [3,5,6,7], target = 9
+// Output: 4
+// Explanation: There are 4 subsequences that satisfy the condition.
+// [3] -> Min value + max value <= target (3 + 3 <= 9)
+// [3,5] -> (3 + 5 <= 9)
+// [3,5,6] -> (3 + 6 <= 9)
+// [3,6] -> (3 + 6 <= 9)
+
 package LeetcodePrograms;
 
 import java.io.File;
@@ -264,6 +602,7 @@ public class LeetCode {
         return true;
     }
 
+    // facebook 26 google 9 amazon 7 bloombergg 7 bytedance 3
     // time complexity O(n) space O(1)
     // Q31 next permutation ... #GoodQuestion
     // [6，3，4，9，8，7，1]
@@ -452,7 +791,6 @@ public class LeetCode {
     // or 9 for positive a and -9 for negative a. The test condition works here because the edge cases mentioned
     // above won't happen due to the fact that the input itself is a signed integer. If the input is something
     // else, say a string (see String to Integer (atoi)), the test condition above will fail the edge cases.
-
     // Q8 String to integer (atoi) #TopInterviewQuestion
     public int myAtoi(String str) {
         int index = 0;
@@ -580,7 +918,7 @@ public class LeetCode {
         return sb.toString();
     }
 
-    // Q14 longest common prefix #TopInterviewQuestion
+    // Q14 longest common prefix #TopInterviewQuestion  vertical scaling solution is good
     // have to check for the complexity
 // Write a function to find the longest common prefix string amongst an array of strings.
     public static String longestCommonPrefix(String[] strs) {
@@ -637,7 +975,8 @@ public class LeetCode {
         }
         String prefix = strs[0];
         for (int i = 1; i < strs.length; i++) {
-            while (strs[i].indexOf(prefix) != 0) { // so indexOf checks if prefix starts with strs[i] starting index 0
+            while (strs[i].indexOf(prefix) != 0) {
+                // so indexOf checks if prefix starts with strs[i] starting index 0
                 // now when prefix is flow and strs[i] is flower..you see flower starts with flow that means the
                 // value of indexOf will be 0 and thus it wont go inside of that and will go for the next iteration.
                 prefix = prefix.substring(0, prefix.length() - 1);
@@ -651,8 +990,7 @@ public class LeetCode {
 
     // time complexity for the below algorith m is O(n * m) .. n number of string and m is the length of the longest
     // string
-    // Vertical Scaling
-    // like checking the first character of every string from the first string
+    // Vertical Scaling like checking the first character of every string from the first string
     public String longestCommonPrefix5(String[] strs) {
         if (strs.length == 0) {
             return "";
@@ -852,23 +1190,6 @@ public class LeetCode {
         return haystack.indexOf(needle);  //this is o(n square)
     }
 
-    // Given a sorted array and a target value, return the index if the target
-    // is found. If not, return the index where it would be if it were inserted in order.
-    public static int SearchInsertPosition(int A[], int target) {
-        // binary search and return low
-        int low = 0, high = A.length - 1;
-        while (low <= high) {
-            int mid = (low + high) / 2;
-            if (A[mid] == target)
-                return mid;
-            else if (A[mid] > target)
-                high = mid - 1;
-            else
-                low = mid + 1;
-        }
-        return low;
-    }
-
     // Q38 Count and Say #TopInterviewQuestion
     // 1
     // 11
@@ -939,7 +1260,7 @@ public class LeetCode {
 
 // Q152 Maximum Product SubArray  Max Product Subarray #TopInterviewQuestion
 // a very good explanation of the below solution
-//    Let me reason the solution.
+// Let me reason the solution.
 //    There are 2 possibilities - either the number of -ve numbers is even or odd.
 //    If they are even, then obviously we would want to include all of them(in fact the whole array(unless for zeros))
 //    to maximise the product. This is because multiplying an even number of -ve numbers would make the result +ve.
@@ -986,7 +1307,7 @@ public class LeetCode {
         return result;
     }
 
-// Q53 maximum sum subarray #TopInterviewQuestion
+// Q53 maximum sum subarray #TopInterviewQuestion  cadence algorithm
 // Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
 // Maintain Indices https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/ #NeedsAttention
 
@@ -1003,54 +1324,54 @@ public class LeetCode {
         return max_so_far;
     }
 
-        static int maxSubArraySumNoIndices(int a[])
-        {
-            int size = a.length;
-            int max_so_far = Integer.MIN_VALUE, max_ending_here = 0;
-
-            for (int i = 0; i < size; i++)
-            {
-                max_ending_here = max_ending_here + a[i];
-                if (max_so_far < max_ending_here)
-                    max_so_far = max_ending_here;
-                if (max_ending_here < 0)
-                    max_ending_here = 0;
-            }
-            return max_so_far;
+    static int maxSubArraySumNoIndices(int a[]) {
+        int size = a.length;
+        int max_so_far = Integer.MIN_VALUE, max_ending_here = 0;
+        for (int i = 0; i < size; i++) {
+            max_ending_here = max_ending_here + a[i];
+            if (max_so_far < max_ending_here)
+                max_so_far = max_ending_here;
+            if (max_ending_here < 0)
+                max_ending_here = 0;
         }
+        return max_so_far;
+    }
 
-        static int maxSubArraySumWithIndices(int a[], int size)
-        {
-            int max_so_far = Integer.MIN_VALUE, max_ending_here = 0,
-                    start =0, end = 0, s=0;
-
-            for (int i=0; i< size; i++ )
-            {
-                max_ending_here += a[i];
-
-                if (max_so_far < max_ending_here)
-                {
-                    max_so_far = max_ending_here;
-                    start = s;
-                    end = i;
-                }
-
-                if (max_ending_here < 0)
-                {
-                    max_ending_here = 0;
-                    s = i + 1;
-                }
+    static int maxSubArraySumWithIndices(int a[], int size) {
+        int max_so_far = Integer.MIN_VALUE, max_ending_here = 0,
+                start =0, end = 0, s=0;
+        for (int i=0; i< size; i++ ) {
+            max_ending_here += a[i];
+            if (max_so_far < max_ending_here) {
+                max_so_far = max_ending_here;
+                start = s;
+                end = i;
             }
-           System.out.println("Maximum contiguous sum is "
-                    +max_so_far );
-            System.out.println( "Starting index "+start
-                    + "Ending index " + end);
-            return max_so_far;
-        }
 
-    // Q70 Climbing stairs problem #TopInterviewQuestion
-    // You are climbing a stair case. It takes n steps to reach to the top.
-    // Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+            if (max_ending_here < 0) {
+                max_ending_here = 0;
+                s = i + 1;
+            }
+        }
+        System.out.println("Maximum contiguous sum is "
+                +max_so_far );
+        System.out.println( "Starting index "+start
+                + "Ending index " + end);
+        return max_so_far;
+    }
+
+//    325. Maximum Size Subarray Sum Equals k
+//    Given an array nums and a target value k, find the maximum length of a subarray that sums to k. If there isn't one, return 0 instead.
+//    Note:    The sum of the entire nums array is guaranteed to fit within the 32-bit signed integer range.
+//    Example 1:
+//    Input: nums = [1, -1, 5, -2, 3], k = 3
+//    Output: 4
+//    Explanation: The subarray [1, -1, 5, -2] sums to 3 and is the longest.
+
+
+// Q70 Climbing stairs problem #TopInterviewQuestion
+// You are climbing a stair case. It takes n steps to reach to the top.
+// Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
     public int fibonacciSeriesRecursive(int n) {
         if (n == 1 || n == 0) {
             return n;
@@ -1362,11 +1683,11 @@ public class LeetCode {
                     profit = prices[i] - min;
                 }
             }
-            // No else..just the if statement
-            // if (prices[i] - min > profit)
-            // {
-            // profit = prices[i] - min;
-            // }
+    // No else..just the if statement
+    // if (prices[i] - min > profit)
+    // {
+    // profit = prices[i] - min;
+    // }
         }
         return profit;
     }
@@ -1689,8 +2010,7 @@ public class LeetCode {
         }
         return isMagicNumber(sumOfDigits);
     }
-    
-    //WILL SEE IT TOMORROW
+
     // Q287 find the duplicate number #TopInterviewQuestion // both the below solutions are amazing
     // Given an array nums containing n + 1 integers where each integer is
     // between 1 and n (inclusive), prove that at least one duplicate number must exist. Assume that there is only one
@@ -1770,7 +2090,6 @@ public class LeetCode {
         }
         return slow + 1;
     }
-
 
     // if asked for the above solution that you cannot modify then the solution will be like this
     public int findDuplicate3(int[] nums) {
@@ -1871,10 +2190,8 @@ public class LeetCode {
 //    we set M = a[0] + a[1] + ..a[n]
 //
 //    and another truth is that:
-//
-//            1 % 9 = 1
-//
-//            10 % 9 = 1
+//  1 % 9 = 1
+//  10 % 9 = 1
 //
 //            100 % 9 = 1
 //
@@ -1898,7 +2215,7 @@ public class LeetCode {
         }
     }
 
-// Q26 remove duplicates from sorted array #TopInterviewQuestion
+// Q26 remove duplicates from sorted array #TopInterviewQuestion #inline
 // Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
 // Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
     public static int removeduplicatesfromSortedArray(int A[], int n) {
@@ -1973,7 +2290,7 @@ public class LeetCode {
         }
     }
 
-    // Q67 Add Binary
+    // Q67 Add Binary #facebook
     // Given two binary strings, return their sum (also a binary string).
     public String addBinary(String a, String b) {
         StringBuilder sb = new StringBuilder();
@@ -2335,7 +2652,7 @@ public class LeetCode {
         return re.toString();
     }
 
-    // Q15 3Sum three sum #TopInterviewQuestion
+    // Q15 3Sum 3 sum three sum #TopInterviewQuestion
     // Given an array S of n integers, are there elements a, b, c in S such that  a + b + c = 0?
     // Find all unique triplets in the array which gives the sum of zero.
     public List<List<Integer>> threeSum(int[] nums) {
@@ -2597,23 +2914,21 @@ public class LeetCode {
         return weighted;
     }
 
-
-    // WILL SEE IT TOMORROW
-    // Q222 Count complete tree nodes Given a complete binary tree, count the number of nodes.
-    // #GoogleFavouriteQuestion #Facebook
-    // its taking the advantage of the property of a perfect binary tree. If it is perfect binary tree,
-    // number of nodes will be 2 raised to the power of height - 1
-    // thats why in the solution left and right nodes height is been calculated and compared.
-    // if it is equal then use the above formula else apply the standard formula
+// #GoogleFavouriteQuestion #Facebook
+// Q222 Count complete tree nodes
+// Given a complete binary tree, count the number of nodes.
+// its taking the advantage of the property of a perfect binary tree. If it is perfect binary tree,
+// number of nodes will be 2 raised to the power of height - 1
+// thats why in the solution left and right nodes height is been calculated and compared.
+// if it is equal then use the above formula else apply the standard formula
 
 //    if you see a complete binary tree
-//    zero depth has 2 power 0 elements
+//    zero depth has 2 power 0 element
 //    first depth has 2 power 1 elements
 //    second depth has 2 power 2 elements
 //    third depth has 2 power 3 elements
 //
-//    meaning count of binary tree depending on the height would be ( 2 power h ) - 1 .. its a geometric progression
-
+// meaning count of binary tree depending on the height would be ( 2 power h ) - 1 .. its a geometric progression
 // for calculating the hieght we can always go on the left side and not on the right side, because we know elements on
 // the left side will always be more than right side. thus , that complexity would be O(log n)
 //
@@ -2680,7 +2995,7 @@ public class LeetCode {
     }
 
     // Q49 group anagrams #TopInterviewQuestion
-    // time compelxity  the time complexity would be O(nmlogm) where n is the max number of words we can receive
+    // time complexity  the time complexity would be O(nmlogm) where n is the max number of words we can receive
     // in "strs" and m is the largest size a word in "strs" can be. Let me know what you guys think!
     public static List<List<String>> groupAnagrams(String[] strs) {
         if (strs == null || strs.length == 0)
@@ -2708,7 +3023,8 @@ public class LeetCode {
             for (char c : s.toCharArray())
                 ca[c - 'a']++;
             String keyStr = String.valueOf(ca);
-            if (!map.containsKey(keyStr)) map.put(keyStr, new ArrayList<>());
+            if (!map.containsKey(keyStr))
+                map.put(keyStr, new ArrayList<>());
             map.get(keyStr).add(s);
         }
         return new ArrayList<>(map.values());
@@ -2925,6 +3241,44 @@ public class LeetCode {
         }
     }
 
+    //set matrix zero with O(1) complexity
+    void setZeroes(int[][] matrix) {
+        boolean isZeroCol = false;
+        boolean isZeroRow = false;
+        for (int i = 0; i < matrix.length; i++) { //check the first column
+            if (matrix[i][0] == 0) {
+                isZeroCol = true;
+                break;
+            }
+        }
+        for (int i = 0; i < matrix[0].length; i++) { //check the first row
+            if (matrix[0][i] == 0) {
+                isZeroRow = true;
+                break;
+            }
+        }
+        for (int i = 1; i < matrix.length; i++) { //check except the first row and column
+            for (int j = 1; j < matrix[0].length; j++)
+                if (matrix[i][j] == 0) {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+        }
+        for (int i = 1; i < matrix.length; i++) { //process except the first row and column
+            for (int j = 1; j < matrix[0].length; j++)
+                if (matrix[i][0] == 0 || matrix[0][j] == 0)
+                    matrix[i][j] = 0;
+        }
+        if (isZeroCol) { //handle the first column
+            for (int i = 0; i < matrix.length; i++)
+                matrix[i][0] = 0;
+        }
+        if (isZeroRow) { //handle the first row
+            for (int i = 0; i < matrix[0].length; i++)
+                matrix[0][i] = 0;
+        }
+    }
+
 // Q75 sort colors #TopInterviewQuestion
 // Given an array with n objects colored red, white or blue, sort them so that objects of the same color
 // are adjacent, with the colors in the order red, white and blue. Here, we will use the integers 0, 1, and 2
@@ -3135,7 +3489,6 @@ public class LeetCode {
             head = null;
             prev = null;
         }
-
     }
 
     // Q138 Copy List with random pointer #TopInterviewQuestion
@@ -3178,6 +3531,28 @@ public class LeetCode {
             p = p.next;
         }
         return newHead;
+    }
+
+    public RandomListNode copyRandomList2(RandomListNode head) {
+        if (head == null) return null;
+
+        Map<RandomListNode, RandomListNode> map = new HashMap<RandomListNode, RandomListNode>();
+
+        // loop 1. copy all the nodes
+        RandomListNode node = head;
+        while (node != null) {
+            map.put(node, new RandomListNode(node.value));
+            node = node.next;
+        }
+
+        // loop 2. assign next and random pointers
+        node = head;
+        while (node != null) {
+            map.get(node).next = map.get(node.next);
+            map.get(node).random = map.get(node.random);
+            node = node.next;
+        }
+        return map.get(head);
     }
 
 // Q419 battleships in the board #GoodQuestion
@@ -3233,7 +3608,6 @@ public class LeetCode {
             result = helper(num / 1000000000) + " Billion " + helper(num % 1000000000);
         return result.trim();
     }
-
 
     // Q143 reorder list   #FaceBookQuestion
     // Given a singly linked list L: L0→L1→…→Ln-1→Ln, reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
@@ -3364,7 +3738,7 @@ public class LeetCode {
         return S.pop();
     }
 
-    // Q91 Decode Ways #TopInterviewQuestion 
+    // Q91 Decode Ways #TopInterviewQuestion
     // A message containing letters from A-Z is being encoded to numbers using
     // the following mapping:
     // 'A' -> 1
@@ -3401,6 +3775,49 @@ public class LeetCode {
     boolean isValid(char a) {
         return a != '0';
     }
+
+//    394. Decode String
+//    Given an encoded string, return its decoded string.
+//    The encoding rule is: k[encoded_string], where the encoded_string inside the square brackets is being repeated
+//    exactly k times. Note that k is guaranteed to be a positive integer.
+//    You may assume that the input string is always valid; No extra white spaces, square brackets are well-formed, etc.
+//    Furthermore, you may assume that the original data does not contain any digits and that digits are only for those
+//    repeat numbers, k. For example, there won't be input like 3a or 2[4].
+//    Example 1:
+//
+//    Input: s = "3[a]2[bc]"
+//    Output: "aaabcbc"
+//    Example 2:
+//
+//    Input: s = "3[a2[c]]"
+//    Output: "accaccacc"
+
+// time : O(maxK*n) where maxK is max value of k & n is the size of string array.
+// Space : O(m+n) m is no of letters and n is no of digits.
+public String decodeString(String s) {
+
+    Stack<Integer> intStack = new Stack<>();
+    Stack<StringBuilder> strStack = new Stack<>();
+    StringBuilder cur = new StringBuilder();
+    int k = 0;
+    for (char ch : s.toCharArray()) {
+        if (Character.isDigit(ch)) {
+            k = k * 10 + ch - '0';
+        } else if (ch == '[') {
+            intStack.push(k);
+            strStack.push(cur);
+            cur = new StringBuilder();
+            k = 0;
+        } else if (ch == ']') {
+            StringBuilder tmp = cur;
+            cur = strStack.pop();
+            for (k = intStack.pop(); k > 0; --k)
+                cur.append(tmp);
+        } else
+            cur.append(ch);
+    }
+    return cur.toString();
+}
 
     // Q162 find peak element #TopInterviewQuestion
     // since we have to find only 1 peak element, it is very obvious that using binary search we can achieve that
@@ -3511,50 +3928,40 @@ public class LeetCode {
 
 // Q333 largest BST in a binary tree #Notasked  #NeedsAttention
 // concept is to use postorder traversal and make sure min of right side > root and max of left side should be < than root to get the bst
-    public class LargestBSTInBinaryTree {
 
-        public int largestBST(Node root) {
-            MinMax m = largest(root);
-            return m.size;
-        }
 
-        private MinMax largest(Node root) {
-            // if root is null return min as Integer.MAX and max as Integer.MIN
-            if (root == null) {
-                return new MinMax();
-            }
+    class LargestBSTInBinaryTree {  // (size, rangeLower, rangeUpper) -- size of current tree, range of current tree [rangeLower, rangeUpper]
+        int size;
+        int lower;
+        int upper;
 
-            // postorder traversal of tree. First visit left and right then
-            // use information of left and right to calculate largest BST.
-            MinMax leftMinMax = largest(root.left);
-            MinMax rightMinMax = largest(root.right);
-
-            MinMax m = new MinMax();
-
-// if either of left or right subtree says its not BST or the data of this node is not greater/equal than max of left
-// and less than min of right then subtree with this node as root will not be BST.
-// Return false and max size of left and right subtree to parent
-            if (leftMinMax.isBST == false || rightMinMax.isBST == false
-                    || (leftMinMax.max > root.data || rightMinMax.min <= root.data)) {
-                m.isBST = false;
-                m.size = Math.max(leftMinMax.size, rightMinMax.size);
-                return m;
-            }
-
-// if we reach this point means subtree with this node as root is BST. Set isBST as true.
-// Then set size as size of left + size of right + 1. Set min and max to be returned to parent.
-            m.isBST = true;
-            m.size = leftMinMax.size + rightMinMax.size + 1;
-
-            // if root.left is null then set root.data as min else take min of left side as min
-            m.min = root.left != null ? leftMinMax.min : root.data;
-
-            // if root.right is null then set root.data as max else take max of right side as max.
-            m.max = root.right != null ? rightMinMax.max : root.data;
-
-            return m;
+        LargestBSTInBinaryTree(int size, int lower, int upper) {
+            this.size = size;
+            this.lower = lower;
+            this.upper = upper;
         }
     }
+
+    int max = 0;
+
+    public int largestBSTSubtree(TreeNode root) {
+        if (root == null) { return 0; }
+        traverse(root, null);
+        return max;
+    }
+
+    private LargestBSTInBinaryTree traverse(TreeNode root, TreeNode parent) {
+        if (root == null) { return new LargestBSTInBinaryTree(0, parent.val, parent.val); }
+        LargestBSTInBinaryTree left = traverse(root.left, root);
+        LargestBSTInBinaryTree right = traverse(root.right, root);
+        if (left.size==-1 || right.size==-1 || root.val<left.upper || root.val>right.lower) {
+            return new LargestBSTInBinaryTree(-1, 0, 0);
+        }
+        int size = left.size + 1 + right.size;
+        max = Math.max(size, max);
+        return new LargestBSTInBinaryTree(size, left.lower, right.upper);
+    }
+
 
     // Q198 House Robber #TopInterviewQuestion
     public int rob(int[] num) {
@@ -3881,28 +4288,28 @@ public class LeetCode {
     }
 
     // Q236 lca of a Binary tree #TopInterviewQuestion
-    //It’s always not easy to explain recursive solutions but I will try..
-    //There is an assumption that p and q nodes exist and are part of the tree.
-    //Let’s start from the beginning, from the root node.
-    //If root of the tree is p or q then line
-    //if(root == p || root == q) return root;
-    //returns real root which is LCA since it’s doesn’t matter where second (p or q) is – root is LCA anyway.
-    //Let’s say root node is not p or q then it checks left branch first
-    //TreeNode left = lowestCommonAncestor(root.left, p, q);
-    //And then right branch:
-    //TreeNode right = lowestCommonAncestor(root.right, p, q);
-    //If it found p or q on the left it stops and returns that node and doesn’t check the rest of the left sub tree.
-    //Why? Because if second node (p or q) is somewhere below in the current left sub tree – then current node is LCA
+    // It’s always not easy to explain recursive solutions but I will try..
+    // There is an assumption that p and q nodes exist and are part of the tree.
+    // Let’s start from the beginning, from the root node.
+    // If root of the tree is p or q then line
+    // if(root == p || root == q) return root;
+    // returns real root which is LCA since it’s doesn’t matter where second (p or q) is – root is LCA anyway.
+    // Let’s say root node is not p or q then it checks left branch first
+    // TreeNode left = lowestCommonAncestor(root.left, p, q);
+    // And then right branch:
+    // TreeNode right = lowestCommonAncestor(root.right, p, q);
+    // If it found p or q on the left it stops and returns that node and doesn’t check the rest of the left sub tree.
+    // Why? Because if second node (p or q) is somewhere below in the current left sub tree – then current node is LCA
     // and it already has it. How does it know whether second node is below in the current sub tree or not? It goes
     // to check a right branch.
-    //If right branch doesn’t have second node then it’s somewhere below in the left sub tree where we found first p
+    // If right branch doesn’t have second node then it’s somewhere below in the left sub tree where we found first p
     // or q and it’s below the node we already found so the node we found on the left is LCA.
-    //If second node is on the right branch then LCA is a node for which both lines
-    //TreeNode left = lowestCommonAncestor(root.left, p, q); and
-    //TreeNode right = lowestCommonAncestor(root.right, p, q);
-    //return != null left and right
-    //It checks this here:
-    //return left != null && right != null ? root
+    // If second node is on the right branch then LCA is a node for which both lines
+    // TreeNode left = lowestCommonAncestor(root.left, p, q); and
+    // TreeNode right = lowestCommonAncestor(root.right, p, q);
+    // return != null left and right
+    // It checks this here:
+    // return left != null && right != null ? root
     TreeNode getLCA(TreeNode current, TreeNode A, TreeNode B) {
         if (current == null || current == A || current == B)
             // found p or q or touch the ground
@@ -3921,7 +4328,6 @@ public class LeetCode {
             // left is not null means from left's left & right we found both q and q
             // so left is the LCA, otherwise, right is the answer
             return right;
-
         else
             return left;
     }
@@ -4139,8 +4545,6 @@ public class LeetCode {
         return Math.max(c1, max);
     }
 
-
-
     // Q344 Reverse String #TopInterviewQuestion
     public static String reverseString(String s) {
         if (s.length() == 0)
@@ -4341,7 +4745,7 @@ public class LeetCode {
         return Math.max(left, right) + node.val;
     }
     //or
-    int max=Integer.MIN_VALUE;
+    int max5=Integer.MIN_VALUE;
 
     public int maxPathSum2(TreeNode root) {
         maxPathSumR(root);
@@ -4806,7 +5210,7 @@ public class LeetCode {
     }
 
     // Search for a Range
-    // Q34 Find First and Last Position of Element in Sorted Array  #TopInterviewQuestion
+    // Q34 Find First and Last Position of Element in Sorted Array  #TopInterviewQuestion #facebook
     // Given an array of integers sorted in ascending order, find the starting
     // and ending position of a given target value.
     // Your algorithm's runtime complexity must be in the order of O(log n).
@@ -4818,7 +5222,6 @@ public class LeetCode {
     // Since we would move the search range to the same side for case 2 and 3,
     // we might as well merge them as one single case so that less code is  needed: If A[mid] >= target, j = mid;
     public int[] searchRange2(int[] nums, int target) {
-
         int[] result = new int[2];
         result[0] = findFirst(nums, target);
         result[1] = findLast(nums, target);
@@ -4966,7 +5369,8 @@ public class LeetCode {
 // After the loop, lo = hi, min should be in [lo, lo], to satisfy the assertion, min = lo.
 //  Essence:
 //  If we split the array with mi into [lo, mi] and [mi, hi]. If [lo, mi] is not sorted, since we detect [lo, mi] is not sorted by nums[lo] > nums[mi]
-//  so nums[lo] cannot be min, min must be within (lo, mi]. If [mi, hi] is not sorted, min must be within (mi, hi] - since we detect [mi, hi] is not sorted by nums[mi] > nums[hi], nums[mi] cannot be min. If they are both sorted, nums[lo] is the min.
+//  so nums[lo] cannot be min, min must be within (lo, mi]. If [mi, hi] is not sorted, min must be within (mi, hi] - since we detect [mi, hi] is not
+//  sorted by nums[mi] > nums[hi], nums[mi] cannot be min. If they are both sorted, nums[lo] is the min.
 //      There are 4 kinds of relationship among num[lo], nums[mi], nums[hi]
 //
 // nums[lo] <= nums[mi] <= nums[hi], min is nums[lo]
@@ -5409,7 +5813,7 @@ public class LeetCode {
             return start;
         }
     }
-    // Basic Calculator 1   #NeedsAttention
+    // Basic calculator 1   #NeedsAttention
     // Implement a basic calculator to evaluate a simple expression string. The expression string may contain open ( and
     // closing parentheses ), the plus + or minus sign -, non-negative integers and empty spaces .
     // One important thing is that the input is valid, which means the
@@ -5877,7 +6281,7 @@ public class LeetCode {
         return ret;
     }
 
-    // Q173 Binary Search Tree Iterator BST iterator #GoodQuestion
+    // Q173 Binary Search Tree Iterator BST iterator #GoodQuestion facebook
     // Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
     // Calling next() will return the next smallest number in the BST.
     // Note: next() and hasNext() should run in average O(1) time and uses O(h) memory, where h is the height of the tree.
@@ -6211,6 +6615,7 @@ public class LeetCode {
         // Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...]
         // find the minimum number of conference rooms required.
         public int minMeetingRooms(Interval[] intervals) {
+
             if (intervals == null || intervals.length == 0)
                 return 0;
             Arrays.sort(intervals, new Comparator<Interval>() {
@@ -6415,7 +6820,7 @@ public class LeetCode {
                     int sum = -(C[k] + D[z]);
                     if (sums.containsKey(sum)) {
                         count += sums.get(sum);
-                    }
+                    }    break;
                 }
             }
             return count;
@@ -6584,6 +6989,59 @@ public class LeetCode {
             return minLength == Integer.MAX_VALUE ? "" : s.substring(minStart, minStart + minLength);
         }
 
+    // same question as above but with the string and not playing with the characters
+    public static String findMatch(String str , String query){
+        String queryArr[] = query.split(" ");
+        String strArr[] = str.split(" ");
+        Map<String, Integer> map = new HashMap<>();
+        for(int i = 0 ; i < strArr.length ; i++){
+            map.put(strArr[i] , 0);
+        }
+        for(int i = 0 ; i < queryArr.length ; i++){
+            if(map.containsKey(queryArr[i])){
+                map.put(queryArr[i] , map.get(queryArr[i])+1);
+            }
+        }
+
+        int start = 0, end = 0 , minLength = Integer.MAX_VALUE , minStart = 0;
+        int numOfTargets = queryArr.length;
+        while(end < strArr.length){
+            String current = strArr[end];
+            if(map.get(current) > 0){
+                numOfTargets--;
+            }
+
+            map.put(current , map.get(current) -1 );
+
+            //query - key list - input
+            //doc [start, end]
+
+            while(numOfTargets == 0){
+                if(minLength > end - start + 1){
+                    minLength = end - start + 1;
+                    minStart = start;
+                }
+                String head = strArr[start];
+                if(map.get(head) >= 0){
+                    numOfTargets++;
+                }
+
+                map.put(head , map.get(head)+1);
+                start++;
+            }
+            end++;
+        }
+        if(minLength == Integer.MAX_VALUE){
+            return "";
+
+        }else{
+            StringBuilder sb = new StringBuilder();
+            for(int i = minStart ; i < minStart + minLength ; i++){
+                sb.append(strArr[i] + " ");
+            }
+            return sb.toString();
+        }
+    }
         // second method is better
         //Shuffle of a given array
         static void randomize(int arr[], int n) {
@@ -6762,7 +7220,7 @@ public class LeetCode {
             }
         }
 
-        // Q378 kth smallest element in the sorted matrix #TopInterviewQuestion #FacebookQuestion
+        // Q378 kth smallest element in the sorted matrix #TopInterviewQuestion #FacebookQuestion #matrix
         // Given a n x n matrix where each of the rows and columns are sorted in ascending order, find the kth smallest element in the matrix.
         // Note that it is the kth smallest element in the sorted order, not the kth distinct element.
         // Solution : Build a minHeap of elements from the first row. Do the following operations k-1 times :
@@ -6945,6 +7403,8 @@ public class LeetCode {
         PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>(
                 (a,b) -> a.getValue()==b.getValue() ? b.getKey().compareTo(a.getKey()) : a.getValue()-b.getValue()
         );
+
+
 
         for(Map.Entry<String, Integer> entry: map.entrySet())
         {
@@ -7440,7 +7900,7 @@ public class LeetCode {
         return root;
     }
 
-        // Q680 Valid palindrome 2 #GoodQuestion #FacebookQuestion
+        // Q680 Valid palindrome 2 #GoodQuestion #FacebookQuestion #Palindrome
         // Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome
         public boolean validPalindrome2(String s) {
             int i = 0, j = s.length() - 1;
@@ -7700,7 +8160,8 @@ public class LeetCode {
                     pre = curr;
                 } else {
                     Interval merged = new Interval(pre.start, Math.max(pre.end, curr.end));
-                    pre = merged; //over here it is not getting merged as there is a possibility that next element could be merged
+                    pre = merged; //over here it is not getting merged as there is a possibility that
+                    // next element could be merged
                 }
             }
             result.add(pre);
@@ -9552,7 +10013,7 @@ public class LeetCode {
         // Priority Queue related questions
 
         // Q215 kth largest element in an array #TopInterviewQuestion  time complexity O(nlogn)
-        //     O(N) best case / O(N^2) worst case running time + O(1) memory
+        //     O(N) best case / O(N^2) worst case running time + O(1) memory facebook
 
         public int findKthLargest(int[] nums, int k) {
             PriorityQueue<Integer> pq = new PriorityQueue<>();
@@ -9711,6 +10172,8 @@ public class LeetCode {
 
         // Time Complexity: O( n * k * log k).
         // Insertion and deletion in a Min Heap requires log k time. So the Overall time complexity is O( n * k * log k)
+        // For each node, the complexity is O(logk), which is the complexity for adding to the PQ,
+        // and there are k*n that many of nodes, which gives us O(knlogk).
         //  Auxiliary Space: O(k).
         //  k is the space required to store the priority queue.
         public static ListNode mergeKLists(List<ListNode> lists) {
@@ -10034,6 +10497,7 @@ public class LeetCode {
             DFSMarking(grid, i, j - 1);
         }
 
+        // 695. Max Area of Island
         // Q695 maximum area of an island
         // Given a non-empty 2D array grid of 0's and 1's, an island is a group of 1's (representing land) connected
         // 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.

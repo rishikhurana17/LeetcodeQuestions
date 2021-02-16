@@ -58,13 +58,13 @@ public class SerializeDeserializeBinaryTree {
         TreeNode tree = new TreeNode(1);
 //        tree.root = new TreeNode(1);
         tree.left = new TreeNode(2);
-        tree.left.left = new TreeNode(2);
+        tree.left.right = new TreeNode(2);
 //        tree.right = new TreeNode(3);
 //        tree.left.left = new TreeNode(4);
 //        tree.left.right = new TreeNode(5);
-        String x = binaryTree.serialize(tree);
+        String x = binaryTree.serialize2(tree);
         System.out.println(x);
-        TreeNode tree2 = binaryTree.deserialize(x);
+        TreeNode tree2 = binaryTree.deserialize2(x);
         System.out.println(tree2);
 //            System.out.println(x);
     }

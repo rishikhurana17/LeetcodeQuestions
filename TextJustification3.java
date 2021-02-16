@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextJustification3  {
-    public static List<String> fullJustify(String[] words, int maxWidth) {
+    public static List<String> fullJustify(String text, int maxWidth) {
+        String[]words = text.split(" ");
         List<String> res = new ArrayList<>();
         int n = words.length;
         int index = 0;
@@ -59,9 +60,9 @@ public class TextJustification3  {
     }
 
     public static void main(String []args){
-        String [] words = {"This", "is", "an", "example", "of", "text", "justification"};
-        String []words1 = {"What","must","be","acknowledgment","shall","be"};
-        int maxWidth = 16;
+        String words = "winter is coming.";
+       // String []words1 = {"What","must","be","acknowledgment","shall","be"};
+        int maxWidth = 18;
         System.out.println(fullJustify(words,maxWidth));
     }
 
