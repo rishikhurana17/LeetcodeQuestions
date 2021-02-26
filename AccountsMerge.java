@@ -11,6 +11,9 @@ import java.util.*;
 // have any number of accounts initially, but all of their accounts definitely have the same name.After merging the accounts,
 // return the accounts in the following format: the first element of each account is the name, and the rest of the elements
 // are emails in sorted order. The accounts themselves can be returned in any order
+
+
+
 public class AccountsMerge {
     public List<List<String>> accountsMerge(List<List<String>> accounts) {
         Map<String, Set<String>> graph = new HashMap<>();  //<email node, neighbor nodes>
